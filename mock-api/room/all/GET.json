@@ -1,0 +1,44 @@
+{
+  "rooms": [
+      {
+          "closed": null,
+          "connect": "/api/v1/room/1/connect",
+          "connectedUsers": 2,
+          "created": "Thu, 25 Jun 2020 00:42:13 GMT",
+          "host": "akadymov",
+          "roomId": 4,
+          "roomName": "Awesome room",
+          "status": "started"
+      },
+      {
+          "closed": null,
+          "connect": "/api/v1/room/2/connect",
+          "connectedUsers": 1,
+          "created": "Thu, 25 Jun 2020 11:22:16 GMT",
+          "host": "gigaloff",
+          "roomId": 2,
+          "roomName": "Game for pros",
+          "status": "open"
+      },
+      {
+          "closed": null,
+          "connect": "/api/v1/room/3/connect",
+          "connectedUsers": 3,
+          "created": "Thu, 25 Jun 2020 11:22:16 GMT",
+          "host": "kuznets",
+          "roomId": 3,
+          "roomName": "Тюкалинские бандиты",
+          "status": "open"
+      },
+      {
+          "closed": null,
+          "connect": "/api/v1/room/4/connect",
+          "connectedUsers": 10,
+          "created": "Thu, 25 Jun 2020 11:22:16 GMT",
+          "host": "gsukhy",
+          "roomId": 4,
+          "roomName": "Aye, lads!",
+          "status": "open"
+      }
+  ]
+}

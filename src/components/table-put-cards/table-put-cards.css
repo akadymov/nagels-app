@@ -1,0 +1,118 @@
+.table-put-cards-container{
+    left: 50%;
+    top: 55%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 165px;
+}
+
+.table-put-cards-container.mobile.landscape{
+    top: 40%
+}
+
+.table-put-cards-container.mobile{
+    width: 98px;
+    height: 105px;
+}
+
+.table-put-card{
+    position: absolute;
+}
+
+.table-put-card.player0{
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.table-put-card.player0.mobile.landscape{
+    bottom: 0%;
+}
+
+
+
+
+
+.table-put-card.player1.outof2{
+    left: 70%;
+    top: 0%;
+    transform: translate(-50%, 30%);
+    top: 0%;
+}
+
+.table-put-card.player2.outof2{
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+
+
+
+.table-put-card.player1.outof3{
+    right: 10%;
+    top: 0%;
+}
+
+.table-put-card.player2.outof3{
+    left: 10%;
+    top: 20%;
+}
+
+.table-put-card.player3.outof3{
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+
+
+.table-put-card.player1.outof4{
+    right: 5%;
+    top: 20%;
+}
+
+.table-put-card.player2.outof4{
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 0%;
+}
+
+.table-put-card.player3.outof4{
+    left: 10%;
+    top: 20%;
+}
+
+.table-put-card.player4.outof4{
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+
+
+.table-put-card.player1.outof6{
+    right: 5%;
+    top: 20%;
+}
+
+.table-put-card.player2.outof6{
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 0%;
+}
+
+.table-put-card.player3.outof6{
+    left: 10%;
+    top: 20%;
+}
+
+.table-put-card.player4.outof6{
+    bottom: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}

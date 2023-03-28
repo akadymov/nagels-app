@@ -1,0 +1,271 @@
+.profile-form-container{
+    width: 74vw;
+    height: 74vh;
+    position: absolute;
+    top: 0%;
+    margin: 3vh 3vw 3vh 3vw;
+    overflow: scroll;
+}
+
+.profile-form-container.mobile.portrait{
+    top: 10vh;
+    height: 78vh;
+    width: 94vw;
+    margin: 2vh 3vw 2vh 3vw;
+}
+
+.profile-form-container.mobile.landscape{
+    width: 88vw;
+    margin: 3vh 2vw 3vh 2vw;
+    top: 15vh;
+    height: 79vh;
+}
+
+.profile-picture-controls-container{
+    position: absolute;
+    width: 25vw;
+    height: 32vh;
+}
+
+.profile-picture-controls-container.mobile.portrait{
+    width: 45vw;
+    height: 25vh;
+}
+
+.profile-picture-controls-container.mobile.landscape{
+    width: 30vw;
+    height: 45vh;
+}
+
+.profile-picture-container{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    top: 0%;
+    border-radius: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.profile-picture-container.mobile{
+    width: 120px;
+    height: 120px;
+}
+
+.profile-picture-update-controls{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0%);
+    background-color: hsl(0, 0%, 0%, 0.5);
+    border-radius: 50%;
+}
+
+.avatar-upload-button-container{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+.profile-username-container{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 36px
+}
+
+.profile-username-container.mobile{
+    font-size: 24px
+}
+
+.profile-text-data-controls-container{
+    position: absolute;
+    width: 49vw;
+    height: 74vh;
+    right: 0%;
+}
+
+.profile-text-data-controls-container.mobile.portrait{ 
+    width: 94vw;
+    height: unset;
+    top: 25vh;
+}
+
+.profile-text-data-controls-container.mobile.landscape{ 
+    width: 58vw;
+    height: unset;
+}
+
+.profile-text-field-control-container{
+    width: 49vw;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.profile-text-field-control-container.mobile.portrait{
+    width: 90vw;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.profile-text-field-control-container.mobile.landscape{
+    width: 30vw;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.profile-control-submit-button-container{
+    width: 49vw;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.profile-control-submit-button-container.mobile.portrait{
+    width: 90vw;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.profile-control-submit-button-container.mobile.landscape{
+    width: 30vw;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.profile-backtogame-button-container{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    bottom: 0%;
+    left: -25vw;
+    top: 0%;
+}
+
+.profile-backtogame-button-container.mobile.portrait{
+    top: -25vh;
+    left: 0%;
+}
+
+.profile-backtogame-button-container.mobile.landscape{
+    left: -30vw;
+    top: 0%;
+}
+
+.profile-stats-container{
+    position: absolute;
+    width: 25vw;
+    height: 41vh;
+    top: 32vh;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    text-align: left;
+    font-size: 24px;
+}
+
+.profile-stats-container.mobile.portrait{
+    top: 0%;
+    left: 45vw;
+    width: 45vw;
+    height: 25vh;
+}
+
+.profile-stats-container.mobile.landscape{
+    top: 45vh;
+    height: 33vh;
+    width: 30vw;
+}
+
+.password-update-confirmation-message{
+    color: green;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    position: absolute;
+    right: 0%;
+    bottom: 1%;
+    width: 200px;
+    text-align: left;
+}
+
+.connected-room-container{
+    position: absolute;
+    top: 150px;
+    width: 25vw;
+    font-size: 14px;
+    text-align: center;
+}
+
+.connected-room-container.mobile{
+    display: none
+}
+
+.user-stats{
+    position: absolute;
+    height: 50px;
+    width: 25vw;
+    font-size: 18px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    text-align: center;
+}
+
+.user-stats.mobile.portrait{
+    width: 45vw
+}
+
+.user-stats.mobile.landscape{
+    width: 30vw
+}
+
+.user-stats.line1{
+    top: 0px
+}
+
+.user-stats.line2{
+    top: 60px
+}
+
+.user-stat-container{
+    width: 8vw;
+    height: 50px;
+    display: inline-block;
+}
+
+.user-stat-container.mobile.portrait{
+    width: 15vw
+}
+
+.user-stat-container.mobile.landscape{
+    width: 10vw
+}
+
+.user-stat-value{
+    position: absolute;
+    top: 0%;
+    width: 8vw;
+    height: 30px;
+}
+
+.user-stat-value.mobile.portrait{
+    width: 15vw
+}
+
+.user-stat-value.mobile.landscape{
+    width: 10vw
+}
+
+.user-stat-label{
+    position: absolute;
+    top: 30px;
+    width: 8vw;
+    height: 20px;
+    font-size: 14px;
+}
+
+.user-stat-label.mobile.portrait{
+    width: 15vw;
+    font-size: 10px;
+}
+
+.user-stat-label.mobile.landscape{
+    width: 10vw
+}

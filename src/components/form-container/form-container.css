@@ -1,0 +1,42 @@
+.form-container{
+    position: relative;
+    overflow: auto;
+}
+
+.form-container.desktop{
+    top: -10vh;
+    height: 76vh;
+    margin: 2vh;
+}
+
+.form-container.tablet.portrait{
+    height: 80vh;
+    margin: 2vh;
+}
+
+.form-container.mobile.portrait{
+    height: 78vh;
+    margin: 2vh;
+}
+
+.form-container.mobile.landscape{
+    height: 90vh;
+    margin: 2vh;
+}
+
+.form-title{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: bold;
+    color: black;
+    font-size: 22px;
+    line-height: 20px;
+    padding-bottom: 10px;
+}
+
+.form-message{
+    color: black
+}
+
+.form-element-container{
+    margin: 10px;
+}

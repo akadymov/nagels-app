@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.root-container{
+  height:100vh; 
+  width: 100vw
+}
+
+.main-container{
+  background-color: lightgray;
+}
+
+.main-container.mobile.portrait {
+  width: 100vw;
+  min-height: 92vh;
+}
+
+.main-container.mobile.landscape {
+  height: 100vh;
+  min-width: 92vw;
+  margin-left:8vw;
+}
+.main-container.tablet.portrait {
+  width: 100vw;
+  min-height: 92vh;
+}
+
+.main-container.tablet.landscape {
+  width: 92vw;
+  margin-left: 8vw;
+  height: 100vh;
+  min-height: 700px;
+}
+
+.main-container.desktop {
+  width: 92vw;
+  margin-left: 8vw;
+  height: 100vh;
+  min-height: 700px;
+}

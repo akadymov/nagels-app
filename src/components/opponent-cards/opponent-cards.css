@@ -1,0 +1,21 @@
+.opponent-card{
+    position: relative;
+    outline: 1px solid gray;
+    border-radius: 10%;
+    background-image: url(./opponent-card-pattern.png);
+    background-size: 56px 90px;
+    width: 56px;
+    height: 90px;
+}
+
+.opponent-card.mobile{
+    width: 35px;
+    height: 50px;
+    background-size: 35px 50px;
+}
+
+.cards-container{
+    display: inline-block;
+    position: relative;
+    height: 100px;
+}

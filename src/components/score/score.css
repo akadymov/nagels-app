@@ -1,0 +1,48 @@
+.score-container{
+    position: relative;
+    width: 100px;
+    height: 30px;
+}
+
+.bet-size-container{
+    position: absolute;
+    left: 0%;
+    height: 30px;
+    width: 50px;
+    margin-left: 30px;
+}
+
+.bet-size{
+    position: absolute;
+    top: 10px;
+    left: 0%;
+    width: 15px;
+    line-height: 15px;
+    height: 15px;
+    font-size: 14px;
+}
+
+.bet-size.bonus{
+    border: 1px darkviolet solid;
+    border-radius: 50%;
+    text-align: center;
+    color: darkviolet
+}
+
+.score{
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    right: 0%;
+    top: 25%;
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
+}
+
+.total-score{
+    font-size: 14px;
+    text-decoration: underline;
+    color: green;
+    font-weight: bold;
+}

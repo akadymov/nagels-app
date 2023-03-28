@@ -1,0 +1,30 @@
+.user-info-container.desktop{
+    position:absolute;
+    top: 10px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
+    z-index: 100;
+    opacity: 50%;
+    display: inline-block;
+}
+
+.user-info-container.desktop:hover{
+    opacity: 100%;
+}
+
+.user-image-container.desktop{
+    position: absolute;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+}
+
+.username-container{
+    height: 50px;
+    right: 55px;
+    padding-top: 5px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 24px;
+    position: absolute;
+}

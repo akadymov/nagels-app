@@ -1,0 +1,31 @@
+{
+        "closed": null,
+        "connect": "/api/v1/room/3/connect",
+        "connectedUsers": [
+          {
+            "username": "akadymov",
+            "ready": false,
+            "rating": 2.3
+          },
+          {
+            "username": "kuznets",
+            "ready": true,
+            "rating": 4.3
+          },
+          {
+            "username": "gigaloff",
+            "ready": true,
+            "rating": 3.9
+          },
+          {
+            "username": "gsukhy",
+            "ready": false,
+            "rating": 2.2
+          }
+        ],
+        "created": "Wed, 01 Jul 2020 21:20:41 GMT",
+        "host": "akadymov",
+        "roomId": 3,
+        "roomName": "Тюкалинские бандиты",
+        "status": "open"
+      }

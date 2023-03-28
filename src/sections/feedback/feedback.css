@@ -1,0 +1,10 @@
+.feedback-sent-confirmation-message{
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 200px;
+    height: 50px;
+    color: green;
+    font-family: Mu"Roboto","Helvetica","Arial",sans-serifkta;
+}

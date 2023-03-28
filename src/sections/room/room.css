@@ -1,0 +1,39 @@
+.room-container.mobile.landscape{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 92vw;
+    height: 100vh;
+}
+
+.room-container.desktop{
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    width: 80vw;
+    max-width: 1400px;
+    border-bottom: 2px solid gray;
+}
+
+.room-table-container.desktop{
+    position: relative;
+}
+
+.room-table-container.tablet{
+    width: 100vw;
+    height: 78vh;
+    right: 0;
+}
+
+.room-table-container.mobile.portrait{
+    width: 100vw;
+    height: 75vh;
+    right: 0;
+}
+
+.room-table-container.mobile.landscape{
+    width: 92vw;
+    height: 88vh;
+    right: 0;
+}

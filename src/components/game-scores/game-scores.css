@@ -1,0 +1,59 @@
+.game-scores-modal-container{
+    position: absolute;
+    transform: translate(-50%, 0%);
+    height: 70vh;
+    left: 50%;
+    top: 15%;
+    width: 50vw;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.game-scores-modal-container.mobile.landscape{
+    height: 90vh;
+    width: 80vw;
+    top: 5%;
+}
+
+
+.game-scores-modal-container.mobile.portrait{
+    top:13%;
+    width: 90vw
+}
+
+.game-scores-container{
+    padding: 2vh 0vw 0 0vw;
+    margin-left: 1vw;
+    height: 60vh;
+    width: 50vw;
+    overflow: scroll;
+}
+
+.game-scores-container.mobile.landscape{
+    height: 71vh;
+    width: 80vw;
+}
+
+.scores-controls-container{
+    position: absolute;
+    height: 6vh;
+    width: 50vw;
+    bottom: 0%;
+}
+
+.scores-controls-container.mobile.landscape{
+    height: 15vh;
+    width: 80vw;
+}
+
+.scores-controls-container.mobile.portrait{
+    width: 90vw;
+}
+
+.close-scores-button-container{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

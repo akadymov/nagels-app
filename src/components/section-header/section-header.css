@@ -1,0 +1,144 @@
+.section-header-container.desktop{
+    min-height: 40px;
+    right: 0px;
+    width: 76vw;
+    margin: 10px 2vw 5px 2vw;
+    max-width: 1300px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
+.section-header-container.tablet.portrait{
+    position: absolute;
+    background-color: white;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    min-height: 40px;
+    width: 96vw;
+    margin: 10px 2vw 5px 2vw;
+}
+
+.section-header-container.mobile{
+    position: absolute;
+    background-color: white;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+.section-header-container.mobile.portrait{
+    width: 98vw;
+    margin: 1vh;
+}
+
+.section-header-container.mobile.landscape{
+    width: 91vw;
+    margin: 1vh;
+}
+
+.controls-container{
+    overflow: scroll;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.controls-container.desktop{
+    position: absolute;
+    width: 64vw;
+    right: 2vw;
+}
+
+.controls-container.tablet.portrait{
+    width: 96vw
+}
+
+.controls-container.mobile.portrait{
+    width: 100vw
+}
+
+.controls-container.mobile.landscape{
+    width: 91vw
+}
+
+.section-title-container{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
+.section-subtitle-container{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
+.section-title-container.desktop{
+    position: absolute;
+    text-align: left;
+    top: 0;
+    max-width: 18vw;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 24px;
+}
+
+.section-title-container.tablet.portrait{
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 24px;
+    top:-80vh;
+    max-width: 15vw;
+}
+
+.section-title-container.mobile{
+    position: absolute;
+    left:2vw;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18px;
+}
+
+
+.section-title-container.mobile.landscape{
+    top:-90vh;
+    max-width: 25vw;
+}
+
+.section-title-container.mobile.portrait{
+    top:-76vh;
+    max-width: 23vw;
+}
+
+.section-subtitle-container.desktop{
+    position: absolute;
+    text-align: left;
+    top: 32px;
+    max-width: 18vw;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.section-subtitle-container.tablet.portrait{
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    top:-77vh;
+    max-width: 15vw;
+}
+
+.section-subtitle-container.mobile{
+    position: absolute;
+    left:2vw;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 10px;
+}
+
+.section-subtitle-container.mobile.landscape{
+    top:-83vh;
+    max-width: 25vw;
+}
+
+.section-subtitle-container.mobile.portrait{
+    top:-72.5vh;
+    max-width: 23vw;
+}

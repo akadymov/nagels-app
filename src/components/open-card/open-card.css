@@ -1,0 +1,165 @@
+.open-card{
+    position: relative;
+    background-size: contain;
+}
+
+.open-card[cardontable]{
+    position: absolute;
+}
+
+.open-card[cardId=card-ad]{
+    background-image: url(./img/Ad.png)
+}
+.open-card[cardId=card-kd]{
+    background-image: url(./img/Kd.png);
+}
+.open-card[cardId=card-qd]{
+    background-image: url(./img/Qd.png);
+}
+.open-card[cardId=card-jd]{
+    background-image: url(./img/Jd.png);    
+}
+.open-card[cardId=card-td]{
+    background-image: url(./img/td.png);
+}
+.open-card[cardId=card-9d]{
+    background-image: url(./img/9d.png);
+}
+.open-card[cardId=card-8d]{
+    background-image: url(./img/8d.png);
+}
+.open-card[cardId=card-7d]{
+    background-image: url(./img/7d.png);
+}
+.open-card[cardId=card-6d]{
+    background-image: url(./img/6d.png);
+}
+.open-card[cardId=card-5d]{
+    background-image: url(./img/5d.png);
+}
+.open-card[cardId=card-4d]{
+    background-image: url(./img/4d.png);
+}
+.open-card[cardId=card-3d]{
+    background-image: url(./img/3d.png);
+}
+.open-card[cardId=card-2d]{
+    background-image: url(./img/2d.png);
+}
+.open-card[cardId=card-ah]{
+    background-image: url(./img/Ah.png);
+}
+.open-card[cardId=card-kh]{
+    background-image: url(./img/Kh.png);
+}
+.open-card[cardId=card-qh]{
+    background-image: url(./img/Qh.png);
+}
+.open-card[cardId=card-jh]{
+    background-image: url(./img/Jh.png);
+}
+.open-card[cardId=card-th]{
+    background-image: url(./img/th.png);
+}
+.open-card[cardId=card-9h]{
+    background-image: url(./img/9h.png);
+}
+.open-card[cardId=card-8h]{
+    background-image: url(./img/8h.png);
+}
+.open-card[cardId=card-7h]{
+    background-image: url(./img/7h.png);
+}
+.open-card[cardId=card-6h]{
+    background-image: url(./img/6h.png);
+}
+.open-card[cardId=card-5h]{
+    background-image: url(./img/5h.png);
+}
+.open-card[cardId=card-4h]{
+    background-image: url(./img/4h.png);
+}
+.open-card[cardId=card-3h]{
+    background-image: url(./img/3h.png);
+}
+.open-card[cardId=card-2h]{
+    background-image: url(./img/2h.png);
+}
+.open-card[cardId=card-as]{
+    background-image: url(./img/As.png);
+}
+.open-card[cardId=card-ks]{
+    background-image: url(./img/Ks.png);
+}
+.open-card[cardId=card-qs]{
+    background-image: url(./img/Qs.png);
+}
+.open-card[cardId=card-js]{
+    background-image: url(./img/Js.png);
+}
+.open-card[cardId=card-ts]{
+    background-image: url(./img/ts.png);
+}
+.open-card[cardId=card-9s]{
+    background-image: url(./img/9s.png);
+}
+.open-card[cardId=card-8s]{
+    background-image: url(./img/8s.png);
+}
+.open-card[cardId=card-7s]{
+    background-image: url(./img/7s.png);
+}
+.open-card[cardId=card-6s]{
+    background-image: url(./img/6s.png);
+}
+.open-card[cardId=card-5s]{
+    background-image: url(./img/5s.png);
+}
+.open-card[cardId=card-4s]{
+    background-image: url(./img/4s.png);
+}
+.open-card[cardId=card-3s]{
+    background-image: url(./img/3s.png);
+}
+.open-card[cardId=card-2s]{
+    background-image: url(./img/2s.png);
+}
+.open-card[cardId=card-ac]{
+    background-image: url(./img/Ac.png);
+}
+.open-card[cardId=card-kc]{
+    background-image: url(./img/Kc.png);
+}
+.open-card[cardId=card-qc]{
+    background-image: url(./img/Qc.png);
+}
+.open-card[cardId=card-jc]{
+    background-image: url(./img/Jc.png);
+}
+.open-card[cardId=card-tc]{
+    background-image: url(./img/tc.png);
+}
+.open-card[cardId=card-9c]{
+    background-image: url(./img/9c.png);
+}
+.open-card[cardId=card-8c]{
+    background-image: url(./img/8c.png);
+}
+.open-card[cardId=card-7c]{
+    background-image: url(./img/7c.png);
+}
+.open-card[cardId=card-6c]{
+    background-image: url(./img/6c.png);
+}
+.open-card[cardId=card-5c]{
+    background-image: url(./img/5c.png);
+}
+.open-card[cardId=card-4c]{
+    background-image: url(./img/4c.png);
+}
+.open-card[cardId=card-3c]{
+    background-image: url(./img/3c.png);
+}
+.open-card[cardId=card-2c]{
+    background-image: url(./img/2c.png);
+}

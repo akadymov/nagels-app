@@ -1,0 +1,168 @@
+.game-container.mobile.landscape{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 92vw;
+    height: 100vh;
+}
+
+.game-container.mobile.portrait{
+    position: absolute;
+    top: 10vh;
+    right: 0;
+    width: 100vw;
+    height: 82vh;
+}
+
+.game-container.desktop{
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    width: 80vw;
+    max-width: 1400px;
+    border-bottom: 2px solid gray;
+}
+
+.game-table{
+    position: absolute;
+    background: rgb(0,62,0);
+    background: linear-gradient(90deg, rgba(0,62,0,1) 0%, rgba(0,156,0,1) 50%, rgba(0,93,0,1) 100%);
+    border-radius: 20%;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    outline: 5px solid black;
+}
+
+.game-table.desktop{
+    height: 55vh;
+    width: 70vw;
+    max-width: 1200px;
+    margin-top: 5vh;
+}
+
+.game-table.tablet.portrait{
+    height: 60vh;
+    width: 60vw;
+    max-width: 1200px;
+    margin-top: 5vh;
+}
+
+.game-table.mobile.portrait{
+    height: 55vh;
+    width: 80vw;
+    margin-top: 5vh;
+}
+
+.game-table.mobile.landscape{
+    height: 60vh;
+    width: 80vw;
+    margin-top: 13vh;
+}
+
+.current-game-trump-container{
+    position: absolute;
+    right: -5%;
+    top: -5%;
+    width: 70px;
+    height: 40px;
+}
+
+.current-game-trump-container.mobile{
+    width: 40px;
+    height: 30px;
+}
+
+.current-game-trump-container.mobile.portrait{
+    right: -5%;
+    top: -5%;
+}
+
+.current-game-trump-container.tablet.portrait{
+    right: -20%;
+    top: -5%;
+}
+
+.current-game-trump-container.mobile.landscape{
+    left: -5%;
+    bottom: -25%;
+    right: unset;
+    top: unset;
+}
+
+.hand-id-label{
+    position: absolute;
+    top: 0%;
+    width: 70px;
+    height: 15px;
+    font-size: 12px;
+    line-height: 15px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    text-align: center;
+}
+
+.hand-id-label.portrait{
+    width: 56px;
+    height: 10px;
+    font-size: 10px;
+}
+
+.hand-id-label.mobile{
+    width: 60px;
+    height: 10px;
+    font-size: 10px;
+}
+
+.hand-id-value{
+    position: absolute;
+    bottom: 0%;
+    width: 70px;
+    height: 25px;
+    line-height: 0px;
+    font-size: 20px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    text-align: center;
+}
+
+.hand-id-value.mobile{
+    width: 60px;
+    height: 20px;
+    line-height: 0px;
+    font-size: 14px;
+}
+
+.trump-container:after{
+    font-size: 20px;
+    line-height: 0px;
+}
+
+.trump-container.mobile:after{
+    font-size: 14px;
+    line-height: 0px;
+}
+
+
+.d.trump-container:after{
+    content: "\2666";
+    color: red;
+}
+
+.h.trump-container:after{
+    content: "\2665";
+    color: red;
+}
+
+.c.trump-container:after{
+    content: "\2663";
+    color: black;
+}
+
+.s.trump-container:after{
+    content: "\2660";
+    color: black;
+}
+
+.x.trump-container:after{
+    content: "\2298";
+    color: black;
+}

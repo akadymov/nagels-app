@@ -1,0 +1,39 @@
+.lobby-container.mobile.landscape{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 92vw;
+    height: 100vh;
+}
+
+.lobby-container.desktop{
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    width: 80vw;
+    max-width: 1400px;
+    border-bottom: 2px solid gray;
+}
+
+.lobby-table-container.desktop{
+    position: relative;
+}
+
+.lobby-table-container.tablet{
+    width: 100vw;
+    height: 78vh;
+    right: 0;
+}
+
+.lobby-table-container.mobile.portrait{
+    width: 100vw;
+    height: 75vh;
+    right: 0;
+}
+
+.lobby-table-container.mobile.landscape{
+    width: 92vw;
+    height: 88vh;
+    right: 0;
+}

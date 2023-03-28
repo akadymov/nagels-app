@@ -1,0 +1,17 @@
+.leaderboard-container.mobile.landscape{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 92vw;
+    height: 100vh;
+}
+
+.leaderboard-container.desktop{
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    width: 80vw;
+    max-width: 1400px;
+    border-bottom: 2px solid gray;
+}

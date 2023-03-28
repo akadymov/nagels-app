@@ -1,0 +1,39 @@
+.action-message-container{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: 250px;
+    line-height: 20px;
+    background-color: hsl(0, 0%, 0%, 0.7);
+    border-radius: 10%;
+    border: 1px solid #58f958;
+}
+
+.action-message-container.highlighted{
+    border: 2px solid darkviolet;
+    background-color: #58f958;
+}
+
+.action-message-container.mobile{
+    width: 130px;
+}
+
+.action-message-container{
+    top:25%
+}
+
+.action-message-container.mobile.landscape{
+    top: 50%;
+}
+
+.action-message-text{
+    color: #58f958;
+    font-weight: 900;
+    padding: 2px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
+.action-message-text.highlighted{
+    color: darkviolet;
+    font-weight: bold;
+}
