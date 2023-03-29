@@ -24,7 +24,7 @@ Specification: [Product requirements]
 6. Install js-dependencies by running following comand in root folder terminal:
     ```sh
     $ npm install
-7. Set frontend configs in /services/config.json
+7. Set frontend configs in /src/config.json
 8. Run the application by command:
     ```sh
     $ npm start

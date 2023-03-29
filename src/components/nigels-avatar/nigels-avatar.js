@@ -2,7 +2,7 @@ import React from 'react';
 
 import Avatar from '@mui/material/Avatar';
 
-import configFile from '../../services/config.json'
+import configFile from '../../config.json'
 
 
 

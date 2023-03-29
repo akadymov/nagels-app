@@ -1,5 +1,5 @@
 import { Manager } from 'socket.io-client';
-import configFile from './config.json'
+import configFile from '../config.json'
 
 const env = configFile.ENVIRONMENT
 
