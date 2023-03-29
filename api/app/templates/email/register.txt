@@ -2,8 +2,8 @@ Dear {{ user.username }},
 
 To reset your password click on the following link:
 
-You are successfully registered in Nagels Application.
+You are successfully registered in Nigels Application.
 
 Sincerely,
 
-Nagels application team
+Nigels application team

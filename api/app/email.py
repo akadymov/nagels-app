@@ -5,16 +5,21 @@ from app import app, mail
 from config import get_settings, get_environment
 
 auth = get_settings('AUTH')
-mail_settings = get_settings('MAIL')
 env = get_environment()
 
+
 def send_async_email(app, msg):
-    #if app.config['ENVIRONMENT'] != 'TEST':  # no sending mails within auto-tests
-    with app.app_context():
-        mail.send(msg)
+    if env != 'TEST':  # no sending mails within auto-tests
+        with app.app_context():
+            try:
+                mail.send(msg)
+            except Exception as e:
+                print(e)
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
+    if env != 'PROD':
+        recipients = auth['ADMINS'][env].split(',')
     if app.debug:
         print('Sending message with subject "' + str(subject) + '" from sender ' + str(sender) + ' to emails ' + str(recipients) + ')...')
     msg = Message(subject, sender=sender, recipients=recipients)
@@ -45,7 +50,7 @@ def send_registration_notification(user):
 
 def send_feedback(message, sender_email=None, sender_name=None):
     if not sender_email:
-        sender_email = mail_settings['USERNAME'][env]
+        sender_email = auth['ADMINS'][env].split(',')[0]
     if not sender_name:
         sender_name = 'Nigels app anonymous user'
     send_email(

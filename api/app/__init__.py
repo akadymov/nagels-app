@@ -15,12 +15,20 @@ app.config.update(
     SQLALCHEMY_DATABASE_URI=flask_configs['SQLALCHEMY_DATABASE_URI'][env],
     SQLALCHEMY_TRACK_MODIFICATIONS=flask_configs['SQLALCHEMY_TRACK_MODIFICATIONS'][env]
 )
-CORS(app,resources={r"/*":{"origins":"*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+
+
+mail_settings = get_settings('MAIL')
+for key in mail_settings.keys():
+    app.config['MAIL_' + str(key)] = mail_settings[key][env]
 mail = Mail(app)
+
 socketio = SocketIO(app, cors_allowed_origins="*", logger=True, engineio_logger=True)
+
 
 from app import routes, models, socket
