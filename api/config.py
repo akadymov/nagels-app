@@ -1,4 +1,6 @@
 import yaml
+import os
+
 
 def get_settings(section=None):
     with open("config.yml", "r") as configfile:
@@ -9,5 +11,7 @@ def get_settings(section=None):
 
 
 def get_environment():
+    if os.environ.get('ENVIRONMENT'):
+        return os.environ.get('ENVIRONMENT')
     with open("config.yml", "r") as configfile:
         return yaml.load(configfile, Loader=yaml.FullLoader)['ENVIRONMENT']
