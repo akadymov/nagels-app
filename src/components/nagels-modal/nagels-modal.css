@@ -17,7 +17,6 @@
 }
 
 .modal-header{
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-size: 24px;
     font-weight:bold;
     text-align: center;
@@ -25,7 +24,6 @@
 }
 
 .modal-text-container{
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
     text-align: center;
 }
 

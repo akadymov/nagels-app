@@ -35,7 +35,7 @@
 
 .nav-menu.desktop:hover{
   width: 15vw;
-  min-width: 250px;
+  min-width: 270px;
   text-align: left;
   padding-left: 10px;
 }
@@ -173,7 +173,6 @@
     transform: translate(0, -50%);
     text-align: left;
     color: white;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-weight: bold;
     font-size: 20px;
 }

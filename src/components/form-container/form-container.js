@@ -4,10 +4,6 @@ import './form-container.css';
 import FormButton from '../form-button';
 import TextField from '@mui/material/TextField';
 import parse from 'html-react-parser';
-import { ThemeProvider } from '@mui/material/styles';
-
-// Local components
-import defaultTheme from '../../themes/default';
 
 
 export default class FormContainer extends React.Component{
@@ -30,28 +26,26 @@ export default class FormContainer extends React.Component{
                     this.props.textFieldsList.map(field => {
                         return (
                             <div className="form-element-container" key={`container-${field.id}`}>
-                                <ThemeProvider theme={defaultTheme} key={`theme-provider-${field.id}`}>
-                                    <TextField
-                                        id={field.id}
-                                        key={field.id}
-                                        label={field.label}
-                                        variant={field.variant}
-                                        onChange={field.onChange}
-                                        onClick={field.onClick}
-                                        error={field.errorMessage !== ''}
-                                        helperText={field.errorMessage}
-                                        type={field.type}
-                                        required={field.required}
-                                        defaultValue={field.text}
-                                        autoComplete={field.autoComplete}
-                                        multiline={field.rows}
-                                        rows={field.rows}
-                                        sx={{
-                                            width: field.width,
-                                            display: !field.hidden ? 'inline-flex' : 'none'
-                                        }}
-                                    ></TextField>
-                                </ThemeProvider>
+                                <TextField
+                                    id={field.id}
+                                    key={field.id}
+                                    label={field.label}
+                                    variant={field.variant}
+                                    onChange={field.onChange}
+                                    onClick={field.onClick}
+                                    error={field.errorMessage !== ''}
+                                    helperText={field.errorMessage}
+                                    type={field.type}
+                                    required={field.required}
+                                    defaultValue={field.text}
+                                    autoComplete={field.autoComplete}
+                                    multiline={field.rows}
+                                    rows={field.rows}
+                                    sx={{
+                                        width: field.width,
+                                        display: !field.hidden ? 'inline-flex' : 'none'
+                                    }}
+                                ></TextField>
                             </div>
                         )
                     })

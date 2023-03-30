@@ -4,7 +4,6 @@
     width: 76vw;
     margin: 10px 2vw 5px 2vw;
     max-width: 1300px;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
 
 .section-header-container.tablet.portrait{
@@ -61,11 +60,9 @@
 }
 
 .section-title-container{
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
 
 .section-subtitle-container{
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
 
 .section-title-container.desktop{
