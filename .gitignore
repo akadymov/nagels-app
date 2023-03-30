@@ -33,7 +33,7 @@ api/app.db
 .idea/.gitignore
 .idea/misc.xml
 .idea/modules.xml
-.idea/nigels-app.iml
+.idea/nagels-app.iml
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/inspectionProfiles/profiles_settings.xml
@@ -41,3 +41,4 @@ api/app.db
 api/migrations/versions/082064787bd6_.py
 api/migrations/versions/__pycache__/082064787bd6_.cpython-38.pyc
 src/config.json
+.idea/nigels-app.iml

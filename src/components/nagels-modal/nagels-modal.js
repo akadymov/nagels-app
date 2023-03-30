@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './nigels-modal.css';
+import './nagels-modal.css';
 
 //MUI components
 import Modal from '@mui/material/Modal';
@@ -13,7 +13,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import defaultTheme from '../../themes/default';
 
 
-export default class NigelsModal extends React.Component{
+export default class NagelsModal extends React.Component{
 
     render() {
         return(

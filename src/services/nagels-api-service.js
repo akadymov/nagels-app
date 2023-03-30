@@ -1,6 +1,6 @@
 import configFile from '../config.json'
 
-export default class NigelsApi {
+export default class NagelsApi {
 
     _env = configFile.ENVIRONMENT
 

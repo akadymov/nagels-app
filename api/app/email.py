@@ -6,7 +6,7 @@ from config import get_settings, get_environment
 
 auth = get_settings('AUTH')
 env = get_environment()
-nigels_app = get_settings('NIGELS_APP')
+nagels_app = get_settings('NAGELS_APP')
 
 
 def send_async_email(app, msg):
@@ -32,20 +32,20 @@ def send_email(subject, sender, recipients, text_body, html_body):
 def send_password_reset_email(user):
     token = user.get_reset_password_token()
     send_email(
-        '[Nigels App] Reset Your Password',
+        '[Nägels App] Reset Your Password',
         sender=auth['ADMINS'][env].split(',')[0],
         recipients=[user.email],
         text_body=render_template(
             'email/reset_password.txt',
-            nigels_url=nigels_app['SCHEMA'][env] + '://' + nigels_app['HOST'][env] + (
-                        ':' + str(nigels_app['PORT'][env])) if nigels_app['PORT'][env] else '',
+            nagels_url=nagels_app['SCHEMA'][env] + '://' + nagels_app['HOST'][env] + (
+                        ':' + str(nagels_app['PORT'][env])) if nagels_app['PORT'][env] else '',
             user=user,
             token=token
         ),
         html_body=render_template(
             'email/reset_password.html',
-            nigels_url=nigels_app['SCHEMA'][env] + '://' + nigels_app['HOST'][env] + (
-                        ':' + str(nigels_app['PORT'][env])) if nigels_app['PORT'][env] else '',
+            nagels_url=nagels_app['SCHEMA'][env] + '://' + nagels_app['HOST'][env] + (
+                        ':' + str(nagels_app['PORT'][env])) if nagels_app['PORT'][env] else '',
             user=user,
             token=token
         )
@@ -53,7 +53,7 @@ def send_password_reset_email(user):
 
 
 def send_registration_notification(user):
-    send_email('[Nigels App] Welcome letter',
+    send_email('[nagels App] Welcome letter',
                sender=auth['ADMINS'][env].split(',')[0],
                recipients=[user.email],
                text_body=render_template('email/register.txt',
@@ -65,9 +65,9 @@ def send_feedback(message, sender_email=None, sender_name=None):
     if not sender_email:
         sender_email = auth['ADMINS'][env].split(',')[0]
     if not sender_name:
-        sender_name = 'Nigels app anonymous user'
+        sender_name = 'nagels app anonymous user'
     send_email(
-        '[Nigels App] Feedback from user',
+        '[Nägels App] Feedback from user',
         sender=(sender_name, sender_email),
         recipients=auth['ADMINS'][env].split(','),
         text_body=render_template('email/feedback.txt', message=message, sender_name=sender_name),

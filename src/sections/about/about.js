@@ -2,7 +2,7 @@ import React from 'react';
 
 
 //Local services
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 
 //Local components
@@ -33,11 +33,11 @@ export default class About extends React.Component{
         }
     };
 
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
     Cookies = new Cookies();
 
     getGameInfo = () => {
-        this.NigelsApi.getInfo()
+        this.NagelsApi.getInfo()
         .then((body) => {
             if(body.errors) {
                 this.setState({ gameInfo:'Something went wrong! Cannot get game info!'})
@@ -62,7 +62,7 @@ export default class About extends React.Component{
                 isMobile = {this.props.isMobile}
                 isDesktop = {this.props.isDesktop}
                 isPortrait = {this.props.isPortrait}
-                title="About Nigels"
+                title="About Nägels"
                 htmlMessage={this.state.gameInfo}
                 submitButtonList={this.state.submitButtonList}
             >

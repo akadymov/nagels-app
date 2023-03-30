@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './nigels-table-container.css';
+import './nagels-table-container.css';
 
 // MUI components
 import Table from '@mui/material/Table';
@@ -21,11 +21,11 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import defaultTheme from '../../themes/default';
 import FormButton from '../form-button';
 import Score from '../score';
-import NigelsAvatar from '../nigels-avatar/nigels-avatar';
+import NagelsAvatar from '../nagels-avatar/nagels-avatar';
 
 
 
-export default class NigelsTableContainer extends React.Component{
+export default class NagelsTableContainer extends React.Component{
 
     render() {
 
@@ -56,11 +56,11 @@ export default class NigelsTableContainer extends React.Component{
                                     <StyledTableCell key={header} align='center'>
                                         <div className='player-table-data-container'>
                                             <div className="avatar-small">
-                                                <NigelsAvatar
+                                                <NagelsAvatar
                                                     width = "38px"
                                                     height = "38px"
                                                     username = {header}
-                                                ></NigelsAvatar>
+                                                ></NagelsAvatar>
                                             </div>
                                             <div 
                                                 className="username-container" 
@@ -97,11 +97,11 @@ export default class NigelsTableContainer extends React.Component{
                                                             <StyledTableCell key={`row ${row.id} column ${row.dataArray.indexOf(data)}`} align='center'>
                                                                 <div className='player-table-data-container'>
                                                                     <div className="avatar-small">
-                                                                        <NigelsAvatar
+                                                                        <NagelsAvatar
                                                                             width = "38px"
                                                                             height = "38px"
                                                                             username = {data.username}
-                                                                        ></NigelsAvatar>
+                                                                        ></NagelsAvatar>
                                                                     </div>
                                                                     <div 
                                                                         className="username-container" 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Local services
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 
 //Local components
@@ -35,7 +35,7 @@ export default class RegistrationSucceed extends React.Component{
       };
     }
 
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
     Cookies = new Cookies();
     CheckIfAlreadyLoggedIn = () => {
         const idToken = this.Cookies.get('idToken')
@@ -45,7 +45,7 @@ export default class RegistrationSucceed extends React.Component{
     }
 
     SendRegRequest = () => {
-        this.NigelsApi.registerUser(
+        this.NagelsApi.registerUser(
             this.state.email, 
             this.state.username, 
             this.state.password, 

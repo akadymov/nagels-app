@@ -3,14 +3,14 @@ import React from 'react';
 import './room.css'
 
 //Local services
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 import { roomSocket, lobbySocket } from '../../services/socket';
 
 //Local components
-import NigelsTableContainer from '../../components/nigels-table-container';
+import NagelsTableContainer from '../../components/nagels-table-container';
 import SectionHeader from '../../components/section-header';
-import NigelsModal from '../../components/nigels-modal';
+import NagelsModal from '../../components/nagels-modal';
 
 
 export default class Room extends React.Component{
@@ -90,7 +90,7 @@ export default class Room extends React.Component{
         }
     }
 
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
     Cookies = new Cookies();
 
     CheckIfLoggedIn = () => {
@@ -196,7 +196,7 @@ export default class Room extends React.Component{
     
 
     GetRoomDetails = () => {
-        this.NigelsApi.getRoom(this.props.match.params.roomId)
+        this.NagelsApi.getRoom(this.props.match.params.roomId)
         .then((body) => {
             if(body.errors) {
                 console.log('Something went wrong! Cannot get rooms list!')
@@ -231,7 +231,7 @@ export default class Room extends React.Component{
         //        confirmAction: this.confirmCloseRoom
         //    })
         //}
-        this.NigelsApi.disconnectRoom(this.Cookies.get('idToken'), roomId, username)
+        this.NagelsApi.disconnectRoom(this.Cookies.get('idToken'), roomId, username)
         .then((body) => {
             if(!body.errors){
                 roomSocket.emit('remove_player_from_room', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
@@ -254,7 +254,7 @@ export default class Room extends React.Component{
 
     confirmReady = (username = this.state.selectedPlayerUsername ? this.state.selectedPlayerUsername : this.Cookies.get('username')) => {
         const roomId = this.state.roomDetails.roomId
-        this.NigelsApi.confirmReady(this.Cookies.get('idToken'), roomId, username)
+        this.NagelsApi.confirmReady(this.Cookies.get('idToken'), roomId, username)
         .then((body) => {
             if(!body.errors){
                 var newRoomDetails = this.state.roomDetails
@@ -270,7 +270,7 @@ export default class Room extends React.Component{
 
     resetReady = (username = this.state.selectedPlayerUsername ? this.state.selectedPlayerUsername : this.Cookies.get('username')) => {
         const roomId = this.state.roomDetails.roomId
-        this.NigelsApi.resetReady(this.Cookies.get('idToken'), roomId, username)
+        this.NagelsApi.resetReady(this.Cookies.get('idToken'), roomId, username)
         .then((body) => {
             if(!body.errors){
                 var newRoomDetails = this.state.roomDetails
@@ -316,7 +316,7 @@ export default class Room extends React.Component{
     confirmCloseRoom = () => {
         const roomId = this.state.roomDetails.roomId
         const roomName = this.state.roomDetails.roomName
-        this.NigelsApi.closeRoom(this.Cookies.get('idToken'), roomId)
+        this.NagelsApi.closeRoom(this.Cookies.get('idToken'), roomId)
         .then((body) => {
             if(body.errors){
                 alert(body.errors[0].message)
@@ -329,7 +329,7 @@ export default class Room extends React.Component{
     }
 
     startGame = () => {
-        this.NigelsApi.startGame(this.Cookies.get('idToken'), 1) // TODO: introduce autodeal checkbox
+        this.NagelsApi.startGame(this.Cookies.get('idToken'), 1) // TODO: introduce autodeal checkbox
         .then((body) => {
             if(body.errors) {
                 alert(body.errors[0].message)
@@ -436,15 +436,15 @@ export default class Room extends React.Component{
                     subtitle={!this.props.isMobile ? this.state.roomDetails.host : ''}
                 ></SectionHeader>
                 <div className={`room-table-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                    <NigelsTableContainer
+                    <NagelsTableContainer
                         height={this.props.isMobile ? (this.props.isPortrait ? '74vh' : '88vh') : '90vh'}
                         headers={this.state.playerHeaders}
                         rows={this.state.players}
                         onClick={this.selectPlayer}
                         selected={this.state.selectedPlayerId}
-                    ></NigelsTableContainer>
+                    ></NagelsTableContainer>
                 </div>
-                <NigelsModal
+                <NagelsModal
                     open={this.state.modalOpen}
                     text="Please, confirm action"
                     isMobile={this.props.isMobile}
@@ -453,7 +453,7 @@ export default class Room extends React.Component{
                     controls={this.state.modalControls}
                     closeModal={this.closeModal}
                     modalCanClose={true}
-                ></NigelsModal>
+                ></NagelsModal>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './player-info.css';
-import NigelsAvatar from '../nigels-avatar';
+import NagelsAvatar from '../nagels-avatar';
 
 export default class PlayerInfo extends React.Component{
 
@@ -51,12 +51,12 @@ export default class PlayerInfo extends React.Component{
                     <div 
                         className={`player-info-avatar-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
                     >
-                        <NigelsAvatar
+                        <NagelsAvatar
                             username={this.props.username}
                             width={this.props.isMobile ? 38 :61} 
                             height={this.props.isMobile ? 38 : 61}
                             outline={this.props.active ? '2px solid #58f958' : 'none'}
-                        ></NigelsAvatar>
+                        ></NagelsAvatar>
                     </div>
                     <div className={`player-data-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                         <div 

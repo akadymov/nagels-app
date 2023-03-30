@@ -8,7 +8,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 // local components
 import defaultTheme from '../../themes/default';
-import NigelsTableContainer from '../../components/nigels-table-container';
+import NagelsTableContainer from '../../components/nagels-table-container';
 import FormButton from '../form-button';
 
 
@@ -21,7 +21,7 @@ export default class GameScores extends React.Component{
                 <div className={`game-scores-modal-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                     <ThemeProvider theme={defaultTheme}>
                         <div className={`game-scores-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                            <NigelsTableContainer
+                            <NagelsTableContainer
                                 isMobile={this.props.isMobile}
                                 isDesktop={this.props.isDesktop}
                                 isPortrait={this.props.isPortrait}
@@ -31,7 +31,7 @@ export default class GameScores extends React.Component{
                                 rows={this.props.scores}
                                 height={this.props.isMobile ? (this.props.isPortrait ? '60vh' : '71vh') : '60vh'}
                                 centered={true}
-                            ></NigelsTableContainer>
+                            ></NagelsTableContainer>
                         </div>
                         <div className={`scores-controls-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             <div className="close-scores-button-container">

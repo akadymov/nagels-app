@@ -1,5 +1,5 @@
-New feedback message from Nigels app user {{ sender_name }}:
+New feedback message from Nägels app user {{ sender_name }}:
 
 "{{ message }}"
 
-Nigels application team
+Nägels application team

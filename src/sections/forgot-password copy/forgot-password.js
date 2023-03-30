@@ -8,7 +8,7 @@ import './forgot-password.css'
 import FormContainer from '../../components/form-container';
 
 //Local services
-import NaegelsApi from '../../services/nigels-api-service';
+import NaegelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 
 

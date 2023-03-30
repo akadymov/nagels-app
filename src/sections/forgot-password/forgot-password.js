@@ -8,7 +8,7 @@ import './forgot-password.css'
 import FormContainer from '../../components/form-container';
 
 //Local services
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 
 
@@ -63,7 +63,7 @@ export default class ForgotPassword extends React.Component{
         }
     }
 
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
     Cookies = new Cookies();
 
 
@@ -76,7 +76,7 @@ export default class ForgotPassword extends React.Component{
     }
 
     recoverPassword = () => {
-        this.NigelsApi.sendPasswordRecovery(this.state.username, this.state.email)
+        this.NagelsApi.sendPasswordRecovery(this.state.username, this.state.email)
         .then((body)=>{
             var newSubmitButtonList = []
             if(body.errors){

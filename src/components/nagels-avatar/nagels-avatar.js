@@ -6,7 +6,7 @@ import configFile from '../../config.json'
 
 
 
-export default class NigelsAvatar extends React.Component{
+export default class NagelsAvatar extends React.Component{
 
     stringToColor(string) {
         let hash = 0;

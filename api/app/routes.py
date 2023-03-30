@@ -28,7 +28,7 @@ app.register_blueprint(general)
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    return 'This is Nigels App Service Home! Work In Progress!'
+    return 'This is Nägels App REST API base method!'
 
 
 @app.route('/register', methods=['GET', 'POST'])

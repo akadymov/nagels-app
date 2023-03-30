@@ -4,14 +4,14 @@ import './game.css'
 
 //Local services
 import Cookies from 'universal-cookie';
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import { lobbySocket, roomSocket, gameSocket } from '../../services/socket';
 
 //Local components
 import SectionHeader from '../../components/section-header';
 import PlayerContainer from '../../components/player-container';
 import OpponentContainer from '../../components/opponent-container';
-import NigelsModal from '../../components/nigels-modal';
+import NagelsModal from '../../components/nagels-modal';
 import TableActionMessage from '../../components/table-action-message';
 import TablePutCards from '../../components/table-put-cards';
 import GameScores from '../../components/game-scores';
@@ -57,7 +57,7 @@ export default class Game extends React.Component{
     };
 
     Cookies = new Cookies();
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
 
     CheckIfAlreadyLoggedIn = () => {
         const idToken = this.Cookies.get('idToken')
@@ -83,7 +83,7 @@ export default class Game extends React.Component{
         // get game status
         var newHeaderControls = []
         var newModalControls = []
-        this.NigelsApi.getGame(this.props.match.params.gameId, this.Cookies.get('idToken'))
+        this.NagelsApi.getGame(this.props.match.params.gameId, this.Cookies.get('idToken'))
         .then((getGameResponse) => {
             if(getGameResponse.errors){
                 this.handleApiError(getGameResponse)
@@ -262,7 +262,7 @@ export default class Game extends React.Component{
     confirmFinishGame = () => {
         const gameId = this.state.gameDetails.gameId
         const roomId = this.state.gameDetails.roomId
-        this.NigelsApi.finishGame(this.Cookies.get('idToken'))
+        this.NagelsApi.finishGame(this.Cookies.get('idToken'))
         .then((body) => {
             if(body.errors){
                 this.handleInGameError(body)
@@ -275,7 +275,7 @@ export default class Game extends React.Component{
     }
 
     dealCards = () => {
-        this.NigelsApi.dealCards(this.props.match.params.gameId, this.Cookies.get('idToken'))
+        this.NagelsApi.dealCards(this.props.match.params.gameId, this.Cookies.get('idToken'))
         .then((body) => {
             if(body.errors) {
                 this.handleInGameError(body)
@@ -287,7 +287,7 @@ export default class Game extends React.Component{
     };
 
     makeBet = () => {
-        this.NigelsApi.makeBet(this.Cookies.get('idToken'), this.state.gameDetails.gameId, this.state.gameDetails.currentHandId, parseInt(this.state.myBetSizeValue,10))
+        this.NagelsApi.makeBet(this.Cookies.get('idToken'), this.state.gameDetails.gameId, this.state.gameDetails.currentHandId, parseInt(this.state.myBetSizeValue,10))
         .then((body) => {
             if(body.errors) {
                 var newModalControls = this.state.modalControls
@@ -311,7 +311,7 @@ export default class Game extends React.Component{
     };
 
     definePositions = () => {
-        this.NigelsApi.definePositions(this.props.match.params.gameId, this.Cookies.get('idToken'))
+        this.NagelsApi.definePositions(this.props.match.params.gameId, this.Cookies.get('idToken'))
         .then((body) => {
             if(body.errors) {
                 this.handleInGameError(body)
@@ -341,7 +341,7 @@ export default class Game extends React.Component{
                 selectedCard: cardId
             })
         } else {
-            this.NigelsApi.putCard(
+            this.NagelsApi.putCard(
                 this.Cookies.get('idToken'),
                 this.state.gameDetails.gameId,
                 this.state.gameDetails.currentHandId,
@@ -412,7 +412,7 @@ export default class Game extends React.Component{
         const roomId = this.state.gameDetails.roomId
         const roomName = this.state.gameDetails.roomName
         const username = this.Cookies.get('username')
-        this.NigelsApi.disconnectRoom(this.Cookies.get('idToken'), roomId, username)
+        this.NagelsApi.disconnectRoom(this.Cookies.get('idToken'), roomId, username)
         .then((body) => {
             if(!body.errors){
                 roomSocket.emit('remove_player_from_room', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
@@ -677,7 +677,7 @@ export default class Game extends React.Component{
                     : '' }
                 </div>
                 
-                <NigelsModal
+                <NagelsModal
                     open={this.state.modalOpen}
                     text={this.state.modalText}
                     isMobile={this.props.isMobile}
@@ -687,7 +687,7 @@ export default class Game extends React.Component{
                     onKeyPress={this.handleKeyPress}
                     closeModal={this.closeModal}
                     modalCanClose={this.modalCanClose}
-                ></NigelsModal>
+                ></NagelsModal>
                 <GameScores
                     open={this.state.scoresModalOpen}
                     isMobile={this.props.isMobile}

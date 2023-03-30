@@ -3,14 +3,14 @@ import React from 'react';
 import './profile.css'
 
 //Local services
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
-import NigelsModal from '../../components/nigels-modal';
+import NagelsModal from '../../components/nagels-modal';
 
 //Local components
 import FormButton from '../../components/form-button';
 import defaultTheme from '../../themes/default';
-import NigelsAvatar from '../../components/nigels-avatar'
+import NagelsAvatar from '../../components/nagels-avatar'
 
 //MUI components
 import TextField from '@mui/material/TextField';
@@ -57,7 +57,7 @@ export default class Profile extends React.Component{
         }
     }
 
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
     Cookies = new Cookies();
 
     CheckIfLoggedIn = () => {
@@ -68,7 +68,7 @@ export default class Profile extends React.Component{
     };
 
     backToGame = () => {
-        this.NigelsApi.getUser(this.Cookies.get('username'))
+        this.NagelsApi.getUser(this.Cookies.get('username'))
         .then((body)=>{
             if(body.connectedRoomId){
                 window.location.assign('/room/' + body.connectedRoomId)
@@ -79,7 +79,7 @@ export default class Profile extends React.Component{
     }
 
     getUserProfile = () => {
-        this.NigelsApi.getUser(this.props.match.params.username || this.Cookies.get('username'))
+        this.NagelsApi.getUser(this.props.match.params.username || this.Cookies.get('username'))
         .then((body)=>{
             if(body.errors) {
                 window.location.assign('/lobby/')
@@ -95,7 +95,7 @@ export default class Profile extends React.Component{
     }
 
     updateProfile = () => {
-        this.NigelsApi.updateUser(this.props.match.params.username || this.Cookies.get('username'), this.Cookies.get('idToken'), this.state.userData.email, this.state.userData.aboutMe || '')
+        this.NagelsApi.updateUser(this.props.match.params.username || this.Cookies.get('username'), this.Cookies.get('idToken'), this.state.userData.email, this.state.userData.aboutMe || '')
         .then((body)=>{
             if(body.errors) {
                 var newErrors = this.state.errors
@@ -129,7 +129,7 @@ export default class Profile extends React.Component{
             }
             this.setState({ errors: newErrors })
         } else {
-            this.NigelsApi.updatePassword(this.Cookies.get('idToken'), this.state.currentPassword, this.state.newPassword, this.state.repeatPassword)
+            this.NagelsApi.updatePassword(this.Cookies.get('idToken'), this.state.currentPassword, this.state.newPassword, this.state.repeatPassword)
             .then((body)=>{
                 if(body.errors) {
                     var newErrors = this.state.errors
@@ -304,7 +304,7 @@ export default class Profile extends React.Component{
 
     uploadFile = async (e) => { // TODO upload avatar method is not working (problem may exist in FE, BE or both)
         // alert('Work in progress: upload tool is in development')
-        this.NigelsApi.uploadProfilePic(this.Cookies.get('idToken'), this.props.match.params.username || this.Cookies.get('username'), this.state.avatarFile)
+        this.NagelsApi.uploadProfilePic(this.Cookies.get('idToken'), this.props.match.params.username || this.Cookies.get('username'), this.state.avatarFile)
         .then((body) => {
             if(body.errors) {
                 console.log(body.errors)
@@ -329,11 +329,11 @@ export default class Profile extends React.Component{
                         onMouseLeave={this.deActivatePicControls}
                         onClick={() => {this.setState({modalOpen: true})}} // FIXME
                     >
-                        <NigelsAvatar
+                        <NagelsAvatar
                             username={this.props.match.params.username || this.Cookies.get('username')}
                             width={this.props.isMobile ? 120 : 200}
                             height={this.props.isMobile ? 120 : 200}
-                        ></NigelsAvatar>
+                        ></NagelsAvatar>
                         <div 
                             className={`profile-picture-update-controls ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
                             style={{ display: this.state.picControlsVisible ? 'block' : 'none' }}
@@ -537,7 +537,7 @@ export default class Profile extends React.Component{
                 : 
                     ''
                 }
-                <NigelsModal
+                <NagelsModal
                     open={this.state.modalOpen}
                     text="Upload new profile picture"
                     isMobile={this.props.isMobile}
@@ -546,7 +546,7 @@ export default class Profile extends React.Component{
                     controls={this.state.modalControls}
                     modalCanClose={true}
                     closeModal={()=>this.setState({modalOpen: false})}
-                ></NigelsModal>
+                ></NagelsModal>
             </div>
         )
     }

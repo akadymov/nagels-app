@@ -3,14 +3,14 @@ import React from 'react';
 import './lobby.css';
 
 //Local services
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 import { roomSocket, lobbySocket } from '../../services/socket';
 
 //Local components
-import NigelsTableContainer from '../../components/nigels-table-container';
+import NagelsTableContainer from '../../components/nagels-table-container';
 import SectionHeader from '../../components/section-header';
-import NigelsModal from '../../components/nigels-modal';
+import NagelsModal from '../../components/nagels-modal';
 
 
 export default class Lobby extends React.Component{
@@ -69,7 +69,7 @@ export default class Lobby extends React.Component{
         }
     }
 
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
     Cookies = new Cookies();
 
     CheckIfLoggedIn = () => {
@@ -80,7 +80,7 @@ export default class Lobby extends React.Component{
     };
 
     GetRoomsList = () => {
-        this.NigelsApi.getRooms(this.Cookies.get('idToken'))
+        this.NagelsApi.getRooms(this.Cookies.get('idToken'))
         .then((body) => {
             if(body.errors) {
                 console.log('Something went wrong! Cannot get rooms list!')
@@ -179,7 +179,7 @@ export default class Lobby extends React.Component{
     }
 
     connectRoom = (roomId) => {
-        this.NigelsApi.connectRoom(this.Cookies.get('idToken'), roomId)
+        this.NagelsApi.connectRoom(this.Cookies.get('idToken'), roomId)
         .then((body) => {
             if(!body.errors){
                 roomSocket.emit('add_player_to_room', this.Cookies.get('username'), roomId, body.roomName, body.connectedUsers)
@@ -219,7 +219,7 @@ export default class Lobby extends React.Component{
 
     createNewRoom = () => {
         this.closeModal()
-        this.NigelsApi.createRoom(this.Cookies.get('idToken'), this.state.newRoomName)
+        this.NagelsApi.createRoom(this.Cookies.get('idToken'), this.state.newRoomName)
         .then((body) => {
             if(body.errors) {
                 this.handleCreateRoomError(body)
@@ -332,15 +332,15 @@ export default class Lobby extends React.Component{
                     title= {!this.props.isMobile ? 'Games Lobby' : ''}
                 ></SectionHeader>
                 <div className={`lobby-table-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                    <NigelsTableContainer 
+                    <NagelsTableContainer 
                         height={this.props.isMobile ? (this.props.isPortrait ? '74vh' : '88vh') : '90vh'}
                         headers={this.state.roomsHeaders}
                         rows={this.state.rooms}
                         onClick={this.selectRoom}
                         selected={this.state.selectedRoomId}
-                    ></NigelsTableContainer>
+                    ></NagelsTableContainer>
                 </div>
-                <NigelsModal
+                <NagelsModal
                     open={this.state.modalOpen}
                     header="New room"
                     isMobile={this.props.isMobile}
@@ -350,7 +350,7 @@ export default class Lobby extends React.Component{
                     onKeyPress={this.handleKeyPress}
                     closeModal={this.closeModal}
                     modalCanClose={true}
-                ></NigelsModal>
+                ></NagelsModal>
             </div>
         )
     }

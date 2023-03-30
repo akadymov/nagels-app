@@ -1,14 +1,14 @@
 <html>
     <head>
         {% if title %}
-        <title>{{ title }} - Nigels App</title>
+        <title>{{ title }} - Nägels App</title>
         {% else %}
-        <title>Welcome to Nigels App</title>
+        <title>Welcome to Nägels App</title>
         {% endif %}
     </head>
     <body>
         <div>
-            Nigels:
+            Nägels:
             <a href="{{ url_for('index') }}">Rooms</a>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>

@@ -8,7 +8,7 @@ import './feedback.css'
 import FormContainer from '../../components/form-container';
 
 //Local services
-import NigelsApi from '../../services/nigels-api-service';
+import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 
 
@@ -85,7 +85,7 @@ export default class Feedback extends React.Component{
         }
     }
 
-    NigelsApi = new NigelsApi();
+    NagelsApi = new NagelsApi();
     Cookies = new Cookies();
 
 
@@ -93,7 +93,7 @@ export default class Feedback extends React.Component{
     CheckIfAlreadyLoggedIn = () => {
         const username = this.Cookies.get('username')
         if(username) {
-            this.NigelsApi.getUser(username)
+            this.NagelsApi.getUser(username)
             .then((body)=>{
                 if(!body.errors){
                     this.setState({
@@ -106,7 +106,7 @@ export default class Feedback extends React.Component{
     }
 
     sendFeedback = () => {
-        this.NigelsApi.sendFeedback(this.state.senderName, this.state.senderEmail, this.state.message)
+        this.NagelsApi.sendFeedback(this.state.senderName, this.state.senderEmail, this.state.message)
         .then((body)=>{
             var newSubmitButtonList = []
             var newTextFieldsList = []
@@ -208,7 +208,7 @@ export default class Feedback extends React.Component{
                     onSubmit={this.SendLoginRequest}
                 >
                 </FormContainer>
-                <div className="feedback-sent-confirmation-message" style={{ display: this.state.feedbackSent ? 'block' : 'none' }}>Thank you for the feedback! Nigels Application admins will contact you soon.</div>
+                <div className="feedback-sent-confirmation-message" style={{ display: this.state.feedbackSent ? 'block' : 'none' }}>Thank you for the feedback! Nägels Application admins will contact you soon.</div>
             </div>
         )
     }
