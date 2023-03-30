@@ -1,6 +1,6 @@
 # nigels-app-ui
 
-Nigels card game application.
+Nägels card game application.
 Created with [Flask framework], [ReactJS framework], [Material design guidelines].
 Specification: [Product requirements]
 
@@ -20,7 +20,7 @@ Specification: [Product requirements]
     api$ python -m unittest tests/integration/united.py
 5. Run the application API by command:
     ```sh
-    api$ python nigels-app.py
+    api$ python nagels-app.py
 6. Install js-dependencies by running following comand in root folder terminal:
     ```sh
     $ npm install
