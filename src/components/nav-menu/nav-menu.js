@@ -58,7 +58,7 @@ export default class NavMenu extends React.Component{
     }
 
     signOut = () => {
-        this.Cookies.remove('idToken', {path:'/signin'})
+        this.Cookies.remove('idToken', {path:'/'})
         window.location.assign('/signin')
     }
 

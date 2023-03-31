@@ -198,16 +198,6 @@ export default class ActiveContainer extends React.Component{
                                 />
                             }
                         ></Route>
-                        <Route 
-                            path="/" 
-                            component={
-                                () => <LoginWithRouter  
-                                    isMobile = {this.props.isMobile}
-                                    isDesktop = {this.props.isDesktop}
-                                    isPortrait = {this.props.isPortrait}
-                                />
-                            }
-                        ></Route>
                         {/*<Route path="/forgot-password" component={ForgotPassword}></Route>
                         <Route path="/restore-password" component={RestorePassword}></Route>
                         <Route path="/game/:gameId" component={Game}></Route>
