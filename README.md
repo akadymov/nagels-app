@@ -23,11 +23,11 @@ Specification: [Product requirements]
     api$ python nagels-app.py
 6. Install js-dependencies by running following comand in root folder terminal:
     ```sh
-    $ npm install
+    $ yarn install
 7. Set frontend configs in /src/config.json
 8. Run the application by command:
     ```sh
-    $ npm start
+    $ yarn start
 [Product requirements]: https://docs.google.com/spreadsheets/d/117oYt6tzSbarLFpdtWTk-ohP1Usm7WvgBH-RtXKfbB4/edit?usp=sharing
 [Material design guidelines]: https://m3.material.io/
 [Flask framework]: https://flask.palletsprojects.com/
