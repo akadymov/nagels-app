@@ -189,7 +189,7 @@ export default class ActiveContainer extends React.Component{
                             }
                         ></Route>
                         <Route 
-                            path="/" 
+                            path="/signin" 
                             component={
                                 () => <LoginWithRouter  
                                     isMobile = {this.props.isMobile}

@@ -66,7 +66,7 @@ export default class ResetPassword extends React.Component{
                     width: "220px",
                     disabled: false,
                     hidden: true,
-                    onSubmit: ()=>window.location.assign('/')
+                    onSubmit: ()=>window.location.assign('/login')
                 }
             ]
         }
@@ -135,8 +135,8 @@ export default class ResetPassword extends React.Component{
             } else {
                 var currentDate = new Date(); 
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
-                this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
-                this.Cookies.set('username', this.state.username, { path: '/' , expires: expiresIn})
+                this.Cookies.set('idToken', body.token, { path: '/login' , expires: expiresIn})
+                this.Cookies.set('username', this.state.username, { path: '/login' , expires: expiresIn})
                 window.location.assign('/lobby/');
             }
         });

@@ -5,7 +5,7 @@ export default class NagelsApi {
     _env = configFile.ENVIRONMENT
 
     _apiHost = configFile.API.HOST[this._env]
-    _apiPort = configFile.API.PORT[this._env]
+    _apiPort = configFile.API.PORT[this._env] ? ':' + configFile.API.PORT[this._env] : ''
     _apiContext = configFile.API.CONTEXT[this._env]
 
     status(response) {  
@@ -26,7 +26,7 @@ export default class NagelsApi {
             throw new Error(`Bad request method (${method})`);
         }
         
-        const resourceLocation = `${this._apiHost}:${this._apiPort}${this._apiContext}${url}`
+        const resourceLocation = `${this._apiHost}${this._apiPort}${this._apiContext}${url}`
 
         var req = {
             method: method,
