@@ -58,7 +58,7 @@ export default class NavMenu extends React.Component{
     }
 
     signOut = () => {
-        this.Cookies.remove('idToken', {path:'/login'})
+        this.Cookies.remove('idToken', {path:'/signin'})
         window.location.assign('/signin')
     }
 
@@ -224,12 +224,12 @@ export default class NavMenu extends React.Component{
                         {this.state.loggedIn ?
                             <LogoutRoundedIcon type="navItem" fontSize="large" color={this.state.hoveredItem === 'signout' ? 'secondary' : 'primary'}/>
                         :
-                            <LoginRoundedIcon type="navItem" fontSize="large" color={this.state.hoveredItem === 'signin' ? 'secondary' : (window.location.pathname === '/login' ? 'action' :'primary')}/>
+                            <LoginRoundedIcon type="navItem" fontSize="large" color={this.state.hoveredItem === 'signin' ? 'secondary' : (window.location.pathname === '/signin' ? 'action' :'primary')}/>
                         }
                     </div>
                     {this.state.menuExpanded ? 
                         <div className="menu-item-title-container">
-                            <p className={`menu-item-title ${this.state.hoveredItem === (this.state.loggedIn ? "signout" : "signin") ? 'secondary' : (window.location.pathname === '/login' ? 'action' :'')}`}>
+                            <p className={`menu-item-title ${this.state.hoveredItem === (this.state.loggedIn ? "signout" : "signin") ? 'secondary' : (window.location.pathname === '/signin' ? 'action' :'')}`}>
                                 {this.state.loggedIn ? "SIGN OUT" : "SIGN IN"}
                             </p>
                         </div>   
