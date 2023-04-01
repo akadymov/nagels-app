@@ -3,7 +3,7 @@ from app.models import User, Room, Game, Hand, Turn, Player, TurnCard, DealtCard
 from config import get_settings, get_environment
 
 env = get_environment()
-flask_settings = get_settings('FLASK')
+flask_configs = get_settings('FLASK')
 
 
 @app.shell_context_processor
@@ -12,4 +12,4 @@ def make_shell_context():
 
 
 if __name__ == '__main__':
-    app.run(port=flask_settings['PORT'][env])
+    app.run(port=flask_configs['PORT'][env], debug=flask_configs['DEBUG'][env])

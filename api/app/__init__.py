@@ -28,7 +28,7 @@ for key in mail_settings.keys():
     app.config['MAIL_' + str(key)] = mail_settings[key][env]
 mail = Mail(app)
 
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", logger=flask_configs['DEBUG'][env], engineio_logger=flask_configs['DEBUG'][env])
 
 
 from app import routes, models
