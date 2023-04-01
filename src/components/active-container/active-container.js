@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './active-container.css'
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 
 //MUI components
 import { ThemeProvider } from '@mui/material/styles';
@@ -198,11 +198,12 @@ export default class ActiveContainer extends React.Component{
                                 />
                             }
                         ></Route>
-                        {/*<Route path="/forgot-password" component={ForgotPassword}></Route>
-                        <Route path="/restore-password" component={RestorePassword}></Route>
-                        <Route path="/game/:gameId" component={Game}></Route>
-                        <Route path="/leaderboard" component={LeaderBoard}></Route>
-                        <Route path="/feedback" component={Feedback}></Route>*/}
+                        <Route exact path="/">
+                            <Redirect to="/signin" />
+                        </Route>
+                        <Route path="/*">
+                            <Redirect to="/about" />
+                        </Route>
                     </Switch>
                 </div>
             </ThemeProvider>
