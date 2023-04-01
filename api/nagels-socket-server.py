@@ -1,6 +1,7 @@
 from app import app, db, socketio
 from app.models import User, Room, Game, Hand, Turn, Player, TurnCard, DealtCards, HandScore
 from config import get_settings, get_environment
+from app import socket
 
 
 env = get_environment()

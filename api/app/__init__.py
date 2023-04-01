@@ -31,4 +31,4 @@ mail = Mail(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 
-from app import routes, models, socket
+from app import routes, models
