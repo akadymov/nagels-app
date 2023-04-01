@@ -5,6 +5,7 @@ from config import get_settings, get_environment
 monkey.patch_all()
 
 env = get_environment()
+flask_settings = get_settings('FLASK')
 
 
 @app.shell_context_processor
@@ -13,4 +14,4 @@ def make_shell_context():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, port=get_settings('FLASK')['PORT'][env])
+    socketio.run(app, debug=flask_settings['DEBUG'][env], port=flask_settings['PORT'][env])
