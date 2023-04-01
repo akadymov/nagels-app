@@ -49,13 +49,13 @@ export default class NagelsApi {
     };
 
     apiCallFormData = async(url, token, data) => {
-        const resourceLocation = `${this._apiHost}:${this._apiPort}${this._apiContext}${url}`
+        const resourceLocation = `${this._apiHost}${this._apiPort}${this._apiContext}${url}`
         var req = {
             method: 'POST',
             headers: {
                 'Token': token
             },
-            body: data
+            body: data  
         }
         const res = await fetch(
             resourceLocation,

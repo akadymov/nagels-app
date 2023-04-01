@@ -302,8 +302,7 @@ export default class Profile extends React.Component{
          });
     }
 
-    uploadFile = async (e) => { // TODO upload avatar method is not working (problem may exist in FE, BE or both)
-        // alert('Work in progress: upload tool is in development')
+    uploadFile = async () => { 
         this.NagelsApi.uploadProfilePic(this.Cookies.get('idToken'), this.props.match.params.username || this.Cookies.get('username'), this.state.avatarFile)
         .then((body) => {
             if(body.errors) {
