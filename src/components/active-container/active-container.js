@@ -202,7 +202,7 @@ export default class ActiveContainer extends React.Component{
                             <Redirect to="/signin" />
                         </Route>
                         <Route path="/*">
-                            <Redirect to="/about" />
+                            <Redirect to="/signin" />
                         </Route>
                     </Switch>
                 </div>
