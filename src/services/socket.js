@@ -4,7 +4,7 @@ import configFile from '../config.json'
 const env = configFile.ENVIRONMENT
 
 const socketHost = configFile.API.HOST[env]
-const socketPort = configFile.API.PORT[env] ? ':' + configFile.API.PORT[env] : ''
+const socketPort = configFile.API.SOCKET_PORT[env] ? ':' + configFile.API.SOCKET_PORT[env] : ''
 
 const manager = new Manager(socketHost + socketPort)
 

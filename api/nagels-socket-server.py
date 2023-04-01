@@ -1,6 +1,7 @@
-from app import app, db
+from app import app, db, socketio
 from app.models import User, Room, Game, Hand, Turn, Player, TurnCard, DealtCards, HandScore
 from config import get_settings, get_environment
+
 
 env = get_environment()
 flask_settings = get_settings('FLASK')
@@ -12,4 +13,4 @@ def make_shell_context():
 
 
 if __name__ == '__main__':
-    app.run(port=flask_settings['PORT'][env])
+    socketio.run(app, debug=True, port=flask_settings['SOCKET_PORT'][env])

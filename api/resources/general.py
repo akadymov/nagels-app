@@ -8,6 +8,7 @@ from config import get_settings, get_environment
 general = Blueprint('general', __name__)
 env = get_environment()
 
+
 @general.route('{base_path}/rules'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
 @cross_origin()
 def get_rules():

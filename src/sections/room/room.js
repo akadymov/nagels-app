@@ -315,7 +315,6 @@ export default class Room extends React.Component{
 
     confirmCloseRoom = () => {
         const roomId = this.state.roomDetails.roomId
-        const roomName = this.state.roomDetails.roomName
         this.NagelsApi.closeRoom(this.Cookies.get('idToken'), roomId)
         .then((body) => {
             if(body.errors){
