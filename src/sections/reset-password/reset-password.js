@@ -136,7 +136,7 @@ export default class ResetPassword extends React.Component{
                 var currentDate = new Date(); 
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
                 this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
-                this.Cookies.set('username', this.state.username, { path: '/' , expires: expiresIn})
+                this.Cookies.set('username',this.state.username, { path: '/' , expires: expiresIn})
                 window.location.assign('/lobby/');
             }
         });
