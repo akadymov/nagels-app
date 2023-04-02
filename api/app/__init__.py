@@ -15,7 +15,7 @@ app.config.update(
     SQLALCHEMY_DATABASE_URI=flask_configs['SQLALCHEMY_DATABASE_URI'][env],
     SQLALCHEMY_TRACK_MODIFICATIONS=flask_configs['SQLALCHEMY_TRACK_MODIFICATIONS'][env]
 )
-cors = CORS(app)
+CORS(app)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
