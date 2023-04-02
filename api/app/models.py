@@ -890,15 +890,17 @@ class TurnCard(db.Model):
     def __repr__(self):
         return "<Card {}{} in hand {} put by player {}>".format(self.card_id, self.card_suit, self.hand_id, User.query.filter_by(id=self.player_id).first().username)
 
+
 class Token(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     token = db.Column(db.String(150), nullable=False)
-    type = db.Column(db.String(10), nullable=False)
-    status = db.Column(db.String(10), nullable=False)
+    type = db.Column(db.String(20), nullable=False)
+    status = db.Column(db.String(20), nullable=False)
 
     def burn(self):
         self.status = 'used'
         db.session.commit()
+
 
 class Stats(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
