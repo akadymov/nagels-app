@@ -20,7 +20,7 @@ const MainContainer = () => {
         isDesktop = isDesktopWidth
     } else {
         isMobile = isMobileHeight
-        isDesktop = isDesktopHeight
+        isDesktop = true /* isDesktopHeight */ 
     }
 
     return (
