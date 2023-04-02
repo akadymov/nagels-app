@@ -485,6 +485,8 @@ def upload_profile_pic(username):
         }), 403'''
     filename = str(modified_user.username) + '.' + file_extension
     try:
+        if app.debug:
+            print(os.path.join(content['UPLOAD_FOLDER'][env], filename))
         file.save(os.path.join(content['UPLOAD_FOLDER'][env], filename))
     except Exception as e:
         return jsonify({
