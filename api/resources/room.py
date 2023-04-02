@@ -47,6 +47,7 @@ def generate_games_json(target_room):
             games_json['ongoingGameId'] = game.id
     return games_json
 
+
 @room.route('{base_path}/room/all'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def get_list():
