@@ -15,6 +15,14 @@ def send_async_email(app, msg):
             mail.send(msg)
         except Exception as e:
             print(e)
+            if get_settings()['DEBUG'][env]:
+                print('MAIL_SERVER: ' + str(app.config['MAIL_SERVER']))
+                print('MAIL_PORT: ' + str(app.config['MAIL_PORT']))
+                print('MAIL_USERNAME: ' + str(app.config['MAIL_USERNAME']))
+                print('MAIL_PASSWORD: ' + str(app.config['MAIL_PASSWORD']))
+                print('MAIL_PASSWORD: ' + str(app.config['MAIL_PASSWORD']))
+                print('MAIL_USE_TLS: ' + str(app.config['MAIL_USE_TLS']))
+                print('MAIL_USE_SSL: ' + str(app.config['MAIL_USE_SSL']))
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
@@ -36,15 +44,13 @@ def send_password_reset_email(user):
         recipients=[user.email],
         text_body=render_template(
             'email/reset_password.txt',
-            nagels_url=nagels_app['SCHEMA'][env] + '://' + nagels_app['HOST'][env] + (
-                        ':' + str(nagels_app['PORT'][env])) if nagels_app['PORT'][env] else '',
+            nagels_url=nagels_app['SITE_URL'][env],
             user=user,
             token=token
         ),
         html_body=render_template(
             'email/reset_password.html',
-            nagels_url=nagels_app['SCHEMA'][env] + '://' + nagels_app['HOST'][env] + (
-                        ':' + str(nagels_app['PORT'][env])) if nagels_app['PORT'][env] else '',
+            nagels_url=nagels_app['SITE_URL'][env],
             user=user,
             token=token
         )
