@@ -11,6 +11,7 @@ from app.email import send_password_reset_email, send_registration_notification
 from config import get_settings, get_environment
 
 
+
 user = Blueprint('user', __name__)
 
 auth = get_settings('AUTH')
