@@ -160,7 +160,7 @@ class UserMethodsCase(BaseCase):
                           headers={"Content-Type": "application/json"}, data=payload1)
             response = self.app.post('{base_path}/user'.format(base_path=get_settings('API_BASE_PATH')),
                                      headers={"Content-Type": "application/json"}, data=payload2)
-            u_count = User.query.filter_by(username=username.casefold()).count()
+            u_count = User.query.filter_by(username=username).count()
             get_user_response = self.app.get(
                 '{base_path}/user/{username}'.format(base_path=get_settings('API_BASE_PATH'), username=username),
                 headers={"Content-Type": "application/json"})

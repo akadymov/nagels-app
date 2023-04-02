@@ -65,7 +65,7 @@ def create_user():
         errors.append({'field': 'email', 'message': 'Bad email!'})
     if not re.match(regexps['PASSWORD'][env], password):
         errors.append({'field': 'password', 'message': requirements['PASSWORD'][env]})
-    if User.query.filter_by(username=username.casefold()).count() > 0:
+    if User.query.filter_by(username=username).count() > 0:
         errors.append(
             {'field': 'username', 'message': 'Username "{username}" is unavailable!'.format(username=username)})
     if User.query.filter_by(email=email).first() is not None:
@@ -75,8 +75,8 @@ def create_user():
             'errors': errors
         }), 400
     user = User(
-        username=username.casefold(),
-        email=email.casefold(),
+        username=username,
+        email=email,
         preferred_language=preferred_lang,
         last_seen=last_seen,
         registered=registered
@@ -87,7 +87,7 @@ def create_user():
     send_registration_notification(user)
     return \
         jsonify({
-            'username': user.username.casefold(),
+            'username': user.username,
             'email': user.email,
             'preferredLang': user.preferred_language,
             'registered': user.registered,
@@ -100,7 +100,7 @@ def create_user():
 
 @user.route('{base_path}/user/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
 def get_user(username):
-    username = username.casefold()
+    username = username
     user = User.query.filter_by(username=username).first()
     if user is None:
         return jsonify({
@@ -126,7 +126,7 @@ def get_user(username):
 @user.route('{base_path}/user/token'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def post_token():
-    username = request.json.get('username').casefold()
+    username = request.json.get('username')
     password = request.json.get('password')
     user = User.query.filter_by(username=username).first()
     if user is None or not user.check_password(str(password)):
@@ -150,7 +150,7 @@ def post_token():
 def edit_user(username):
 
     token = request.json.get('token')
-    username = username.casefold()
+    username = username
     requesting_user = User.verify_api_auth_token(token)
     if requesting_user is None:
         return jsonify({
@@ -409,7 +409,7 @@ def new_password():
 @cross_origin()
 def upload_profile_pic(username):
     token = request.headers.get('Token')
-    username = username.casefold()
+    username = username
     requesting_user = User.verify_api_auth_token(token)
     if requesting_user is None:
         return jsonify({
