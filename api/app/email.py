@@ -10,12 +10,11 @@ nagels_app = get_settings('NAGELS_APP')
 
 
 def send_async_email(app, msg):
-    if env != 'TEST':  # no sending mails within auto-tests
-        with app.app_context():
-            try:
-                mail.send(msg)
-            except Exception as e:
-                print(e)
+    with app.app_context():
+        try:
+            mail.send(msg)
+        except Exception as e:
+            print(e)
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
