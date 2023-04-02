@@ -15,7 +15,7 @@ def send_async_email(app, msg):
             mail.send(msg)
         except Exception as e:
             print(e)
-            if get_settings()['DEBUG'][env]:
+            if app.debug:
                 print('MAIL_SERVER: ' + str(app.config['MAIL_SERVER']))
                 print('MAIL_PORT: ' + str(app.config['MAIL_PORT']))
                 print('MAIL_USERNAME: ' + str(app.config['MAIL_USERNAME']))
