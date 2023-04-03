@@ -116,7 +116,7 @@ export default class Lobby extends React.Component{
                     r.dataArray.push({
                         type:'button',
                         variant: 'contained',
-                        text: !body.myConnectedRoomId && r.status === 'open' ? 'Connect' : (body.myConnectedRoomId===r.id ? 'Open' : 'Watch'),
+                        text: !body.myConnectedRoomId && r.status === 'open' ? 'Join' : (body.myConnectedRoomId===r.id ? 'Open' : 'Watch'),
                         onSubmit: !body.myConnectedRoomId && r.status ? this.connectRoom.bind(this, r.roomId) : () => window.location.assign('/room/' + r.roomId),
                         width: '130px',
                         disabled: false
