@@ -121,7 +121,7 @@ export default class Room extends React.Component{
                 {
                     type: 'button',
                     variant: 'contained',
-                    text: 'Disconnect',
+                    text: 'Leave',
                     onSubmit: this.disconnectRoom.bind(this, index),
                     width: '130px',
                     color: 'error',
