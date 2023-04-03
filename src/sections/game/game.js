@@ -531,18 +531,24 @@ export default class Game extends React.Component{
                             }
                         break
                         case 'put card':
+                            console.log(data)
                             newGameDetails.cardsOnTable = data.cardsOnTable
                             newGameDetails.nextActingPlayer = data.nextActingPlayer
-                            if(data.isLastCardInHand){
-                                this.newGameStatus()
-                            } else {
+                            if(data.tookPlayer){
                                 var tookPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.tookPlayer)
-                                if(data.tookPlayerIndex >= 0){
+                                console.log(tookPlayerIndex)
+                                if(tookPlayerIndex >= 0){
                                     newGameDetails.players[tookPlayerIndex].tookTurns ++
+                                    console.log(newGameDetails.players[tookPlayerIndex].username)
+                                    console.log(newGameDetails.players[tookPlayerIndex].tookTurns)
                                 }
                                 if(data.tookPlayer === newGameDetails.myInHandInfo.username) {
                                     newGameDetails.myInHandInfo.tookTurns ++
                                 }
+                            }
+                            if(data.isLastCardInHand){
+                                this.newGameStatus()
+                            } else {
                                 if(data.nextActingPlayer === this.Cookies.get('username')) {
                                     newGameDetails.actionMessage = "It's your turn now"
                                     newGameDetails.attentionToMessage = true
