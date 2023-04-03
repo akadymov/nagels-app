@@ -52,6 +52,16 @@ def bet(game_id, hand_id):
             ]
         }), 403
 
+    max_bet_size = h.cards_per_player
+    if bet_size > max_bet_size:
+        return jsonify({
+            'errors': [
+                {
+                    'message': 'Maximum bet size is {max_bet_size}!'.format(max_bet_size=str(max_bet_size))
+                }
+            ]
+        }), 403
+
     requesting_player_bet = HandScore.query.filter_by(hand_id=hand_id, player_id=requesting_user.id).first()
     if requesting_player_bet:
         return jsonify({
