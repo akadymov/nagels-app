@@ -1,6 +1,6 @@
 .open-card{
     position: relative;
-    background-size: contain;
+    background-size:cover;
 }
 
 .open-card[cardontable]{
