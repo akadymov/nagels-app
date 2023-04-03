@@ -475,7 +475,7 @@ export default class Game extends React.Component{
                             updatedPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.actor)
                             if (updatedPlayerIndex >= 0){
                                 newGameDetails.players[updatedPlayerIndex].betSize = data.betSize
-                                newGameDetails.nextActingPlayer = data.nextPlayerToBet
+                                newGameDetails.nextActingPlayer = data.nextActingPlayer
                                 if(data.isLastPlayerToBet){
                                     newGameDetails.betsAreMade = data.isLastPlayerToBet
                                     newGameDetails.nextActingPlayer = data.nextActingPlayer
