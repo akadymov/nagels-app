@@ -9,7 +9,7 @@ import re
 import os
 from app.email import send_password_reset_email, send_registration_notification
 from config import get_settings, get_environment
-
+from sqlalchemy import func
 
 
 user = Blueprint('user', __name__)
@@ -66,7 +66,7 @@ def create_user():
         errors.append({'field': 'email', 'message': 'Bad email!'})
     if not re.match(regexps['PASSWORD'][env], password):
         errors.append({'field': 'password', 'message': requirements['PASSWORD'][env]})
-    if User.query.filter_by(username=username).count() > 0:
+    if User.query.filter(func.lower(User.username) == func.lower(username)).count() > 0:
         errors.append(
             {'field': 'username', 'message': 'Username "{username}" is unavailable!'.format(username=username)})
     if User.query.filter_by(email=email).first() is not None:
