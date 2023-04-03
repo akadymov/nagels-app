@@ -1,6 +1,5 @@
 .MuiPaper-root{
     position: absolute;
-    max-width: 1400px;
     transform: translate(-50%, 0%);
     left: 50%;
     margin: 0;
