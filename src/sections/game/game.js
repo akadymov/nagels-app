@@ -88,7 +88,7 @@ export default class Game extends React.Component{
             if(getGameResponse.errors){
                 this.handleApiError(getGameResponse)
             } else {
-                if(getGameResponse.canDeal && getGameResponse.autodeal && getGameResponse.host === this.Cookies.get('username')){
+                if(getGameResponse.canDeal && getGameResponse.autodeal && getGameResponse.host.toLowerCase() === this.Cookies.get('username')){
                     this.dealCards()
                 } else {
                     newHeaderControls = [
@@ -115,16 +115,16 @@ export default class Game extends React.Component{
                         {
                             id: 'exit',
                             type: 'button',
-                            text: getGameResponse.host === this.Cookies.get('username') ? 'Finish' : 'Exit',
+                            text: getGameResponse.host.toLowerCase() === this.Cookies.get('username') ? 'Finish' : 'Exit',
                             variant: 'contained',
                             disabled: false,
                             size: 'small',
                             width: '130px',
                             color: 'error',
-                            onSubmit: getGameResponse.host === this.Cookies.get('username') ? this.finishGame : (getGameResponse.myInHandInfo.username ? this.exitGame : ()=> window.location.assign('/lobby'))
+                            onSubmit: getGameResponse.host.toLowerCase() === this.Cookies.get('username') ? this.finishGame : (getGameResponse.myInHandInfo.username ? this.exitGame : ()=> window.location.assign('/lobby'))
                         }
                     ]
-                    if (getGameResponse.host === this.Cookies.get('username')){
+                    if (getGameResponse.host.toLowerCase() === this.Cookies.get('username')){
                         newHeaderControls.push({
                             id: 'shuffle',
                             type: 'button',
@@ -167,8 +167,38 @@ export default class Game extends React.Component{
                             onMouseUp: (e) => this.handleLastTurnClick()
                         })
                     }
-                    if(getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade){
+                    if(getGameResponse.nextActingPlayer.toLowerCase() === this.Cookies.get('username') && !getGameResponse.betsAreMade){
+                        var betPlayers = []
+                        var playersToBet = []
+                        var sumOfMadeBets = 0
+                        getGameResponse.players.map(player => {
+                            if(player.username.toLowerCase() !== this.Cookies.get('username')){
+                                if(player.betSize){
+                                    betPlayers.push(player)
+                                    sumOfMadeBets =+ player.betSize
+                                } else {
+                                    playersToBet.push(player)
+                                }
+                            }
+                        })
                         newModalControls = [
+                            {
+                                id: "hand_cards",
+                                type: "hand-cards",
+                                cards: getGameResponse.myInHandInfo.dealtCards
+                            },
+                            {
+                                id: "bet_players",
+                                header: "Made bets",
+                                type: "players-bet-info",
+                                players: betPlayers
+                            },
+                            {
+                                id: "players_to_bet",
+                                header: "Players to bet",
+                                type: "players-bet-info",
+                                players: playersToBet
+                            },
                             {
                                 id: "bet_size_input",
                                 type: "input",
@@ -187,18 +217,19 @@ export default class Game extends React.Component{
                                 type: "button",
                                 variant: "contained",
                                 text: "Confirm",
+                                width: "195px",
                                 onSubmit: this.makeBet
                             }
                         ]
                     }
-                    if(getGameResponse.nextActingPlayer === this.Cookies.get('username')){
+                    if(getGameResponse.nextActingPlayer.toLowerCase() === this.Cookies.get('username')){
                         getGameResponse.attentionToMessage = true
                     }
                     this.setState({
                         gameDetails: getGameResponse,
                         headerControls: newHeaderControls,
                         modalControls: newModalControls,
-                        modalOpen: getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade,
+                        modalOpen: getGameResponse.nextActingPlayer.toLowerCase() === this.Cookies.get('username') && !getGameResponse.betsAreMade,
                         modalText: "Make a bet",
                         modalCanClose: false,
                         modalContentType: 'Bet'
@@ -291,7 +322,8 @@ export default class Game extends React.Component{
         .then((body) => {
             if(body.errors) {
                 var newModalControls = this.state.modalControls
-                newModalControls[0].errorMessage = body.errors[0].message
+                var inputControlIndex = newModalControls.findIndex(el => el.id == "bet_size_input")
+                newModalControls[inputControlIndex].errorMessage = body.errors[0].message
                 this.setState({
                     modalControls: newModalControls
                 })
@@ -470,7 +502,7 @@ export default class Game extends React.Component{
 
         gameSocket.on('refresh_game_table', (data) => {
             if(parseInt(data.gameId) === parseInt(this.props.match.params.gameId)){
-                if(data.actor !== this.Cookies.get('username')){
+                if(data.actor.toLowerCase() !== this.Cookies.get('username')){
                     var newGameDetails = this.state.gameDetails
                     var newModalOpen = this.state.modalOpen
                     var newModalControls = this.state.modalControls
@@ -493,24 +525,54 @@ export default class Game extends React.Component{
                         case 'make bet':
                             updatedPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.actor)
                             if (updatedPlayerIndex >= 0){
-                                newGameDetails.players[updatedPlayerIndex].betSize = data.betSize
-                                newGameDetails.nextActingPlayer = data.nextActingPlayer
                                 if(data.isLastPlayerToBet){
                                     newGameDetails.betsAreMade = data.isLastPlayerToBet
                                     newGameDetails.nextActingPlayer = data.nextActingPlayer
-                                    if(data.nextActingPlayer === this.Cookies.get('username')){
+                                    if(data.nextActingPlayer.toLowerCase() === this.Cookies.get('username')){
                                         newGameDetails.actionMessage = "It's your turn now"
                                         newGameDetails.attentionToMessage = true
                                     } else{
                                         newGameDetails.actionMessage = data.nextActingPlayer + "'s turn..."
                                     }
                                 } else {
-                                    if(data.nextActingPlayer === this.Cookies.get('username')){
+                                    if(data.nextActingPlayer.toLowerCase() === this.Cookies.get('username')){
                                         newGameDetails.actionMessage = "It's your turn now"
                                         newGameDetails.attentionToMessage = true
                                         newModalOpen = true
                                         newScoresModalOpen = false
+                                        newGameDetails.players[updatedPlayerIndex].betSize = data.betSize
+                                        newGameDetails.nextActingPlayer = data.nextActingPlayer
+                                        var betPlayers = []
+                                        var playersToBet = []
+                                        var sumOfMadeBets = 0
+                                        newGameDetails.players.map(player => {
+                                            if(player.username.toLowerCase() !== this.Cookies.get('username')){
+                                                if(player.betSize){
+                                                    betPlayers.push(player)
+                                                    sumOfMadeBets =+ player.betSize
+                                                } else {
+                                                    playersToBet.push(player)
+                                                }
+                                            }
+                                        })
                                         newModalControls = newModalControls = [
+                                            {
+                                                id: "hand_cards",
+                                                type: "hand-cards",
+                                                cards: newGameDetails.myInHandInfo.dealtCards
+                                            },
+                                            {
+                                                id: "bet_players",
+                                                header: "Made bets",
+                                                type: "players-bet-info",
+                                                players: betPlayers
+                                            },
+                                            {
+                                                id: "players_to_bet",
+                                                header: "Players to bet",
+                                                type: "players-bet-info",
+                                                players: playersToBet
+                                            },
                                             {
                                                 id: "bet_size_input",
                                                 type: "input",
@@ -568,13 +630,13 @@ export default class Game extends React.Component{
                                 this.setState({
                                     gameDetails: newGameDetails
                                 })
-                                if(this.Cookies.get('username') === newGameDetails.host){
+                                if(this.Cookies.get('username') === newGameDetails.host.toLowerCase()){
                                     setTimeout(function(){
                                         window.location.reload();
                                     }, 5000)
                                 }
                             } else {
-                                if(data.nextActingPlayer === this.Cookies.get('username')) {
+                                if(data.nextActingPlayer.toLowerCase() === this.Cookies.get('username')) {
                                     newGameDetails.actionMessage = "It's your turn now"
                                     newGameDetails.attentionToMessage = true
                                 } else {
@@ -586,7 +648,7 @@ export default class Game extends React.Component{
                             }
                         break
                         case 'finish':
-                            if(data.actor !== this.Cookies.get('username')){
+                            if(data.actor.toLowerCase() !== this.Cookies.get('username')){
                                 window.location.assign('/room/' + data.roomId)
                             }
                         break
@@ -666,7 +728,7 @@ export default class Game extends React.Component{
                     }
                     {
                     this.state.gameDetails.players.map(player => {  // TODO consider replacing with forEach
-                        if(player.username !== this.Cookies.get('username')) {
+                        if(player.username.toLowerCase() !== this.Cookies.get('username')) {
                             if(this.state.gameDetails.positionsDefined){
                                 return (
                                     <OpponentContainer
@@ -699,7 +761,7 @@ export default class Game extends React.Component{
                             dealtCards={this.state.gameDetails.myInHandInfo.dealtCards}
                             selectedCard={this.state.selectedCard}
                             onSelectCard={this.onSelectCard}
-                            isStarter={this.Cookies.get('username')===this.state.gameDetails.handStarter}
+                            isStarter={this.Cookies.get('username')===this.state.gameDetails.handStarter.toLowerCase()}
                         ></PlayerContainer>
                     :
                         ''

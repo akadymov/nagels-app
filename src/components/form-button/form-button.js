@@ -16,8 +16,8 @@ export default class FormButton extends React.Component{
                     variant={this.props.variant}
                     disabled={this.props.disabled}
                     onClick={this.props.onSubmit}
-                    onmousedown={this.props.onMouseDown}
-                    onmouseup={this.props.onMouseUp}
+                    onMouseDown={this.props.onMouseDown}
+                    onMouseUp={this.props.onMouseUp}
                     size={this.props.size}
                     color={this.props.color}
                     sx={{

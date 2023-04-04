@@ -114,7 +114,7 @@ export default class Room extends React.Component{
                     type:'switch',
                     checked: player.ready,
                     defaultChecked: player.defaultChecked || player.ready,
-                    disabled: player.username === this.state.roomDetails.host || (this.Cookies.get('username') !== this.state.roomDetails.host && player.username !== this.Cookies.get('username')),
+                    disabled: player.username === this.state.roomDetails.host || (this.Cookies.get('username') !== this.state.roomDetails.host && player.username.toLowerCase() !== this.Cookies.get('username')),
                     username: player.username,
                     onChange: this.handleReadySwitchChange.bind(this, index) // FIXME: handle changes state but doesnot change UI appearance
                 },
@@ -125,7 +125,7 @@ export default class Room extends React.Component{
                     onSubmit: this.disconnectRoom.bind(this, index),
                     width: '130px',
                     color: 'error',
-                    disabled: player.username === this.state.roomDetails.host || (player.username !== this.Cookies.get('username') && this.state.roomDetails.host !== this.Cookies.get('username'))
+                    disabled: player.username === this.state.roomDetails.host || (player.username.toLowerCase() !== this.Cookies.get('username') && this.state.roomDetails.host !== this.Cookies.get('username'))
                 }
             ]
             if(!(this.props.isMobile && this.props.isPortrait)) {
@@ -208,7 +208,7 @@ export default class Room extends React.Component{
                         this.updatePlayersTable()
                         this.updateControls()
                     })
-                    if(body.host === this.Cookies.get('username')) {
+                    if(body.host.toLowerCase() === this.Cookies.get('username')) {
                         this.setState({youAreHost: true}, () => {
                             this.updateControls()
                         })
@@ -236,7 +236,7 @@ export default class Room extends React.Component{
             if(!body.errors){
                 roomSocket.emit('remove_player_from_room', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
                 lobbySocket.emit('decrease_room_players', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
-                if(username === this.Cookies.get('username')){
+                if(username.toLowerCase() === this.Cookies.get('username')){
                     window.location.assign('/lobby')
                 } else {
                     var newPlayers = this.state.players
@@ -382,7 +382,7 @@ export default class Room extends React.Component{
                             case 'disconnect':
                                 targetUserUpdated = this.state.roomDetails.connectedUserList.findIndex(element => element.username === data.username )
                                 if (targetUserUpdated >= 0){
-                                    if(this.state.roomDetails.connectedUserList[targetUserUpdated].username === this.Cookies.get('username')){
+                                    if(this.state.roomDetails.connectedUserList[targetUserUpdated].username.toLowerCase() === this.Cookies.get('username')){
                                         window.location.assign('/lobby/')
                                     } else {
                                         this.GetRoomDetails()
@@ -400,7 +400,7 @@ export default class Room extends React.Component{
         
         roomSocket.on("exit_room", (data) => {
             if(parseInt(data.roomId) === parseInt(this.state.roomDetails.roomId)){
-                if(data.username === 0 || data.username === this.Cookies.get('username')){
+                if(data.username === 0 || data.username.toLowerCase() === this.Cookies.get('username')){
                     window.location.assign('/lobby/')
                 }
             }

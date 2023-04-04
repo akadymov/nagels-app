@@ -1,3 +1,19 @@
+.MuiModal-root{
+    max-height: 100vh;
+}
+
+.MuiBackdrop-root{
+    max-height: 100vh;
+}
+
+iframe{
+    max-height: 100vh;
+}
+
+div[data-testid=sentinelStart]{
+    max-height: 100vh;
+}
+
 .modal-container{
     position: absolute;
     transform: translate(-50%, -50%);
@@ -7,24 +23,19 @@
     border-radius: 10px;
 }
 
-.modal-container.mobile.landscape{
-    top:25%;
-}
-
 .modal-content-container{
-    padding: 30px 2vw 10px 2vw;
+    padding: 5px 2vw 5px 2vw;
     min-height: 40px;
 }
 
 .modal-header{
-    font-size: 24px;
-    font-weight:bold;
     text-align: center;
-    line-height: 20px;
 }
 
 .modal-text-container{
+    font-size: 24px;
     text-align: center;
+    line-height: 30px;
 }
 
 .modal-controls-container{
@@ -55,4 +66,52 @@
     position: absolute;
     right: 6px;
     top: 6px;
+}
+
+.modal-player-bet-header{
+    display: inline-block;
+    text-align: center;
+    width: 260px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.modal-player-bet-info{
+    display: inline-block;
+    text-align: center;
+    width: 260px;
+    font-size: 14px;
+    height: 20px;
+}
+
+.modal-player-avatar-container{
+    display: inline-block;
+    overflow: hidden;
+}
+
+.modal-player-username{
+    display: inline-block;
+    width: 110px;
+    overflow-x: hidden;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.modal-player-username:hover{
+    color: darkviolet;
+}
+
+.modal-player-betsize{
+    display: inline-block;
+    width: 20px;
+    overflow-x: hidden;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+.modal-cards-container{
+    display: inline-block;
+    height: 50px;
+    padding: 5px;
+    font-size: 14px;
 }

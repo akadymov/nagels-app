@@ -7,11 +7,15 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import FormButton from '../form-button';
 import CloseIcon from '@mui/icons-material/Close';
-
+import NagelsAvatar from '../nagels-avatar/nagels-avatar';
+import OpenCard from '../open-card';
 
 export default class NagelsModal extends React.Component{
 
     render() {
+
+        console.log(this.props.controls)
+
         return(
             <Modal
                 open={this.props.open}
@@ -20,7 +24,7 @@ export default class NagelsModal extends React.Component{
                     <div className='modal-content-container'>
                         <div className="modal-header">{this.props.header}</div>
                         <div className="modal-text-container">
-                            <p>{this.props.text}</p>
+                            {this.props.text}
                         </div>
                         <div 
                             className="modal-controls-container"
@@ -39,6 +43,7 @@ export default class NagelsModal extends React.Component{
                                                         variant={control.variant}
                                                         onChange={control.onChange}
                                                         width={control.width}
+                                                        size='small'
                                                         required={control.required}
                                                         defaultValue={control.text}
                                                         error={control.errorMessage}
@@ -58,6 +63,29 @@ export default class NagelsModal extends React.Component{
                                                 ></input>
                                             </div>
                                         )
+                                    case 'hand-cards':
+                                        return(
+                                            <div className="modal-control-container" key={control.id}>
+                                                <div 
+                                                    className="modal-cards-container"
+                                                    style={{
+                                                        width:(this.props.isMobile ? 35 : 49) + (control.cards.length - 1) * (this.props.isMobile ? 10 : 15),
+                                                        height:this.props.isMobile ? 50 : 70
+                                                    }}
+                                                >
+                                                    {control.cards.map(card =>{
+                                                        return(<OpenCard 
+                                                            key={'modal-card-' + card}
+                                                            cardId={'card-' + card}
+                                                            selectedCard={null}
+                                                            isMobile={this.props.isMobile}
+                                                            index={control.cards.findIndex( el => el === card )}
+                                                            modal={true}
+                                                        ></OpenCard>)
+                                                    })}
+                                                </div>
+                                            </div>
+                                        )
                                     case 'button':
                                         return(
                                             <div className="modal-control-container" key={control.id}>
@@ -71,6 +99,34 @@ export default class NagelsModal extends React.Component{
                                                 width={control.width}
                                                 color={control.color}
                                             ></FormButton>
+                                            </div>
+                                        )
+                                    case 'players-bet-info':
+                                        return (
+                                            <div className="modal-player-bets-container">
+                                                {control.players.length ?
+                                                    <div className="modal-player-bet-header">{control.header}</div>
+                                                :
+                                                    ''
+                                                }
+                                                {control.players.map(player => {
+                                                    return(
+                                                            <div className="modal-player-bet-info">
+                                                                <div className="modal-player-avatar-container">
+                                                                    <NagelsAvatar
+                                                                        width = "20px"
+                                                                        height = "20px"
+                                                                        username = {player.username}
+                                                                    ></NagelsAvatar>
+                                                                </div>
+                                                                <div 
+                                                                    className="modal-player-username"
+                                                                    onClick={()=>window.location.assign('/profile/' + player.username)}
+                                                                >{player.username}</div>
+                                                                <div className="modal-player-betsize">{player.betSize}</div>
+                                                            </div>
+                                                    )
+                                                })}
                                             </div>
                                         )
                                     case 'text':

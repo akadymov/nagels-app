@@ -14,7 +14,7 @@ const MainContainer = () => {
     const isMobileWidth = useMediaQuery({query: '(max-width: 480px)'})
     const isDesktopWidth = useMediaQuery({query: '(min-width: 1024px)'})
     const isMobileHeight = useMediaQuery({query: '(max-height: 480px)'})
-    const isDesktopHeight = useMediaQuery({query: '(min-height: 700px)'})
+    // const isDesktopHeight = useMediaQuery({query: '(min-height: 700px)'})
     if(isPortrait){
         isMobile = isMobileWidth
         isDesktop = isDesktopWidth

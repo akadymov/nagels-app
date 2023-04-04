@@ -5,7 +5,6 @@ const env = configFile.ENVIRONMENT
 
 const socketHost = configFile.API.HOST[env]
 const socketPort = configFile.API.SOCKET_PORT[env] ? ':' + configFile.API.SOCKET_PORT[env] : ''
-console.log(socketHost + socketPort)
 
 const manager = new Manager(socketHost + socketPort)
 
