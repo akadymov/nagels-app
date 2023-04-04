@@ -409,7 +409,7 @@ export default class Game extends React.Component{
                         })
                         setTimeout(function(){
                             window.location.reload();
-                        }, 3000)
+                        }, 5000)
                     } else {
                         this.newGameStatus();
                     }
