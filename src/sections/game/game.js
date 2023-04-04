@@ -611,7 +611,7 @@ export default class Game extends React.Component{
                                 })
                             }
                         break
-                        case 'put card':
+                        case "put card":
                             newGameDetails.cardsOnTable = data.cardsOnTable
                             newGameDetails.nextActingPlayer = data.nextActingPlayer
                             var putPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.actor)

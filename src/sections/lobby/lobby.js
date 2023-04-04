@@ -282,7 +282,7 @@ export default class Lobby extends React.Component{
                         this.GetRoomsList()
                     }
                     break
-                case data.event === 'close':
+                case data.event === "close":
                     newRooms = this.state.rooms
                     updatedRoomIndex = newRooms.findIndex(element => element.id === data.roomId )
                     if (updatedRoomIndex >= 0) {
