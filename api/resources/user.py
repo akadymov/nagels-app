@@ -140,6 +140,7 @@ def post_token():
     else:
         token = user.generate_auth_token()
         return jsonify({
+            'username': user.username,
             'token': token,
             'expiresIn': auth['TOKEN_LIFETIME'][env],
             'connectedRoomId': user.get_connected_room_id()
