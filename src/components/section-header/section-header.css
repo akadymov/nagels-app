@@ -39,6 +39,7 @@
     overflow: scroll;
     white-space: nowrap;
     text-align: right;
+    top: 15px;
 }
 
 .controls-container.desktop{
@@ -68,7 +69,7 @@
 .section-title-container.desktop{
     position: absolute;
     text-align: left;
-    top: 0;
+    top: 15px;
     max-width: 18vw;
     overflow: hidden;
     white-space: nowrap;
@@ -106,11 +107,11 @@
 .section-subtitle-container.desktop{
     position: absolute;
     text-align: left;
-    top: 32px;
+    top: 40px;
     max-width: 18vw;
     overflow: hidden;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .section-subtitle-container.tablet.portrait{

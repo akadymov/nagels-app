@@ -14,8 +14,6 @@ export default class NagelsModal extends React.Component{
 
     render() {
 
-        console.log(this.props.controls)
-
         return(
             <Modal
                 open={this.props.open}

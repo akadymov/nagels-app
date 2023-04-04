@@ -39,8 +39,8 @@
 }
 
 .main-logo-text.desktop{
-    font-size: 44px;
-    right: 0;
+    font-size: 32px;
+    right: 25px;
     transform: translate(0, -50%);
 }
 
