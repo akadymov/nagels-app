@@ -583,9 +583,11 @@ export default class Game extends React.Component{
             }.bind(this), 3000)
         }
     }*/
+    
 
 
     render() {
+
         
         return (
             <div className={`game-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
@@ -652,6 +654,7 @@ export default class Game extends React.Component{
                                         betSize={player.betSize}
                                         tookTurns={player.tookTurns}
                                         active={this.state.gameDetails.nextActingPlayer === player.username}
+                                        isStarter={this.state.gameDetails.handStarter === player.username}
                                     ></OpponentContainer>
                                 )
                             }
@@ -669,6 +672,7 @@ export default class Game extends React.Component{
                             dealtCards={this.state.gameDetails.myInHandInfo.dealtCards}
                             selectedCard={this.state.selectedCard}
                             onSelectCard={this.onSelectCard}
+                            isStarter={this.Cookies.get('username')===this.state.gameDetails.handStarter}
                         ></PlayerContainer>
                     :
                         ''

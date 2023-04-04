@@ -413,7 +413,8 @@ def status(game_id):
         'gameScores': game.get_scores(),
         'actionMessage': action_msg,
         'myInHandInfo': my_info,
-        'cardsOnTable': cards_on_table
+        'cardsOnTable': cards_on_table,
+        'handStarter': current_hand.get_starter().username if current_hand else None
     }
 
 

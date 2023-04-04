@@ -96,8 +96,8 @@
 
 
 .opponent-container.player1.outof5{
-    top: 60%;
-    right: -4vw;
+    top: 50%;
+    right: -10vw;
 }
 
 .opponent-container.player2.outof5{
@@ -131,8 +131,8 @@
 }
 
 .opponent-container.player4.outof5{
-    top: 60%;
-    left: -4vw;
+    top: 50%;
+    left: -10vw;
 }
 
 .opponent-container.player5.outof5{

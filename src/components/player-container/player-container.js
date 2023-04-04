@@ -5,6 +5,7 @@ import './player-container.css';
 //Local components
 import PlayerInfo from '../player-info/player-info';
 import OpenCard from '../open-card';
+import DealerButton from '../dealer-button';
 
 
 export default class PlayerContainer extends React.Component{
@@ -28,6 +29,16 @@ export default class PlayerContainer extends React.Component{
                             onClick={this.props.onSelectCard}
                         ></OpenCard>
                     )})}
+                    {
+                        this.props.isStarter ?
+                            <DealerButton
+                                isMobile={this.props.isMobile}
+                                isDesktop={this.props.isDesktop}
+                                isPortrait={this.props.isPortrait}
+                            ></DealerButton>
+                        :
+                            ''
+                    }
                 </div>
                 <PlayerInfo
                     isMobile={this.props.isMobile}

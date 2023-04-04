@@ -5,6 +5,7 @@ import './opponent-container.css';
 //Local Components
 import OpponentCards from '../opponent-cards';
 import PlayerInfo from '../player-info/player-info';
+import DealerButton from '../dealer-button';
 
 
 export default class OpponentContainer extends React.Component{
@@ -29,6 +30,17 @@ export default class OpponentContainer extends React.Component{
                     tookTurns={this.props.tookTurns}
                     active={this.props.active}
                 ></PlayerInfo>
+                {
+                    this.props.isStarter ?
+                        <DealerButton 
+                            position={`player${this.props.position + 'outof' + this.props.numberOfPlayers}`}
+                            isMobile={this.props.isMobile}
+                            isDesktop={this.props.isDesktop}
+                            isPortrait={this.props.isPortrait}
+                        ></DealerButton>
+                    :
+                        ''
+                }
             </div>
         )
     }

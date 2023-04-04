@@ -102,7 +102,7 @@ def create_user():
 @user.route('{base_path}/user/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
 def get_user(username):
     username = username
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
     if user is None:
         return jsonify({
             'errors': [
@@ -130,6 +130,7 @@ def post_token():
     username = request.json.get('username')
     password = request.json.get('password')
     user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
+    print(user.username)
     if user is None or not user.check_password(str(password)):
         return jsonify({
             'errors': [
@@ -233,7 +234,7 @@ def send_password_recovery():
         err = True
     requesting_user = None
     if username and email:
-        requesting_user = User.query.filter_by(username=username).first()
+        requesting_user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
     if not requesting_user:
         err = True
     elif requesting_user.email != email:
@@ -410,7 +411,6 @@ def new_password():
 @cross_origin()
 def upload_profile_pic(username):
     token = request.headers.get('Token')
-    username = username
     requesting_user = User.verify_api_auth_token(token)
     if requesting_user is None:
         return jsonify({
@@ -421,8 +421,7 @@ def upload_profile_pic(username):
             ]
         }), 401
 
-
-    modified_user = User.query.filter_by(username=username).first()
+    modified_user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
     if modified_user is None:
         return jsonify({
             'errors': [
