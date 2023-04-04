@@ -130,7 +130,6 @@ def post_token():
     username = request.json.get('username')
     password = request.json.get('password')
     user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
-    print(user.username)
     if user is None or not user.check_password(str(password)):
         return jsonify({
             'errors': [

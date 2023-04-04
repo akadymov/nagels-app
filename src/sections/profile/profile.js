@@ -359,7 +359,7 @@ export default class Profile extends React.Component{
                         <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             <TextField
                                 id='email'
-                                disabled={this.state.userData.username.toLowerCase() !== this.Cookies.get('username')}
+                                disabled={this.state.userData.username !== this.Cookies.get('username')}
                                 size='small'
                                 helperText={this.state.errors.email || 'email'}
                                 error={this.state.errors.email}
@@ -386,7 +386,7 @@ export default class Profile extends React.Component{
                         <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             <TextField
                                 id='about'
-                                disabled={this.state.userData.username.toLowerCase() !== this.Cookies.get('username')}
+                                disabled={this.state.userData.username !== this.Cookies.get('username')}
                                 helperText={this.state.errors.aboutMe || 'about me (' + this.state.aboutMeSymbols + '/500)'}
                                 error={this.state.errors.aboutMe}
                                 value={this.state.userData.aboutMe}
@@ -396,7 +396,7 @@ export default class Profile extends React.Component{
                                 rows={2}
                             ></TextField>
                         </div>
-                        {this.state.userData.username.toLowerCase() === this.Cookies.get('username')?
+                        {this.state.userData.username === this.Cookies.get('username')?
                             <div className={`profile-control-submit-button-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <FormButton
                                     id='profile_update_button'
@@ -411,7 +411,7 @@ export default class Profile extends React.Component{
                         :
                             ''
                         }
-                        {this.state.userData.username.toLowerCase() === this.Cookies.get('username')?
+                        {this.state.userData.username === this.Cookies.get('username')?
                             <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <TextField
                                     id='current_password'
@@ -428,7 +428,7 @@ export default class Profile extends React.Component{
                         :
                             ''
                         }
-                        {this.state.userData.username.toLowerCase() === this.Cookies.get('username')?
+                        {this.state.userData.username === this.Cookies.get('username')?
                             <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <TextField
                                     id='new_password'
@@ -445,7 +445,7 @@ export default class Profile extends React.Component{
                         :
                             ''
                         }
-                        {this.state.userData.username.toLowerCase() === this.Cookies.get('username')?
+                        {this.state.userData.username === this.Cookies.get('username')?
                             <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <TextField
                                     id='confirm_password'
@@ -462,7 +462,7 @@ export default class Profile extends React.Component{
                         :
                             ''
                         }
-                        {this.state.userData.username.toLowerCase() === this.Cookies.get('username')?
+                        {this.state.userData.username === this.Cookies.get('username')?
                             <div className={`profile-control-submit-button-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <FormButton
                                     id='password_update_button'
