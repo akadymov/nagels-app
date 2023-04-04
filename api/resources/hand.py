@@ -100,7 +100,7 @@ def deal_cards(game_id):
             print('Cannot calculate cards per player count in hand #' + str(new_hand_id) + ' of game #' + str(game_id))
 
         # next starting player is the one who was second is previous hand
-        starting_player = last_closed_hand.get_player_by_pos(2)
+        starting_player = last_closed_hand.get_player_by_pos(1)
 
     h = Hand(id=new_hand_id, game_id=int(game_id), serial_no=serial_no, trump=trump, cards_per_player=cards_per_player, starting_player=starting_player.id)
     db.session.add(h)

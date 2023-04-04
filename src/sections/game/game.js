@@ -524,10 +524,11 @@ export default class Game extends React.Component{
                         break
                         case 'make bet':
                             updatedPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.actor)
+                            newGameDetails.players[updatedPlayerIndex].betSize = data.betSize
+                            newGameDetails.nextActingPlayer = data.nextActingPlayer
                             if (updatedPlayerIndex >= 0){
                                 if(data.isLastPlayerToBet){
                                     newGameDetails.betsAreMade = data.isLastPlayerToBet
-                                    newGameDetails.nextActingPlayer = data.nextActingPlayer
                                     if(data.nextActingPlayer === this.Cookies.get('username')){
                                         newGameDetails.actionMessage = "It's your turn now"
                                         newGameDetails.attentionToMessage = true
@@ -540,8 +541,6 @@ export default class Game extends React.Component{
                                         newGameDetails.attentionToMessage = true
                                         newModalOpen = true
                                         newScoresModalOpen = false
-                                        newGameDetails.players[updatedPlayerIndex].betSize = data.betSize
-                                        newGameDetails.nextActingPlayer = data.nextActingPlayer
                                         var betPlayers = []
                                         var playersToBet = []
                                         var sumOfMadeBets = 0
