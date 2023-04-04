@@ -387,7 +387,6 @@ def status(game_id):
         else:                                           # if hand is just finished
             action_msg = 'Hand is finished'
 
-
     response_json = {
         'gameId': game.id,
         'roomName': Room.query.filter_by(id=game.room_id).first().room_name,
@@ -416,6 +415,5 @@ def status(game_id):
         'cardsOnTable': cards_on_table,
         'handStarter': current_hand.get_starter().username if current_hand else None
     }
-
 
     return jsonify(response_json), 200

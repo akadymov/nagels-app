@@ -88,7 +88,7 @@ export default class Game extends React.Component{
             if(getGameResponse.errors){
                 this.handleApiError(getGameResponse)
             } else {
-                if(getGameResponse.canDeal && getGameResponse.autodeal && this.state.gameDetails.host === this.Cookies.get('username')){
+                if(getGameResponse.canDeal && getGameResponse.autodeal && getGameResponse.host === this.Cookies.get('username')){
                     this.dealCards()
                 } else {
                     newHeaderControls = [
@@ -361,7 +361,26 @@ export default class Game extends React.Component{
                         body.nextActingPlayer,
                         body.isLastCardInHand
                     )
-                    this.newGameStatus();
+                    if(body.isLastCardInHand && body.tookPlayer){
+                        var newGameDetails = this.state.gameDetails
+                        newGameDetails.cardsOnTable.push({
+                            'cardId': cardId,
+                            'playerId': this.Cookies.get('username'),
+                            'playerPosition': newGameDetails.myInHandInfo.position,
+                            'playerRelativePosition': 0
+                        })
+                        var putCardIndex = newGameDetails.myInHandInfo.dealtCards.findIndex(el => el.cardId === cardId)
+                        newGameDetails.myInHandInfo.dealtCards.splice(putCardIndex, 1)
+                        newGameDetails.actionMessage = "Hand is finished! Dealing cards..."
+                        this.setState({
+                            gameDetails: newGameDetails
+                        })
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 3000)
+                    } else {
+                        this.newGameStatus();
+                    }
                 }
             })
         }
@@ -531,23 +550,29 @@ export default class Game extends React.Component{
                             }
                         break
                         case 'put card':
-                            console.log(data)
                             newGameDetails.cardsOnTable = data.cardsOnTable
                             newGameDetails.nextActingPlayer = data.nextActingPlayer
+                            var putPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.actor)
+                            newGameDetails.players[putPlayerIndex].cardsOnHand --
                             if(data.tookPlayer){
                                 var tookPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.tookPlayer)
-                                console.log(tookPlayerIndex)
                                 if(tookPlayerIndex >= 0){
                                     newGameDetails.players[tookPlayerIndex].tookTurns ++
-                                    console.log(newGameDetails.players[tookPlayerIndex].username)
-                                    console.log(newGameDetails.players[tookPlayerIndex].tookTurns)
                                 }
                                 if(data.tookPlayer === newGameDetails.myInHandInfo.username) {
                                     newGameDetails.myInHandInfo.tookTurns ++
                                 }
                             }
                             if(data.isLastCardInHand){
-                                this.newGameStatus()
+                                newGameDetails.actionMessage = "Hand is finished! Dealing cards..."
+                                this.setState({
+                                    gameDetails: newGameDetails
+                                })
+                                if(this.Cookies.get('username') === newGameDetails.host){
+                                    setTimeout(function(){
+                                        window.location.reload();
+                                    }, 5000)
+                                }
                             } else {
                                 if(data.nextActingPlayer === this.Cookies.get('username')) {
                                     newGameDetails.actionMessage = "It's your turn now"
@@ -574,17 +599,19 @@ export default class Game extends React.Component{
         });
     }
 
-    /*componentDidUpdate = () => {
-        if(this.state.handDetails.cardsOnTable.length === this.state.gameDetails.players.length){
-            var newHandDetails = this.state.handDetails
-            setTimeout(function(){
-                newHandDetails.cardsOnTable = []
-                this.setState({ handDetails: newHandDetails })
-            }.bind(this), 3000)
-        }
-    }*/
-    
+    componentDidUpdate = () => {
 
+        var lastTurnCards = this.state.gameDetails.lastTurnCards
+        
+        setTimeout(function(){
+
+            if(this.state.gameDetails.cardsOnTable.length === this.state.gameDetails.players.length && lastTurnCards === this.state.gameDetails.lastTurnCards){
+                var newGameDetails = this.state.gameDetails
+                newGameDetails.cardsOnTable = []
+                this.setState({ gameDetails: newGameDetails })
+            }
+        }.bind(this), 5000)
+    }
 
     render() {
 

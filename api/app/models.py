@@ -451,13 +451,29 @@ class Hand(db.Model):
         return user_hand_pos
 
     def get_player_by_pos(self, position):
-        players_count = Player.query.filter_by(game_id=self.game_id).count()
-        initial_position = players_count - ((position - self.serial_no) % players_count)
-        player = Player.query.filter_by(game_id=self.game_id, position=initial_position).first()
-        if player:
-            return User.query.filter_by(id=player.user_id).first()
-        else:
-            return None
+        if app.debug:
+            print('Seeking for player on position #' + str(position) + ' in hand #' + str(self.id))
+        played_hands = Hand.query.filter_by(game_id=self.game_id, is_closed=1).count()
+        if app.debug:
+            print('Already played ' + str(played_hands) + ' hands in game')
+        game_players = Player.query.filter_by(game_id=self.game_id).all()
+        if position == len(game_players):
+            position = 0
+        if app.debug:
+            print('Found ' + str(len(game_players)) + ' in hand')
+        for player in game_players:
+            if app.debug:
+                print('Checking player #' + str(player.position) + ' hand position...')
+            shifted_position = (player.position + played_hands) % len(game_players)
+            if app.debug:
+                print("Player's position in hand is " + str(shifted_position))
+            if shifted_position == position:
+                user = User.query.filter_by(id=player.user_id).first()
+                if app.debug:
+                    print('User ' + str(user.username) + ' on initial position #' + str(player.position) + ' is who we are seeking for!')
+                if user:
+                    return user
+        return None
 
     def get_user_initial_hand(self, user, trump=None):
         possible_suits_ordered = ['s', 'c', 'h', 'd']
