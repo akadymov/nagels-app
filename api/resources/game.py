@@ -300,6 +300,7 @@ def status(game_id):
                         my_info['dealtCards'] = current_hand.get_user_current_hand(requesting_user, current_hand.trump)
                         my_info['betSize'] = my_scores.bet_size if my_scores else None
                         my_info['tookTurns'] = my_scores.took_turns() if my_scores else None
+                        my_info['selectedCard'] = None
                     else:
                         my_info['dealtCards'] = []
 
