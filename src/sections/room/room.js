@@ -22,6 +22,7 @@ export default class Room extends React.Component{
             playerHeaders: this.props.isMobile && this.props.isPortrait ? ['Player', 'Ready',''] : ['Player','Ready','','Won'],
             players: [],
             modalOpen: false,
+            modalHeader: "Please, confirm action",
             modalControls: [
                 {
                     id: "confirm_close_room",
@@ -383,7 +384,27 @@ export default class Room extends React.Component{
                                 targetUserUpdated = this.state.roomDetails.connectedUserList.findIndex(element => element.username === data.username )
                                 if (targetUserUpdated >= 0){
                                     if(this.state.roomDetails.connectedUserList[targetUserUpdated].username === this.Cookies.get('username')){
-                                        window.location.assign('/lobby/')
+                                        this.setState({
+                                            modalControls: [
+                                                {
+                                                    id: "empty_margin",
+                                                    type: "text",
+                                                    text: ""
+                                                },
+                                                {
+                                                    id: "kick_message",
+                                                    type: "text",
+                                                    text: "Sorry, you were kicked from the room. Disconnecting..."
+                                                }
+                                            ],
+                                            modalCanClose: false,
+                                            modalOpen: true,
+                                            modalHeader: ""
+                                        })
+                                        setTimeout(function(){
+                                            window.location.assign('/lobby/')
+                                        }, 3000)
+                                        
                                     } else {
                                         this.GetRoomDetails()
                                     }
@@ -445,7 +466,7 @@ export default class Room extends React.Component{
                 </div>
                 <NagelsModal
                     open={this.state.modalOpen}
-                    text="Please, confirm action"
+                    text={this.state.modalHeader}
                     isMobile={this.props.isMobile}
                     isDesktop={this.props.isDesktop}
                     isPortrait={this.props.isPortrait}
