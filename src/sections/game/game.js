@@ -402,6 +402,8 @@ export default class Game extends React.Component{
                             'playerRelativePosition': 0
                         })
                         var putCardIndex = newGameDetails.myInHandInfo.dealtCards.findIndex(el => el.cardId === cardId)
+                        var tookPlayerIndex = newGameDetails.players.findIndex(el => el.username === body.tookPlayer)
+                        newGameDetails.players[tookPlayerIndex].tookTurns ++
                         newGameDetails.myInHandInfo.dealtCards.splice(putCardIndex, 1)
                         newGameDetails.actionMessage = "Hand is finished! Dealing cards..."
                         this.setState({
