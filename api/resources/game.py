@@ -356,7 +356,6 @@ def status(game_id):
                     'playerRelativePosition': player_relative_position
                 })
 
-
     else:
         for player in players:
             user = User.query.filter_by(id=player.user_id).first()
@@ -369,11 +368,11 @@ def status(game_id):
                     'relativePosition': game.get_player_relative_positions(requesting_user.id, player.user_id) if requesting_user_is_player else player.position
                 })
 
-    played_hands_count = Hand.query.filter_by(game_id=game_id, is_closed=1).count()
-
     action_msg = 'Game #{game_id} started by {hostname}! Host is to shuffle positions.'.format(game_id=game_id, hostname=room.host.username)
     can_deal = False
-    if game.finished:
+    if game.winner_id:
+        action_msg = 'Congratulations! ' + str(User.query.filter_by(id=game.winner_id).first().username) + ' won the game. You can check players standings by clicking "SCORES"'
+    elif game.finished:
         action_msg = 'This game is closed!'
     elif positions_defined:
         if current_hand is None:                        # if hand is not started yet
@@ -387,6 +386,8 @@ def status(game_id):
             action_msg = "{username}'s turn...".format(username=current_hand.next_acting_player().username)
         else:                                           # if hand is just finished
             action_msg = 'Hand is finished'
+
+    played_hands_count = Hand.query.filter_by(game_id=game_id, is_closed=1).count()
 
     response_json = {
         'gameId': game.id,
@@ -414,7 +415,7 @@ def status(game_id):
         'actionMessage': action_msg,
         'myInHandInfo': my_info,
         'cardsOnTable': cards_on_table,
-        'handStarter': current_hand.get_starter().username if current_hand else None
+        'handStarter': current_hand.get_starter().username if current_hand else None,
     }
 
     return jsonify(response_json), 200

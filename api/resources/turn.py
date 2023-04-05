@@ -371,20 +371,10 @@ def put_card(game_id, hand_id, card_id):
                     hs.calculate_current_score()
             if g.all_hands_played():
                 g.finished = datetime.utcnow()
-                game_scores = g.get_scores()
-                top_score = 0
-                winner_id = None
-                r = Room.query.filter_by(id=g.room_id).first()
-                for player in g.players:
-                    user = User.query.filter_by(id=player.id).first()
-                    r.not_ready(user)
-                    player_scores = user.calc_game_stats(game_id=game_id)
-                    if player_scores:
-                        if player_scores['totalScore'] >= top_score:
-                            top_score = player_scores['totalScore']
-                            winner_id = player.user_id
-                g.winner_id = winner_id
+                db.session.commit()
 
+                winner_data = g.calculate_winner()
+                g.winner_id = winner_data['winner_id']
 
     db.session.commit()
 
@@ -397,10 +387,10 @@ def put_card(game_id, hand_id, card_id):
                 s = Stats(
                     user_id=user.id,
                     games_played=player_scores['gamesPlayed'],
-                    games_won = player_scores['gamesWon'],
-                    sum_of_bets = player_scores['sumOfBets'],
-                    bonuses = player_scores['bonuses'],
-                    total_score = player_scores['totalScore']
+                    games_won=player_scores['gamesWon'],
+                    sum_of_bets=player_scores['sumOfBets'],
+                    bonuses=player_scores['bonuses'],
+                    total_score=player_scores['totalScore']
                 )
                 db.session.add(s)
             else:

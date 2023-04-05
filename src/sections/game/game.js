@@ -115,13 +115,13 @@ export default class Game extends React.Component{
                         {
                             id: 'exit',
                             type: 'button',
-                            text: getGameResponse.host === this.Cookies.get('username') ? 'Finish' : 'Exit',
+                            text: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? 'Finish' : 'Exit',
                             variant: 'contained',
                             disabled: false,
                             size: 'small',
                             width: '130px',
                             color: 'error',
-                            onSubmit: getGameResponse.host === this.Cookies.get('username') ? this.finishGame : (getGameResponse.myInHandInfo.username ? this.exitGame : ()=> window.location.assign('/lobby'))
+                            onSubmit: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? this.finishGame : (getGameResponse.myInHandInfo.username && getGameResponse.status !== 'finished' ? this.exitGame : ()=> window.location.assign('/lobby'))
                         }
                     ]
                     if (getGameResponse.host === this.Cookies.get('username')){
@@ -678,7 +678,8 @@ export default class Game extends React.Component{
 
     render() {
 
-        
+        console.log(this.state.myBetSizeValue)
+
         return (
             <div className={`game-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                 <SectionHeader
