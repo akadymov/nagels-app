@@ -87,12 +87,12 @@ export default class NavMenu extends React.Component{
                                 username={this.Cookies.get('username')}
                                 width={35}
                                 height={35}
-                                outline={this.state.hoveredItem === 'profile' ? '2px solid ' + defaultTheme.palette.secondary.main : (window.location.pathname.startsWith('/profile') ? '2px solid ' + defaultTheme.palette.primary.main : 'none')}
+                                outline={this.state.hoveredItem === 'profile' ? '2px solid ' + defaultTheme.palette.primary.light : (window.location.pathname.startsWith('/profile') ? '2px solid ' + defaultTheme.palette.primary.main : 'none')}
                             ></NagelsAvatar>
                         </div>
                         {this.state.menuExpanded ? 
                         <div className="menu-item-title-container">
-                            <p className={`menu-item-title ${this.state.hoveredItem === 'profile' ? 'secondary' : (window.location.pathname.startsWith('/profile') ? 'action' :'')}`}>PROFILE</p>
+                            <p className={`menu-item-title ${this.state.hoveredItem === 'profile' ? 'action' : (window.location.pathname.startsWith('/profile') ? 'action' :'')}`}>PROFILE</p>
                         </div>   
                     :
                         ''
@@ -110,12 +110,12 @@ export default class NavMenu extends React.Component{
                             <FeedbackRoundedIcon 
                                 type="navItem"
                                 fontSize="large" 
-                                color={this.state.hoveredItem === 'feedback' ? 'secondary' : (window.location.pathname.startsWith('/feedback') ? 'action' :'primary')}
+                                color={this.state.hoveredItem === 'feedback' ? 'action' : (window.location.pathname.startsWith('/feedback') ? 'action' :'primary')}
                             />
                         </div>
                         {this.state.menuExpanded ? 
                             <div className="menu-item-title-container">
-                                <p className={`menu-item-title ${this.state.hoveredItem === 'feedback' ? 'secondary' : (window.location.pathname.startsWith('/feedback') ? 'action' :'')}`}>FEEDBACK</p>
+                                <p className={`menu-item-title ${this.state.hoveredItem === 'feedback' ? 'action' : (window.location.pathname.startsWith('/feedback') ? 'action' :'')}`}>FEEDBACK</p>
                             </div>   
                         :
                             ''
@@ -133,12 +133,12 @@ export default class NavMenu extends React.Component{
                         <EmojiEventsRoundedIcon 
                             type="navItem"
                             fontSize="large" 
-                            color={this.state.hoveredItem === 'leaderboard' ? 'secondary' : (window.location.pathname.startsWith('/leaderboard') ? 'action' :'primary')}
+                            color={this.state.hoveredItem === 'leaderboard' ? 'action' : (window.location.pathname.startsWith('/leaderboard') ? 'action' :'primary')}
                         />
                     </div>
                     {this.state.menuExpanded ? 
                         <div className="menu-item-title-container">
-                            <p className={`menu-item-title ${this.state.hoveredItem === 'leaderboard' ? 'secondary' : (window.location.pathname.startsWith('/leaderboard') ? 'action' :'')}`}>LEADERBOARD</p>
+                            <p className={`menu-item-title ${this.state.hoveredItem === 'leaderboard' ? 'action' : (window.location.pathname.startsWith('/leaderboard') ? 'action' :'')}`}>LEADERBOARD</p>
                         </div>   
                     :
                         ''
@@ -155,12 +155,12 @@ export default class NavMenu extends React.Component{
                         <HomeRoundedIcon 
                             type="navItem"
                             fontSize="large" 
-                            color={this.state.loggedIn ? (this.state.hoveredItem === 'lobby' ? 'secondary' : (window.location.pathname.startsWith('/lobby') ? 'action' : 'primary')) : 'disabled'}
+                            color={this.state.loggedIn ? (this.state.hoveredItem === 'lobby' ? 'action' : (window.location.pathname.startsWith('/lobby') ? 'action' : 'primary')) : 'disabled'}
                         />
                     </div>
                     {this.state.menuExpanded ? 
                         <div className="menu-item-title-container">
-                            <p className={`menu-item-title ${this.state.loggedIn ? (this.state.hoveredItem === 'lobby' ? 'secondary' : (window.location.pathname.startsWith('/lobby') ? 'action' :'')) : 'disabled'}`}>LOBBY</p>
+                            <p className={`menu-item-title ${this.state.loggedIn ? (this.state.hoveredItem === 'lobby' ? 'action' : (window.location.pathname.startsWith('/lobby') ? 'action' :'')) : 'disabled'}`}>LOBBY</p>
                         </div>   
                     :
                         ''
@@ -176,11 +176,11 @@ export default class NavMenu extends React.Component{
                         <InfoRoundedIcon 
                             type="navItem"
                             fontSize="large" 
-                            color={this.state.hoveredItem === 'about' ? 'secondary' : (window.location.pathname.startsWith('/about') ? 'action' :'primary')}
+                            color={this.state.hoveredItem === 'about' ? 'action' : (window.location.pathname.startsWith('/about') ? 'action' :'primary')}
                         />
                     </div>
                     {this.state.menuExpanded ? 
-                        <div className="menu-item-title-container"><p className={`menu-item-title ${this.state.hoveredItem === 'about' ? 'secondary' : (window.location.pathname.startsWith('/about') ? 'action' :'')}`}>ABOUT</p></div>   
+                        <div className="menu-item-title-container"><p className={`menu-item-title ${this.state.hoveredItem === 'about' ? 'action' : (window.location.pathname.startsWith('/about') ? 'action' :'')}`}>ABOUT</p></div>   
                     :
                         ''
                     }
@@ -194,14 +194,14 @@ export default class NavMenu extends React.Component{
                 >
                     <div className={`menu-item-icon-container ${ ScreenSizeClassPostfix} ${ ScreenOrientationClassPostfix }`}>
                         {this.state.loggedIn ?
-                            <LogoutRoundedIcon type="navItem" fontSize="large" color={this.state.hoveredItem === 'signout' ? 'secondary' : 'primary'}/>
+                            <LogoutRoundedIcon type="navItem" fontSize="large" color={this.state.hoveredItem === 'signout' ? 'action' : 'primary'}/>
                         :
-                            <LoginRoundedIcon type="navItem" fontSize="large" color={this.state.hoveredItem === 'signin' ? 'secondary' : (window.location.pathname === '/signin' ? 'action' :'primary')}/>
+                            <LoginRoundedIcon type="navItem" fontSize="large" color={this.state.hoveredItem === 'signin' ? 'action' : (window.location.pathname === '/signin' ? 'action' :'primary')}/>
                         }
                     </div>
                     {this.state.menuExpanded ? 
                         <div className="menu-item-title-container">
-                            <p className={`menu-item-title ${this.state.hoveredItem === (this.state.loggedIn ? "signout" : "signin") ? 'secondary' : (window.location.pathname === '/signin' ? 'action' :'')}`}>
+                            <p className={`menu-item-title ${this.state.hoveredItem === (this.state.loggedIn ? "signout" : "signin") ? 'action' : (window.location.pathname === '/signin' ? 'action' :'')}`}>
                                 {this.state.loggedIn ? "SIGN OUT" : "SIGN IN"}
                             </p>
                         </div>   

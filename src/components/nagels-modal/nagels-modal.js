@@ -19,7 +19,7 @@ export default class NagelsModal extends React.Component{
             <Modal
                 open={this.props.open}
             >
-                <div className={`modal-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"} ${configFile.THEME=='dark' ? 'dark-theme' : ''}`}>
+                <div className={`modal-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"} ${configFile.THEME==='dark' ? 'dark-theme' : ''}`}>
                     <div className='modal-content-container'>
                         <div className="modal-header">{this.props.header}</div>
                         <div className="modal-text-container">

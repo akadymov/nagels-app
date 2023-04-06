@@ -116,7 +116,7 @@ export default class Game extends React.Component{
                             id: 'exit',
                             type: 'button',
                             text: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? 'Finish' : 'Exit',
-                            variant: 'contained',
+                            variant: 'outlined',
                             disabled: false,
                             size: 'small',
                             width: '130px',
@@ -253,7 +253,7 @@ export default class Game extends React.Component{
             {
                 id: "confirm_finish_game",
                 type: "button",
-                variant: "contained",
+                variant: "outlined",
                 text: "Finish game",
                 width: '140px',
                 color: 'error',
@@ -435,7 +435,7 @@ export default class Game extends React.Component{
             {
                 id: "confirm_exit_game",
                 type: "button",
-                variant: "contained",
+                variant: "outlined",
                 text: "Exit game",
                 width: '140px',
                 color: 'error',

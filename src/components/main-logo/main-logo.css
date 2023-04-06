@@ -31,37 +31,42 @@
     min-width: 200px;
 }
 
-.main-logo-text{
+.main-logo{
     position: absolute;
     top: 50%;
     margin: 0;
     color: var(--headers);
-    font-weight: bold;
+    background-image: url(main-logo-akula.png);
+    background-size: contain;
 }
 
-.main-logo-text.desktop{
-    font-size: 32px;
+.main-logo.desktop{
     right: 25px;
+    width: 250px;
+    height: 140px;
     transform: translate(0, -50%);
 }
 
-.main-logo-text.tablet.portrait{
-    font-size: 44px;
+.main-logo.tablet.portrait{
     left: 50%;
+    width: 40vw;
+    height: 22.5vw;
     transform: translate(-50%, -50%);
 }
 
-.main-logo-text.mobile{
-    font-size: 30px;
+.main-logo.mobile{
     right: 0;
 }
 
-.main-logo-text.mobile.portrait{
-    transform: translate(0%, -50%);
-    width: 100vw;
-    text-align: center;
+.main-logo.mobile.portrait{
+    left: 50%;
+    width: 70vw;
+    height: 39vw;
+    transform: translate(-50%, -50%);
 }
 
-.main-logo-text.mobile.landscape{
+.main-logo.mobile.landscape{
+    width: 36vh;
+    height: 20vh;
     transform: translate(0, -50%);
 }
