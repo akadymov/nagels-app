@@ -436,7 +436,6 @@ class Game(db.Model):
                     else:
                         players_bonuses[score.player_id] = score.bonus
 
-
         winner_score = 0
         winner_bonuses = 0
         winner_id = None
