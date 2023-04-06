@@ -345,6 +345,7 @@ export default class Profile extends React.Component{
                                     onClick={() => {this.setState({modalOpen: true})}}
                                     variant='outlined'
                                     text='Upload new'
+                                    width='140px'
                                     size={this.props.isMobile ? 'small' : 'medium'}
                                     color='contrastControlElements'
                                 ></FormButton>

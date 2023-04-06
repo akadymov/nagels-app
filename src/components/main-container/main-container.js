@@ -24,6 +24,7 @@ const MainContainer = () => {
         isDesktop = true /* isDesktopHeight */ 
     }
 
+    
     return (
         <div className={`root-container ${configFile.THEME==='dark' ? 'dark-theme' : ''}`}>   
             <NavMenu 

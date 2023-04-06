@@ -25,6 +25,7 @@ import defaultTheme from '../../themes/default';
 
 
 
+
 export default class NagelsTableContainer extends React.Component{
 
     render() {
