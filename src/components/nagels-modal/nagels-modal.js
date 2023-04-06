@@ -9,6 +9,7 @@ import FormButton from '../form-button';
 import CloseIcon from '@mui/icons-material/Close';
 import NagelsAvatar from '../nagels-avatar/nagels-avatar';
 import OpenCard from '../open-card';
+import configFile from '../../config.json';
 
 export default class NagelsModal extends React.Component{
 
@@ -18,7 +19,7 @@ export default class NagelsModal extends React.Component{
             <Modal
                 open={this.props.open}
             >
-                <div className={`modal-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+                <div className={`modal-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"} ${configFile.THEME=='dark' ? 'dark-theme' : ''}`}>
                     <div className='modal-content-container'>
                         <div className="modal-header">{this.props.header}</div>
                         <div className="modal-text-container">

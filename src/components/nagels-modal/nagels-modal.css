@@ -19,8 +19,9 @@ div[data-testid=sentinelStart]{
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
-    background-color: white;
+    background-color: var(--formsBckgr);
     border-radius: 10px;
+    color: var(--regularText);
 }
 
 .modal-content-container{
@@ -57,7 +58,7 @@ div[data-testid=sentinelStart]{
 }
 
 .modal-control-container.error{
-    color: red
+    color: var(--error)
 }
 
 .modal-close-icon-container{
@@ -98,7 +99,7 @@ div[data-testid=sentinelStart]{
 }
 
 .modal-player-username:hover{
-    color: darkviolet;
+    color: var(--secondary);
 }
 
 .modal-player-betsize{

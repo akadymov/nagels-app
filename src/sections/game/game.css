@@ -30,7 +30,7 @@
     border-radius: 20%;
     transform: translate(-50%, 0%);
     left: 50%;
-    outline: 5px solid black;
+    outline: 5px solid var(--borderMain);
 }
 
 .game-table.desktop{
@@ -60,6 +60,7 @@
 }
 
 .current-game-trump-container{
+    color: var(--headers);
     position: absolute;
     right: -5%;
     top: -5%;
@@ -141,25 +142,25 @@
 
 .d.trump-container:after{
     content: "\2666";
-    color: red;
+    color: var(--error);
 }
 
 .h.trump-container:after{
     content: "\2665";
-    color: red;
+    color: var(--error);
 }
 
 .c.trump-container:after{
     content: "\2663";
-    color: black;
+    color: var(--blackSuit);
 }
 
 .s.trump-container:after{
     content: "\2660";
-    color: black;
+    color: var(--blackSuit);
 }
 
 .x.trump-container:after{
     content: "\2298";
-    color: black;
+    color: var(--blackSuit);
 }

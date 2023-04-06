@@ -2,22 +2,64 @@ import { createTheme } from '@mui/material/styles';
 
 const defaultTheme = createTheme({
   palette: {
-    mode: 'light',
-    primary: {
-      main: '#01aa00',
-      light: '#58f958',
-      dark: '#004600',
+    mode: 'dark',
+    headers: {
+      main: '#000000',
     },
-    secondary: {
-      main: '#b900f5',
+    regularText: {
+      main: 'darkGray',
+    },
+    inputText: {
+      main: '#000000',
+    },
+    formsBckgr: {
+      main: '#ffffff',
+    },
+    mainBckgr: {
+      main: '#e7e7e7',
     },
     error: {
-      main: '#d32f2f',
+      main: '#b10000',
     },
-    shadowed: {
-      main: '#ffffff'
+    secondary: {
+      main: '#13428f',
+    },
+    primary: {
+      light: '#5dc2fc',
+      main: '#13428f', 
+      dark: '#5dc2fc',
+    },
+    blackSuit: {
+      main: '#000000',
+    },
+    contrastControlElements: {
+      main: '#ffffff',
+    },
+    contrastControlPanel: {
+      main: '#000000',
+    },
+    disabled: {
+      main: '#808080',
+    },
+    transparentElementBckgr: {
+      main: 'hsl(0, 0%, 0%, 0.7)',
+    },
+    succeedText: {
+      main: '#008000',
+    },
+    totalRow: {
+      main: '#e8e8e8',
+    },
+    borderColor: {
+      main: '#000000',
+      light: '#808080',
     }
   },
+  typography: {
+    button: {
+      textTransform: 'none'
+    }
+  }
 });
 
 export default defaultTheme;

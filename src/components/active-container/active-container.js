@@ -26,6 +26,7 @@ export default class ActiveContainer extends React.Component{
     
     render() {
 
+
         const RoomWithRouter = withRouter(Room)
         const LeaderBoardWithRouter = withRouter(LeaderBoard)
         const LoginWithRouter = withRouter(Login)
@@ -37,6 +38,7 @@ export default class ActiveContainer extends React.Component{
         const ForgotPasswordWithRouter = withRouter(ForgotPassword)
         const ResetPasswordWithRouter = withRouter(ResetPassword)
         const FeedbackWithRouter = withRouter(Feedback)
+
 
         return (
             <ThemeProvider theme={defaultTheme}>

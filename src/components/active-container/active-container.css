@@ -2,6 +2,7 @@
     position: absolute;
     background: white;
     text-align: center;
+    background-color: var(--formsBckgr);
 }
 
 .active-container.mobile.portrait{

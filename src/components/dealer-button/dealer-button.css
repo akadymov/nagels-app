@@ -2,13 +2,13 @@
     position: absolute;
     left: -35px;
     top: -35px;
-    background-color: white;
+    background-color: var(--contrastControlElements);
     width: 30px;
     height: 30px;
     font-size: 24px;
     line-height: 30px;
     border-radius: 50%;
-    border: 1px black solid;
+    border: 1px var(--contrastControlPanel) solid;
 }
 
 .dealer-button.mobile.landscape{

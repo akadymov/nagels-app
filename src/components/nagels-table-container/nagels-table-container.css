@@ -6,7 +6,7 @@
 }
 
 .Mui-selected{
-    background-color: green;
+    background-color: var(--primary);  
 }
 
 .player-table-data-container{
@@ -31,7 +31,7 @@
 }
 
 .username-container:hover{
-    color: darkviolet;
+    color: var(--secondary);
 }
 
 .admin-icon-container{
@@ -55,25 +55,25 @@
 
 .d.suit-container:before{
     content: "\2666";
-    color: red;
+    color: var(--error);
 }
 
 .h.suit-container:before{
     content: "\2665";
-    color: red;
+    color: var(--error);
 }
 
 .c.suit-container:before{
     content: "\2663";
-    color: black;
+    color: var(--blackSuit);
 }
 
 .s.suit-container:before{
     content: "\2660";
-    color: black;
+    color: var(--blackSuit);
 }
 
 .x.suit-container:before{
     content: "\2298";
-    color: black;
+    color: var(--blackSuit);
 }

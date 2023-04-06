@@ -59,7 +59,7 @@
     left: 50%;
     top: 0%;
     transform: translate(-50%, 0%);
-    background-color: hsl(0, 0%, 0%, 0.5);
+    background-color: var(--transparentElementBckgr);
     border-radius: 50%;
 }
 
@@ -71,6 +71,7 @@
 }
 
 .profile-username-container{
+    color: var(--regularText);
     font-size: 26px
 }
 
@@ -138,7 +139,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid gray;
+    border: 1px solid var(--borderLight);
     bottom: 0%;
     left: -25vw;
     top: 0%;
@@ -155,6 +156,7 @@
 }
 
 .profile-stats-container{
+    color: var(--regularText);
     position: absolute;
     width: 25vw;
     height: 41vh;
@@ -177,7 +179,7 @@
 }
 
 .password-update-confirmation-message{
-    color: green;
+    color: var(--succeedText);
     position: absolute;
     right: 0%;
     bottom: 1%;

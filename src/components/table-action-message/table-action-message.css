@@ -4,14 +4,14 @@
     left: 50%;
     width: 250px;
     line-height: 20px;
-    background-color: hsl(0, 0%, 0%, 0.7);
+    background-color: var(--transparentElementBckgr);
     border-radius: 10%;
-    border: 1px solid #58f958;
+    border: 1px solid var(--secondary);
 }
 
 .action-message-container.highlighted{
-    border: 2px solid darkviolet;
-    background-color: #58f958;
+    border: 2px solid var(--primary);
+    background-color: var(--secondary);
 }
 
 .action-message-container.mobile{
@@ -27,12 +27,12 @@
 }
 
 .action-message-text{
-    color: #58f958;
+    color: var(--primary);
     font-weight: 900;
     padding: 2px;
 }
 
 .action-message-text.highlighted{
-    color: darkviolet;
+    color: var(--primary);
     font-weight: bold;
 }

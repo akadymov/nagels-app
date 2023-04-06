@@ -319,6 +319,7 @@ export default class Profile extends React.Component{
     }
 
     render () {
+        
         return(
             <div className={`profile-form-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                 <div className={`profile-picture-controls-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
@@ -341,11 +342,11 @@ export default class Profile extends React.Component{
                                 <FormButton
                                     id='avatar_update_button'
                                     key='avatar_update_button'
-                                    onClick={() => {this.setState({modalOpen: true})}} // FIXME
+                                    onClick={() => {this.setState({modalOpen: true})}}
                                     variant='outlined'
                                     text='Upload new'
                                     size={this.props.isMobile ? 'small' : 'medium'}
-                                    color='shadowed'
+                                    color='contrastControlElements'
                                 ></FormButton>
                             </div>
                         </div>

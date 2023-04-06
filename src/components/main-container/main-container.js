@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 // Local components
 import NavMenu from '../nav-menu';
 import ActiveContainer from '../active-container';
+import configFile from '../../config.json';
 
 
 const MainContainer = () => {
@@ -24,7 +25,7 @@ const MainContainer = () => {
     }
 
     return (
-        <div className='root-container'>   
+        <div className={`root-container ${configFile.THEME==='dark' ? 'dark-theme' : ''}`}>   
             <NavMenu 
                 isMobile = {isMobile}
                 isDesktop = {isDesktop}

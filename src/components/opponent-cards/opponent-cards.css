@@ -1,6 +1,6 @@
 .opponent-card{
     position: relative;
-    outline: 1px solid gray;
+    outline: 1px solid var(--borderLight);
     border-radius: 10%;
     background-image: url(./opponent-card-pattern.png);
     background-size: 56px 90px;

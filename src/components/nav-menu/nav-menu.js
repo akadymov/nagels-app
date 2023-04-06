@@ -14,6 +14,7 @@ import Cookies from 'universal-cookie';
 
 //Local components
 import NagelsAvatar from '../nagels-avatar';
+import defaultTheme from '../../themes/default';
 
 
 export default class NavMenu extends React.Component{
@@ -62,35 +63,6 @@ export default class NavMenu extends React.Component{
         window.location.assign('/signin')
     }
 
-    stringToColor(string) {
-        let hash = 0;
-        let i;
-      
-        /* eslint-disable no-bitwise */
-        for (i = 0; i < string.length; i += 1) {
-          hash = string.charCodeAt(i) + ((hash << 5) - hash);
-        }
-      
-        let color = '#';
-      
-        for (i = 0; i < 3; i += 1) {
-          const value = (hash >> (i * 8)) & 0xff;
-          color += `00${value.toString(16)}`.slice(-2);
-        }
-        /* eslint-enable no-bitwise */
-      
-        return color;
-    }
-      
-    stringAvatar(name) {
-        return {
-            sx: {
-            bgcolor: this.stringToColor(name),
-            },
-            children: `${name[0][0]}`,
-        };
-    }
-
     componentDidMount() {
         this.CheckIfAlreadyLoggedIn()
     }
@@ -115,7 +87,7 @@ export default class NavMenu extends React.Component{
                                 username={this.Cookies.get('username')}
                                 width={35}
                                 height={35}
-                                outline={this.state.hoveredItem === 'profile' ? '1px solid darkViolet' : (window.location.pathname.startsWith('/profile') ? '1px solid #01aa00' : 'none')}
+                                outline={this.state.hoveredItem === 'profile' ? '2px solid ' + defaultTheme.palette.secondary.main : (window.location.pathname.startsWith('/profile') ? '2px solid ' + defaultTheme.palette.primary.main : 'none')}
                             ></NagelsAvatar>
                         </div>
                         {this.state.menuExpanded ? 

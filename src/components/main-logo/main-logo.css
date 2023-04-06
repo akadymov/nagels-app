@@ -13,14 +13,14 @@
     top: 0;
     min-height: 8vh;
     width: 100vw;
-    background-color: lightgray;
+    background-color: var(--mainBckgr);
 }
 
 .main-logo-container.mobile.portrait{
     top: 0;
     min-height: 10vh;
     min-width: 200px;
-    background-color: lightgray;
+    background-color: var(--mainBckgr);
 }
 
 
@@ -35,7 +35,7 @@
     position: absolute;
     top: 50%;
     margin: 0;
-    color: black;
+    color: var(--headers);
     font-weight: bold;
 }
 

@@ -21,6 +21,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import FormButton from '../form-button';
 import Score from '../score';
 import NagelsAvatar from '../nagels-avatar/nagels-avatar';
+import defaultTheme from '../../themes/default';
 
 
 
@@ -30,23 +31,23 @@ export default class NagelsTableContainer extends React.Component{
 
         const StyledTableCell = styled(TableCell)(() => ({
             [`&.${tableCellClasses.head}`]: {
-                backgroundColor: 'black',
-                color: 'white',
+                backgroundColor: defaultTheme.palette.contrastControlElements.main,
+                color: defaultTheme.palette.contrastControlPanel.main,
                 fontWeight: 'bold',
-                borderRight: '1px dotted gray',
+                borderRight: '1px dotted ' + defaultTheme.palette.borderColor.light,
                 borderBottom: 'none'
             },
             [`&.${tableCellClasses.body}`]: {
                 fontSize: 14,
-                color: 'darkGray',
+                color: defaultTheme.palette.regularText.main,
                 padding: this.props.padding || '16px',
-                borderRight: '1px dotted gray',
+                borderRight: '1px dotted ' + defaultTheme.palette.borderColor.light,
                 borderBottom: 'none'
             },
         }));
 
         return(
-            <TableContainer component={Paper} sx={{ height:this.props.height, overflow: 'scroll'}}>
+            <TableContainer component={Paper} sx={{ height:this.props.height, overflow: 'scroll', color: defaultTheme.palette.formsBckgr.main}}>
                 <Table stickyHeader aria-label="simple table" >
                     <TableHead>
                         <TableRow>
@@ -77,7 +78,7 @@ export default class NagelsTableContainer extends React.Component{
                         return (
                             <TableRow
                                 key={row.id}
-                                sx={{ bgcolor: row.id === 'total' ? '#e8e8e8' : 'none' }}
+                                sx={{ bgcolor: row.id === 'total' ? defaultTheme.palette.totalRow.main : 'none' }}
                                 onClick={this.props.onClick ? (event) => this.props.onClick(event, row.id) : ''}
                                 selected={row.id === this.props.selected}
                             >

@@ -5,13 +5,55 @@ body {
   font-family: 'Montseratt', sans-serif;
 }
 
+:root{
+  --headers: #202020;
+  --regularText: #a9a9a9; 
+  --inputText: #000000;
+  --formsBckgr: #ffffff;
+  --mainBckgr: #e7e7e7;
+  --error: #b10000;
+  --secondary: #13428f;
+  --primary: #5dc2fc;
+  --blackSuit: #000000;
+  --contrastControlElements: #ffffff;
+  --contrastControlPanel: #000000;
+  --disabled: #808080;
+  --transparentElementBckgr: rgba(0, 0, 0, 0.7);
+  --transparentDarkElementBckgr: hsl(0, 0%, 0%, 0.85);
+  --succeedText: #008000;
+  --borderLight: #808080;
+  --borderMain: #000000;
+  --emailGradient: linear-gradient(90deg, #0a2b61 0%, #5dc2fc 50%, #13428f 100%);
+}
+
+.dark-theme{
+  --headers: #ffffff;
+  --regularText: #d3d3d3; 
+  --inputText: #ffffff;
+  --formsBckgr: #131313;
+  --mainBckgr: #3b3b3b;
+  --error: #b10000;
+  --secondary: #5dc2fc;
+  --primary: #13428f;
+  --blackSuit: #ffffff;
+  --contrastControlElements: #ffffff;
+  --contrastControlPanel: #000000;
+  --disabled: #d3d3d3;
+  --transparentElementBckgr: rgba(0, 0, 0, 0.7);
+  --transparentDarkElementBckgr: hsl(0, 0%, 0%, 0.85);
+  --succeedText: #008000;
+  --borderLight: #5c5c5c;
+  --borderMain: #ffffff;
+  --emailGradient: linear-gradient(90deg, #0a2b61 0%, #5dc2fc 50%, #13428f 100%);
+}
+
 .root-container{
   height:100vh; 
   width: 100vw
 }
 
 .main-container{
-  background-color: lightgray;
+  background-color: var(--mainBckgr);
 }
 
 .main-container.mobile.portrait {

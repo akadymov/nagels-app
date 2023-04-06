@@ -23,10 +23,10 @@
 }
 
 .bet-size.bonus{
-    border: 1px darkviolet solid;
+    border: 1px var(--primary) solid;
     border-radius: 50%;
     text-align: center;
-    color: darkviolet
+    color: var(--primary)
 }
 
 .score{
@@ -36,13 +36,13 @@
     right: 0%;
     top: 25%;
     font-size: 14px;
-    color: green;
+    color: var(--secondary);
     font-weight: bold;
 }
 
 .total-score{
     font-size: 14px;
     text-decoration: underline;
-    color: green;
+    color: var(--secondary);
     font-weight: bold;
 }

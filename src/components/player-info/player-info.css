@@ -5,21 +5,21 @@
     left: 50%;
     transform: translate(-50%, 0);
     bottom: 0%;
-    background-color: hsl(0, 0%, 0%, 0.85);
+    background-color: var(--transparentDarkElementBckgr);
     border-radius: 10px;
-    color: white;
+    color: var(--contrastControlElements);
     cursor: pointer;
 }
 
 .player-info-container[active=true]{
-    outline: 2px solid #58f958;
-    color: #58f958;
+    outline: 2px solid var(--primary);
+    color: var(--primary);
 }
 
-.player-info-container:hover{
-    outline: darkviolet 2px solid;
-    color: darkviolet;
-}
+/*.player-info-container:hover{
+    outline: var(--secondary) 2px solid;
+    color: var(--secondary);
+}*/
 
 .player-info-container.mobile{
     width: 124px;
