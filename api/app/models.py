@@ -168,7 +168,8 @@ class User(UserMixin, db.Model):
             game = Game.query.filter_by(id=entry.game_id).first()
             if game:
                 if game.winner_id is not None and game.finished is not None:
-                    print('Building user stats: game #' + str(entry.game_id) + ' is finished')
+                    if app.debug:
+                        print('Building user stats: game #' + str(entry.game_id) + ' is finished')
                     played_games += 1
                     played_hands += Hand.query.filter_by(game_id=game.id, is_closed=1).count()
                     if game.winner_id == self.id:
@@ -177,7 +178,7 @@ class User(UserMixin, db.Model):
                     sum_of_bets += game_scores['sum_of_bets']
                     bonuses += game_scores['bonuses']
                     total_score += game_scores['total_score']
-        if player_entries==0 or played_hands==0:
+        if player_entries == 0 or played_hands == 0:
             return None
         avg_score = total_score / played_games
         avg_bonuses = bonuses / played_games
@@ -417,6 +418,38 @@ class Game(db.Model):
         game_players = Player.query.filter_by(game_id=self.id).count()
         return (required_player.position - source_player.position) % game_players
 
+    def calculate_winner(self):
+        game_hands = Hand.query.filter_by(game_id=self.id).all()
+        players_scores = {}
+        players_bonuses = {}
+        for hand in game_hands:
+            hand_scores = HandScore.query.filter_by(hand_id=hand.id).all()
+            for score in hand_scores:
+                if score.score:
+                    if score.player_id in players_scores:
+                        players_scores[score.player_id] += score.score
+                    else:
+                        players_scores[score.player_id] = score.score
+                if score.bonus:
+                    if score.player_id in players_bonuses:
+                        players_bonuses[score.player_id] += score.bonus
+                    else:
+                        players_bonuses[score.player_id] = score.bonus
+
+        winner_score = 0
+        winner_bonuses = 0
+        winner_id = None
+        for player_id in players_scores.keys():
+            if players_scores[player_id] > winner_score or (players_scores[player_id] == winner_score and players_bonuses[player_id] > winner_bonuses):
+                winner_score = players_scores[player_id]
+                winner_bonuses = players_bonuses[player_id]
+                winner_id = player_id
+
+        return {
+            'winner_id': winner_id,
+            'winner_bonuses': winner_bonuses,
+            'winner_score': winner_score
+        }
 
 
 class Player(db.Model):
