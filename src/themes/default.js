@@ -1,8 +1,9 @@
 import { createTheme } from '@mui/material/styles';
+import configFile from '../config.json';
 
 const defaultTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: configFile.THEME==='dark' ? 'dark' : 'light',
     headers: {
       main: '#000000',
     },

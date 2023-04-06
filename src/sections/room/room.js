@@ -457,7 +457,7 @@ export default class Room extends React.Component{
                 ></SectionHeader>
                 <div className={`room-table-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                     <NagelsTableContainer
-                        height={this.props.isMobile ? (this.props.isPortrait ? '74vh' : '88vh') : '70vh'}
+                        height={this.props.isMobile ? (this.props.isPortrait ? '74vh' : '88vh') : '68vh'}
                         headers={this.state.playerHeaders}
                         rows={this.state.players}
                         onClick={this.selectPlayer}

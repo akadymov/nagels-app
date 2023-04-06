@@ -2,7 +2,7 @@
     min-height: 40px;
     right: 0px;
     width: 76vw;
-    margin: 10px 2vw 5px 2vw;
+    margin: 10px 2vw 20px 2vw;
     max-width: 1300px;
 }
 
@@ -76,7 +76,7 @@
     max-width: 18vw;
     overflow: hidden;
     white-space: nowrap;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .section-title-container.tablet.portrait{

@@ -333,7 +333,7 @@ export default class Lobby extends React.Component{
                 ></SectionHeader>
                 <div className={`lobby-table-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                     <NagelsTableContainer 
-                        height={this.props.isMobile ? (this.props.isPortrait ? '74vh' : '88vh') : '70vh'}
+                        height={this.props.isMobile ? (this.props.isPortrait ? '74vh' : '88vh') : '68vh'}
                         headers={this.state.roomsHeaders}
                         rows={this.state.rooms}
                         onClick={this.selectRoom}

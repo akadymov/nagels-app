@@ -31,8 +31,8 @@ export default class NagelsTableContainer extends React.Component{
 
         const StyledTableCell = styled(TableCell)(() => ({
             [`&.${tableCellClasses.head}`]: {
-                backgroundColor: defaultTheme.palette.contrastControlElements.main,
-                color: defaultTheme.palette.contrastControlPanel.main,
+                backgroundColor: defaultTheme.palette.contrastControlPanel.main,
+                color: defaultTheme.palette.contrastControlElements.main,
                 fontWeight: 'bold',
                 borderRight: '1px dotted ' + defaultTheme.palette.borderColor.light,
                 borderBottom: 'none'
@@ -43,12 +43,12 @@ export default class NagelsTableContainer extends React.Component{
                 padding: this.props.padding || '16px',
                 borderRight: '1px dotted ' + defaultTheme.palette.borderColor.light,
                 borderBottom: 'none'
-            },
+            }
         }));
 
         return(
-            <TableContainer component={Paper} sx={{ height:this.props.height, overflow: 'scroll', color: defaultTheme.palette.formsBckgr.main}}>
-                <Table stickyHeader aria-label="simple table" >
+            <TableContainer component={Paper} sx={{ height:this.props.height, overflow: 'scroll', color: defaultTheme.palette.formsBckgr.main, boxShadow: 'none'}}>
+                <Table stickyHeader aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             {this.props.headers.map(header => {

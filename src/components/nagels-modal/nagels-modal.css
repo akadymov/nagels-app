@@ -34,7 +34,8 @@ div[data-testid=sentinelStart]{
 }
 
 .modal-text-container{
-    font-size: 24px;
+    font-size: 16px;
+    font-weight: 800;
     text-align: center;
     line-height: 30px;
 }
