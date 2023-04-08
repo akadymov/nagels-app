@@ -298,6 +298,7 @@ export default class Game extends React.Component{
             if(body.errors){
                 this.handleInGameError(body)
             } else {
+                console.log('Emitting event "finish_game_in_room"')
                 gameSocket.emit('finish_game_in_room', this.Cookies.get('username'), gameId, roomId);
                 this.setState({actionMessage: 'Game #' + gameId + ' was successfully finished!'})
                 window.location.assign('/room/' + roomId)
@@ -311,6 +312,7 @@ export default class Game extends React.Component{
             if(body.errors) {
                 this.handleInGameError(body)
             } else{
+                console.log('Emitting event "deal_cards"')
                 gameSocket.emit('deal_cards', this.props.match.params.gameId)
                 this.newGameStatus();
             }
@@ -328,6 +330,7 @@ export default class Game extends React.Component{
                     modalControls: newModalControls
                 })
             } else {
+                console.log('Emitting event "make_bet"')
                 gameSocket.emit(
                     'make_bet', 
                     this.props.match.params.gameId,
@@ -348,6 +351,7 @@ export default class Game extends React.Component{
             if(body.errors) {
                 this.handleInGameError(body)
             } else {
+                console.log('Emitting event "define_positions"')
                 gameSocket.emit('define_positions', this.props.match.params.gameId, body.players)
                 this.newGameStatus()
             }
@@ -383,6 +387,7 @@ export default class Game extends React.Component{
                 if(body.errors) {
                     this.handleInGameError(body)
                 } else {
+                    console.log('Emitting event "put_card"')
                     gameSocket.emit(
                         'put_card', 
                         this.props.match.params.gameId,
@@ -468,6 +473,7 @@ export default class Game extends React.Component{
         this.NagelsApi.disconnectRoom(this.Cookies.get('idToken'), roomId, username)
         .then((body) => {
             if(!body.errors){
+                console.log('Emitting event "remove_player_from_room"')
                 roomSocket.emit('remove_player_from_room', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
                 lobbySocket.emit('decrease_room_players', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
                 window.location.assign('/lobby')

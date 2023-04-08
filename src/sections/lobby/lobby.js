@@ -182,6 +182,7 @@ export default class Lobby extends React.Component{
         this.NagelsApi.connectRoom(this.Cookies.get('idToken'), roomId)
         .then((body) => {
             if(!body.errors){
+                console.log('Emitting event "add_player_to_room"')
                 roomSocket.emit('add_player_to_room', this.Cookies.get('username'), roomId, body.roomName, body.connectedUsers)
                 lobbySocket.emit('increase_room_players', this.Cookies.get('username'), roomId, body.roomName, body.connectedUsers)
                 setTimeout(function(){
@@ -224,6 +225,7 @@ export default class Lobby extends React.Component{
             if(body.errors) {
                 this.handleCreateRoomError(body)
             } else {
+                console.log('Emitting event "create_room"')
                 lobbySocket.emit('create_room', body.roomId, body.roomName, body.host, body.created)
                 window.location.assign('/room/' + body.roomId);
             }

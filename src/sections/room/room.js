@@ -235,7 +235,9 @@ export default class Room extends React.Component{
         this.NagelsApi.disconnectRoom(this.Cookies.get('idToken'), roomId, username)
         .then((body) => {
             if(!body.errors){
+                console.log('Emitting event "remove_player_from_room"')
                 roomSocket.emit('remove_player_from_room', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
+                console.log('Emitting event "decrease_room_players"')
                 lobbySocket.emit('decrease_room_players', this.Cookies.get('username'), username, roomId, roomName, body.connectedUsers)
                 if(username === this.Cookies.get('username')){
                     window.location.assign('/lobby')
@@ -262,6 +264,7 @@ export default class Room extends React.Component{
                 var targetUserUpdated = newRoomDetails.connectedUserList.findIndex(element => element.username === username )
                 newRoomDetails.connectedUserList[targetUserUpdated].ready = true
                 this.setState({roomDetails: newRoomDetails})
+                console.log('Emitting event "ready"')
                 roomSocket.emit('ready', this.Cookies.get('username'), username, roomId)
             } else {
                 alert(body.errors[0].message)
@@ -278,6 +281,7 @@ export default class Room extends React.Component{
                 var targetUserUpdated = newRoomDetails.connectedUserList.findIndex(element => element.username === username )
                 newRoomDetails.connectedUserList[targetUserUpdated].ready = false
                 this.setState({roomDetails: newRoomDetails})
+                console.log('Emitting event "not_ready"')
                 roomSocket.emit('not_ready', this.Cookies.get('username'), username, roomId)
             } else {
                 alert(body.errors[0].message)
@@ -321,7 +325,9 @@ export default class Room extends React.Component{
             if(body.errors){
                 alert(body.errors[0].message)
             } else {
+                console.log('Emitting event "close_room"')
                 roomSocket.emit('close_room', this.Cookies.get('username'), roomId);
+                console.log('Emitting event "remove_room_from_lobby"')
                 lobbySocket.emit('remove_room_from_lobby', roomId);
                 window.location.assign('/lobby' + roomId)
             }
@@ -334,6 +340,7 @@ export default class Room extends React.Component{
             if(body.errors) {
                 alert(body.errors[0].message)
             } else {
+                console.log('Emitting event "start_game_in_room"')
                 roomSocket.emit('start_game_in_room', this.Cookies.get('username'), body.gameId, this.props.match.params.roomId)
                 setTimeout(function(){
                     window.location.assign('/game/' + body.gameId)
