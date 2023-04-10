@@ -68,8 +68,8 @@ export default class NagelsModal extends React.Component{
                                                 <div 
                                                     className="modal-cards-container"
                                                     style={{
-                                                        width:(this.props.isMobile ? 35 : 60) + (control.cards.length - 1) * (this.props.isMobile ? 10 : 18),
-                                                        height:this.props.isMobile ? 50 : 70
+                                                        width:(this.props.isMobile && !this.props.isPortrait ? 35 : 60) + (control.cards.length - 1) * (this.props.isMobile && !this.props.isPortrait ? 10 : 18),
+                                                        height:this.props.isMobile && !this.props.isPortrait ? 50 : 70
                                                     }}
                                                 >
                                                     {control.cards.map(card =>{
@@ -78,6 +78,7 @@ export default class NagelsModal extends React.Component{
                                                             cardId={'card-' + card}
                                                             selectedCard={null}
                                                             isMobile={this.props.isMobile}
+                                                            isPortrait={this.props.isPortrait}
                                                             index={control.cards.findIndex( el => el === card )}
                                                             modal={true}
                                                         ></OpenCard>)
