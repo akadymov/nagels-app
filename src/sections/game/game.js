@@ -506,7 +506,7 @@ export default class Game extends React.Component{
     };
     
     componentDidMount = () => {
-        this.newGameStatus()
+        this.newGameStatus();
 
         gameSocket.on('refresh_game_table', (data) => {
             if(parseInt(data.gameId) === parseInt(this.props.match.params.gameId)){

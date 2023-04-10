@@ -3,7 +3,7 @@
 from flask import url_for, request, jsonify, Blueprint
 from flask_cors import cross_origin
 from app import app, db
-from app.models import User, Game, Player, Hand, HandScore, Turn, DealtCards, TurnCard, Stats, Room
+from app.models import User, Game, Player, Hand, HandScore, Turn, DealtCards, TurnCard, Stats
 from datetime import datetime
 import numpy as np
 from config import get_settings, get_environment
@@ -378,12 +378,19 @@ def put_card(game_id, hand_id, card_id):
 
     db.session.commit()
 
+    if app.debug:
+        print("Calculating players' scores")
+
     for player in g.players:
         user = User.query.filter_by(id=player.id).first()
         player_scores = user.calc_game_stats(game_id=game_id)
         if player_scores:
+            if app.debug:
+                print("Successfully calculated player " + str(user.username) + "'s scores")
             s = Stats.query.filter_by(user_id=user.id).first()
             if not s:
+                if app.debug:
+                    print("Player '" + str(user.username) + "' doesn't have stats records. Inserting...")
                 s = Stats(
                     user_id=user.id,
                     games_played=player_scores['gamesPlayed'],
@@ -394,10 +401,12 @@ def put_card(game_id, hand_id, card_id):
                 )
                 db.session.add(s)
             else:
+                if app.debug:
+                    print("Player '" + str(user.username) + "' already has stats records. Updating...")
                 s.games_played += player_scores['gamesPlayed']
                 s.games_won += player_scores['gamesWon']
                 s.sum_of_bets += player_scores['sumOfBets']
-                s.bonuses += player_scores['bonuses'],
+                s.bonuses += player_scores['bonuses']
                 s.total_score += player_scores['totalScore']
             db.session.commit()
 

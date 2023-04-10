@@ -3,7 +3,7 @@
 from flask import url_for, request, jsonify, Blueprint
 from flask_cors import cross_origin
 from app import db
-from app.models import User, Room, Game, Player, Hand, HandScore, TurnCard
+from app.models import User, Room, Game, Player, Hand, HandScore, TurnCard, Stats
 from datetime import datetime
 import random
 from config import get_settings, get_environment
@@ -386,7 +386,7 @@ def status(game_id):
             action_msg = "{username}'s turn...".format(username=current_hand.next_acting_player().username)
         else:                                           # if hand is just finished
             action_msg = 'Hand is finished'
-
+            
     played_hands_count = Hand.query.filter_by(game_id=game_id, is_closed=1).count()
 
     response_json = {

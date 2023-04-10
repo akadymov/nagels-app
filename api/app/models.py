@@ -641,7 +641,7 @@ class Hand(db.Model):
         finished_hand_turns = 0
         for hand_turn in hand_turns:
             if hand_turn.took_user_id is not None:
-                finished_hand_turns =+ 1
+                finished_hand_turns += 1
         if app.debug:
             print('Hand turns: ' + str(hand_turns))
             print('Finished hand turns: ' + str(finished_hand_turns))
@@ -712,7 +712,7 @@ class Hand(db.Model):
             finished_turns_in_hand = 0
             for turn_in_hand in turns_in_hand:
                 if turn_in_hand.took_user_id:
-                    finished_turns_in_hand = + 1
+                    finished_turns_in_hand += 1
             if finished_turns_in_hand == 0:
                 if app.debug:
                     print('This is first turn in hand: position shift is defined with put cards and played hands')
