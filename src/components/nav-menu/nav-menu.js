@@ -37,21 +37,27 @@ export default class NavMenu extends React.Component{
     }
 
     expandMenu = () => {
-        if(this.props.isDesktop){
+        if(!this.props.isMobile && this.props.isDesktop){
             this.setState({ menuExpanded: true})
         }
     }
 
     wrapMenu = () => {
-        this.setState({ menuExpanded: false})
+        if(!this.props.isMobile && this.props.isDesktop){
+            this.setState({ menuExpanded: false})
+        }
     }
 
     hoverItem = (e) => {
-        this.setState({ hoveredItem: e.target.id })
+        if(!this.props.isMobile && this.props.isDesktop){
+            this.setState({ hoveredItem: e.target.id })
+        }
     }
 
     unhoverItems = () => {
-        this.setState({ hoveredItem: null })
+        if(!this.props.isMobile && this.props.isDesktop){
+            this.setState({ hoveredItem: null })
+        }
     }
 
     handleNavItemClick = (pathname) => {

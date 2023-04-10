@@ -128,12 +128,12 @@ export default class Game extends React.Component{
                         newHeaderControls.push({
                             id: 'shuffle',
                             type: 'button',
-                            text: 'Shuffle',
+                            text: getGameResponse.status === 'finished' ? 'Start new game' : 'Shuffle',
                             variant: 'contained',
-                            disabled: getGameResponse.positionsDefined,
+                            disabled: getGameResponse.positionsDefined && getGameResponse.status !== 'finished',
                             size: 'small',
                             width: '130px',
-                            onSubmit: this.definePositions
+                            onSubmit: getGameResponse.status === 'finished' ? this.restartGame : this.definePositions
                         })
                         /*newHeaderControls.push({
                             id: 'deal',
@@ -170,12 +170,12 @@ export default class Game extends React.Component{
                     if(getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade){
                         var betPlayers = []
                         var playersToBet = []
-                        var sumOfMadeBets = 0
+                        //var sumOfMadeBets = 0
                         getGameResponse.players.map(player => {
                             if(player.username !== this.Cookies.get('username')){
                                 if(player.betSize){
                                     betPlayers.push(player)
-                                    sumOfMadeBets =+ player.betSize
+                                    //sumOfMadeBets =+ player.betSize
                                 } else {
                                     playersToBet.push(player)
                                 }
@@ -238,6 +238,21 @@ export default class Game extends React.Component{
                         setTimeout(this.utilizeCards(getGameResponse.currentHandId, getGameResponse.nextActingPlayer), 3000)
                     }*/
                 }
+            }
+        })
+    }
+
+    restartGame = () => {
+        this.NagelsApi.startGame(this.Cookies.get('idToken'), 1) // TODO: introduce autodeal checkbox
+        .then((body) => {
+            if(body.errors) {
+                alert(body.errors[0].message)
+            } else {
+                console.log('Emitting event "start_game_in_room"')
+                roomSocket.emit('start_game_in_room', this.Cookies.get('username'), body.gameId, this.state.gameDetails.roomId)
+                setTimeout(function(){
+                    window.location.assign('/game/' + body.gameId)
+                }, 1000)
             }
         })
     }
@@ -324,7 +339,7 @@ export default class Game extends React.Component{
         .then((body) => {
             if(body.errors) {
                 var newModalControls = this.state.modalControls
-                var inputControlIndex = newModalControls.findIndex(el => el.id == "bet_size_input")
+                var inputControlIndex = newModalControls.findIndex(el => el.id === "bet_size_input")
                 newModalControls[inputControlIndex].errorMessage = body.errors[0].message
                 this.setState({
                     modalControls: newModalControls
@@ -508,6 +523,12 @@ export default class Game extends React.Component{
     componentDidMount = () => {
         this.newGameStatus();
 
+        roomSocket.on("start_game", (data) => {
+            if(data.roomId === this.state.gameDetails.roomId){
+                window.location.assign('/game/' + data.gameId)
+            }
+        });
+
         gameSocket.on('refresh_game_table', (data) => {
             if(parseInt(data.gameId) === parseInt(this.props.match.params.gameId)){
                 if(data.actor !== this.Cookies.get('username')){
@@ -551,12 +572,12 @@ export default class Game extends React.Component{
                                         newScoresModalOpen = false
                                         var betPlayers = []
                                         var playersToBet = []
-                                        var sumOfMadeBets = 0
+                                        //var sumOfMadeBets = 0
                                         newGameDetails.players.map(player => {
                                             if(player.username !== this.Cookies.get('username')){
                                                 if(player.betSize){
                                                     betPlayers.push(player)
-                                                    sumOfMadeBets =+ player.betSize
+                                                    //sumOfMadeBets =+ player.betSize
                                                 } else {
                                                     playersToBet.push(player)
                                                 }

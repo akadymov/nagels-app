@@ -15,7 +15,7 @@ export default class OpenCard extends React.Component{
         var topShift = 0
         var zindex = this.props.index
         var width = '70px'
-        var widthNum = 70
+        //var widthNum = 70
         var height = '100px'
         var heightNum = 100
         var interval = 22
@@ -23,13 +23,13 @@ export default class OpenCard extends React.Component{
         if(this.props.isMobile){
             if(this.props.onTable){
                 width = '49px'
-                widthNum = 49
+                //widthNum = 49
                 height = '70px'
                 heightNum = 70
             }
             if(this.props.modal){
                 width = this.props.isPortrait ? '49px' : '35px'
-                widthNum = this.props.isPortrait ? 49 : 35
+                //widthNum = this.props.isPortrait ? 49 : 35
                 height = this.props.isPortrait ? '70px' : '50px'
                 heightNum = this.props.isPortrait ? 70 : 50
                 interval = this.props.isPortrait ? 18 : 10
@@ -37,7 +37,7 @@ export default class OpenCard extends React.Component{
         } else {
             if(this.props.modal){
                 width = '60px'
-                widthNum = 60
+                //widthNum = 60
                 height = '86px'
                 heightNum = 86
                 interval = 18
