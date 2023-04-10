@@ -36,11 +36,11 @@ export default class OpenCard extends React.Component{
             }
         } else {
             if(this.props.modal){
-                width = '49px'
-                widthNum = 49
-                height = '70px'
-                heightNum = 70
-                interval = 15
+                width = '60px'
+                widthNum = 60
+                height = '86px'
+                heightNum = 86
+                interval = 18
             }
         }
 

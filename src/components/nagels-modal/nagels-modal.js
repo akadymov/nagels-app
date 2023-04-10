@@ -68,7 +68,7 @@ export default class NagelsModal extends React.Component{
                                                 <div 
                                                     className="modal-cards-container"
                                                     style={{
-                                                        width:(this.props.isMobile ? 35 : 49) + (control.cards.length - 1) * (this.props.isMobile ? 10 : 15),
+                                                        width:(this.props.isMobile ? 35 : 60) + (control.cards.length - 1) * (this.props.isMobile ? 10 : 18),
                                                         height:this.props.isMobile ? 50 : 70
                                                     }}
                                                 >
