@@ -5,7 +5,7 @@ from flask_socketio import emit #, join_room, leave_room
 @socketio.on('connect', namespace='/lobby')
 def connect():
     if app.debug:
-        print('New socket connection established')
+        print('New socketIO connection established')
     # emit("connect", {'eventCategory': 'service_events', 'event': 'server connection established'})
 
 

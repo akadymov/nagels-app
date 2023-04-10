@@ -6,7 +6,8 @@ from flask_login import LoginManager
 from config import get_settings, get_environment
 from flask_mail import Mail
 from flask_socketio import SocketIO
-from werkzeug.middleware.proxy_fix import ProxyFix
+# from werkzeug.middleware.proxy_fix import ProxyFix
+from threading import Lock
 
 flask_configs = get_settings()
 env = get_environment()
@@ -17,7 +18,7 @@ app.config.update(
     SQLALCHEMY_TRACK_MODIFICATIONS=flask_configs['SQLALCHEMY_TRACK_MODIFICATIONS'][env]
 )
 CORS(app)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
+# app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -30,6 +31,19 @@ for key in mail_settings.keys():
     app.config['MAIL_' + str(key)] = mail_settings[key][env]
 mail = Mail(app)
 
-socketio = SocketIO(app, async_mode='gevent', cors_allowed_origins="*", logger=flask_configs['DEBUG'][env], engineio_logger=flask_configs['DEBUG'][env])
 
-from app import routes, models
+# Set this variable to "threading", "eventlet" or "gevent" to test the
+# different async modes, or leave it set to None for the application to choose
+# the best option based on installed packages.
+async_mode = 'gevent'
+socketio = SocketIO(
+    app,
+    async_mode=async_mode,
+    cors_allowed_origins="*",
+    logger=flask_configs['DEBUG'][env],
+    engineio_logger=flask_configs['DEBUG'][env]
+)
+thread = None
+thread_lock = Lock()
+
+from app import routes, models, socket

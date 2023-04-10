@@ -14,4 +14,3 @@ def make_shell_context():
 
 if __name__ == '__main__':
     socketio.run(app, debug=flask_configs['DEBUG'][env], host=flask_configs['SOCKET_HOST'][env], port=flask_configs['SOCKET_PORT'][env])
-
