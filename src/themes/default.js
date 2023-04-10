@@ -1,10 +1,14 @@
 import { createTheme } from '@mui/material/styles';
 import configFile from '../config.json';
+import Cookies from 'universal-cookie';
+
+
+const cookies = new Cookies();
 
 
 const defaultTheme = createTheme({
   palette: {
-    mode: configFile.THEME==='dark' ? 'dark' : 'light',
+    mode: cookies.get('colorScheme')==='dark' ? 'dark' : 'light',
     headers: {
       main: '#000000',
     },
@@ -19,6 +23,7 @@ const defaultTheme = createTheme({
     },
     mainBckgr: {
       main: '#e7e7e7',
+      dark: '#7f7f7f'
     },
     error: {
       main: '#b10000',
@@ -50,7 +55,8 @@ const defaultTheme = createTheme({
       main: '#008000',
     },
     totalRow: {
-      main: '#e8e8e8',
+      main: '#6b6b6b',
+      dark: ''
     },
     borderColor: {
       main: '#000000',

@@ -10,7 +10,6 @@ from sqlalchemy import text
 from config import get_settings, get_environment
 
 
-
 auth = get_settings('AUTH')
 env = get_environment()
 
@@ -44,6 +43,7 @@ class User(UserMixin, db.Model):
     facebook_pic = db.Column(db.String(128), nullable=True)
     registered = db.Column(db.DateTime)
     about_me = db.Column(db.String(140), nullable=True)
+    color_scheme = db.Column(db.String(30), nullable=True, default=None)
     social_id = db.Column(db.String(64), unique=True, nullable=True)
     preferred_language = db.Column(db.String(6), default='en')
     connected_rooms_bad = db.relationship(

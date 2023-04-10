@@ -143,7 +143,8 @@ def post_token():
             'username': user.username,
             'token': token,
             'expiresIn': auth['TOKEN_LIFETIME'][env],
-            'connectedRoomId': user.get_connected_room_id()
+            'connectedRoomId': user.get_connected_room_id(),
+            'colorScheme': user.color_scheme
         }), 201
 
 

@@ -5,8 +5,10 @@ import { useMediaQuery } from 'react-responsive';
 // Local components
 import NavMenu from '../nav-menu';
 import ActiveContainer from '../active-container';
-import configFile from '../../config.json';
+import Cookies from 'universal-cookie';
 
+
+const cookies = new Cookies();
 
 const MainContainer = () => {
     var isMobile = false
@@ -26,7 +28,7 @@ const MainContainer = () => {
 
     
     return (
-        <div className={`root-container ${configFile.THEME==='dark' ? 'dark-theme' : ''}`}>   
+        <div className={`root-container ${cookies.get('colorScheme')==='dark' ? 'dark-theme' : ''}`}>   
             <NavMenu 
                 isMobile = {isMobile}
                 isDesktop = {isDesktop}

@@ -131,6 +131,7 @@ export default class Registration extends React.Component{
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
                 this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
                 this.Cookies.set('username',body.username, { path: '/' , expires: expiresIn})
+                this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 window.location.assign('/lobby/');
             }
         });

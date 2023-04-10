@@ -101,6 +101,7 @@ export default class Login extends React.Component{
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
                 this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
                 this.Cookies.set('username',body.username, { path: '/' , expires: expiresIn})
+                this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 if(body.connectedRoomId) {
                     window.location.assign('/room/' + body.connectedRoomId)
                 } else {

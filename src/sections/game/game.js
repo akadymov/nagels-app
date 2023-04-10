@@ -154,7 +154,7 @@ export default class Game extends React.Component{
                             getGameResponse.actionMessage = 'Press "DEAL" button in game controls to deal cards in hand'
                         }
                     }
-                    if(getGameResponse.lastTurnCards.length > 0) {
+                    /*if(getGameResponse.lastTurnCards.length > 0) {
                         newHeaderControls.push({
                             id: 'last_turn',
                             type: 'button',
@@ -166,7 +166,7 @@ export default class Game extends React.Component{
                             onMouseDown: (e) => this.handleLastTurnClick(),
                             onMouseUp: (e) => this.handleLastTurnClick()
                         })
-                    }
+                    }*/
                     if(getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade){
                         var betPlayers = []
                         var playersToBet = []
