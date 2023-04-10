@@ -386,7 +386,7 @@ def status(game_id):
             action_msg = "{username}'s turn...".format(username=current_hand.next_acting_player().username)
         else:                                           # if hand is just finished
             action_msg = 'Hand is finished'
-            
+
     played_hands_count = Hand.query.filter_by(game_id=game_id, is_closed=1).count()
 
     response_json = {

@@ -670,7 +670,6 @@ class Hand(db.Model):
                     return hand_turn
         return None
 
-
     def next_acting_player(self):
 
         if self.is_closed:
