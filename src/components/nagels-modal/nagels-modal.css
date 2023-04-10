@@ -58,6 +58,14 @@ div[data-testid=sentinelStart]{
     font-size: 14px;
 }
 
+.modal-control-container-checkbox{
+    margin-left: 50px;
+    display: inline-block;
+    width: 200px;
+    font-size: 14px;
+    text-align: left;
+}
+
 .modal-control-container.error{
     color: var(--error)
 }
