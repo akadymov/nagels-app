@@ -9,6 +9,10 @@
     line-height: 30px;
     border-radius: 50%;
     border: 1px var(--contrastControlPanel) solid;
+    background-image: url(dealer_logo.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .dealer-button.mobile.landscape{
