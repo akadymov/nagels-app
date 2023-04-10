@@ -6,7 +6,7 @@ from flask_login import LoginManager
 from config import get_settings, get_environment
 from flask_mail import Mail
 from flask_socketio import SocketIO
-from werkzeug.middleware.proxy_fix import ProxyFix
+# from werkzeug.middleware.proxy_fix import ProxyFix
 from threading import Lock
 
 flask_configs = get_settings()
@@ -18,7 +18,7 @@ app.config.update(
     SQLALCHEMY_TRACK_MODIFICATIONS=flask_configs['SQLALCHEMY_TRACK_MODIFICATIONS'][env]
 )
 CORS(app)
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
+# app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -39,7 +39,7 @@ async_mode = 'gevent'
 socketio = SocketIO(
     app,
     async_mode=async_mode,
-    cors_allowed_origins="*",
+    cors_allowed_origins=get_settings('NAGELS_APP')['SITE_URL'][env],
     logger=flask_configs['DEBUG'][env],
     engineio_logger=flask_configs['DEBUG'][env]
 )
