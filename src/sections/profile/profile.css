@@ -268,3 +268,11 @@
 .user-stat-label.mobile.landscape{
     width: 10vw
 }
+
+.profile-dark-mode-checkbox-container{
+    position: absolute;
+    top: 255px;
+    left: 240px;
+    color: var(--regularText);
+    font-size: 12px;
+}

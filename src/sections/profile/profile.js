@@ -18,6 +18,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import Checkbox from '@mui/material/Checkbox';
 
 
 export default class Profile extends React.Component{
@@ -26,6 +27,7 @@ export default class Profile extends React.Component{
         super(props);
         this.state = {
             picControlsVisible: false,
+            darkMode: false,
             userData: {
                 aboutMe: null,
                 email: null,
@@ -34,7 +36,8 @@ export default class Profile extends React.Component{
                 registered: null,
                 username: null,
                 connectedRoomId: null,
-                stats: []
+                stats: [],
+                colorScheme: null
             },
             aboutMeSymbols: 0,
             canUpdate: false,
@@ -84,7 +87,15 @@ export default class Profile extends React.Component{
             if(body.errors) {
                 window.location.assign('/lobby/')
             } else {
+                var darkMode = false
+                var currentDate = new Date(); 
+                var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
+                this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                if(body.colorScheme === 'dark'){
+                    darkMode = true
+                }
                 this.setState({ 
+                    darkMode: darkMode,
                     userData: body, 
                     canUpdate: false, 
                     canUpdatePassword: false, 
@@ -95,7 +106,12 @@ export default class Profile extends React.Component{
     }
 
     updateProfile = () => {
-        this.NagelsApi.updateUser(this.props.match.params.username || this.Cookies.get('username'), this.Cookies.get('idToken'), this.state.userData.email, this.state.userData.aboutMe || '')
+        this.NagelsApi.updateUser(
+            this.props.match.params.username || this.Cookies.get('username'), 
+            this.Cookies.get('idToken'), this.state.userData.email, 
+            this.state.userData.aboutMe || '', 
+            this.state.userData.colorScheme || 'light'
+        )
         .then((body)=>{
             if(body.errors) {
                 var newErrors = this.state.errors
@@ -112,7 +128,12 @@ export default class Profile extends React.Component{
                     passwordUpdated: false 
                 })
             } else {
+                var darkMode = false
+                if(body.colorScheme === 'dark'){
+                    darkMode = true
+                }
                 this.setState({ 
+                    darkMode: darkMode,
                     userData: body, 
                     canUpdate: false, 
                     passwordUpdated: false,
@@ -169,6 +190,19 @@ export default class Profile extends React.Component{
         if(this.props.isDesktop){
             this.setState({ picControlsVisible: false })
         }
+    }
+
+    handleColorSchemeChange = () => {
+        var userData = this.state.userData
+        if(userData.colorScheme === 'dark'){
+            userData.colorScheme = 'light'
+        } else {
+            userData.colorScheme = 'dark'
+        }
+        this.setState({
+            userData: userData,
+            canUpdate: true
+        })
     }
 
     handleEmailChange = (e) => {
@@ -319,6 +353,8 @@ export default class Profile extends React.Component{
     }
 
     render () {
+
+        console.log(this.state.userData.colorScheme)
         
         return(
             <div className={`profile-form-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
@@ -476,6 +512,20 @@ export default class Profile extends React.Component{
                                     width='180px'
                                 ></FormButton>
                                 <div className="password-update-confirmation-message" style={{ display: this.state.passwordUpdated ? 'block' : 'none' }}>Password is saved</div>
+                            </div>
+                        :
+                            ''
+                        }
+                        {this.props.isDesktop ?
+                            <div className='profile-dark-mode-checkbox-container'>
+                                <Checkbox
+                                    key='profile-dark-mode-checkbox'
+                                    onChange={this.handleColorSchemeChange}
+                                    defaultChecked={this.state.userData.colorScheme === "dark"}
+                                    size='small'
+                                    sx={{padding:'5px'}}
+                                ></Checkbox>
+                                Dark mode
                             </div>
                         :
                             ''

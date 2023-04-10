@@ -85,6 +85,7 @@ export default class Login extends React.Component{
     SignOut = () => {
         this.Cookies.remove('idToken');
         this.Cookies.remove('username');
+        this.Cookies.remove('colorScheme');
         window.location.assign('/signin');
     }
 

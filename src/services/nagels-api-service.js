@@ -84,7 +84,7 @@ export default class NagelsApi {
         return res
     };
 
-    updateUser = async (username, token, email=null, aboutMe=null, preferredLang=null) => {
+    updateUser = async (username, token, email=null, aboutMe=null, colorScheme=null, preferredLang=null) => {
         const data = {
             username: username,
             token: token
@@ -95,9 +95,14 @@ export default class NagelsApi {
         if (aboutMe){
             data.aboutMe = aboutMe
         }
+        if (colorScheme){
+            data.colorScheme = colorScheme
+        }
         if (preferredLang){
             data.preferredLang = preferredLang
         }
+
+        console.log(data)
         const res = await this.apiCall('/user/' + username, 'PUT', data);
         return res
     };
