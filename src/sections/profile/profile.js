@@ -516,7 +516,7 @@ export default class Profile extends React.Component{
                         :
                             ''
                         }
-                        {this.props.isDesktop ?
+                        {this.props.isDesktop && this.Cookies.get('username') === this.state.userData.username ?
                             <div className='profile-dark-mode-checkbox-container'>
                                 <Checkbox
                                     key='profile-dark-mode-checkbox'
