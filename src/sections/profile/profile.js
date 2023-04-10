@@ -19,6 +19,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Checkbox from '@mui/material/Checkbox';
+import { FamilyRestroomRounded } from '@mui/icons-material';
 
 
 export default class Profile extends React.Component{
@@ -87,10 +88,7 @@ export default class Profile extends React.Component{
             if(body.errors) {
                 window.location.assign('/lobby/')
             } else {
-                var darkMode = false
-                var currentDate = new Date(); 
-                var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
-                this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                var darkMode = FamilyRestroomRounded
                 if(body.colorScheme === 'dark'){
                     darkMode = true
                 }
