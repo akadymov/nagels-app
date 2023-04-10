@@ -212,11 +212,13 @@ export default class NagelsApi {
         return res
     };
 
-    startGame = async (token, autodeal) => {
+    startGame = async (token, autodeal, singleCardHands) => {
         const data = {
             token: token,
-            autodeal: autodeal
+            autodeal: autodeal,
+            singleCardHands: singleCardHands
         };
+        console.log(data)
         const res = await this.apiCall('/game/start', 'POST', data);
         return res
     };

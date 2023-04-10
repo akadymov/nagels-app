@@ -89,15 +89,26 @@ def deal_cards(game_id):
             trump = 'd'
 
         # defining number of cards to be dealt in new hand
-        single_card_closed_hands = Hand.query.filter_by(game_id=game_id, is_closed=1, cards_per_player=1).all()
-        if len(single_card_closed_hands) == 0:
-            cards_per_player = last_closed_hand.cards_per_player - 1
-        elif len(single_card_closed_hands) == 1 and last_closed_hand.cards_per_player == 1:
-            cards_per_player = 1
-        elif len(single_card_closed_hands) == 2:
-            cards_per_player = last_closed_hand.cards_per_player + 1
+        if game.one_card_hands == 1:
+            single_card_closed_hands = Hand.query.filter_by(game_id=game_id, is_closed=1, cards_per_player=1).all()
+            if len(single_card_closed_hands) == 0:
+                cards_per_player = last_closed_hand.cards_per_player - 1
+            elif len(single_card_closed_hands) == 1 and last_closed_hand.cards_per_player == 1:
+                cards_per_player = 1
+            elif len(single_card_closed_hands) == 2:
+                cards_per_player = last_closed_hand.cards_per_player + 1
+            else:
+                print('Cannot calculate cards per player count in hand #' + str(new_hand_id) + ' of game #' + str(game_id))
         else:
-            print('Cannot calculate cards per player count in hand #' + str(new_hand_id) + ' of game #' + str(game_id))
+            two_card_closed_hands = Hand.query.filter_by(game_id=game_id, is_closed=1, cards_per_player=2).all()
+            if len(two_card_closed_hands) == 0:
+                cards_per_player = last_closed_hand.cards_per_player - 1
+            elif len(two_card_closed_hands) <= 3:
+                cards_per_player = 2
+            elif len(two_card_closed_hands) > 3:
+                cards_per_player = last_closed_hand.cards_per_player + 1
+            else:
+                print('Cannot calculate cards per player count in hand #' + str(new_hand_id) + ' of game #' + str(game_id))
 
         # next starting player is the one who was second is previous hand
         starting_player = last_closed_hand.get_player_by_pos(2)

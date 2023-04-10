@@ -21,6 +21,8 @@ export default class Room extends React.Component{
         this.state = {
             playerHeaders: this.props.isMobile && this.props.isPortrait ? ['Player', 'Ready',''] : ['Player','Ready','','Won'],
             players: [],
+            autodeal: true,
+            singleCardHands: true,
             modalOpen: false,
             modalHeader: "Please, confirm action",
             modalControls: [
@@ -289,6 +291,18 @@ export default class Room extends React.Component{
         });
     }
 
+    handleAutodealChange = () => {
+        var curValue = this.state.autodeal
+        this.setState({autodeal: !curValue})
+        console.log(this.state.autodeal)
+    }
+
+    handleSingleCardChange = () => {
+        var curValue = this.state.singleCardHands
+        this.setState({singleCardHands: !curValue})
+        console.log(this.state.singleCardHands)
+    }
+
     handleReadySwitchChange = (playerIndex) => {
         var newPlayers = this.state.players
         /*var targetSwitch = document.getElementById('ready-switch-' + newPlayers[playerIndex].username)
@@ -335,7 +349,40 @@ export default class Room extends React.Component{
     }
 
     startGame = () => {
-        this.NagelsApi.startGame(this.Cookies.get('idToken'), 1) // TODO: introduce autodeal checkbox
+        this.setState({
+            modalControls: [
+                {
+                    id: "autodeal_checkbox",
+                    type: "checkbox",
+                    label: "Auto deal cards",
+                    defaultChecked: this.state.autodeal,
+                    onChange: this.handleAutodealChange
+                },
+                {
+                    id: "single_card_hands",
+                    type: "checkbox",
+                    label: "Single card hands",
+                    defaultChecked: this.state.singleCardHands,
+                    onChange: this.handleSingleCardChange
+                },
+                {
+                    id: "confirm_start_game_button",
+                    type: "button",
+                    variant: "contained",
+                    text: "Start game",
+                    width: '140px',
+                    disabled: false,
+                    onSubmit: ()=>this.confirmStartGame(this.state.autodeal, this.state.singleCardHands)
+                }
+            ],
+            modalCanClose: true,
+            modalOpen: true,
+            modalHeader: "New game"
+        })
+    }
+
+    confirmStartGame = (autodeal, singleCardHands) => {
+        this.NagelsApi.startGame(this.Cookies.get('idToken'), autodeal, singleCardHands) // TODO: introduce autodeal checkbox
         .then((body) => {
             if(body.errors) {
                 alert(body.errors[0].message)

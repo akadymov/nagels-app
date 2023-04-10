@@ -40,6 +40,7 @@ def game_score(game_id):
 @cross_origin()
 def start():
     token = request.json.get('token')
+    one_card_hands = request.json.get('singleCardHands')
     if token is None:
         return jsonify({
             'errors': [
@@ -88,7 +89,7 @@ def start():
     autodeal = 0
     if request.json.get('autodeal'):
         autodeal=request.json.get('autodeal')
-    g = Game(room=hosted_room, autodeal=autodeal)
+    g = Game(room=hosted_room, autodeal=autodeal, one_card_hands=1 if one_card_hands else 0)
     db.session.add(g)
     db.session.commit()
 

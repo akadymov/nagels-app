@@ -5,6 +5,7 @@ import './nagels-modal.css';
 //MUI components
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 import FormButton from '../form-button';
 import CloseIcon from '@mui/icons-material/Close';
 import NagelsAvatar from '../nagels-avatar/nagels-avatar';
@@ -127,6 +128,20 @@ export default class NagelsModal extends React.Component{
                                                             </div>
                                                     )
                                                 })}
+                                            </div>
+                                        )
+                                    case 'checkbox':
+                                        return(
+                                            <div className={`modal-control-container-checkbox`} key={control.id}>
+                                                <Checkbox
+                                                    key={'checkbox' + control.id}
+                                                    value={control.value}
+                                                    onChange={control.onChange}
+                                                    defaultChecked={control.defaultChecked}
+                                                    size='small'
+                                                    sx={{padding:'5px'}}
+                                                ></Checkbox>
+                                                {control.label}
                                             </div>
                                         )
                                     case 'text':
