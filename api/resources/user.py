@@ -120,7 +120,8 @@ def get_user(username):
         'lastSeen': user.last_seen,
         'aboutMe': user.about_me,
         'connectedRoomId': user.get_connected_room_id(),
-        'stats': user.get_stats()
+        'stats': user.get_stats(),
+        'colorScheme': user.color_scheme
     }), 200
 
 
@@ -185,6 +186,7 @@ def edit_user(username):
     email = request.json.get('email')
     preferred_lang = request.json.get('preferredLang') or langs['DEFAULT'][env]
     about_me = request.json.get('aboutMe')
+    color_scheme = request.json.get('colorScheme')
     errors = []
     if not re.match(regexps['EMAIL'][env], email):
         errors.append({'field': 'email', 'message': 'Bad email!'})
@@ -203,6 +205,7 @@ def edit_user(username):
 
     modified_user.email = email.casefold()
     modified_user.about_me = about_me
+    modified_user.color_scheme = color_scheme
     modified_user.preferred_language = preferred_lang
     modified_user.last_seen = datetime.utcnow()
     db.session.commit()
@@ -214,6 +217,7 @@ def edit_user(username):
         'registered': modified_user.registered,
         'lastSeen': modified_user.last_seen,
         'aboutMe': modified_user.about_me,
+        'colorScheme': modified_user.color_scheme,
         'connectedRoomId': modified_user.get_connected_room_id(),
         'stats': modified_user.get_stats()
     }), 200

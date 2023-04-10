@@ -23,6 +23,7 @@ export default class Room extends React.Component{
             players: [],
             autodeal: true,
             singleCardHands: true,
+            ratingGame: true,
             modalOpen: false,
             modalHeader: "Please, confirm action",
             modalControls: [
@@ -294,13 +295,16 @@ export default class Room extends React.Component{
     handleAutodealChange = () => {
         var curValue = this.state.autodeal
         this.setState({autodeal: !curValue})
-        console.log(this.state.autodeal)
     }
 
     handleSingleCardChange = () => {
         var curValue = this.state.singleCardHands
         this.setState({singleCardHands: !curValue})
-        console.log(this.state.singleCardHands)
+    }
+
+    handleRatingGameChange = () => {
+        var curValue = this.state.ratingGame
+        this.setState({ratingGame: !curValue})
     }
 
     handleReadySwitchChange = (playerIndex) => {
@@ -366,13 +370,20 @@ export default class Room extends React.Component{
                     onChange: this.handleSingleCardChange
                 },
                 {
+                    id: "rating_game",
+                    type: "checkbox",
+                    label: "Rating game",
+                    defaultChecked: this.state.ratingGame,
+                    onChange: this.handleRatingGameChange
+                },
+                {
                     id: "confirm_start_game_button",
                     type: "button",
                     variant: "contained",
                     text: "Start game",
                     width: '140px',
                     disabled: false,
-                    onSubmit: ()=>this.confirmStartGame(this.state.autodeal, this.state.singleCardHands)
+                    onSubmit: ()=>this.confirmStartGame(this.state.autodeal, this.state.singleCardHands, this.state.ratingGame)
                 }
             ],
             modalCanClose: true,
@@ -381,8 +392,8 @@ export default class Room extends React.Component{
         })
     }
 
-    confirmStartGame = (autodeal, singleCardHands) => {
-        this.NagelsApi.startGame(this.Cookies.get('idToken'), autodeal, singleCardHands) // TODO: introduce autodeal checkbox
+    confirmStartGame = (autodeal, singleCardHands, ratingGame) => {
+        this.NagelsApi.startGame(this.Cookies.get('idToken'), autodeal, singleCardHands, ratingGame) // TODO: introduce autodeal checkbox
         .then((body) => {
             if(body.errors) {
                 alert(body.errors[0].message)

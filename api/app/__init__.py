@@ -39,7 +39,7 @@ async_mode = 'gevent'
 socketio = SocketIO(
     app,
     async_mode=async_mode,
-    cors_allowed_origins=get_settings('NAGELS_APP')['SITE_URL'][env],
+    cors_allowed_origins= get_settings('NAGELS_APP')['SITE_URL'][env],
     logger=flask_configs['DEBUG'][env],
     engineio_logger=flask_configs['DEBUG'][env]
 )

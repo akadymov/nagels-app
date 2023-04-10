@@ -281,6 +281,7 @@ class Game(db.Model):
     winner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True, index=True)
     autodeal = db.Column(db.Integer, default=0)
     one_card_hands = db.Column(db.Integer, default=1)
+    rating_game = db.Column(db.Integer, default=1)
     hands = db.relationship('Hand', backref='game', lazy='dynamic')
 
     def __repr__(self):

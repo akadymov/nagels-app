@@ -40,7 +40,9 @@ def game_score(game_id):
 @cross_origin()
 def start():
     token = request.json.get('token')
+    autodeal=request.json.get('autodeal')
     one_card_hands = request.json.get('singleCardHands')
+    rating_game = request.json.get('ratingGame')
     if token is None:
         return jsonify({
             'errors': [
@@ -63,6 +65,7 @@ def start():
                 }
             ]
         }), 403
+
     if not game_cfg['MIN_PLAYERS'][env] <= hosted_room.connected_users.count() <= game_cfg['MAX_PLAYERS'][env]:
         return jsonify({
             'errors': [
@@ -86,10 +89,12 @@ def start():
                     }
                 ]
             }), 403
-    autodeal = 0
-    if request.json.get('autodeal'):
-        autodeal=request.json.get('autodeal')
-    g = Game(room=hosted_room, autodeal=autodeal, one_card_hands=1 if one_card_hands else 0)
+    g = Game(
+        room=hosted_room,
+        autodeal=1 if autodeal else 0,
+        one_card_hands=1 if one_card_hands else 0,
+        rating_game=1 if rating_game else 0
+    )
     db.session.add(g)
     db.session.commit()
 

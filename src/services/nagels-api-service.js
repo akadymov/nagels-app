@@ -102,7 +102,6 @@ export default class NagelsApi {
             data.preferredLang = preferredLang
         }
 
-        console.log(data)
         const res = await this.apiCall('/user/' + username, 'PUT', data);
         return res
     };
@@ -217,13 +216,13 @@ export default class NagelsApi {
         return res
     };
 
-    startGame = async (token, autodeal, singleCardHands) => {
+    startGame = async (token, autodeal, singleCardHands, ratingGame) => {
         const data = {
             token: token,
             autodeal: autodeal,
-            singleCardHands: singleCardHands
+            singleCardHands: singleCardHands,
+            ratingGame: ratingGame
         };
-        console.log(data)
         const res = await this.apiCall('/game/start', 'POST', data);
         return res
     };
