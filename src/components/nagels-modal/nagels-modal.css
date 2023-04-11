@@ -126,3 +126,8 @@ div[data-testid=sentinelStart]{
     padding: 5px;
     font-size: 14px;
 }
+
+.wrap{
+    max-width: 250px; 
+    word-wrap: break-word
+}

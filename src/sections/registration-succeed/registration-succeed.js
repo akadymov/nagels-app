@@ -20,7 +20,7 @@ export default class RegistrationSucceed extends React.Component{
                     id:"login_button",
                     type:"contained", 
                     width:"220px",
-                    text:"Login", 
+                    text:"Log in", 
                     onSubmit: () => window.location.assign('/signin/' + this.props.match.params.username)
                 },
                 {

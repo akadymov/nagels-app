@@ -79,6 +79,27 @@ export default class NagelsApi {
         return res
     };
 
+    invitePlayer = async (roomId, email=null, message=null) => {
+        const data = {
+            roomId: roomId,
+            email: email,
+            message: message
+        };
+        const res = await this.apiCall('/user/invite', 'POST', data);
+        return res
+    };
+
+    registerTempAccount = async (roomId, inviteToken, username, password) => {
+        const data = {
+            roomId: roomId,
+            token: inviteToken,
+            username: username,
+            password: password
+        };
+        const res = await this.apiCall('/user/temp', 'POST', data);
+        return res
+    };
+
     getUser = async (username) => {
         const res = await this.apiCall('/user/' + username, 'GET');
         return res

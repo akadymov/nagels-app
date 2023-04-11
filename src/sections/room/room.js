@@ -17,6 +17,10 @@ export default class Room extends React.Component{
 
     constructor(props) {
         super(props);
+        this.handleInvitedUsernameChange = this.handleInvitedUsernameChange.bind(this);
+        this.handleInvitedPasswordChange = this.handleInvitedPasswordChange.bind(this);
+        this.handleInvitationEmailChange = this.handleInvitationEmailChange.bind(this);
+        this.handleInvitationMessageChange = this.handleInvitationMessageChange.bind(this);
         this.handleReadySwitchChange = this.handleReadySwitchChange.bind(this);
         this.state = {
             playerHeaders: this.props.isMobile && this.props.isPortrait ? ['Player', 'Ready',''] : ['Player','Ready','','Won'],
@@ -26,6 +30,7 @@ export default class Room extends React.Component{
             ratingGame: true,
             modalOpen: false,
             modalHeader: "Please, confirm action",
+            modalCanClose: true,
             modalControls: [
                 {
                     id: "confirm_close_room",
@@ -52,6 +57,10 @@ export default class Room extends React.Component{
                 host: '',
                 status: 'open',
                 games: []
+            },
+            invitedUserData: {
+                username: null,
+                password: null
             },
             headerControls: [
                 {
@@ -99,7 +108,7 @@ export default class Room extends React.Component{
 
     CheckIfLoggedIn = () => {
         const idToken = this.Cookies.get('idToken')
-        if(!idToken) {
+        if(!idToken && !this.props.match.params.invitationToken) {
             window.location.assign('/signin/');
         }
     };
@@ -177,6 +186,15 @@ export default class Room extends React.Component{
             onSubmit: this.GetRoomDetails
         })
         newHeaderControls.push({
+            id: 'invite_player',
+            type: 'button',
+            text: 'Invite',
+            variant: 'outlined',
+            disabled: !this.state.youAreHost,
+            width: '130px',
+            onSubmit: this.invitePlayer
+        })
+        newHeaderControls.push({
             id: 'start_game',
             type: 'button',
             text: 'Start',
@@ -215,6 +233,61 @@ export default class Room extends React.Component{
                     if(body.host === this.Cookies.get('username')) {
                         this.setState({youAreHost: true}, () => {
                             this.updateControls()
+                        })
+                    }
+                    if(this.props.match.params.invitationToken && !this.Cookies.get('idToken')){
+                        this.setState({
+                            modalControls: [
+                                {
+                                    id: "invitation_text",
+                                    type: "text",
+                                    text: 'Welcome to Nägels App! User ' + this.state.roomDetails.host + ' invited you to room "' + this.state.roomDetails.roomName + '". Please, create a username and password to continue or log in if you already have an account. You can add other details to your profile later.'
+                                },
+                                {
+                                    id: "invited_username_input",
+                                    type: "input",
+                                    variant: "outlined",
+                                    value: this.state.invitedUserData.username,
+                                    required: true,
+                                    width: '205px',
+                                    errorMessage: "",
+                                    label: "Username",
+                                    onChange: this.handleInvitedUsernameChange
+                                },
+                                {
+                                    id: "invited_password_input",
+                                    type: "input",
+                                    textFormat: "password",
+                                    variant: "outlined",
+                                    value: this.state.invitedUserData.password,
+                                    required: true,
+                                    width: '205px',
+                                    errorMessage: "",
+                                    label: "Password",
+                                    onChange: this.handleInvitedPasswordChange
+                                },
+                                {
+                                    id: "invited_register_button",
+                                    type: "button",
+                                    variant: "contained",
+                                    text: "Register and join",
+                                    width: '210px',
+                                    disabled: false,
+                                    onSubmit: this.registerInvitedPlayer
+                                },
+                                {
+                                    id: "invited_login_button",
+                                    type: "button",
+                                    variant: "outlined",
+                                    text: "Log in and join",
+                                    width: '210px',
+                                    disabled: false,
+                                    onSubmit: this.loginInvitedPlayer
+                                }
+                            ],
+                            modalCanClose: false,
+                            modalOpen: true,
+                            modalHeader: "Register new player"
                         })
                     }
                     if(this.state.roomDetails.status === 'closed') {
@@ -292,6 +365,179 @@ export default class Room extends React.Component{
         });
     }
 
+    createInviteLink = () => {
+        var newModalControls = this.state.modalControls
+        this.NagelsApi.invitePlayer(
+            this.props.match.params.roomId,
+            this.state.invitationEmail,
+            this.state.invitationMessage
+        )
+        .then((body)=>{
+            if(body.errors){
+                body.errors.forEach(error=>{
+                    if(error.field === 'email'){
+                        newModalControls[0].errorMessage = error.message
+                    }
+                    if(error.field === 'message'){
+                        newModalControls[1].errorMessage = error.message
+                    }
+                })
+                this.setState({
+                    modalControls: newModalControls
+                })
+            } else {
+                this.setState({
+                    modalControls: [
+                        {
+                            id: "invitation_succeed_message",
+                            type: "text",
+                            text: "Invitation link created and sent to specified email. You can share it with invited players"
+                        },
+                        {
+                            id: "invitation_link",
+                            type: "text",
+                            text: body.inviteLink,
+                            style: 'wrap'
+                        },
+                        {
+                            id: "invitation_close_button",
+                            type: "button",
+                            variant: "contained",
+                            text: "Close",
+                            width: '195px',
+                            disabled: false,
+                            onSubmit: () => this.setState({ modalOpen: false })
+                        }
+                    ],
+                    modalCanClose: true,
+                    modalOpen: true,
+                    modalHeader: "Invite new player"
+                })
+            }
+        })
+    }
+
+    loginInvitedPlayer = () => {
+        this.NagelsApi.login(
+            this.state.invitedUserData.username, 
+            this.state.invitedUserData.password
+        )
+        .then((body) => {
+            if(body.errors) {
+                var newModalControls = this.state.modalControls
+                body.errors.forEach(error=>{
+                    if(error.field === 'username'){
+                        newModalControls[1].errorMessage = error.message
+                    }
+                    if(error.field === 'password'){
+                        newModalControls[2].errorMessage = error.message
+                    }
+                })
+                this.setState({
+                    modalControls: newModalControls
+                })
+            } else {
+                var currentDate = new Date(); 
+                var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
+                this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
+                this.Cookies.set('username',body.username, { path: '/' , expires: expiresIn})
+                this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                if(body.connectedRoomId) {
+                    window.location.assign('/room/' + body.connectedRoomId)
+                } else {
+                    this.connectRoom(this.props.match.params.roomId)
+                }
+            }
+        });
+    };
+
+    connectRoom = (roomId) => {
+        this.NagelsApi.connectRoom(this.Cookies.get('idToken'), roomId)
+        .then((body) => {
+            if(!body.errors){
+                console.log('Emitting event "add_player_to_room"')
+                roomSocket.emit('add_player_to_room', this.Cookies.get('username'), roomId, body.roomName, body.connectedUsers)
+                lobbySocket.emit('increase_room_players', this.Cookies.get('username'), roomId, body.roomName, body.connectedUsers)
+                setTimeout(function(){
+                    window.location.assign('/room/' + roomId)
+                }, 1000)
+            } else {
+                alert(body.errors[0].message)
+            }
+        });
+    };
+
+    registerInvitedPlayer = () => {
+        this.NagelsApi.registerTempAccount(
+            this.props.match.params.roomId,
+            this.props.match.params.invitationToken, 
+            this.state.invitedUserData.username, 
+            this.state.invitedUserData.password
+        )
+        .then((body)=>{
+            if(body.errors) {
+                var newModalControls = this.state.modalControls
+                body.errors.forEach(error=>{
+                    if(error.field === 'username'){
+                        newModalControls[1].errorMessage = error.message
+                    }
+                    if(error.field === 'password'){
+                        newModalControls[2].errorMessage = error.message
+                    }
+                })
+                this.setState({
+                    modalControls: newModalControls
+                })
+            } else {
+                this.loginInvitedPlayer();
+            }
+        })
+    }
+
+    handleInvitationEmailChange(e) {
+        var newModalControls = this.state.modalControls
+        newModalControls[0].errorMessage = ''
+        newModalControls[1].errorMessage = ''
+        this.setState({
+            invitationEmail: e.target.value,
+            modalControls: newModalControls
+        })
+    };
+
+    handleInvitationMessageChange(e) {
+        var newModalControls = this.state.modalControls
+        newModalControls[0].errorMessage = ''
+        newModalControls[1].errorMessage = ''
+        this.setState({
+            invitationMessage: e.target.value,
+            modalControls: newModalControls
+        })
+    };
+
+    handleInvitedUsernameChange(e) {
+        var newInvitedUserData = this.state.invitedUserData
+        var newModalControls = this.state.modalControls
+        newInvitedUserData.username =  e.target.value
+        newModalControls[1].errorMessage = ''
+        newModalControls[2].errorMessage = ''
+        this.setState({
+            invitedUserData: newInvitedUserData,
+            modalControls: newModalControls
+        })
+    };
+
+    handleInvitedPasswordChange(e) {
+        var newInvitedUserData = this.state.invitedUserData
+        var newModalControls = this.state.modalControls
+        newInvitedUserData.password =  e.target.value
+        newModalControls[1].errorMessage = ''
+        newModalControls[2].errorMessage = ''
+        this.setState({
+            invitedUserData: newInvitedUserData,
+            modalControls: newModalControls
+        })
+    };
+
     handleAutodealChange = () => {
         var curValue = this.state.autodeal
         this.setState({autodeal: !curValue})
@@ -350,6 +596,41 @@ export default class Room extends React.Component{
                 window.location.assign('/lobby' + roomId)
             }
         });
+    }
+
+    invitePlayer = () => {
+        this.setState({
+            modalControls: [
+                {
+                    id: "invitation_email",
+                    type: "input",
+                    variant: "outlined",
+                    value: '',
+                    label: "Player email",
+                    onChange: this.handleInvitationEmailChange
+                },
+                {
+                    id: "invitation_text",
+                    type: "input",
+                    variant: "outlined",
+                    value: 'Nägels Online player ' + this.state.roomDetails.host + ' invites you to room "' + this.state.roomDetails.roomName + '".',
+                    label: "Message",
+                    onChange: this.handleInvitationMessageChange
+                },
+                {
+                    id: "invitation_confirm_button",
+                    type: "button",
+                    variant: "contained",
+                    text: "Create invite link",
+                    width: '195px',
+                    disabled: false,
+                    onSubmit: this.createInviteLink
+                }
+            ],
+            modalCanClose: true,
+            modalOpen: true,
+            modalHeader: "Invite new player"
+        })
     }
 
     startGame = () => {
@@ -415,6 +696,7 @@ export default class Room extends React.Component{
     
     componentDidMount = () => {
         this.GetRoomDetails();
+
         this.roomAutoUpdate();
         roomSocket.on("update_room", (data) => {
             if(this.Cookies.get('username') !== data.actor){
@@ -537,7 +819,7 @@ export default class Room extends React.Component{
                     isPortrait={this.props.isPortrait}
                     controls={this.state.modalControls}
                     closeModal={this.closeModal}
-                    modalCanClose={true}
+                    modalCanClose={this.state.modalCanClose}
                 ></NagelsModal>
             </div>
         )

@@ -7,7 +7,7 @@ from app.models import User, Token
 from datetime import datetime
 import re
 import os
-from app.email import send_password_reset_email, send_registration_notification
+from app.email import send_password_reset_email, send_registration_notification, send_invite_email
 from config import get_settings, get_environment
 from sqlalchemy import func
 
@@ -35,7 +35,9 @@ def get_user_regexps():
 @cross_origin()
 def create_user():
     username = request.json.get('username')
-    email = request.json.get('email')
+    email = None
+    if request.json.get('email'):
+        email = request.json.get('email').casefold()
     preferred_lang = request.json.get('preferredLang') or langs['DEFAULT'][env]
     password = request.json.get('password')
     repeat_password = request.json.get('repeatPassword')
@@ -62,7 +64,7 @@ def create_user():
         errors.append({'field': 'repeatPassword', 'message': 'Password confirmation is invalid!'})
     if not re.match(regexps['USERNAME'][env], username):
         errors.append({'field': 'username', 'message': 'Bad username!'})
-    if not re.match(regexps['EMAIL'][env], email):
+    if email is not None and not re.match(regexps['EMAIL'][env], email):
         errors.append({'field': 'email', 'message': 'Bad email!'})
     if not re.match(regexps['PASSWORD'][env], password):
         errors.append({'field': 'password', 'message': requirements['PASSWORD'][env]})
@@ -86,17 +88,14 @@ def create_user():
     db.session.add(user)
     db.session.commit()
     send_registration_notification(user)
-    return \
-        jsonify({
-            'username': user.username,
-            'email': user.email,
-            'preferredLang': user.preferred_language,
-            'registered': user.registered,
-            'lastSeen': user.last_seen,
-            'aboutMe': user.about_me
-        }), \
-        201, \
-        {'Location': url_for('user.get_user', username=username, _external=True)}
+    return jsonify({
+        'username': user.username,
+        'email': user.email,
+        'preferredLang': user.preferred_language,
+        'registered': user.registered,
+        'lastSeen': user.last_seen,
+        'aboutMe': user.about_me
+    }), 200
 
 
 @user.route('{base_path}/user/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
@@ -182,15 +181,16 @@ def edit_user(username):
                 }
             ]
         }), 401
-
-    email = request.json.get('email')
+    email = None
+    if request.json.get('email'):
+        email = request.json.get('email').casefold()
     preferred_lang = request.json.get('preferredLang') or langs['DEFAULT'][env]
     about_me = ''
     if request.json.get('aboutMe'):
         about_me = request.json.get('aboutMe')
     color_scheme = request.json.get('colorScheme')
     errors = []
-    if not re.match(regexps['EMAIL'][env], email):
+    if email is not None and not re.match(regexps['EMAIL'][env], email):
         errors.append({'field': 'email', 'message': 'Bad email!'})
     email_user = User.query.filter_by(email=email).first()
     if email_user is not None and email_user != modified_user:
@@ -205,7 +205,7 @@ def edit_user(username):
             'errors': errors
         }), 400
 
-    modified_user.email = email.casefold()
+    modified_user.email = email
     modified_user.about_me = about_me
     modified_user.color_scheme = color_scheme
     modified_user.preferred_language = preferred_lang
@@ -252,11 +252,11 @@ def send_password_recovery():
             'errors': [
                 {
                     'field': 'username',
-                    'message': 'Invalid username or password'
+                    'message': 'Invalid username or email'
                 },
                 {
                     'field': 'email',
-                    'message': 'Invalid username or password'
+                    'message': 'Invalid username or email'
                 }
             ]
         }), 400
@@ -264,6 +264,116 @@ def send_password_recovery():
     send_password_reset_email(requesting_user)
 
     return jsonify('Password recovery link is sent!'), 200
+
+
+@user.route('{base_path}/user/invite'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
+@cross_origin()
+def invite_user():
+    email = request.json.get('email')
+    message = request.json.get('message')
+    room_id = request.json.get('roomId')
+    if not room_id:
+        return jsonify({
+            'errors': [
+                {
+                    'field': 'email',
+                    'message': 'Ivalid room id'
+                },
+                {
+                    'field': 'message',
+                    'message': '   '
+                }
+            ]
+        })
+    if email is not None and email != '' and not re.match(regexps['EMAIL'][env], email):
+        return jsonify({
+            'errors': [
+                {'field': 'email', 'message': 'Bad email!'}
+            ]
+        })
+    if app.debug:
+        print(email)
+        print(message)
+
+    invite_token = User.get_invite_token(room_id)
+
+    if email:
+        send_invite_email(invite_token, room_id, email, message)
+
+    return jsonify({'inviteLink': '{site_url}/room/{room_id}/{token}'.format(
+        site_url=get_settings('NAGELS_APP')['SITE_URL'][env],
+        room_id=room_id,
+        token=invite_token
+    )}), 200
+
+
+@user.route('{base_path}/user/temp'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
+@cross_origin()
+def create_temp_account():
+
+    room_id = request.json.get('roomId')
+    token = request.json.get('token')
+    username = request.json.get('username')
+    preferred_lang = langs['DEFAULT'][env]
+    password = request.json.get('password')
+    admin_secret = request.headers.get('ADMIN_SECRET')
+    last_seen = datetime.utcnow()
+    registered = datetime.utcnow()
+    if app.debug:
+        print(room_id)
+        print(token)
+        print(username)
+        print(password)
+    errors = []
+    if auth['REGISTRATION_RESTRICTED'][env] and admin_secret != auth['ADMIN_SECRET'][env]:
+        return jsonify({
+            'errors': [
+                {'field': 'username',
+                 'message': 'Registration is restricted! Please, use feedback form or contact site admins to apply for registration.'},
+                {'field': 'password', 'message': ' '}
+            ]
+        }), 400
+
+    if User.verify_invite_token(token, room_id) != room_id:
+        return jsonify({
+            'errors': [
+                {'field': 'username',
+                 'message': 'Invite token is outdated! Please, ask host to send another link.'},
+                {'field': 'password', 'message': ' '}
+            ]
+        }), 400
+    if username is None:
+        errors.append({'field': 'username', 'message': 'Required'})
+    if password is None:
+        errors.append({'field': 'password', 'message': 'Required'})
+    if password is not None and not re.match(regexps['PASSWORD'][env], password):
+        errors.append({'field': 'password', 'message': requirements['PASSWORD'][env]})
+    if User.query.filter(func.lower(User.username) == func.lower(username)).count() > 0:
+        errors.append(
+            {'field': 'username', 'message': 'Username "{username}" is unavailable!'.format(username=username)})
+    if errors:
+        return jsonify({
+            'errors': errors
+        }), 400
+    temp_user = User(
+        username=username,
+        email=None,
+        preferred_language=preferred_lang,
+        last_seen=last_seen,
+        registered=registered
+    )
+    temp_user.set_password(password)
+    saved_token = Token.query.filter_by(token=token).first()
+    saved_token.status = 'used'
+    db.session.add(temp_user)
+    db.session.commit()
+    return jsonify({
+        'username': temp_user.username,
+        'preferredLang': temp_user.preferred_language,
+        'registered': temp_user.registered,
+        'lastSeen': temp_user.last_seen,
+        'aboutMe': temp_user.about_me
+    }), 200
 
 
 @user.route('{base_path}/user/password/reset'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])

@@ -81,7 +81,7 @@ export default class Registration extends React.Component{
                     width: "300px",
                     type:"outlined",
                     size: "small",
-                    text:"Login", 
+                    text:"Log in", 
                     onSubmit: () => window.location.assign('/signin')
                 }
             ],

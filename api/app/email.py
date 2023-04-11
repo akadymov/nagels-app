@@ -39,7 +39,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
 def send_password_reset_email(user):
     token = user.get_reset_password_token()
     send_email(
-        '[Nägels App] Reset Your Password',
+        '[Nägels Online] Reset Your Password',
         sender=auth['ADMINS'][env].split(',')[0],
         recipients=[user.email],
         text_body=render_template(
@@ -57,8 +57,30 @@ def send_password_reset_email(user):
     )
 
 
+def send_invite_email(token, room_id, email, message):
+    send_email(
+        '[Nägels Online] Invitation to join game',
+        sender=auth['ADMINS'][env].split(',')[0],
+        recipients=[email],
+        text_body=render_template(
+            'email/invite.txt',
+            nagels_url=nagels_app['SITE_URL'][env],
+            room_id=room_id,
+            message=message,
+            token=token
+        ),
+        html_body=render_template(
+            'email/invite.html',
+            nagels_url=nagels_app['SITE_URL'][env],
+            room_id=room_id,
+            message=message,
+            token=token
+        )
+    )
+
+
 def send_registration_notification(user):
-    send_email('[nagels App] Welcome letter',
+    send_email('[Nägels Online] Welcome letter',
                sender=auth['ADMINS'][env].split(',')[0],
                recipients=[user.email],
                text_body=render_template('email/register.txt',
@@ -72,7 +94,7 @@ def send_feedback(message, sender_email=None, sender_name=None):
     if not sender_name:
         sender_name = 'nagels app anonymous user'
     send_email(
-        '[Nägels App] Feedback from user',
+        '[Nägels Online] Feedback from user',
         sender=(sender_name, sender_email),
         recipients=auth['ADMINS'][env].split(','),
         text_body=render_template('email/feedback.txt', message=message, sender_name=sender_name),

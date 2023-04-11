@@ -102,6 +102,34 @@ class User(UserMixin, db.Model):
         user = User.query.filter_by(username=data['username']).first()
         return user
 
+    @staticmethod
+    def get_invite_token(room_id, expires_in=600):
+        new_token = jwt.encode(
+            {'room_id': room_id, 'exp': time() + expires_in},
+            auth['SECRET_KEY'][env],
+            algorithm='HS256'
+        )
+        new_token_entry = Token(token=new_token, status='active', type='invite')
+        db.session.add(new_token_entry)
+        db.session.commit()
+        return new_token
+
+    @staticmethod
+    def verify_invite_token(token, room_id):
+        saved_token = Token.query.filter_by(token=token, type='invite').first()
+        if not saved_token:
+            return
+        if saved_token.status != 'active':
+            return
+        try:
+            id = jwt.decode(token, auth['SECRET_KEY'][env],
+                            algorithms=['HS256'])['room_id']
+        except:
+            return
+        if room_id != id:
+            return
+        return room_id
+
     def get_reset_password_token(self, expires_in=600):
         new_token = jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
@@ -115,7 +143,7 @@ class User(UserMixin, db.Model):
 
     @staticmethod
     def verify_reset_password_token(token):
-        saved_token = Token.query.filter_by(token=token).first()
+        saved_token = Token.query.filter_by(token=token, type='reset_password').first()
         if not saved_token:
             return
         if saved_token.status != 'active':

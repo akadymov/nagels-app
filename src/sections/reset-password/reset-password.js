@@ -62,7 +62,7 @@ export default class ResetPassword extends React.Component{
                 {
                     id:"login_button", 
                     type:"contained", 
-                    text:"Login", 
+                    text:"Log in", 
                     width: "220px",
                     disabled: false,
                     hidden: true,

@@ -121,6 +121,16 @@ export default class ActiveContainer extends React.Component{
                             }
                         ></Route>
                         <Route 
+                            path="/room/:roomId/:invitationToken" 
+                            component={
+                                () => <RoomWithRouter  
+                                    isMobile = {this.props.isMobile}
+                                    isDesktop = {this.props.isDesktop}
+                                    isPortrait = {this.props.isPortrait}
+                                />
+                            }
+                        ></Route>
+                        <Route 
                             path="/room/:roomId" 
                             component={
                                 () => <RoomWithRouter  

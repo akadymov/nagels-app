@@ -44,7 +44,7 @@ export default class NagelsModal extends React.Component{
                                                         type={control.textFormat}
                                                         variant={control.variant}
                                                         onChange={control.onChange}
-                                                        width={control.width}
+                                                        sx={{width: control.width}}
                                                         size='small'
                                                         required={control.required}
                                                         defaultValue={control.text}

@@ -1,0 +1,12 @@
+Hello!
+
+You are invited to join Nägels Online game.
+Here is message from game host:
+{{ message }}
+
+To start playing, please, click following link:
+{{ nagels_url }}/room/{{ room_id }}/{{ token }}
+
+Sincerely,
+
+Nägels application team
