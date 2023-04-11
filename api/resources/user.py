@@ -185,7 +185,9 @@ def edit_user(username):
 
     email = request.json.get('email')
     preferred_lang = request.json.get('preferredLang') or langs['DEFAULT'][env]
-    about_me = request.json.get('aboutMe')
+    about_me = ''
+    if request.json.get('aboutMe'):
+        about_me = request.json.get('aboutMe')
     color_scheme = request.json.get('colorScheme')
     errors = []
     if not re.match(regexps['EMAIL'][env], email):

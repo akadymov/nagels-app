@@ -139,6 +139,7 @@ export default class Profile extends React.Component{
                     passwordUpdated: false,
                     errors: {}
                 })
+                window.location.reload()
             }
         })
     }
