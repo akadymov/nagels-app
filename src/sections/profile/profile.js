@@ -126,11 +126,11 @@ export default class Profile extends React.Component{
                 })
             } else {
                 var darkMode = false
+                var currentDate = new Date(); 
+                var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
+                this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 if(body.colorScheme === 'dark'){
                     darkMode = true
-                    var currentDate = new Date(); 
-                    var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
-                    this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 }
                 this.setState({ 
                     darkMode: darkMode,
