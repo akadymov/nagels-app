@@ -29,7 +29,7 @@ export default class TableActionMessage extends React.Component{
                     <LinearProgress
                         color='primary'
                         size='large'
-                        sx={{width:'40%',positon: 'absolute', left: '50%', transform: 'translate(-50%, -300%)'}}
+                        sx={{width:'40%', display: 'inline-block', marginBottom: '8px'}}
                     ></LinearProgress>
                 :
                     ''

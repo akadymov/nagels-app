@@ -151,11 +151,11 @@ export default class Game extends React.Component{
                         })*/
                         if(!getGameResponse.positionsDefined){
                             getGameResponse.attentionToMessage = true
-                            getGameResponse.actionMessage = 'Press "SHUFFLE" button in game controls to define players positions in game and deal cards'
+                            getGameResponse.actionMessage = 'Press "Shuffle" button in game controls to define players positions in game and deal cards'
                         }
                         if(getGameResponse.canDeal){
                             getGameResponse.attentionToMessage = true
-                            getGameResponse.actionMessage = 'Press "DEAL" button in game controls to deal cards in hand'
+                            getGameResponse.actionMessage = 'Press "Deal" button in game controls to deal cards in hand'
                         }
                     }
                     /*if(getGameResponse.lastTurnCards.length > 0) {
