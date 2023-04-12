@@ -221,7 +221,7 @@ class User(UserMixin, db.Model):
             'totalScore': total_score,
             'avgScore': avg_score,
             'avgBonuses': avg_bonuses,
-            'avgBetSize': avg_bet_size
+            'avgBets': avg_bet_size
         }
 
     def get_stats(self):
@@ -233,11 +233,11 @@ class User(UserMixin, db.Model):
             'gamesWon': stats.games_won,
             'winRatio': round(stats.games_won / stats.games_played, 2),
             'sumOfBets': stats.sum_of_bets,
-            'bonuses': round(stats.bonuses  / stats.games_played, 2),
+            'bonuses': round(stats.bonuses / stats.games_played, 2),
             'totalScore': stats.total_score,
             'avgScore': round(stats.total_score / stats.games_played, 2),
             'avgBonuses': round(stats.bonuses / stats.games_played, 2),
-            'avgBetSize': round(stats.sum_of_bets / stats.games_played, 2)
+            'avgBets': round(stats.sum_of_bets / stats.games_played, 2)
         }
 
 

@@ -90,6 +90,6 @@ def ratings():
                     'totalScore': rating.total_score,
                     'avgScore': round(rating.total_score / rating.games_played, 2),
                     'avgBonuses': round(rating.bonuses / rating.games_played, 2),
-                    'avgBetSize': round(rating.sum_of_bets / rating.games_played, 2)
+                    'avgBets': round(rating.sum_of_bets / rating.games_played, 2)
                 })
     return ratings_final
