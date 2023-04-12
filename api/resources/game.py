@@ -374,7 +374,7 @@ def status(game_id):
                     'relativePosition': game.get_player_relative_positions(requesting_user.id, player.user_id) if requesting_user_is_player else player.position
                 })
 
-    action_msg = 'Game #{game_id} started by {hostname}! Host is to shuffle positions.'.format(game_id=game_id, hostname=room.host.username)
+    action_msg = 'Game #{game_id} started by {hostname}! Shuffling positions.'.format(game_id=game_id, hostname=room.host.username)
     can_deal = False
     if game.winner_id:
         action_msg = 'Congratulations! ' + str(User.query.filter_by(id=game.winner_id).first().username) + ' won the game. You can check players standings by clicking "SCORES"'

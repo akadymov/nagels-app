@@ -429,7 +429,7 @@ export default class Game extends React.Component{
                         var tookPlayerIndex = newGameDetails.players.findIndex(el => el.username === body.tookPlayer)
                         newGameDetails.players[tookPlayerIndex].tookTurns ++
                         newGameDetails.myInHandInfo.dealtCards.splice(putCardIndex, 1)
-                        newGameDetails.actionMessage = "Hand is finished! Dealing cards..."
+                        newGameDetails.actionMessage = "Dealing cards..."
                         this.setState({
                             gameDetails: newGameDetails
                         })
@@ -658,7 +658,7 @@ export default class Game extends React.Component{
                                 }
                             }
                             if(data.isLastCardInHand){
-                                newGameDetails.actionMessage = "Hand is finished! Dealing cards..."
+                                newGameDetails.actionMessage = "Dealing cards..."
                                 this.setState({
                                     gameDetails: newGameDetails
                                 })
