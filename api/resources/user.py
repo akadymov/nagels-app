@@ -31,7 +31,7 @@ def get_user_regexps():
     }), 200
 
 
-@user.route('{base_path}/user'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
+@user.route('{base_path}/user/register'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def create_user():
     username = request.json.get('username')
@@ -98,7 +98,7 @@ def create_user():
     }), 200
 
 
-@user.route('{base_path}/user/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
+@user.route('{base_path}/user/profile/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
 def get_user(username):
     username = username
     user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
@@ -148,7 +148,7 @@ def post_token():
         }), 201
 
 
-@user.route('{base_path}/user/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['PUT'])
+@user.route('{base_path}/user/edit/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['PUT'])
 @cross_origin()
 def edit_user(username):
 
@@ -524,7 +524,7 @@ def new_password():
         return jsonify('New password is saved!'), 200
 
 
-@user.route('{base_path}/user/<username>/profilepic'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
+@user.route('{base_path}/user/profilepic/<username>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def upload_profile_pic(username):
     token = request.headers.get('Token')

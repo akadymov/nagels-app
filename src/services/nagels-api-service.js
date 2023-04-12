@@ -75,7 +75,7 @@ export default class NagelsApi {
             repeatPassword: repeatPassword,
             preferredLang: preferredLang
         };
-        const res = await this.apiCall('/user', 'POST', data);
+        const res = await this.apiCall('/user/register', 'POST', data);
         return res
     };
 
@@ -101,7 +101,7 @@ export default class NagelsApi {
     };
 
     getUser = async (username) => {
-        const res = await this.apiCall('/user/' + username, 'GET');
+        const res = await this.apiCall('/user/profile' + username, 'GET');
         return res
     };
 
@@ -123,7 +123,7 @@ export default class NagelsApi {
             data.preferredLang = preferredLang
         }
 
-        const res = await this.apiCall('/user/' + username, 'PUT', data);
+        const res = await this.apiCall('/user/edit/' + username, 'PUT', data);
         return res
     };
 
@@ -336,7 +336,7 @@ export default class NagelsApi {
     uploadProfilePic = async (token, username, img) => {
         const formData = new FormData();
         formData.append('avatar', img);
-        const res = await this.apiCallFormData('/user/' + username + '/profilepic', token, formData)
+        const res = await this.apiCallFormData('/user/profilepic/' + username, token, formData)
         return res
     }
 
