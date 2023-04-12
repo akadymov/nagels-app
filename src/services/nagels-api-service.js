@@ -101,7 +101,7 @@ export default class NagelsApi {
     };
 
     getUser = async (username) => {
-        const res = await this.apiCall('/user/profile' + username, 'GET');
+        const res = await this.apiCall('/user/profile/' + username, 'GET');
         return res
     };
 
