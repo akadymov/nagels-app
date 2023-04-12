@@ -255,6 +255,7 @@ def put_card(game_id, hand_id, card_id):
         all_remaining_cards_are_lower_trumps = True
         status_code = 403
         error_msg = '-'
+        allowed_suites = None
 
         if app.debug:
             print('turn_suit:       ' + str(turn_suit))
@@ -311,20 +312,21 @@ def put_card(game_id, hand_id, card_id):
                 if turn_suit == hand_trump and suitable_cards == ['j' + hand_trump]:
                     status_code = 200                               # putting card of non trump suit in trump suited turn is allowed if the only remaining trump on hand is J
                 elif player_has_turn_suit:
-                    error_msg = 'You should put card with following suits: {turn_suit}, {hand_trump}!'.format(
-                        turn_suit=turn_suit,
-                        hand_trump=hand_trump
-                    )                                               # putting card of non trump and non turn suit is not allowed if player has turn suited cards on hand
+                    error_msg = 'Not allowed. Allowed suites:'  # putting card of non trump and non turn suit is not allowed if player has turn suited cards on hand
+                    allowed_suites = [turn_suit, hand_trump]
                 else:
                     status_code = 200                               # putting card of non trump suit not matching turn suit is allowed if player has no turn suited cards
 
         if status_code == 403:
+            errors = [
+                {
+                    'message': error_msg
+                }
+            ]
+            if allowed_suites:
+                errors[0]['allowedSuites'] = allowed_suites
             return jsonify({
-                'errors': [
-                    {
-                        'message': error_msg
-                    }
-                ]
+                'errors': errors
             }), status_code
 
     if app.debug:

@@ -31,6 +31,7 @@ export default class Game extends React.Component{
                 positionsDefined: false,
                 canDeal: false,
                 actionMessage: '',
+                allowedSuites: [],
                 attentionToMessage: false,
                 gameScores: [],
                 nextActingPlayer: null,
@@ -76,6 +77,9 @@ export default class Game extends React.Component{
     handleInGameError(responseWithErrorMessage){
         var newGameDetails = this.state.gameDetails
         newGameDetails.actionMessage = responseWithErrorMessage.errors[0].message
+        if(responseWithErrorMessage.errors[0].allowedSuites){
+            newGameDetails.allowedSuites = responseWithErrorMessage.errors[0].allowedSuites
+        }
         this.setState({gameDetails: newGameDetails})
     }
 
@@ -724,6 +728,7 @@ export default class Game extends React.Component{
                             isPortrait={this.props.isPortrait}
                             message={this.state.gameDetails.actionMessage}
                             highlighted={this.state.gameDetails.attentionToMessage}
+                            allowedSuites={this.state.gameDetails.allowedSuites}
                         >
                         </TableActionMessage>
                         :
