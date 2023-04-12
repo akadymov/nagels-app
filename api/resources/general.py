@@ -84,12 +84,12 @@ def ratings():
                     'username': user.username,
                     'gamesPlayed': rating.games_played,
                     'gamesWon': rating.games_won,
-                    'winRatio': rating.games_won / rating.games_played,
+                    'winRatio': round(rating.games_won / rating.games_played, 2),
                     'sumOfBets': rating.sum_of_bets,
                     'bonuses': rating.bonuses,
                     'totalScore': rating.total_score,
-                    'avgScore': rating.total_score / rating.games_played,
-                    'avgBonuses': rating.bonuses / rating.games_played,
-                    'avgBetSize': rating.sum_of_bets / rating.games_played
+                    'avgScore': round(rating.total_score / rating.games_played, 2),
+                    'avgBonuses': round(rating.bonuses / rating.games_played, 2),
+                    'avgBetSize': round(rating.sum_of_bets / rating.games_played, 2)
                 })
     return ratings_final
