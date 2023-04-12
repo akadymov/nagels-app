@@ -86,7 +86,7 @@ def ratings():
                     'gamesWon': rating.games_won,
                     'winRatio': round(rating.games_won / rating.games_played, 2),
                     'sumOfBets': rating.sum_of_bets,
-                    'bonuses': rating.bonuses,
+                    'bonuses': round(rating.bonuses / rating.games_played, 2),
                     'totalScore': rating.total_score,
                     'avgScore': round(rating.total_score / rating.games_played, 2),
                     'avgBonuses': round(rating.bonuses / rating.games_played, 2),
