@@ -28,11 +28,11 @@ export default class OpenCard extends React.Component{
                 heightNum = 70
             }
             if(this.props.modal){
-                width = this.props.isPortrait ? '49px' : '35px'
+                width = '49px'
                 //widthNum = this.props.isPortrait ? 49 : 35
-                height = this.props.isPortrait ? '70px' : '50px'
-                heightNum = this.props.isPortrait ? 70 : 50
-                interval = this.props.isPortrait ? 18 : 10
+                height = '70px'
+                heightNum = 70
+                interval = 15
             }
         } else {
             if(this.props.modal){
