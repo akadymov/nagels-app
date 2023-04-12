@@ -3,7 +3,7 @@
 from flask import url_for, request, jsonify, Blueprint
 from flask_cors import cross_origin
 from app import db
-from app.models import User, Room
+from app.models import User, Room, Stats
 from datetime import datetime
 from config import get_settings, get_environment
 
@@ -19,10 +19,11 @@ def generate_users_json(target_room, connected_users):
             is_ready = True
         else:
             is_ready = target_room.if_user_is_ready(u)
-        user_stats = u.get_stats()
-        win_ratio = 0
+        user_stats = Stats.query.filter_by(user_id=u.id).first()
+        win_ratio = 0.00
         if user_stats:
-            win_ratio = user_stats['winRatio']
+            if user_stats.games_played > 0:
+                win_ratio = 100 * round(user_stats.games_won / user_stats.games_played, 4)
         users_json.append({
             'id': u.id,
             'username': u.username,
@@ -348,7 +349,7 @@ def status(room_id):
         }), 404
 
     connected_users = room.connected_users
-    users_json = generate_users_json(room,connected_users)
+    users_json = generate_users_json(room, connected_users)
     games_json = generate_games_json(room)
 
     return jsonify({
