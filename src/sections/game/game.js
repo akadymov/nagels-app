@@ -209,7 +209,7 @@ export default class Game extends React.Component{
                                 value: this.state.myBetSizeValue,
                                 errorMessage: "",
                                 onChange: this.handleBetChange,
-                                width: '5px',
+                                width: '50px',
                                 defaultValue:0
                             },
                             {
@@ -611,7 +611,7 @@ export default class Game extends React.Component{
                                                 value: this.state.myBetSizeValue,
                                                 errorMessage: "",
                                                 onChange: this.handleBetChange,
-                                                width: '5px',
+                                                width: '50px',
                                                 defaultValue:0
                                             },
                                             {
