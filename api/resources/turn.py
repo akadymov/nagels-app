@@ -313,7 +313,10 @@ def put_card(game_id, hand_id, card_id):
                     status_code = 200                               # putting card of non trump suit in trump suited turn is allowed if the only remaining trump on hand is J
                 elif player_has_turn_suit:
                     error_msg = 'Not allowed. Allowed suites:'  # putting card of non trump and non turn suit is not allowed if player has turn suited cards on hand
-                    allowed_suites = [turn_suit, hand_trump]
+                    if turn_suit == hand_trump:
+                        allowed_suites = [turn_suit]
+                    else:
+                        allowed_suites = [turn_suit, hand_trump]
                 else:
                     status_code = 200                               # putting card of non trump suit not matching turn suit is allowed if player has no turn suited cards
 
