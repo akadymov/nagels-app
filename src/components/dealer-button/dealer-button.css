@@ -15,10 +15,6 @@
     background-repeat: no-repeat;
 }
 
-.dealer-button.mobile.landscape{
-    top: 0;
-}
-
 .dealer-button.player1outof2{
     right: -35px;
     left: unset;
@@ -34,7 +30,7 @@
 
 .dealer-button.player1outof3{
     left: 80px;
-    bottom: -45px;
+    top: -45px;
     top: unset;
 }
 

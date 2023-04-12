@@ -506,6 +506,16 @@ class Hand(db.Model):
     def get_starter(self):
         return User.query.filter_by(id=self.starting_player).first()
 
+    def get_starter_new(self):
+        num_players = Player.query.filter_by(game_id=self.game_id).count()
+        starting_player_position = self.serial_no % num_players
+        if starting_player_position == 0:
+            starting_player_position = num_players
+        starter_id = Player.query.filter_by(game_id=self.game_id, position=starting_player_position).first().user_id
+        if starter_id is None:
+            return None
+        return User.query.filter_by(id=starter_id).first()
+
     def get_position(self, user):
         players_count = Player.query.filter_by(game_id=self.game_id).count()
         game = Game.query.filter_by(id=self.game_id).first()
@@ -516,18 +526,18 @@ class Hand(db.Model):
     def get_player_by_pos(self, position):
         if app.debug:
             print('Seeking for player on position #' + str(position) + ' in hand #' + str(self.id))
-        played_hands = Hand.query.filter_by(game_id=self.game_id, is_closed=1).count()
+        before_played_hands = Hand.query.filter(Hand.game_id == self.game_id, Hand.serial_no < self.serial_no).count()
         if app.debug:
-            print('Already played ' + str(played_hands) + ' hands in game')
+            print('Already played ' + str(before_played_hands) + ' hands in game')
         game_players = Player.query.filter_by(game_id=self.game_id).all()
         if position == len(game_players):
             position = 0
         if app.debug:
-            print('Found ' + str(len(game_players)) + ' in hand')
+            print('Found ' + str(len(game_players)) + ' players in hand')
         for player in game_players:
             if app.debug:
                 print('Checking player #' + str(player.position) + ' hand position...')
-            shifted_position = (player.position + played_hands) % len(game_players)
+            shifted_position = (player.position + before_played_hands) % len(game_players)
             if app.debug:
                 print("Player's position in hand is " + str(shifted_position))
             if shifted_position == position:

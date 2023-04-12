@@ -421,7 +421,7 @@ def status(game_id):
         'actionMessage': action_msg,
         'myInHandInfo': my_info,
         'cardsOnTable': cards_on_table,
-        'handStarter': current_hand.get_starter().username if current_hand else None,
+        'handStarter': current_hand.get_starter_new().username if current_hand else None,
     }
 
     return jsonify(response_json), 200
