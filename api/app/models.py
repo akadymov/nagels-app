@@ -231,13 +231,13 @@ class User(UserMixin, db.Model):
         return {
             'gamesPlayed': stats.games_played,
             'gamesWon': stats.games_won,
-            'winRatio': stats.games_won / stats.games_played,
+            'winRatio': round(stats.games_won / stats.games_played, 2),
             'sumOfBets': stats.sum_of_bets,
-            'bonuses': stats.bonuses,
+            'bonuses': round(stats.bonuses  / stats.games_played, 2),
             'totalScore': stats.total_score,
-            'avgScore': stats.total_score / stats.games_played,
-            'avgBonuses': stats.bonuses / stats.games_played,
-            'avgBetSize': stats.sum_of_bets / stats.games_played
+            'avgScore': round(stats.total_score / stats.games_played, 2),
+            'avgBonuses': round(stats.bonuses / stats.games_played, 2),
+            'avgBetSize': round(stats.sum_of_bets / stats.games_played, 2)
         }
 
 
