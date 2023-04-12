@@ -30,6 +30,7 @@
     color: var(--primary);
     font-weight: 900;
     padding: 2px;
+    min-height: 35px;
 }
 
 .action-message-text.highlighted{
