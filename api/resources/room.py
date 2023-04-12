@@ -23,7 +23,7 @@ def generate_users_json(target_room, connected_users):
         win_ratio = 0.00
         if user_stats:
             if user_stats.games_played > 0:
-                win_ratio = 100 * round(user_stats.games_won / user_stats.games_played, 4)
+                win_ratio = round(user_stats.games_won / user_stats.games_played, 2)
         users_json.append({
             'id': u.id,
             'username': u.username,
