@@ -223,6 +223,14 @@ export default class Game extends React.Component{
                                 text: "Confirm",
                                 width: "195px",
                                 onSubmit: this.makeBet
+                            },
+                            {
+                                id: "scores_view_button",
+                                type: "button",
+                                variant: "outlined",
+                                text: "Scores",
+                                width: "195px",
+                                onSubmit: this.showScores
                             }
                         ]
                     }
