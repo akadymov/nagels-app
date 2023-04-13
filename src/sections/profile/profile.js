@@ -182,13 +182,13 @@ export default class Profile extends React.Component{
     }
 
     activatePicControls = () => {
-        if(this.props.isDesktop){
+        if(this.props.isDesktop && this.state.userData.username === this.Cookies.get('username')){
             this.setState({ picControlsVisible: true })
         }
     }
 
     deActivatePicControls = () => {
-        if(this.props.isDesktop){
+        if(this.props.isDesktop && this.state.userData.username === this.Cookies.get('username')){
             this.setState({ picControlsVisible: false })
         }
     }
@@ -364,7 +364,7 @@ export default class Profile extends React.Component{
                         className={`profile-picture-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
                         onMouseEnter={this.activatePicControls}
                         onMouseLeave={this.deActivatePicControls}
-                        onClick={() => {this.setState({modalOpen: true})}} // FIXME
+                        onClick={() => {if(this.state.userData.username === this.Cookies.get('username')){this.setState({modalOpen: true})}}} // FIXME
                     >
                         <NagelsAvatar
                             username={this.props.match.params.username || this.Cookies.get('username')}
