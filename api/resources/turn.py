@@ -61,6 +61,14 @@ def bet(game_id, hand_id):
                 }
             ]
         }), 403
+    if bet_size < 0:
+        return jsonify({
+            'errors': [
+                {
+                    'message': 'Bet size cannot be negative!'
+                }
+            ]
+        }), 403
 
     requesting_player_bet = HandScore.query.filter_by(hand_id=hand_id, player_id=requesting_user.id).first()
     if requesting_player_bet:
