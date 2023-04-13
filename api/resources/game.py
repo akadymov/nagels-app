@@ -417,6 +417,8 @@ def status(game_id):
         'host': room.host.username,
         'startedHands': [],
         'autodeal': game.autodeal == 1,
+        'singleCardHands': game.one_card_hands == 1,
+        'ratingGame': game.rating_game == 1,
         'gameScores': game.get_scores(),
         'actionMessage': action_msg,
         'myInHandInfo': my_info,

@@ -674,7 +674,12 @@ export default class Room extends React.Component{
     }
 
     confirmStartGame = (autodeal, singleCardHands, ratingGame) => {
-        this.NagelsApi.startGame(this.Cookies.get('idToken'), autodeal, singleCardHands, ratingGame) // TODO: introduce autodeal checkbox
+        this.NagelsApi.startGame(
+            this.Cookies.get('idToken'), 
+            autodeal, 
+            singleCardHands, 
+            ratingGame
+        )
         .then((body) => {
             if(body.errors) {
                 alert(body.errors[0].message)

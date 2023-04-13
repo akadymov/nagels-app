@@ -247,7 +247,13 @@ export default class Game extends React.Component{
     }
 
     restartGame = () => {
-        this.NagelsApi.startGame(this.Cookies.get('idToken'), 1) // TODO: introduce autodeal checkbox
+
+        this.NagelsApi.startGame(
+            this.Cookies.get('idToken'), 
+            this.state.gameDetails.autodeal, 
+            this.state.gameDetails.singleCardHands,
+            this.state.gameDetails.ratingGame
+        ) // TODO: introduce autodeal checkbox
         .then((body) => {
             if(body.errors) {
                 alert(body.errors[0].message)
