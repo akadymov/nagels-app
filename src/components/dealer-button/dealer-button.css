@@ -75,8 +75,8 @@
 
 
 .dealer-button.player1outof5{
-    left: -35px;
-    bottom: 0px;
+    left: 0px;
+    bottom: -40px;
     top: unset;
 }
 
@@ -96,7 +96,7 @@
     left: unset;
     right: -35px;
     top: unset;
-    bottom: 25px;
+    bottom: 0px;
 }
 
 .dealer-button.player2outof5.mobile.portrait{
@@ -126,7 +126,7 @@
 
 .dealer-button.player4outof5{
     left: unset;
-    right: 80px;
+    right: 0px;
     top: -45px;
 }
 
