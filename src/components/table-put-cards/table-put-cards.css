@@ -95,6 +95,32 @@
 
 
 
+
+.table-put-card.player1.outof5{
+    right: 5%;
+    top: 35%;
+}
+
+.table-put-card.player2.outof5{
+    left: 60%;
+    transform: translate(-50%, 0);
+    top: 0%;
+}
+
+.table-put-card.player3.outof5{
+    left: 10%;
+    top: 15%;
+}
+
+.table-put-card.player4.outof5{
+    bottom: 5%;
+    left: 25%;
+    transform: translate(-50%, 0);
+}
+
+
+
+
 .table-put-card.player1.outof6{
     right: 5%;
     top: 20%;
