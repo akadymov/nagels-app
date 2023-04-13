@@ -1,9 +1,8 @@
 Dear {{ user.username }},
 
-To reset your password click on the following link:
-
 You are successfully registered in Nägels Application.
+You can start playing now!
+Game main rules and basic steps for newcomers: https://nigels.online/about
 
 Sincerely,
-
 Nägels application team
