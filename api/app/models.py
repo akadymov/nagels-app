@@ -44,6 +44,7 @@ class User(UserMixin, db.Model):
     registered = db.Column(db.DateTime)
     about_me = db.Column(db.String(140), nullable=True)
     color_scheme = db.Column(db.String(30), nullable=True, default=None)
+    deck_type = db.Column(db.String(20), nullable=True, default=None)
     social_id = db.Column(db.String(64), unique=True, nullable=True)
     preferred_language = db.Column(db.String(6), default='en')
     connected_rooms_bad = db.relationship(
