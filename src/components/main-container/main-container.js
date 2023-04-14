@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import './main-container.css'
 import { useMediaQuery } from 'react-responsive';
 
@@ -26,13 +26,13 @@ const MainContainer = () => {
         isDesktop = true /* isDesktopHeight */ 
     }
 
-    const containerRef = useRef(null);
+    /*const containerRef = useRef(null);
 
     useEffect(() => {
       if (containerRef.current && !isDesktop && isPortrait) {
         containerRef.current.scrollTo(0, containerRef.current.scrollHeight - window.innerHeight * 0.08);
       }
-    }, []);
+    }, []);*/
 
     
     return (

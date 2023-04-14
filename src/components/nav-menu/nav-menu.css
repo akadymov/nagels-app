@@ -2,6 +2,7 @@
     position: absolute;
     background-color: var(--contrastControlPanel);
     z-index: 200;
+    position: fixed;
 }
 
 .nav-menu.mobile.portrait{
