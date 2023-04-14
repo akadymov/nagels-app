@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './open-card.css';
+import Cookies from 'universal-cookie';
 
 export default class OpenCard extends React.Component{
 
@@ -8,6 +9,8 @@ export default class OpenCard extends React.Component{
         super(props);
         this.state = {}
     }
+
+    Cookies = new Cookies();
     
     render() {
 
@@ -56,7 +59,7 @@ export default class OpenCard extends React.Component{
 
         return (
             <div 
-                className="open-card" 
+                className={`open-card ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : 'classic'} ${this.Cookies.get('colorScheme') === 'dark' ? 'inverted' : ''}`}
                 onClick={this.props.onClick}
                 cardid={this.props.cardId}
                 index={this.props.index}

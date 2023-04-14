@@ -37,7 +37,8 @@ export default class Profile extends React.Component{
                 username: null,
                 connectedRoomId: null,
                 stats: [],
-                colorScheme: null
+                colorScheme: null,
+                deckType: null
             },
             aboutMeSymbols: 0,
             canUpdate: false,
@@ -91,8 +92,13 @@ export default class Profile extends React.Component{
                 if(body.colorScheme === 'dark'){
                     darkMode = true
                 }
+                var deckType = 'classic'
+                if(body.deckType === '4color'){
+                    deckType = '4color'
+                }
                 this.setState({ 
                     darkMode: darkMode,
+                    deckType: deckType,
                     userData: body, 
                     canUpdate: false, 
                     canUpdatePassword: false, 
@@ -107,7 +113,8 @@ export default class Profile extends React.Component{
             this.props.match.params.username || this.Cookies.get('username'), 
             this.Cookies.get('idToken'), this.state.userData.email, 
             this.state.userData.aboutMe || '', 
-            this.state.userData.colorScheme || 'light'
+            this.state.userData.colorScheme || 'light',
+            this.state.deckType || 'classic'
         )
         .then((body)=>{
             if(body.errors) {
@@ -128,7 +135,8 @@ export default class Profile extends React.Component{
                 var darkMode = false
                 var currentDate = new Date(); 
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
-                this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.Cookies.set('colorScheme', body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.Cookies.set('deckType', body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 if(body.colorScheme === 'dark'){
                     darkMode = true
                 }
@@ -199,6 +207,19 @@ export default class Profile extends React.Component{
             userData.colorScheme = 'light'
         } else {
             userData.colorScheme = 'dark'
+        }
+        this.setState({
+            userData: userData,
+            canUpdate: true
+        })
+    }
+
+    handleDeckTypeChange = () => {
+        var userData = this.state.userData
+        if(userData.deckType === '4color'){
+            userData.deckType = 'classic'
+        } else {
+            userData.deckType = '4color'
         }
         this.setState({
             userData: userData,
@@ -354,8 +375,6 @@ export default class Profile extends React.Component{
     }
 
     render () {
-
-        console.log(this.state.userData.colorScheme)
         
         return(
             <div className={`profile-form-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
@@ -527,6 +546,20 @@ export default class Profile extends React.Component{
                                     sx={{padding:'5px'}}
                                 ></Checkbox>
                                 Dark mode
+                            </div>
+                        :
+                            ''
+                        }
+                        {this.props.isDesktop && this.Cookies.get('username') === this.state.userData.username ?
+                            <div className='profile-deck-type-checkbox-container'>
+                                <Checkbox
+                                    key='profile-deck-type-checkbox'
+                                    onChange={this.handleDeckTypeChange}
+                                    defaultChecked={this.state.userData.deckType === "4color"}
+                                    size='small'
+                                    sx={{padding:'5px'}}
+                                ></Checkbox>
+                                4 color deck
                             </div>
                         :
                             ''

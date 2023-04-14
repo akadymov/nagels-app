@@ -120,7 +120,8 @@ def get_user(username):
         'aboutMe': user.about_me,
         'connectedRoomId': user.get_connected_room_id(),
         'stats': user.get_stats(),
-        'colorScheme': user.color_scheme
+        'colorScheme': user.color_scheme,
+        'deckType': user.deck_type
     }), 200
 
 
@@ -144,7 +145,8 @@ def post_token():
             'token': token,
             'expiresIn': auth['TOKEN_LIFETIME'][env],
             'connectedRoomId': user.get_connected_room_id(),
-            'colorScheme': user.color_scheme
+            'colorScheme': user.color_scheme,
+            'deckType': user.deck_type
         }), 201
 
 
@@ -189,6 +191,7 @@ def edit_user(username):
     if request.json.get('aboutMe'):
         about_me = request.json.get('aboutMe')
     color_scheme = request.json.get('colorScheme')
+    deck_type = request.json.get('deckType')
     errors = []
     if email is not None and not re.match(regexps['EMAIL'][env], email):
         errors.append({'field': 'email', 'message': 'Bad email!'})
@@ -208,6 +211,7 @@ def edit_user(username):
     modified_user.email = email
     modified_user.about_me = about_me
     modified_user.color_scheme = color_scheme
+    modified_user.deck_type = deck_type
     modified_user.preferred_language = preferred_lang
     modified_user.last_seen = datetime.utcnow()
     db.session.commit()
@@ -220,6 +224,7 @@ def edit_user(username):
         'lastSeen': modified_user.last_seen,
         'aboutMe': modified_user.about_me,
         'colorScheme': modified_user.color_scheme,
+        'deckType': modified_user.deck_type,
         'connectedRoomId': modified_user.get_connected_room_id(),
         'stats': modified_user.get_stats()
     }), 200

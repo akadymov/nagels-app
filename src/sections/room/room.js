@@ -442,6 +442,7 @@ export default class Room extends React.Component{
                 this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
                 this.Cookies.set('username',body.username, { path: '/' , expires: expiresIn})
                 this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.Cookies.set('deckType',body.deckType, { path: '/' , deckType: expiresIn})
                 if(body.connectedRoomId) {
                     window.location.assign('/room/' + body.connectedRoomId)
                 } else {
@@ -555,10 +556,6 @@ export default class Room extends React.Component{
 
     handleReadySwitchChange = (playerIndex) => {
         var newPlayers = this.state.players
-        /*var targetSwitch = document.getElementById('ready-switch-' + newPlayers[playerIndex].username)
-        if (targetSwitch) {
-            targetSwitch.checked = !newPlayers[playerIndex].ready
-        }*/
         newPlayers[playerIndex].defaultChecked = newPlayers[playerIndex].ready
         newPlayers[playerIndex].ready = !newPlayers[playerIndex].ready
         if (newPlayers[playerIndex].ready) {
@@ -568,6 +565,7 @@ export default class Room extends React.Component{
             this.resetReady(newPlayers[playerIndex].username)
             this.setState({players: newPlayers})
         }
+        window.location.reload();
     }
 
     closeRoom = () => {

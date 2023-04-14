@@ -276,3 +276,11 @@
     color: var(--regularText);
     font-size: 12px;
 }
+
+.profile-deck-type-checkbox-container{
+    position: absolute;
+    top: 255px;
+    left: 320px;
+    color: var(--regularText);
+    font-size: 12px;
+}

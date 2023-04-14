@@ -86,6 +86,7 @@ export default class Login extends React.Component{
         this.Cookies.remove('idToken');
         this.Cookies.remove('username');
         this.Cookies.remove('colorScheme');
+        this.Cookies.remove('deckType');
         window.location.assign('/signin');
     }
 
@@ -103,6 +104,7 @@ export default class Login extends React.Component{
                 this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
                 this.Cookies.set('username',body.username, { path: '/' , expires: expiresIn})
                 this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.Cookies.set('deckType',body.deckType, { path: '/' , deckType: expiresIn})
                 if(body.connectedRoomId) {
                     window.location.assign('/room/' + body.connectedRoomId)
                 } else {

@@ -138,6 +138,7 @@ export default class ResetPassword extends React.Component{
                 this.Cookies.set('idToken', body.token, { path: '/' , expires: expiresIn})
                 this.Cookies.set('username',body.username, { path: '/' , expires: expiresIn})
                 this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.Cookies.set('deckType',body.deckType, { path: '/' , deckType: expiresIn})
                 window.location.assign('/lobby/');
             }
         });
