@@ -28,6 +28,7 @@ export default class Profile extends React.Component{
         this.state = {
             picControlsVisible: false,
             darkMode: false,
+            fourColorDeck: false,
             userData: {
                 aboutMe: null,
                 email: null,
@@ -92,13 +93,13 @@ export default class Profile extends React.Component{
                 if(body.colorScheme === 'dark'){
                     darkMode = true
                 }
-                var deckType = 'classic'
+                var fourColorDeck = false
                 if(body.deckType === '4color'){
-                    deckType = '4color'
+                    fourColorDeck = true
                 }
                 this.setState({ 
                     darkMode: darkMode,
-                    deckType: deckType,
+                    fourColorDeck: fourColorDeck,
                     userData: body, 
                     canUpdate: false, 
                     canUpdatePassword: false, 
@@ -114,7 +115,7 @@ export default class Profile extends React.Component{
             this.Cookies.get('idToken'), this.state.userData.email, 
             this.state.userData.aboutMe || '', 
             this.state.userData.colorScheme || 'light',
-            this.state.deckType || 'classic'
+            this.state.userData.deckType || 'classic'
         )
         .then((body)=>{
             if(body.errors) {
@@ -133,15 +134,20 @@ export default class Profile extends React.Component{
                 })
             } else {
                 var darkMode = false
+                var fourColorDeck = false
                 var currentDate = new Date(); 
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
                 this.Cookies.set('colorScheme', body.colorScheme, { path: '/' , colorScheme: expiresIn})
-                this.Cookies.set('deckType', body.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.Cookies.set('deckType', body.deckType, { path: '/' , deckType: expiresIn})
                 if(body.colorScheme === 'dark'){
                     darkMode = true
                 }
+                if(body.deckType === '4color'){
+                    fourColorDeck = true
+                }
                 this.setState({ 
                     darkMode: darkMode,
+                    fourColorDeck: fourColorDeck,
                     userData: body, 
                     canUpdate: false, 
                     passwordUpdated: false,

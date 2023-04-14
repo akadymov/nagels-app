@@ -105,7 +105,7 @@ export default class NagelsApi {
         return res
     };
 
-    updateUser = async (username, token, email=null, aboutMe=null, colorScheme=null, preferredLang=null) => {
+    updateUser = async (username, token, email=null, aboutMe=null, colorScheme=null, deckType=null, preferredLang=null) => {
         const data = {
             username: username,
             token: token
@@ -122,6 +122,11 @@ export default class NagelsApi {
         if (preferredLang){
             data.preferredLang = preferredLang
         }
+        if (deckType){
+            data.deckType = deckType
+        }
+
+        console.log(data)
 
         const res = await this.apiCall('/user/edit/' + username, 'PUT', data);
         return res
