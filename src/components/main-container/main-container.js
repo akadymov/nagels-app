@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './main-container.css'
 import { useMediaQuery } from 'react-responsive';
 
@@ -25,6 +25,14 @@ const MainContainer = () => {
         isMobile = isMobileHeight
         isDesktop = true /* isDesktopHeight */ 
     }
+
+    useEffect(() => {
+        const body = document.body;
+        body.style.overflow = "hidden";
+        return () => {
+            body.style.overflow = "auto";
+        };
+    }, []);
 
     
     return (
