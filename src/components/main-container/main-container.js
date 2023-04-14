@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './main-container.css'
 import { useMediaQuery } from 'react-responsive';
 
@@ -26,12 +26,12 @@ const MainContainer = () => {
         isDesktop = true /* isDesktopHeight */ 
     }
 
+    const containerRef = useRef(null);
+
     useEffect(() => {
-        const body = document.body;
-        body.style.overflow = "hidden";
-        return () => {
-            body.style.overflow = "auto";
-        };
+      if (containerRef.current && !isDesktop && isPortrait) {
+        containerRef.current.scrollTo(0, containerRef.current.scrollHeight - window.innerHeight * 0.08);
+      }
     }, []);
 
     
