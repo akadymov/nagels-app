@@ -22,11 +22,14 @@ import FormButton from '../form-button';
 import Score from '../score';
 import NagelsAvatar from '../nagels-avatar/nagels-avatar';
 import defaultTheme from '../../themes/default';
+import Cookies from 'universal-cookie';
 
 
 
 
 export default class NagelsTableContainer extends React.Component{
+
+    Cookies = new Cookies();
 
     render() {
 
@@ -143,7 +146,7 @@ export default class NagelsTableContainer extends React.Component{
                                                 case 'hand id':
                                                     return(
                                                         <StyledTableCell key={`row ${row.id} column ${row.dataArray.indexOf(data)}`} align='center'>
-                                                            <p key={`handspan ${data.cards}-${data.trump}-${row.dataArray.indexOf(data)}`} className={`${data.trump} suit-container`}>{data.cards}</p>
+                                                            <p key={`handspan ${data.cards}-${data.trump}-${row.dataArray.indexOf(data)}`} className={`${data.trump} suit-container ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : ''}`}>{data.cards}</p>
                                                         </StyledTableCell>
                                                     )
                                                 case 'score':

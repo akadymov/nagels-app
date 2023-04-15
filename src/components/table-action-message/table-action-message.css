@@ -45,3 +45,19 @@
 .s.trump-container.action-message-text:after{
     color: black;
 }
+
+.c.trump-container.action-message-text.fourcolor:after{
+    color: #308552;
+}
+
+.s.trump-container.action-message-text.fourcolor:after{
+    color: var(--blackSuit);
+}
+
+.d.trump-container.action-message-text.fourcolor:after{
+    color: #0094FF;
+}
+
+.h.trump-container.action-message-text.fourcolor:after{
+    color: #BE1931;
+}

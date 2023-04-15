@@ -19,7 +19,7 @@ export default class TableActionMessage extends React.Component{
                 {this.props.allowedSuites ? 
                     this.props.allowedSuites.map(allowedSuit => {
                         return(
-                            <div class={`${allowedSuit} trump-container action-message-text`} style={{position: 'relative', display: 'inline-block'}}></div>
+                            <div class={`${allowedSuit} trump-container action-message-text ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : ''}`} style={{position: 'relative', display: 'inline-block'}}></div>
                         )
                     })
                 :  

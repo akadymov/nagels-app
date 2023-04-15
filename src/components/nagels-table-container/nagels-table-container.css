@@ -68,12 +68,32 @@
     color: var(--blackSuit);
 }
 
-.s.suit-container:before{
+.s.suit-container.fourcolor:before{
     content: "\2660";
     color: var(--blackSuit);
 }
 
-.x.suit-container:before{
+.x.suit-container.fourcolor:before{
     content: "\2298";
+    color: var(--blackSuit);
+}
+
+.d.suit-container.fourcolor:before{
+    content: "\2666";
+    color: #0094FF;
+}
+
+.h.suit-container.fourcolor:before{
+    content: "\2665";
+    color: #BE1931;
+}
+
+.c.suit-container.fourcolor:before{
+    content: "\2663";
+    color: #308552;
+}
+
+.s.suit-container:before{
+    content: "\2660";
     color: var(--blackSuit);
 }
