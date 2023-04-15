@@ -167,6 +167,7 @@ export default class Game extends React.Component{
                             disabled: getGameResponse.lastTurnCards === [],
                             size: 'small',
                             width: '130px',
+                            onSubmit: this.showLastTurnMobile,
                             onMouseDown: (e) => this.handleLastTurnClick(e),
                             onMouseUp: (e) => this.handleLastTurnClick(e)
                         })
@@ -516,6 +517,16 @@ export default class Game extends React.Component{
         });
     }
 
+    showLastTurnMobile = () => {
+        if(this.props.isMobile){ 
+            var showLastTurn = this.state.showLastTurn; 
+            this.setState({ showLastTurn: !showLastTurn }) 
+            setTimeout(function(){
+                this.setState({ showLastTurn: showLastTurn })
+            }.bind(this), 2000)
+        }
+    }
+
     onSelectCard = (e) => {
         const cardId = e.target.getAttribute('cardId').substring(5)
         if(this.state.gameDetails.nextActingPlayer === this.state.gameDetails.myInHandInfo.username && this.state.gameDetails.betsAreMade) {
@@ -744,7 +755,7 @@ export default class Game extends React.Component{
                 ></SectionHeader>
                 <div className={`game-table ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                     {
-                        this.state.gameDetails.actionMessage && (!this.props.isMobile || this.props.isPortrait || this.state.gameDetails.cardsOnTable.length === 0) ? 
+                        this.state.gameDetails.actionMessage && !this.state.showLastTurn && (!this.props.isMobile || this.props.isPortrait || this.state.gameDetails.cardsOnTable.length === 0) ? 
                         <TableActionMessage
                             isMobile={this.props.isMobile}
                             isDesktop={this.props.isDesktop}
@@ -770,13 +781,14 @@ export default class Game extends React.Component{
                             ''
                     }
                     {
-                        this.state.gameDetails.lastTurnCards.length > 0 && this.state.showLastTurn ?
+                        this.state.showLastTurn ?
                             <TablePutCards
                                 isMobile={this.props.isMobile}
                                 isDesktop={this.props.isDesktop}
                                 isPortrait={this.props.isPortrait}
-                                cardsOnTable={this.state.gameDetails.lastTurnCards}
+                                cardsOnTable={this.state.gameDetails.lastTurnCards.length > 0 ? this.state.gameDetails.lastTurnCards : this.state.gameDetails.cardsOnTable}
                                 playersCount={this.state.gameDetails.players.length}
+                                isLastTurn={this.state.showLastTurn}
                             ></TablePutCards>
                         :
                             ''

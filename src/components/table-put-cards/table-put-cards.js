@@ -9,6 +9,11 @@ export default class TablePutCards extends React.Component{
         
         return (
             <div className={`table-put-cards-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+                {this.props.isLastTurn ? 
+                    <div className='last-turn-header'>Last turn</div>
+                :
+                    ''
+                }
                 {this.props.cardsOnTable.map(card => {return(
                     <div 
                         className={`table-put-card player${card.playerRelativePosition} outof${this.props.playersCount}`}

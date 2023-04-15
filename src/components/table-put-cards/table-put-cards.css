@@ -1,3 +1,16 @@
+.last-turn-header{
+    color: white;
+    background-color: var(--transparentElementBckgr);
+    border: 1px solid var(--borderLight);
+    border-radius: 5px;
+    width: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
 .table-put-cards-container{
     left: 50%;
     top: 55%;
