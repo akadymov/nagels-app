@@ -272,7 +272,6 @@ def put_card(game_id, hand_id, card_id):
             print('hand_trump:      ' + str(hand_trump))
             print('is_turn_suit:    ' + str(is_turn_suit))
 
-
         if is_turn_suit:
             status_code = 200                                           # putting card of current suit is allowed always
         else:
