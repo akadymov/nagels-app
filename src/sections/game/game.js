@@ -430,7 +430,8 @@ export default class Game extends React.Component{
                         body.cardsOnTable,
                         body.tookPlayer,
                         body.nextActingPlayer,
-                        body.isLastCardInHand
+                        body.isLastCardInHand,
+                        body.gameIsFinished
                     )
                     if(body.isLastCardInHand && body.tookPlayer){
                         var newGameDetails = this.state.gameDetails
@@ -692,14 +693,18 @@ export default class Game extends React.Component{
                                 }
                             }
                             if(data.isLastCardInHand){
-                                newGameDetails.actionMessage = "Dealing cards..."
-                                this.setState({
-                                    gameDetails: newGameDetails
-                                })
-                                if(this.Cookies.get('username') === newGameDetails.host){
-                                    setTimeout(function(){
-                                        window.location.reload();
-                                    }, 5000)
+                                if(data.gameIsFinished){
+                                    window.location.reload();
+                                } else {
+                                    newGameDetails.actionMessage = "Dealing cards..."
+                                    this.setState({
+                                        gameDetails: newGameDetails
+                                    })
+                                    if(this.Cookies.get('username') === newGameDetails.host){
+                                        setTimeout(function(){
+                                            window.location.reload();
+                                        }, 5000)
+                                    }
                                 }
                             } else {
                                 if(data.nextActingPlayer === this.Cookies.get('username')) {
