@@ -19,6 +19,9 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Checkbox from '@mui/material/Checkbox';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 
 export default class Profile extends React.Component{
@@ -207,13 +210,9 @@ export default class Profile extends React.Component{
         }
     }
 
-    handleColorSchemeChange = () => {
+    handleColorSchemeChange = (e) => {
         var userData = this.state.userData
-        if(userData.colorScheme === 'dark'){
-            userData.colorScheme = 'light'
-        } else {
-            userData.colorScheme = 'dark'
-        }
+        userData.colorScheme = e.target.value
         this.setState({
             userData: userData,
             canUpdate: true
@@ -428,7 +427,7 @@ export default class Profile extends React.Component{
                                 helperText={this.state.errors.email || 'email'}
                                 error={this.state.errors.email}
                                 value={this.state.userData.email}
-                                sx={{width: this.props.isMobile ? (this.props.isPortrait ? '90vw' : '55vw') : '30vw'}}
+                                sx={{width: this.props.isMobile ? (this.props.isPortrait ? '90vw' : '55vw') : '24vw'}}
                                 onChange={this.handleEmailChange}
                             ></TextField>
                         </div>
@@ -441,13 +440,13 @@ export default class Profile extends React.Component{
                                     size='small'
                                     helperText='registered'
                                     value={this.state.userData.registered}
-                                    sx={{width: this.props.isMobile ? (this.props.isPortrait ? '90vw' : '55vw') : '30vw'}}
+                                    sx={{width: this.props.isMobile ? (this.props.isPortrait ? '90vw' : '55vw') : '24vw'}}
                                 ></TextField>
                             </div>
                         :
                             ''
                         }
-                        <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+                        <div className={`profile-text-field-control-container wide ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             <TextField
                                 id='about'
                                 disabled={this.state.userData.username !== this.Cookies.get('username')}
@@ -542,21 +541,27 @@ export default class Profile extends React.Component{
                         :
                             ''
                         }
-                        {this.props.isDesktop && this.Cookies.get('username') === this.state.userData.username ?
-                            <div className='profile-dark-mode-checkbox-container'>
-                                <Checkbox
-                                    key='profile-dark-mode-checkbox'
-                                    onChange={this.handleColorSchemeChange}
-                                    defaultChecked={this.state.userData.colorScheme === "dark"}
+                        {!this.props.isMobile && this.Cookies.get('username') === this.state.userData.username ?
+                            <div className='profile-color-scheme-select-container'>
+                                <Select
+                                    labelId="color-scheme-select-label"
+                                    id="color-scheme-select"
+                                    value={this.state.userData.colorScheme || 'light'}
+                                    label="color scheme"
                                     size='small'
-                                    sx={{padding:'5px'}}
-                                ></Checkbox>
-                                Dark mode
+                                    sx={{fontSize: 14, width: '100px', textAlign: 'left'}}
+                                    onChange={this.handleColorSchemeChange}
+                                >
+                                    <MenuItem value='light' sx={{fontSize: 14}}>light</MenuItem>
+                                    <MenuItem value='dark' sx={{fontSize: 14}}>dark</MenuItem>
+                                    <MenuItem value='piggy' sx={{fontSize: 14}}>piggy</MenuItem>
+                                </Select>
+                                <InputLabel id="color-scheme-label" sx={{fontSize: '0.75rem', textAlign: 'left', marginLeft: '14px', marginTop: '4px'}}>color scheme</InputLabel>
                             </div>
                         :
                             ''
                         }
-                        {this.props.isDesktop && this.Cookies.get('username') === this.state.userData.username ?
+                        {!this.props.isMobile && this.Cookies.get('username') === this.state.userData.username ?
                             <div className='profile-deck-type-checkbox-container'>
                                 <Checkbox
                                     key='profile-deck-type-checkbox'

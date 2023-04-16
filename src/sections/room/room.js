@@ -339,7 +339,7 @@ export default class Room extends React.Component{
                 var newRoomDetails = this.state.roomDetails
                 var targetUserUpdated = newRoomDetails.connectedUserList.findIndex(element => element.username === username )
                 newRoomDetails.connectedUserList[targetUserUpdated].ready = true
-                this.setState({roomDetails: newRoomDetails})
+                //this.setState({roomDetails: newRoomDetails})
                 console.log('Emitting event "ready"')
                 roomSocket.emit('ready', this.Cookies.get('username'), username, roomId)
             } else {
@@ -356,7 +356,7 @@ export default class Room extends React.Component{
                 var newRoomDetails = this.state.roomDetails
                 var targetUserUpdated = newRoomDetails.connectedUserList.findIndex(element => element.username === username )
                 newRoomDetails.connectedUserList[targetUserUpdated].ready = false
-                this.setState({roomDetails: newRoomDetails})
+                //this.setState({roomDetails: newRoomDetails})
                 console.log('Emitting event "not_ready"')
                 roomSocket.emit('not_ready', this.Cookies.get('username'), username, roomId)
             } else {
@@ -560,12 +560,10 @@ export default class Room extends React.Component{
         newPlayers[playerIndex].ready = !newPlayers[playerIndex].ready
         if (newPlayers[playerIndex].ready) {
             this.confirmReady(newPlayers[playerIndex].username)
-            this.setState({players: newPlayers})
         } else {
             this.resetReady(newPlayers[playerIndex].username)
-            this.setState({players: newPlayers})
         }
-        window.location.reload();
+        this.setState({ players: newPlayers })
     }
 
     closeRoom = () => {

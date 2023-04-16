@@ -33,6 +33,14 @@
     outline: 5px solid var(--borderMain);
 }
 
+.game-table.dark{
+    background: linear-gradient(90deg, rgb(0, 19, 0) 0%, rgb(0, 74, 0) 50%, rgb(0, 35, 0) 100%);
+}
+
+.game-table.piggy{
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(83, 83, 83) 50%, rgb(0, 0, 0) 100%);
+}
+
 .game-table.desktop{
     height: 55vh;
     width: 70vw;

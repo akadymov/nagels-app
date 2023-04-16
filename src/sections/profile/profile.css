@@ -7,6 +7,13 @@
     overflow: scroll;
 }
 
+.profile-form-container.tablet{
+    top: 10vh;
+    height: 78vh;
+    width: 94vw;
+    margin: 2vh 3vw 2vh 3vw;
+}
+
 .profile-form-container.mobile.portrait{
     top: 10vh;
     height: 78vh;
@@ -45,6 +52,10 @@
     top: 0%;
     border-radius: 50%;
     transform: translate(-50%, 0%);
+}
+
+.profile-picture-container{
+    left: 65%;
 }
 
 .profile-picture-container.mobile{
@@ -87,6 +98,10 @@
     right: 0%;
 }
 
+.profile-text-data-controls-container.tablet{
+    left: 30vw
+}
+
 .profile-text-data-controls-container.mobile.portrait{ 
     width: 94vw;
     height: unset;
@@ -99,9 +114,13 @@
 }
 
 .profile-text-field-control-container{
-    width: 49vw;
+    width: 24vw;
     text-align: left;
     margin-bottom: 5px;
+}
+
+.profile-text-field-control-container.wide{
+    width: 49vw
 }
 
 .profile-text-field-control-container.mobile.portrait{
@@ -143,6 +162,10 @@
     bottom: 0%;
     left: -25vw;
     top: 0%;
+}
+
+.profile-backtogame-button-container.tablet{
+    left: -30vw;
 }
 
 .profile-backtogame-button-container.mobile.portrait{
@@ -277,10 +300,22 @@
     font-size: 12px;
 }
 
-.profile-deck-type-checkbox-container{
+.profile-color-scheme-select-container{
     position: absolute;
-    top: 255px;
-    left: 350px;
+    top: 0;
+    left: 26vw;
     color: var(--regularText);
     font-size: 12px;
+}
+
+.profile-deck-type-checkbox-container{
+    position: absolute;
+    top: 80px;
+    left: 26vw;
+    color: var(--regularText);
+    font-size: 12px;
+}
+
+.MuiPaper-root{
+    background-color: var(--formsBckgr);
 }

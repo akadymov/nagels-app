@@ -10,30 +10,37 @@ const defaultTheme = createTheme({
     mode: cookies.get('colorScheme')==='dark' ? 'dark' : 'light',
     headers: {
       main: '#000000',
+      piggy: '#620140'
     },
     regularText: {
       main: 'darkGray',
+      piggy: '#303030'
     },
     inputText: {
       main: '#000000',
+      piggy: '#000000'
     },
     formsBckgr: {
       main: '#ffffff',
+      piggy: '#ffe6f0'
     },
     mainBckgr: {
       main: '#e7e7e7',
-      dark: '#7f7f7f'
+      dark: '#7f7f7f',
+      piggy: '#ecb7d0'
     },
     error: {
       main: '#b10000',
     },
     secondary: {
       main: '#13428f',
+      piggy: '#ffbce6'
     },
     primary: {
       light: '#5dc2fc',
       main: '#13428f', 
       dark: '#5dc2fc',
+      piggy: '#fc5dbf'
     },
     blackSuit: {
       main: '#000000',
@@ -65,6 +72,11 @@ const defaultTheme = createTheme({
   typography: {
     button: {
       textTransform: 'none'
+    }
+  },
+  components: {
+    MuiPaper: {
+      styleOverrides: { root: { backgroundColor: cookies.get('colorScheme')==='dark' ? '#131313' : (cookies.get('colorScheme')==='piggy' ? '#ffe6f0' : 'white') } },
     }
   }
 });

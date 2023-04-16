@@ -47,6 +47,27 @@ body {
   --emailGradient: linear-gradient(90deg, #0a2b61 0%, #5dc2fc 50%, #13428f 100%);
 }
 
+.piggy-theme{
+  --headers: #620140;
+  --regularText: #303030; 
+  --inputText: #000000;
+  --formsBckgr: #ffe6f0;
+  --mainBckgr: #ecb7d0;
+  --error: #b10000;
+  --secondary: #ffbce6;
+  --primary: #fc5dbf;
+  --blackSuit: #000000;
+  --contrastControlElements: #ffffff;
+  --contrastControlPanel: #000000;
+  --disabled: #808080;
+  --transparentElementBckgr: rgba(0, 0, 0, 0.7);
+  --transparentDarkElementBckgr: hsl(0, 0%, 0%, 0.85);
+  --succeedText: #008000;
+  --borderLight: #808080;
+  --borderMain: #000000;
+  --emailGradient: linear-gradient(90deg, #0a2b61 0%, #5dc2fc 50%, #13428f 100%);
+}
+
 .root-container{
   height:100vh; 
   width: 100vw

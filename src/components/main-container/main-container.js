@@ -36,7 +36,7 @@ const MainContainer = () => {
 
     
     return (
-        <div className={`root-container ${cookies.get('colorScheme')==='dark' ? 'dark-theme' : ''}`}>   
+        <div className={`root-container ${cookies.get('colorScheme')==='dark' ? 'dark-theme' : cookies.get('colorScheme')==='piggy' ? 'piggy-theme' : ''}`}>   
             <NavMenu 
                 isMobile = {isMobile}
                 isDesktop = {isDesktop}

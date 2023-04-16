@@ -29,7 +29,46 @@ import Cookies from 'universal-cookie';
 
 export default class NagelsTableContainer extends React.Component{
 
+    /*constructor(props) {
+        super(props);
+        this.state = {
+           switcherState: []
+        }
+    }*/
+
     Cookies = new Cookies();
+
+    /*handleSwitchChange = (event, switcherRowIndex) => {
+        const isChecked = event.target.checked;
+        var newSwitcherState = this.state.switcherState
+        newSwitcherState.findIndex(switcher => switcher.id === switcherRowIndex)
+        if (switcherRowIndex > 0){
+            newSwitcherState[switcherRowIndex].checked = isChecked
+        } else {
+            newSwitcherState.push(
+                {
+                    id: switcherRowIndex,
+                    checked: isChecked
+                }
+            )
+        }
+        this.setState({ switcherState: newSwitcherState })
+    }*/
+
+    componentDidMount = () => {
+        /*var newSwitcherState = this.state.switcherState
+        this.props.rows.forEach(row => {
+            row.dataArray.foreach(data => {
+                if(data.type === 'switch'){
+                    newSwitcherState.push({
+                        id: row.id,
+                        checked: data.checked
+                    })
+                }
+            })
+        });
+        this.setState({ switcherState: newSwitcherState })*/
+    }
 
     render() {
 
@@ -43,7 +82,7 @@ export default class NagelsTableContainer extends React.Component{
             },
             [`&.${tableCellClasses.body}`]: {
                 fontSize: 14,
-                color: defaultTheme.palette.regularText.main,
+                color: this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.regularText.piggy : defaultTheme.palette.regularText.main,
                 padding: this.props.padding || '16px',
                 borderRight: '1px dotted ' + defaultTheme.palette.borderColor.light,
                 borderBottom: 'none'
@@ -51,7 +90,13 @@ export default class NagelsTableContainer extends React.Component{
         }));
 
         return(
-            <TableContainer component={Paper} sx={{ height:this.props.height, overflow: 'scroll', color: defaultTheme.palette.formsBckgr.main, boxShadow: 'none'}}>
+            <TableContainer 
+                component={Paper} 
+                sx={{ 
+                    height:this.props.height, 
+                    overflow: 'scroll', 
+                    boxShadow: 'none'
+                }}>
                 <Table stickyHeader aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -115,17 +160,22 @@ export default class NagelsTableContainer extends React.Component{
                                                         </StyledTableCell>
                                                     )
                                                 case 'switch':
+                                                    /*var switcherDataIndex = this.state.switcherState.findIndex(switcher => switcher.id === row.id)
+                                                    if (switcherDataIndex < 0){
+                                                        switcherDataIndex = row.id
+                                                    }*/
                                                     return(
                                                         <StyledTableCell key={`row ${row.id} column ${row.dataArray.indexOf(data)}`} align='center'>
                                                             <Switch
                                                                 inputProps={{ 'aria-label': 'controlled' }}
                                                                 key={`ready-switch-${data.username}`}
                                                                 id={`ready-switch-${data.username}`}
-                                                                defaultChecked={data.defaultChecked}
+                                                                //defaultChecked={data.defaultChecked}
                                                                 checked={data.checked}
                                                                 disabled={data.disabled}
                                                                 username={data.username}
                                                                 onChange={data.onChange}
+                                                                //onChange={this.handleSwitchChange(switcherDataIndex)}
                                                             />
                                                         </StyledTableCell>
                                                     )

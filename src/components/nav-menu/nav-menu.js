@@ -96,7 +96,7 @@ export default class NavMenu extends React.Component{
                                 username={this.Cookies.get('username')}
                                 width={35}
                                 height={35}
-                                outline={this.state.hoveredItem === 'profile' ? '2px solid ' + defaultTheme.palette.primary.main : (window.location.pathname.startsWith('/profile') ? '2px solid ' + defaultTheme.palette.primary.main : 'none')}
+                                outline={this.state.hoveredItem === 'profile' ? '2px solid ' + (this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.primary.piggy : defaultTheme.palette.primary.main) : (window.location.pathname.startsWith('/profile') ? '2px solid ' + (this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.primary.piggy : defaultTheme.palette.primary.main) : 'none')}
                             ></NagelsAvatar>
                         </div>
                         {this.state.menuExpanded ? 

@@ -19,7 +19,7 @@ export default class GameScores extends React.Component{
 
         return(
             <Modal open={this.props.open}>
-                <div className={`game-scores-modal-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}  ${this.Cookies.get('colorScheme')==='dark' ? 'dark-theme' : ''}`}>
+                <div className={`game-scores-modal-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}  ${this.Cookies.get('colorScheme')==='dark' ? 'dark-theme' : this.Cookies.get('colorScheme')==='piggy' ? 'piggy' : ''}`}>
                     <div className={`game-scores-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                         <NagelsTableContainer
                             isMobile={this.props.isMobile}

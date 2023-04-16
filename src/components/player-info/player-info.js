@@ -3,6 +3,7 @@ import React from 'react';
 import './player-info.css';
 import NagelsAvatar from '../nagels-avatar';
 import defaultTheme from '../../themes/default';
+import Cookies from 'universal-cookie';
 
 export default class PlayerInfo extends React.Component{
 
@@ -11,6 +12,8 @@ export default class PlayerInfo extends React.Component{
         this.state = {
         }
     }
+
+    Cookies = new Cookies();
 
     render() {
         return(
@@ -27,7 +30,7 @@ export default class PlayerInfo extends React.Component{
                             username={this.props.username}
                             width={this.props.isMobile ? 38 :61} 
                             height={this.props.isMobile ? 38 : 61}
-                            outline={this.props.active ? '2px solid ' + defaultTheme.palette.primary.main : 'none'}
+                            outline={this.props.active ? '2px solid ' + this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.primary.piggy : defaultTheme.palette.primary.main : 'none'}
                         ></NagelsAvatar>
                     </div>
                     <div className={`player-data-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>

@@ -758,7 +758,7 @@ export default class Game extends React.Component{
                     title={this.state.gameDetails.roomName}
                     subtitle={this.state.gameDetails.host}
                 ></SectionHeader>
-                <div className={`game-table ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+                <div className={`game-table ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"} ${this.Cookies.get('colorScheme')}`}>
                     {
                         this.state.gameDetails.actionMessage && !this.state.showLastTurn && (!this.props.isMobile || this.props.isPortrait || this.state.gameDetails.cardsOnTable.length === 0) ? 
                         <TableActionMessage
