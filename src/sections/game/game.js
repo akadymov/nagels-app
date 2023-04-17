@@ -179,7 +179,7 @@ export default class Game extends React.Component{
                         //var sumOfMadeBets = 0
                         getGameResponse.players.map(player => {
                             if(player.username !== this.Cookies.get('username')){
-                                if(player.betSize){
+                                if(player.betSize >= 0){
                                     betPlayers.push(player)
                                     //sumOfMadeBets =+ player.betSize
                                 } else {
