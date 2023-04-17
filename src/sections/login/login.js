@@ -2,6 +2,7 @@ import React from 'react';
 import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 import FormContainer from '../../components/form-container';
+import { getText } from '../../components/user-text';
 
 export default class Login extends React.Component{
 
@@ -14,13 +15,13 @@ export default class Login extends React.Component{
         this.clearErrorMessage = this.clearErrorMessage.bind(this);
         this.CheckIfAlreadyLoggedIn = this.CheckIfAlreadyLoggedIn.bind(this);
         this.state = {
-            title: 'Login',
+            title: getText('login'),
             username: this.props.match.params.username ? this.props.match.params.username : '',
             password: '',
             textFieldsList: [
                 {
                     id:"username", 
-                    label:"username", 
+                    label: getText('username'), 
                     variant:"outlined", 
                     type: "text", 
                     required: true,
@@ -34,7 +35,7 @@ export default class Login extends React.Component{
                 },
                 {
                     id:"password", 
-                    label:"password", 
+                    label: getText('password'), 
                     variant:"outlined", 
                     type: "password", 
                     required: true,
@@ -49,14 +50,14 @@ export default class Login extends React.Component{
                 {
                     id:"login_button", 
                     type:"contained", 
-                    text:"Submit", 
+                    text: getText('submit'), 
                     width: "220px",
                     onSubmit: this.SendLoginRequest
                 },
                 {
                     id:"register_button", 
                     type:"outlined", 
-                    text:"Register new player", 
+                    text: getText('register_new_player'), 
                     width: "220px",
                     size: "small",
                     onSubmit: () => window.location.assign('/register/')
@@ -64,7 +65,7 @@ export default class Login extends React.Component{
                 {
                     id:"forgot_button", 
                     type:"outlined", 
-                    text:"Forgot password", 
+                    text: getText('forgot_password'), 
                     width: "220px",
                     size: "small",
                     onSubmit: () => window.location.assign('/forgot-password/')

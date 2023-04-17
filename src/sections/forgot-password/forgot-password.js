@@ -10,6 +10,7 @@ import FormContainer from '../../components/form-container';
 //Local services
 import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
+import { getText } from '../../components/user-text';
 
 
 export default class ForgotPassword extends React.Component{
@@ -19,7 +20,7 @@ export default class ForgotPassword extends React.Component{
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.state = {
-            title: 'Recover password',
+            title: getText('recover_password'),
             username: null,
             email: null,
             recoverySent: false,
@@ -27,7 +28,7 @@ export default class ForgotPassword extends React.Component{
             textFieldsList: [
                 {
                     id:"username", 
-                    label:"username", 
+                    label: getText('username'), 
                     variant:"outlined", 
                     type: "text", 
                     required: true,
@@ -54,7 +55,7 @@ export default class ForgotPassword extends React.Component{
                 {
                     id:"recover_button", 
                     type:"contained", 
-                    text:"Submit", 
+                    text: getText('submit'), 
                     width: "220px",
                     disabled: true,
                     onSubmit: this.recoverPassword
@@ -168,7 +169,7 @@ export default class ForgotPassword extends React.Component{
                     className={`recovery-sent-confirmation-message ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
                     style={{ display: this.state.recoverySent ? 'block' : 'none' }}
                 >
-                    Password recovery letter sent: check your mail inbox
+                    {getText('password_recover_sent')}
                 </div>
             </div>
         )

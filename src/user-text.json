@@ -61,44 +61,44 @@
       "ru": ""
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "password_updated",
+      "en": "Password is updated",
+      "ru": "Пароль обновлен"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "reset_password",
+      "en": "Reset password",
+      "ru": "Сброс пароля"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "login",
+      "en": "Login",
+      "ru": "Войти"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "forgot_password",
+      "en": "Forgot password",
+      "ru": "Не помню пароль"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "password",
+      "en": "password",
+      "ru": "пароль"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "password_recover_sent",
+      "en": "Password recovery letter sent: check your mail inbox",
+      "ru": "Письмо со ссылкой для восстановления пароля отправлено. Проверьте свой email"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "username",
+      "en": "username",
+      "ru": "имя пользователя"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "recover_password",
+      "en": "Recover password",
+      "ru": "Восстановление пароля"
     },
     {
       "id": "thank_you_for_the_feedback",

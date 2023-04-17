@@ -6,6 +6,7 @@ import './reset-password.css'
 
 //Local components
 import FormContainer from '../../components/form-container';
+import { getText } from '../../components/user-text';
 
 //Local services
 import NagelsApi from '../../services/nagels-api-service';
@@ -19,7 +20,7 @@ export default class ResetPassword extends React.Component{
         this.handleNewPasswordChange = this.handleNewPasswordChange.bind(this);
         this.handleRepeatPasswordChange = this.handleRepeatPasswordChange.bind(this);
         this.state = {
-            title: 'Reset password',
+            title: getText('reset_password'),
             newPassword: null,
             repeatPassword: null,
             passwordUpdated: false,
@@ -27,7 +28,7 @@ export default class ResetPassword extends React.Component{
             textFieldsList: [
                 {
                     id:"new_password", 
-                    label:"new password", 
+                    label: getText('new_password'), 
                     variant:"outlined", 
                     type: "password", 
                     required: true,
@@ -39,7 +40,7 @@ export default class ResetPassword extends React.Component{
                 },
                 {
                     id:"repeat_password", 
-                    label:"repeat password", 
+                    label: getText('repeat_password'), 
                     variant:"outlined", 
                     type: "password", 
                     required: true,
@@ -54,7 +55,7 @@ export default class ResetPassword extends React.Component{
                 {
                     id:"reset_password_button", 
                     type:"contained", 
-                    text:"Submit", 
+                    text: getText('submit'), 
                     width: "220px",
                     disabled: true,
                     onSubmit: this.resetPassword
@@ -62,7 +63,7 @@ export default class ResetPassword extends React.Component{
                 {
                     id:"login_button", 
                     type:"contained", 
-                    text:"Log in", 
+                    text: getText('login'), 
                     width: "220px",
                     disabled: false,
                     hidden: true,
@@ -208,7 +209,7 @@ export default class ResetPassword extends React.Component{
                     className={`password-updated-confirmation-message ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
                     style={{ display: this.state.passwordUpdated ? 'block' : 'none' }}
                 >
-                    Password is updated
+                    {getText('password_updated')}
                 </div>
             </div>
         )
