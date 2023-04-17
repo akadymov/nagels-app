@@ -46,6 +46,206 @@
       "ru": ""
     },
     {
+      "id": "you_were_kicked_from_room",
+      "en": "Sorry, you were kicked from the room. Disconnecting...",
+      "ru": "Нам жаль, но хост кикнул вас из комнаты. Отключаемся..."
+    },
+    {
+      "id": "new_game",
+      "en": "New game",
+      "ru": "Новая игра"
+    },
+    {
+      "id": "start_game",
+      "en": "Start game",
+      "ru": "Начать игру"
+    },
+    {
+      "id": "rating_game",
+      "en": "Rating game",
+      "ru": "Рейтинговая игра"
+    },
+    {
+      "id": "single_card_hands",
+      "en": "Single card hands",
+      "ru": "Разадачи с одной картой"
+    },
+    {
+      "id": "auto_deal_cards",
+      "en": "Auto deal cards",
+      "ru": "Авто раздача карт"
+    },
+    {
+      "id": "create_invite_link",
+      "en": "Create invite link",
+      "ru": "Создать приглашение"
+    },
+    {
+      "id": "invites_to_room",
+      "en": " invites you to room \"",
+      "ru": " приглашает вас в комнату \""
+    },
+    {
+      "id": "nagels_online_player",
+      "en": "Nägels Online player ",
+      "ru": "Игрок Nägels Online "
+    },
+    {
+      "id": "player_email",
+      "en": "Player email",
+      "ru": "Email игрока"
+    },
+    {
+      "id": "invite_new_player",
+      "en": "Invite new player",
+      "ru": "Пригласить нового игрока"
+    },
+    {
+      "id": "login_and_join",
+      "en": "Log in and join",
+      "ru": "Войти"
+    },
+    {
+      "id": "register_and_join",
+      "en": "Register and join",
+      "ru": "Зарегистрироваться"
+    },
+    {
+      "id": "please_create_or_login",
+      "en": "\". Please, create a username and password to continue or log in if you already have an account. You can add other details to your profile later.",
+      "ru": "\". Пожалуйста, придумайте имя пользователя и пароль, чтобы продолжить, или войдите, если у вас уже есть учетная запись. Вы можете дополнить свой профиль позднее."
+    },
+    {
+      "id": "invited_you_to",
+      "en": " invited you to room \"",
+      "ru": " пригласил вас в комнату \""
+    },
+    {
+      "id": "welcome_to_nagels",
+      "en": "Welcome to Nägels App! User ",
+      "ru": "Добро пожаловать в игру Nägels! Пользователь "
+    },
+    {
+      "id": "invite",
+      "en": "Invite",
+      "ru": "Пригасить"
+    },
+    {
+      "id": "kick",
+      "en": "Kick",
+      "ru": "Кикнуть"
+    },
+    {
+      "id": "leave",
+      "en": "Leave",
+      "ru": "Выйти"
+    },
+    {
+      "id": "ready",
+      "en": "Ready",
+      "ru": "Готовность"
+    },
+    {
+      "id": "player",
+      "en": "Player",
+      "ru": "Игрок"
+    },
+    {
+      "id": "close",
+      "en": "Close",
+      "ru": "Закрыть"
+    },
+    {
+      "id": "start",
+      "en": "Start",
+      "ru": "Начать"
+    },
+    {
+      "id": "close_room",
+      "en": "Close room",
+      "ru": "Закрыть комнату"
+    },
+    {
+      "id": "confirm_action",
+      "en": "Please, confirm action",
+      "ru": "Пожалуйста, подтвердите действие"
+    },
+    {
+      "id": "new_room",
+      "en": "New room",
+      "ru": "Новая комната"
+    },
+    {
+      "id": "games_lobby",
+      "en": "Games Lobby",
+      "ru": "Игровое лобби"
+    },
+    {
+      "id": "watch",
+      "en": "Watch",
+      "ru": "Наблюдать"
+    },
+    {
+      "id": "open",
+      "en": "Open",
+      "ru": "Открыть"
+    },
+    {
+      "id": "join",
+      "en": "Join",
+      "ru": "Войти"
+    },
+    {
+      "id": "create_room",
+      "en": "Create room",
+      "ru": "Создать комнату"
+    },
+    {
+      "id": "room_name",
+      "en": "room name",
+      "ru": "имя комнаты"
+    },
+    {
+      "id": "create",
+      "en": "Create",
+      "ru": "создать"
+    },
+    {
+      "id": "rating",
+      "en": "Rating",
+      "ru": "Рейтинг"
+    },
+    {
+      "id": "bonuses_per_game",
+      "en": "Bonuses per game",
+      "ru": "Бонусов за игру"
+    },
+    {
+      "id": "avg_game_score",
+      "en": "Avg game score",
+      "ru": "Очков за игру"
+    },
+    {
+      "id": "won_games",
+      "en": "Won games",
+      "ru": "Выиграно"
+    },
+    {
+      "id": "played_games",
+      "en": "Played games",
+      "ru": "Игр сыграно"
+    },
+    {
+      "id": "won",
+      "en": "Won",
+      "ru": "Побед"
+    },
+    {
+      "id": "username_capitalize",
+      "en": "Username",
+      "ru": "Имя пользователя"
+    },
+    {
       "id": "score",
       "en": "score",
       "ru": "счет"

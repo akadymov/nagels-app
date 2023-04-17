@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 //Local components
 import NagelsTableContainer from '../../components/nagels-table-container';
 import SectionHeader from '../../components/section-header';
+import { getText } from '../../components/user-text';
 
 
 export default class LeaderBoard extends React.Component{
@@ -16,7 +17,7 @@ export default class LeaderBoard extends React.Component{
     constructor(props) {
         super(props);
         this.state ={
-            gameRatingHeaders: this.props.isMobile && this.props.isPortrait ? ['Username', 'Games', 'Won', 'Avg score'] : ['Username', 'Played games', 'Won games', 'Avg game score', 'Bonuses per game', 'Total score'],
+            gameRatingHeaders: this.props.isMobile && this.props.isPortrait ? [getText('username_capitalize'), getText('games'), getText('won'), getText('avg_score')] : [getText('username_capitalize'), getText('played_games'), getText('won_games'), getText('avg_game_score'), getText('bonuses_per_game'), getText('total_score')],
             gameRatings: []
         }
     }
@@ -78,7 +79,7 @@ export default class LeaderBoard extends React.Component{
                     isDesktop={this.props.isDesktop}
                     isPortrait={this.props.isPortrait}
                     controls={[]}
-                    title={!this.props.isMobile ? 'Rating' : ''}
+                    title={!this.props.isMobile ? getText('rating') : ''}
                 ></SectionHeader>
                 <div className={`lobby-table-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                     <NagelsTableContainer 

@@ -11,6 +11,7 @@ import { roomSocket, lobbySocket } from '../../services/socket';
 import NagelsTableContainer from '../../components/nagels-table-container';
 import SectionHeader from '../../components/section-header';
 import NagelsModal from '../../components/nagels-modal';
+import { getText } from '../../components/user-text';
 
 
 export default class Room extends React.Component{
@@ -23,20 +24,20 @@ export default class Room extends React.Component{
         this.handleInvitationMessageChange = this.handleInvitationMessageChange.bind(this);
         this.handleReadySwitchChange = this.handleReadySwitchChange.bind(this);
         this.state = {
-            playerHeaders: this.props.isMobile && this.props.isPortrait ? ['Player', 'Ready',''] : ['Player','Ready','','Won'],
+            playerHeaders: this.props.isMobile && this.props.isPortrait ? [getText('player'), getText('ready'),''] : [getText('player') ,getText('ready'),'',getText('won')],
             players: [],
             autodeal: true,
             singleCardHands: true,
             ratingGame: true,
             modalOpen: false,
-            modalHeader: "Please, confirm action",
+            modalHeader: getText('confirm_action'),
             modalCanClose: true,
             modalControls: [
                 {
                     id: "confirm_close_room",
                     type: "button",
                     variant: "outlined",
-                    text: "Close room",
+                    text: getText('close_room'),
                     width: '140px',
                     color: 'error',
                     disabled: false,
@@ -46,7 +47,7 @@ export default class Room extends React.Component{
                     id: "cancel_close_room",
                     type: "button",
                     variant: "contained",
-                    text: "Cancel",
+                    text: getText('cancel'),
                     width: '140px',
                     disabled: false,
                     onSubmit: this.closeModal
@@ -66,7 +67,7 @@ export default class Room extends React.Component{
                 {
                     id: 'refresh_room',
                     type: 'button',
-                    text: 'Refresh',
+                    text: getText('refresh'),
                     variant: 'outlined',
                     disabled: false,
                     width: '130px',
@@ -75,7 +76,7 @@ export default class Room extends React.Component{
                 {
                     id: 'start_game',
                     type: 'button',
-                    text: 'Start',
+                    text: getText('start'),
                     variant: 'contained',
                     disabled: true,
                     width: '130px',
@@ -84,7 +85,7 @@ export default class Room extends React.Component{
                 {
                     id: 'close_room',
                     type: 'button',
-                    text: 'Close',
+                    text: getText('close'),
                     variant: 'outlined',
                     disabled: true,
                     color: 'error',
@@ -134,7 +135,7 @@ export default class Room extends React.Component{
                 {
                     type: 'button',
                     variant: 'outlined',
-                    text:  player.username === this.Cookies.get('username') ? "Leave" : "Kick",
+                    text:  player.username === this.Cookies.get('username') ? getText('Leave') : getText('kick'),
                     onSubmit: this.disconnectRoom.bind(this, index),
                     width: '130px',
                     color: 'error',
@@ -179,7 +180,7 @@ export default class Room extends React.Component{
         newHeaderControls.push({
             id: 'refresh_room',
             type: 'button',
-            text: 'Refresh',
+            text: getText('refresh'),
             variant: 'outlined',
             disabled: false,
             width: '130px',
@@ -188,7 +189,7 @@ export default class Room extends React.Component{
         newHeaderControls.push({
             id: 'invite_player',
             type: 'button',
-            text: 'Invite',
+            text: getText('invite'),
             variant: 'outlined',
             disabled: !this.state.youAreHost,
             width: '130px',
@@ -197,7 +198,7 @@ export default class Room extends React.Component{
         newHeaderControls.push({
             id: 'start_game',
             type: 'button',
-            text: 'Start',
+            text: getText('start'),
             variant: 'contained',
             disabled: !this.state.youAreHost,
             width: '130px',
@@ -206,7 +207,7 @@ export default class Room extends React.Component{
         newHeaderControls.push({
             id: 'close_room',
             type: 'button',
-            text: 'Close',
+            text: getText('close'),
             variant: 'outlined',
             color: 'error',
             disabled: !this.state.youAreHost,
@@ -241,7 +242,7 @@ export default class Room extends React.Component{
                                 {
                                     id: "invitation_text",
                                     type: "text",
-                                    text: 'Welcome to Nägels App! User ' + this.state.roomDetails.host + ' invited you to room "' + this.state.roomDetails.roomName + '". Please, create a username and password to continue or log in if you already have an account. You can add other details to your profile later.'
+                                    text: getText('welcome_to_nagels') + this.state.roomDetails.host + getText('invited_you_to') + this.state.roomDetails.roomName + getText('please_create_or_login')
                                 },
                                 {
                                     id: "invited_username_input",
@@ -251,7 +252,7 @@ export default class Room extends React.Component{
                                     required: true,
                                     width: '205px',
                                     errorMessage: "",
-                                    label: "Username",
+                                    label: getText('username'),
                                     onChange: this.handleInvitedUsernameChange
                                 },
                                 {
@@ -263,14 +264,14 @@ export default class Room extends React.Component{
                                     required: true,
                                     width: '205px',
                                     errorMessage: "",
-                                    label: "Password",
+                                    label: getText('password'),
                                     onChange: this.handleInvitedPasswordChange
                                 },
                                 {
                                     id: "invited_register_button",
                                     type: "button",
                                     variant: "contained",
-                                    text: "Register and join",
+                                    text: getText('register_and_join'),
                                     width: '210px',
                                     disabled: false,
                                     onSubmit: this.registerInvitedPlayer
@@ -279,7 +280,7 @@ export default class Room extends React.Component{
                                     id: "invited_login_button",
                                     type: "button",
                                     variant: "outlined",
-                                    text: "Log in and join",
+                                    text: getText('login_and_join'),
                                     width: '210px',
                                     disabled: false,
                                     onSubmit: this.loginInvitedPlayer
@@ -287,7 +288,7 @@ export default class Room extends React.Component{
                             ],
                             modalCanClose: false,
                             modalOpen: true,
-                            modalHeader: "Register new player"
+                            modalHeader: getText('register_new_player')
                         })
                     }
                     if(this.state.roomDetails.status === 'closed') {
@@ -403,7 +404,7 @@ export default class Room extends React.Component{
                             id: "invitation_close_button",
                             type: "button",
                             variant: "contained",
-                            text: "Close",
+                            text: getText('close'),
                             width: '195px',
                             disabled: false,
                             onSubmit: () => this.setState({ modalOpen: false })
@@ -411,7 +412,7 @@ export default class Room extends React.Component{
                     ],
                     modalCanClose: true,
                     modalOpen: true,
-                    modalHeader: "Invite new player"
+                    modalHeader: getText('invite_new_player')
                 })
             }
         })
@@ -603,14 +604,14 @@ export default class Room extends React.Component{
                     type: "input",
                     variant: "outlined",
                     value: '',
-                    label: "Player email",
+                    label: getText('player_email'),
                     onChange: this.handleInvitationEmailChange
                 },
                 {
                     id: "invitation_text",
                     type: "input",
                     variant: "outlined",
-                    value: 'Nägels Online player ' + this.state.roomDetails.host + ' invites you to room "' + this.state.roomDetails.roomName + '".',
+                    value: getText('nagels_online_player') + this.state.roomDetails.host + getText('invites_to_room') + this.state.roomDetails.roomName + '".',
                     label: "Message",
                     onChange: this.handleInvitationMessageChange
                 },
@@ -618,7 +619,7 @@ export default class Room extends React.Component{
                     id: "invitation_confirm_button",
                     type: "button",
                     variant: "contained",
-                    text: "Create invite link",
+                    text: getText('create_invite_link'),
                     width: '195px',
                     disabled: false,
                     onSubmit: this.createInviteLink
@@ -626,7 +627,7 @@ export default class Room extends React.Component{
             ],
             modalCanClose: true,
             modalOpen: true,
-            modalHeader: "Invite new player"
+            modalHeader: getText('invite_new_player')
         })
     }
 
@@ -636,21 +637,21 @@ export default class Room extends React.Component{
                 {
                     id: "autodeal_checkbox",
                     type: "checkbox",
-                    label: "Auto deal cards",
+                    label: getText('auto_deal_cards'),
                     defaultChecked: this.state.autodeal,
                     onChange: this.handleAutodealChange
                 },
                 {
                     id: "single_card_hands",
                     type: "checkbox",
-                    label: "Single card hands",
+                    label: getText('single_card_hands'),
                     defaultChecked: this.state.singleCardHands,
                     onChange: this.handleSingleCardChange
                 },
                 {
                     id: "rating_game",
                     type: "checkbox",
-                    label: "Rating game",
+                    label: getText('rating_game'),
                     defaultChecked: this.state.ratingGame,
                     onChange: this.handleRatingGameChange
                 },
@@ -658,7 +659,7 @@ export default class Room extends React.Component{
                     id: "confirm_start_game_button",
                     type: "button",
                     variant: "contained",
-                    text: "Start game",
+                    text: getText('start_game'),
                     width: '140px',
                     disabled: false,
                     onSubmit: ()=>this.confirmStartGame(this.state.autodeal, this.state.singleCardHands, this.state.ratingGame)
@@ -666,7 +667,7 @@ export default class Room extends React.Component{
             ],
             modalCanClose: true,
             modalOpen: true,
-            modalHeader: "New game"
+            modalHeader: getText('new_game')
         })
     }
 
@@ -743,7 +744,7 @@ export default class Room extends React.Component{
                                                 {
                                                     id: "kick_message",
                                                     type: "text",
-                                                    text: "Sorry, you were kicked from the room. Disconnecting..."
+                                                    text: getText('you_were_kicked_from_room')
                                                 }
                                             ],
                                             modalCanClose: false,

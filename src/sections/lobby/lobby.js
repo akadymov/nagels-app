@@ -11,6 +11,7 @@ import { roomSocket, lobbySocket } from '../../services/socket';
 import NagelsTableContainer from '../../components/nagels-table-container';
 import SectionHeader from '../../components/section-header';
 import NagelsModal from '../../components/nagels-modal';
+import { getText } from '../../components/user-text';
 
 
 export default class Lobby extends React.Component{
@@ -25,7 +26,7 @@ export default class Lobby extends React.Component{
                 {
                     id: 'refresh_lobby',
                     type: 'button',
-                    text: 'Refresh',
+                    text: getText('refresh'),
                     variant: 'outlined',
                     disabled: false,
                     width: '130px',
@@ -34,7 +35,7 @@ export default class Lobby extends React.Component{
                 {
                     id: 'create_room',
                     type: 'button',
-                    text: 'Create',
+                    text: getText('create'),
                     variant: 'contained',
                     disabled: false,
                     width: '130px',
@@ -50,14 +51,14 @@ export default class Lobby extends React.Component{
                     value: "",
                     required: true,
                     errorMessage: "",
-                    label: "room name",
+                    label: getText('room_name'),
                     onChange: this.handleNewRoomNameChange
                 },
                 {
                     id: "create_room_confirm_button",
                     type: "button",
                     variant: "contained",
-                    text: "Create room",
+                    text: getText('create_room'),
                     disabled: true,
                     onSubmit: this.createNewRoom
                 }
@@ -116,7 +117,7 @@ export default class Lobby extends React.Component{
                     r.dataArray.push({
                         type:'button',
                         variant: !body.myConnectedRoomId && r.status === 'open' ? 'contained' : 'outlined',
-                        text: !body.myConnectedRoomId && r.status === 'open' ? 'Join' : (body.myConnectedRoomId===r.id ? 'Open' : 'Watch'),
+                        text: !body.myConnectedRoomId && r.status === 'open' ? getText('join') : (body.myConnectedRoomId===r.id ? getText('open') : getText('watch')),
                         onSubmit: !body.myConnectedRoomId && r.status ? this.connectRoom.bind(this, r.roomId) : () => window.location.assign('/room/' + r.roomId),
                         width: '130px',
                         disabled: false
@@ -138,7 +139,7 @@ export default class Lobby extends React.Component{
             {
                 id: 'refresh_lobby',
                 type: 'button',
-                text: 'Refresh',
+                text: getText('refresh'),
                 variant: 'outlined',
                 disabled: false,
                 width: '130px',
@@ -147,7 +148,7 @@ export default class Lobby extends React.Component{
             {
                 id: 'create_room',
                 type: 'button',
-                text: 'Create',
+                text: getText('create'),
                 variant: 'contained',
                 disabled: this.state.myConnectedRoomId > 0,
                 width: '130px',
@@ -159,7 +160,7 @@ export default class Lobby extends React.Component{
                 id: "new_room_name_input",
                 type: "input",
                 value: this.state.newRoomName,
-                label: "room name",
+                label: getText('room_name'),
                 required: true,
                 onChange: this.handleNewRoomNameChange
             },
@@ -167,7 +168,7 @@ export default class Lobby extends React.Component{
                 id: "create_room_confirm_button",
                 type: "button",
                 variant: "contained",
-                text: "Create room",
+                text: getText('create_room'),
                 disabled: this.state.newRoomName === '',
                 onSubmit: this.createNewRoom
             }
@@ -316,7 +317,7 @@ export default class Lobby extends React.Component{
                     }
                     break
                 default:
-                    console.log('Received nknown event "' + data.event + '" from lobby socket.')
+                    console.log('Received unknown event "' + data.event + '" from lobby socket.')
                     break
             }
         })
@@ -331,7 +332,7 @@ export default class Lobby extends React.Component{
                     isDesktop={this.props.isDesktop}
                     isPortrait={this.props.isPortrait}
                     controls={this.state.headerControls}
-                    title= {!this.props.isMobile ? 'Games Lobby' : ''}
+                    title= {!this.props.isMobile ? getText('games_lobby') : ''}
                 ></SectionHeader>
                 <div className={`lobby-table-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                     <NagelsTableContainer 
@@ -344,7 +345,7 @@ export default class Lobby extends React.Component{
                 </div>
                 <NagelsModal
                     open={this.state.modalOpen}
-                    header="New room"
+                    header={getText('new_room')}
                     isMobile={this.props.isMobile}
                     isDesktop={this.props.isDesktop}
                     isPortrait={this.props.isPortrait}
