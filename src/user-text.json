@@ -36,14 +36,14 @@
       "ru": ""
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "log_in",
+      "en": "Log in",
+      "ru": "Войти"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "username_placeholder",
+      "en": "Username      ",
+      "ru": "Имя пользователя"
     },
     {
       "id": "you_were_kicked_from_room",

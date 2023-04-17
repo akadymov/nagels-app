@@ -2,6 +2,7 @@ import React from 'react';
 import NagelsApi from '../../services/nagels-api-service';
 import Cookies from 'universal-cookie';
 import FormContainer from '../../components/form-container';
+import { getText } from '../../components/user-text';
 
 export default class Registration extends React.Component{
 
@@ -15,7 +16,7 @@ export default class Registration extends React.Component{
         this.handleErrorResponse = this.handleErrorResponse.bind(this);
         this.clearErrorMessage = this.clearErrorMessage.bind(this);
         this.state = {
-            title: 'Register new player',
+            title: getText('register_new_player'),
             email:'',
             password:'',
             repeatPassword:'',
@@ -24,10 +25,10 @@ export default class Registration extends React.Component{
             textFieldsList: [
                 {
                     id:"username", 
-                    label:"username", 
+                    label: getText('username'), 
                     type: "text", 
                     width: "300px",
-                    placeholder: "Username      ", 
+                    placeholder: getText('username_placeholder'), 
                     onChange: this.handleUsernameChange, 
                     errorMessage: "", 
                     value: "", 
@@ -47,7 +48,7 @@ export default class Registration extends React.Component{
                 },
                 {
                     id:"password", 
-                    label:"password", 
+                    label: getText('password'), 
                     type: "password", 
                     width: "300px",
                     onChange: this.handlePasswordChange, 
@@ -58,7 +59,7 @@ export default class Registration extends React.Component{
                 },
                 {
                     id:"repeatPassword",
-                    label:"repeat password", 
+                    label: getText('repeat_password'), 
                     type: "password", 
                     width: "300px",
                     onChange: this.handleRepeatPasswordChange, 
@@ -73,7 +74,7 @@ export default class Registration extends React.Component{
                     id:"register_button", 
                     width: "300px",
                     type:"contained", 
-                    text:"Submit", 
+                    text: getText('submit'), 
                     onSubmit: this.SendRegRequest
                 },
                 {
@@ -81,7 +82,7 @@ export default class Registration extends React.Component{
                     width: "300px",
                     type:"outlined",
                     size: "small",
-                    text:"Log in", 
+                    text: getText('log_in'), 
                     onSubmit: () => window.location.assign('/signin')
                 }
             ],
