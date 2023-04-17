@@ -317,7 +317,7 @@ def make_bet(game_id, hand_id, actor, bet_size, is_last_bet, next_acting_player)
 
 
 @socketio.on('put_card', namespace='/game')
-def next_turn(game_id, hand_id, actor, cards_on_table, took_player, next_player, is_last_card_in_hand, game_finished_flag):
+def next_turn(game_id, hand_id, actor, cards_on_table, took_player, next_player, last_turn_cards, is_last_card_in_hand, game_finished_flag):
     if app.debug:
         print('Next turn in game #' + str(game_id))
     emit(
@@ -331,7 +331,8 @@ def next_turn(game_id, hand_id, actor, cards_on_table, took_player, next_player,
             'tookPlayer': took_player,
             'nextActingPlayer': next_player,
             'isLastCardInHand': is_last_card_in_hand,
-            'gameIsFinished': game_finished_flag
+            'gameIsFinished': game_finished_flag,
+            'lastTurnCards': last_turn_cards
         },
         json=True,
         # to=room_id,
