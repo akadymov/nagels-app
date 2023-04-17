@@ -15,6 +15,7 @@ import NagelsModal from '../../components/nagels-modal';
 import TableActionMessage from '../../components/table-action-message';
 import TablePutCards from '../../components/table-put-cards';
 import GameScores from '../../components/game-scores';
+import { getText } from '../../components/user-text';
 
 export default class Game extends React.Component{
 
@@ -99,7 +100,7 @@ export default class Game extends React.Component{
                         {
                             id: 'scores',
                             type: 'button',
-                            text: 'Scores',
+                            text: getText('scores'),
                             variant: 'outlined',
                             disabled: false,
                             size: 'small',
@@ -109,7 +110,7 @@ export default class Game extends React.Component{
                         {
                             id: 'refresh',
                             type: 'button',
-                            text: 'Refresh',
+                            text: getText('refresh'),
                             variant: 'outlined',
                             disabled: false,
                             size: 'small',
@@ -119,7 +120,7 @@ export default class Game extends React.Component{
                         {
                             id: 'exit',
                             type: 'button',
-                            text: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? 'Finish' : 'Exit',
+                            text: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? getText('finish') : getText('exit'),
                             variant: 'outlined',
                             disabled: false,
                             size: 'small',
@@ -132,7 +133,7 @@ export default class Game extends React.Component{
                         newHeaderControls.push({
                             id: 'shuffle',
                             type: 'button',
-                            text: getGameResponse.status === 'finished' ? 'Start new game' : 'Shuffle',
+                            text: getGameResponse.status === 'finished' ? getText('start_new_game') : getText('shuffle'),
                             variant: 'contained',
                             disabled: getGameResponse.positionsDefined && getGameResponse.status !== 'finished',
                             size: 'small',
@@ -151,18 +152,18 @@ export default class Game extends React.Component{
                         })*/
                         if(!getGameResponse.positionsDefined){
                             getGameResponse.attentionToMessage = true
-                            getGameResponse.actionMessage = 'Press "Shuffle" button in game controls to define players positions in game and deal cards'
+                            getGameResponse.actionMessage = getText('press_shuffle')
                         }
                         if(getGameResponse.canDeal){
                             getGameResponse.attentionToMessage = true
-                            getGameResponse.actionMessage = 'Press "Deal" button in game controls to deal cards in hand'
+                            getGameResponse.actionMessage = getText('press_deal')
                         }
                     }
                     if(getGameResponse.lastTurnCards.length > 0) {
                         newHeaderControls.push({
                             id: 'last_turn',
                             type: 'button',
-                            text: 'Last turn',
+                            text: getText('last_turn'),
                             variant: 'contained',
                             disabled: getGameResponse.lastTurnCards === [],
                             size: 'small',
@@ -194,13 +195,13 @@ export default class Game extends React.Component{
                             },
                             {
                                 id: "bet_players",
-                                header: "Made bets",
+                                header: getText('made_bets'),
                                 type: "players-bet-info",
                                 players: betPlayers
                             },
                             {
                                 id: "players_to_bet",
-                                header: "Players to bet",
+                                header: getText('players_to_bet'),
                                 type: "players-bet-info",
                                 players: playersToBet
                             },
@@ -208,7 +209,7 @@ export default class Game extends React.Component{
                                 id: "bet_size_input",
                                 type: "input",
                                 textFormat: "number",
-                                label: "bet size",
+                                label: getText('bet_size'),
                                 required: true,
                                 variant: "outlined",
                                 value: this.state.myBetSizeValue,
@@ -221,7 +222,7 @@ export default class Game extends React.Component{
                                 id: "bet_size_confirm_button",
                                 type: "button",
                                 variant: "contained",
-                                text: "Confirm",
+                                text: getText('confirm'),
                                 width: "195px",
                                 onSubmit: this.makeBet
                             },
@@ -229,7 +230,7 @@ export default class Game extends React.Component{
                                 id: "scores_view_button",
                                 type: "button",
                                 variant: "outlined",
-                                text: "Scores",
+                                text: getText('scores'),
                                 width: "195px",
                                 onSubmit: this.showScores
                             }
@@ -243,7 +244,7 @@ export default class Game extends React.Component{
                         headerControls: newHeaderControls,
                         modalControls: newModalControls,
                         modalOpen: getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade,
-                        modalText: "Make a bet",
+                        modalText: getText('make_a_bet'),
                         modalCanClose: false,
                         modalContentType: 'Bet'
                     })
@@ -288,7 +289,7 @@ export default class Game extends React.Component{
                 id: "confirm_finish_game",
                 type: "button",
                 variant: "outlined",
-                text: "Finish game",
+                text: getText('finish_game'),
                 width: '140px',
                 color: 'error',
                 disabled: false,
@@ -298,7 +299,7 @@ export default class Game extends React.Component{
                 id: "cancel_finish_game",
                 type: "button",
                 variant: "contained",
-                text: "Cancel",
+                text: getText('cancel'),
                 width: '140px',
                 disabled: false,
                 onSubmit: this.closeModal
@@ -307,7 +308,7 @@ export default class Game extends React.Component{
         this.setState({
             modalControls: newModalControls,
             modalOpen: true,
-            modalText: "Please, confirm finishing the game",
+            modalText: getText('confirm_game_finish'),
             modalCanClose: true,
             modalContentType: 'Finish'
         })
@@ -334,7 +335,7 @@ export default class Game extends React.Component{
             } else {
                 console.log('Emitting event "finish_game_in_room"')
                 gameSocket.emit('finish_game_in_room', this.Cookies.get('username'), gameId, roomId);
-                this.setState({actionMessage: 'Game #' + gameId + ' was successfully finished!'})
+                this.setState({actionMessage: getText('game_id') + gameId + getText('was_finished')})
                 window.location.assign('/room/' + roomId)
             }
         });
@@ -445,7 +446,7 @@ export default class Game extends React.Component{
                         var tookPlayerIndex = newGameDetails.players.findIndex(el => el.username === body.tookPlayer)
                         newGameDetails.players[tookPlayerIndex].tookTurns ++
                         newGameDetails.myInHandInfo.dealtCards.splice(putCardIndex, 1)
-                        newGameDetails.actionMessage = "Dealing cards..."
+                        newGameDetails.actionMessage = getText('dealing_cards')
                         this.setState({
                             gameDetails: newGameDetails
                         })
@@ -476,7 +477,7 @@ export default class Game extends React.Component{
                 id: "confirm_exit_game",
                 type: "button",
                 variant: "outlined",
-                text: "Exit game",
+                text: getText('exit_game'),
                 width: '140px',
                 color: 'error',
                 disabled: false,
@@ -486,7 +487,7 @@ export default class Game extends React.Component{
                 id: "cancel_exit_game",
                 type: "button",
                 variant: "contained",
-                text: "Cancel",
+                text: getText('cancel'),
                 width: '140px',
                 disabled: false,
                 onSubmit: this.closeModal
@@ -496,7 +497,7 @@ export default class Game extends React.Component{
             modalControls: newModalControls,
             modalOpen: true,
             modalContentType: 'Exit',
-            modalText: "Please, confirm exit",
+            modalText: getText('confirm_exit'),
             modalCanClose: true
         })
     }
@@ -589,14 +590,14 @@ export default class Game extends React.Component{
                                 if(data.isLastPlayerToBet){
                                     newGameDetails.betsAreMade = data.isLastPlayerToBet
                                     if(data.nextActingPlayer === this.Cookies.get('username')){
-                                        newGameDetails.actionMessage = "It's your turn now"
+                                        newGameDetails.actionMessage = getText('its_your_turn')
                                         newGameDetails.attentionToMessage = true
                                     } else{
-                                        newGameDetails.actionMessage = data.nextActingPlayer + "'s turn..."
+                                        newGameDetails.actionMessage = data.nextActingPlayer + getText('-s_turn')
                                     }
                                 } else {
                                     if(data.nextActingPlayer === this.Cookies.get('username')){
-                                        newGameDetails.actionMessage = "It's your turn now"
+                                        newGameDetails.actionMessage = getText('its_your_turn')
                                         newGameDetails.attentionToMessage = true
                                         newModalOpen = true
                                         newScoresModalOpen = false
@@ -621,13 +622,13 @@ export default class Game extends React.Component{
                                             },
                                             {
                                                 id: "bet_players",
-                                                header: "Made bets",
+                                                header: getText('mdae_bets'),
                                                 type: "players-bet-info",
                                                 players: betPlayers
                                             },
                                             {
                                                 id: "players_to_bet",
-                                                header: "Players to bet",
+                                                header: getText('players_to_bet'),
                                                 type: "players-bet-info",
                                                 players: playersToBet
                                             },
@@ -635,7 +636,7 @@ export default class Game extends React.Component{
                                                 id: "bet_size_input",
                                                 type: "input",
                                                 textFormat: "number",
-                                                label: "bet size",
+                                                label: getText('bet_size'),
                                                 variant: "outlined",
                                                 required: true,
                                                 value: this.state.myBetSizeValue,
@@ -648,7 +649,7 @@ export default class Game extends React.Component{
                                                 id: "bet_size_confirm_button",
                                                 type: "button",
                                                 variant: "contained",
-                                                text: "Confirm",
+                                                text: getText('confirm'),
                                                 width: "195px",
                                                 onSubmit: this.makeBet
                                             },
@@ -656,15 +657,15 @@ export default class Game extends React.Component{
                                                 id: "scores_view_button",
                                                 type: "button",
                                                 variant: "outlined",
-                                                text: "Scores",
+                                                text: getText('scores'),
                                                 width: "195px",
                                                 onSubmit: this.showScores
                                             }
                                         ]
-                                        newModalText = "Make a bet"
+                                        newModalText = getText('make_a_bet')
                                         newModalCanClose = false
                                     } else {
-                                        newGameDetails.actionMessage = data.nextActingPlayer + ' is making bet...'
+                                        newGameDetails.actionMessage = data.nextActingPlayer + getText('is_making_bet')
                                     }
                                 }
                                 this.setState({
@@ -691,12 +692,25 @@ export default class Game extends React.Component{
                                 if(data.tookPlayer === newGameDetails.myInHandInfo.username) {
                                     newGameDetails.myInHandInfo.tookTurns ++
                                 }
+                                var newHeaderControls = this.state.headerControls  
+                                newHeaderControls.push({
+                                    id: 'last_turn',
+                                    type: 'button',
+                                    text: getText('last_turn'),
+                                    variant: 'contained',
+                                    disabled: newGameDetails.lastTurnCards === [],
+                                    size: 'small',
+                                    width: '130px',
+                                    onSubmit: this.showLastTurnMobile,
+                                    onMouseDown: (e) => this.handleLastTurnClick(e),
+                                    onMouseUp: (e) => this.handleLastTurnClick(e)
+                                })
                             }
                             if(data.isLastCardInHand){
                                 if(data.gameIsFinished){
                                     window.location.reload();
                                 } else {
-                                    newGameDetails.actionMessage = "Dealing cards..."
+                                    newGameDetails.actionMessage = getText('dealing_cards')
                                     this.setState({
                                         gameDetails: newGameDetails
                                     })
@@ -708,13 +722,14 @@ export default class Game extends React.Component{
                                 }
                             } else {
                                 if(data.nextActingPlayer === this.Cookies.get('username')) {
-                                    newGameDetails.actionMessage = "It's your turn now"
+                                    newGameDetails.actionMessage = getText('its_your_turn')
                                     newGameDetails.attentionToMessage = true
                                 } else {
-                                    newGameDetails.actionMessage = data.nextActingPlayer + "'s turn..."
+                                    newGameDetails.actionMessage = data.nextActingPlayer + getText('-s_turn')
                                 }
                                 this.setState({
-                                    gameDetails: newGameDetails
+                                    gameDetails: newGameDetails,
+                                    headerControls: newHeaderControls
                                 })
                             }
                         break
@@ -840,7 +855,7 @@ export default class Game extends React.Component{
                     }
                     {this.state.gameDetails.currentHandId ?
                         <div className={`current-game-trump-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                            <div className={`hand-id-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>Hand #{this.state.gameDetails.currentHandSerialNo}/20</div>
+                            <div className={`hand-id-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('hand_id')}{this.state.gameDetails.currentHandSerialNo}/20</div>
                             <div className={`hand-id-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <p className={`${this.state.gameDetails.trump || 'x'} trump-container ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : ''}`}>{this.state.gameDetails.cardsPerPlayer}</p>
                             </div>

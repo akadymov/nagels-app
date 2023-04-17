@@ -404,7 +404,7 @@ class Game(db.Model):
             })
         rows.append({
             'id': 'total',
-            'dataArray':totals_data_array
+            'dataArray': totals_data_array
         })
         return {
             'headers': headers,

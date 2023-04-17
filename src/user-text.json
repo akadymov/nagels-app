@@ -46,19 +46,139 @@
       "ru": ""
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "score",
+      "en": "score",
+      "ru": "счет"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "hand_id",
+      "en": "Hand #",
+      "ru": "Раздача #"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "is_making_bet",
+      "en": " is making bet...",
+      "ru": " делает ставку..."
+    },
+    {
+      "id": "-s_turn",
+      "en": "'s turn...",
+      "ru": " ходит"
+    },
+    {
+      "id": "its_your_turn",
+      "en": "It's your turn now",
+      "ru": "Сейчас ваш ход"
+    },
+    {
+      "id": "confirm_exit",
+      "en": "Please, confirm exit",
+      "ru": "Пожалуйста, подтвердите выход"
+    },
+    {
+      "id": "exit_game",
+      "en": "Exit game",
+      "ru": "Выйти из игры"
+    },
+    {
+      "id": "dealing_cards",
+      "en": "Dealing cards...",
+      "ru": "Раздаем карты..."
+    },
+    {
+      "id": "was_finished",
+      "en": " was successfully finished!",
+      "ru": " была завершена!"
+    },
+    {
+      "id": "game_id",
+      "en": "Game #",
+      "ru": "Игра #"
+    },
+    {
+      "id": "confirm_game_finish",
+      "en": "Please, confirm finishing the game",
+      "ru": "Пожалуйста, подтвердите завершение игры"
+    },
+    {
+      "id": "cancel",
+      "en": "Cancel",
+      "ru": "Отменить"
+    },
+    {
+      "id": "finish_game",
+      "en": "Finish game",
+      "ru": "Завершить игру"
+    },
+    {
+      "id": "make_a_bet",
+      "en": "Make a bet",
+      "ru": "Сделать ставку"
+    },
+    {
+      "id": "confirm",
+      "en": "Confirm",
+      "ru": "Подтвердить"
+    },
+    {
+      "id": "bet_size",
+      "en": "bet size",
+      "ru": "размер ставки"
+    },
+    {
+      "id": "players_to_bet",
+      "en": "Players to bet",
+      "ru": "Ожидаемые ставки"
+    },
+    {
+      "id": "made_bets",
+      "en": "Made bets",
+      "ru": "Сделанные ставки"
+    },
+    {
+      "id": "last_turn",
+      "en": "Last turn",
+      "ru": "Прошлый ход"
+    },
+    {
+      "id": "press_deal",
+      "en": "Press \"Deal\" button in game controls to deal cards in hand",
+      "ru": "Нажмите на кнопку \"Раздать\" в панели управления, чтобы начать новую раздачу"
+    },
+    {
+      "id": "press_shuffle",
+      "en": "Press \"Shuffle\" button in game controls to define players positions in game and deal cards",
+      "ru": "Нажмите на кнопку \"Рассадка\" в панели управления, чтобы определить позиции игроков в игре и раздать карты"
+    },
+    {
+      "id": "shuffle",
+      "en": "Shuffle",
+      "ru": "Рассадка"
+    },
+    {
+      "id": "start_new_game",
+      "en": "Start new game",
+      "ru": "Начать новую игру"
+    },
+    {
+      "id": "exit",
+      "en": "Exit",
+      "ru": "Выйти"
+    },
+    {
+      "id": "finish",
+      "en": "Finish",
+      "ru": "Завершить"
+    },
+    {
+      "id": "refresh",
+      "en": "Refresh",
+      "ru": "Обновить"
+    },
+    {
+      "id": "scores",
+      "en": "Scores",
+      "ru": "Счет"
     },
     {
       "id": "password_updated",
@@ -368,7 +488,7 @@
     {
       "id": "game_open_hand_error",
       "en": "Game #{game_id} has open hand #{hand_id}! You should finish it before dealing new hand!",
-      "ru": "Игра #{game_id} содержит незакрытуюу руку #{hand_id}! Необходимо завершить ее перед тем, как начинать новую раздачу!"
+      "ru": "Игра #{game_id} содержит незакрытуюу раздачу #{hand_id}! Необходимо завершить ее перед тем, как начинать новую раздачу!"
     },
     {
       "id": "game_not_found_error",
@@ -448,7 +568,7 @@
     {
       "id": "all_game_hands_dealt_error",
       "en": "All hands in game {game_id} are already dealt!",
-      "ru": "Все руки в игре {game_id} уже раздали!"
+      "ru": "Все раздачи в игре {game_id} уже раздали!"
     },
     {
       "id": "user_not_participating_error",
@@ -458,17 +578,17 @@
     {
       "id": "hand_not_exist_error",
       "en": "Hand #{hand_id} is closed or does not exist!",
-      "ru": "Рука #{hand_id} закрыт или не существует!"
+      "ru": "Раздача #{hand_id} закрыт или не существует!"
     },
     {
       "id": "hand_not_found_error",
       "en": "Hand #{hand_id} is not found!",
-      "ru": "Рука #{hand_id} не найдена!"
+      "ru": "Раздача #{hand_id} не найдена!"
     },
     {
       "id": "hand_not_in_game_error",
       "en": "Hand #{hand_id} is not part of game #{game_id}!",
-      "ru": "Рука #{hand_id} не является частью игры #{game_id}!"
+      "ru": "Раздача #{hand_id} не является частью игры #{game_id}!"
     },
     {
       "id": "user_already_opened_room_error",
@@ -553,12 +673,12 @@
     {
       "id": "already_made_bet_error",
       "en": "Player {username} already has made a bet in hand #{hand_id}!",
-      "ru": "Игрок {username} уже сделал ставку в руке #{hand_id}!"
+      "ru": "Игрок {username} уже сделал ставку в раздаче #{hand_id}!"
     },
     {
       "id": "user_not_in_hand_error",
       "en": "User {username} is not registered in hand #{hand_id} of game #{game_id}!",
-      "ru": "Пользователь {username} не зарегистрирован в руке #{hand_id} игры #{game_id}!"
+      "ru": "Пользователь {username} не зарегистрирован в раздаче #{hand_id} игры #{game_id}!"
     },
     {
       "id": "whos_turn_message",
@@ -568,22 +688,22 @@
     {
       "id": "someone_unhappy_error",
       "en": "Someone should stay unhappy! You cannot bet {bet_size} since you are last betting player in hand.",
-      "ru": "Кто-то должен быть несчастлив! Вы не можете сделать ставку в размере {bet_size}, т.к. вы последний игрок в текущей руке."
+      "ru": "Кто-то должен быть несчастлив! Вы не можете сделать ставку в размере {bet_size}, т.к. вы последний игрок в текущей раздаче."
     },
     {
       "id": "wait_all_bets_error",
       "en": "Wait until all bets are made in hand #{hand_id}",
-      "ru": "Дождитесь, пока будут сделаны все ставки в руке #{hand_id}"
+      "ru": "Дождитесь, пока будут сделаны все ставки в раздаче #{hand_id}"
     },
     {
       "id": "all_turns_made_error",
       "en": "All turns are made in hand #{hand_id} of game #{game_id}!",
-      "ru": "Все ходы уже завершены в руке #{hand_id} игры #{game_id}!"
+      "ru": "Все ходы уже завершены в раздаче #{hand_id} игры #{game_id}!"
     },
     {
       "id": "already_put_card_error",
       "en": "Player {username} has already put card in current turn of hand #{hand_id}!'",
-      "ru": "Игрок {username} уже положил карту в текущем ходе руки #{hand_id}!'"
+      "ru": "Игрок {username} уже положил карту в текущем ходе раздачи #{hand_id}!'"
     },
     {
       "id": "cannot_define_next_player_error",
@@ -593,7 +713,7 @@
     {
       "id": "no_put_card_error",
       "en": "Player {username} does not have card {card_id} on his hand!",
-      "ru": "У игрока {username} нет карты \"{card_id}\" на руке!"
+      "ru": "Игроку {username} не раздавали карту \"{card_id}\"!"
     },
     {
       "id": "registration_restricted_error",
@@ -768,7 +888,7 @@
     {
       "id": "hand_finished_action_message",
       "en": "Hand is finished",
-      "ru": "Рука закрыта"
+      "ru": "Раздача завершена"
     },
     {
       "id": "only_host_status_error",

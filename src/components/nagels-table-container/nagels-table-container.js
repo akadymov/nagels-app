@@ -23,6 +23,7 @@ import Score from '../score';
 import NagelsAvatar from '../nagels-avatar/nagels-avatar';
 import defaultTheme from '../../themes/default';
 import Cookies from 'universal-cookie';
+import { getText } from '../user-text';
 
 
 
@@ -215,8 +216,8 @@ export default class NagelsTableContainer extends React.Component{
                                                     return(
                                                         <StyledTableCell key={`row ${row.id} column ${row.dataArray.indexOf(data)}`} align='center'>
                                                             <Score
-                                                                betSize='bet'
-                                                                score='score'
+                                                                betSize={getText('bet')}
+                                                                score={getText('score')}
                                                             ></Score>
                                                         </StyledTableCell>
                                                     )
