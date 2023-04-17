@@ -9,7 +9,7 @@ import Modal from '@mui/material/Modal';
 import NagelsTableContainer from '../../components/nagels-table-container';
 import FormButton from '../form-button';
 import Cookies from 'universal-cookie';
-import phrases from '../../user-text.json'
+import { getText } from '../user-text';
 
 
 export default class GameScores extends React.Component{
@@ -39,7 +39,7 @@ export default class GameScores extends React.Component{
                             <FormButton
                                 key='close_game_scores'
                                 variant='outlined'
-                                text='Back to game'
+                                text={getText('back_to_game')}
                                 onSubmit={this.props.closeModal}
                                 size='small'
                             ></FormButton>

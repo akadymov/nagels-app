@@ -5,6 +5,8 @@ import './table-action-message.css';
 //MUI components
 import LinearProgress from '@mui/material/LinearProgress';
 
+import { getText } from '../user-text';
+
 export default class TableActionMessage extends React.Component{
     
     render() {
@@ -25,7 +27,7 @@ export default class TableActionMessage extends React.Component{
                 :  
                     ''
                 }
-                {!this.props.isMobile && !this.props.highlighted && this.props.message !== 'This game is closed!' ? 
+                {!this.props.isMobile && !this.props.highlighted && this.props.message !== getText('game_closed_action_message') ? 
                     <LinearProgress
                         color='primary'
                         size='large'

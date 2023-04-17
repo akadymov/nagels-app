@@ -4,6 +4,7 @@ import './player-info.css';
 import NagelsAvatar from '../nagels-avatar';
 import defaultTheme from '../../themes/default';
 import Cookies from 'universal-cookie';
+import { getText } from '../user-text';
 
 export default class PlayerInfo extends React.Component{
 
@@ -41,7 +42,7 @@ export default class PlayerInfo extends React.Component{
                         </div>
                         <div className={`player-bets-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             <div className={`player-bets-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                            bet
+                            {getText('bet')}
                             </div>
                             <div className={`player-bets-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             {this.props.betSize}
@@ -49,7 +50,7 @@ export default class PlayerInfo extends React.Component{
                         </div>
                         <div className={`player-took-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             <div className={`player-took-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                            took
+                            {getText('took')}
                             </div>
                             <div className={`player-took-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             {this.props.tookTurns}

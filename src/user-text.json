@@ -36,49 +36,49 @@
       "ru": ""
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "took",
+      "en": "took",
+      "ru": "взяток"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "bet",
+      "en": "bet",
+      "ru": "ставка"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "sign_out",
+      "en": "SIGN OUT",
+      "ru": "ВЫЙТИ"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "sign_in",
+      "en": "SIGN IN",
+      "ru": "ВОЙТИ"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "about",
+      "en": "ABOUT",
+      "ru": "ОБ ИГРЕ"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "lobby",
+      "en": "LOBBY",
+      "ru": "ЛОББИ"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "leaderboard",
+      "en": "LEADERBOARD",
+      "ru": "РЕЙТИНГ"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "feedback",
+      "en": "FEEDBACK",
+      "ru": "ОБРАТНАЯ СВЯЗЬ"
     },
     {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "profile",
+      "en": "PROFILE",
+      "ru": "ПРОФИЛЬ"
     },
     {
       "id": "color_scheme",
