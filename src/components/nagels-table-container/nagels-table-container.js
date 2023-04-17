@@ -79,14 +79,16 @@ export default class NagelsTableContainer extends React.Component{
                 color: defaultTheme.palette.contrastControlElements.main,
                 fontWeight: 'bold',
                 borderRight: '1px dotted ' + defaultTheme.palette.borderColor.light,
-                borderBottom: 'none'
+                borderBottom: 'none',
+                overflow: 'hidden'
             },
             [`&.${tableCellClasses.body}`]: {
                 fontSize: 14,
                 color: this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.regularText.piggy : defaultTheme.palette.regularText.main,
                 padding: this.props.padding || '16px',
                 borderRight: '1px dotted ' + defaultTheme.palette.borderColor.light,
-                borderBottom: 'none'
+                borderBottom: 'none',
+                overflow: 'hidden'
             }
         }));
 
