@@ -6,6 +6,7 @@ import './feedback.css'
 
 //Local components
 import FormContainer from '../../components/form-container';
+import { getText } from '../../components/user-text';
 
 //Local services
 import NagelsApi from '../../services/nagels-api-service';
@@ -20,7 +21,7 @@ export default class Feedback extends React.Component{
         this.handleSenderEmailChange = this.handleSenderEmailChange.bind(this);
         this.handleMessageChange = this.handleMessageChange.bind(this);
         this.state = {
-            title: 'Feedback',
+            title: getText('feedback_lower'),
             senderName: null,
             senderEmail: null,
             message: null,
@@ -29,7 +30,7 @@ export default class Feedback extends React.Component{
             textFieldsList: [
                 {
                     id:"sender_name", 
-                    label:"name", 
+                    label:getText('name'), 
                     variant:"outlined", 
                     type: "text", 
                     autoComplete: 'on',
@@ -51,7 +52,7 @@ export default class Feedback extends React.Component{
                 },
                 {
                     id:"message", 
-                    label:'message (0/500)', 
+                    label:getText('message_symbols'), 
                     variant:"outlined", 
                     type: "text", 
                     required: true,
@@ -67,7 +68,7 @@ export default class Feedback extends React.Component{
                 {
                     id:"submit_button", 
                     type:"contained", 
-                    text:"Submit", 
+                    text: getText('submit'), 
                     width: "220px",
                     disabled: true,
                     onSubmit: this.sendFeedback
@@ -75,7 +76,7 @@ export default class Feedback extends React.Component{
                 {
                     id:"more_feedback", 
                     type:"contained", 
-                    text:"Another message", 
+                    text: getText('another_message'), 
                     width: "220px",
                     disabled: false,
                     hidden: true,
@@ -173,8 +174,8 @@ export default class Feedback extends React.Component{
         var newSubmitButtonList = this.state.submitButtonList
         newTextFieldsList[0].errorMessage=''
         newTextFieldsList[1].errorMessage=''
-        newTextFieldsList[2].errorMessage=e.target.value.length > 500 ? 'too long message (' + e.target.value.length + '/500)' : ''
-        newTextFieldsList[2].label='message (' + e.target.value.length + '/500)'
+        newTextFieldsList[2].errorMessage=e.target.value.length > 500 ? getText('too_long_message') + e.target.value.length + '/500)' : ''
+        newTextFieldsList[2].label= getText('message_symb') + e.target.value.length + '/500)'
         newSubmitButtonList[0].disabled = false
         this.setState({ 
             message: e.target.value,
@@ -208,7 +209,7 @@ export default class Feedback extends React.Component{
                     onSubmit={this.SendLoginRequest}
                 >
                 </FormContainer>
-                <div className="feedback-sent-confirmation-message" style={{ display: this.state.feedbackSent ? 'block' : 'none' }}>Thank you for the feedback! Nägels Application admins will contact you soon.</div>
+                <div className="feedback-sent-confirmation-message" style={{ display: this.state.feedbackSent ? 'block' : 'none' }}>{getText('thank_you_for_the_feedback')}</div>
             </div>
         )
     }

@@ -36,6 +36,131 @@
       "ru": ""
     },
     {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "thank_you_for_the_feedback",
+      "en": "Thank you for the feedback! Nägels Application admins will contact you soon.",
+      "ru": "Спасибо за обратную связь! Администраторы приложения скоро свяжутся с вами."
+    },
+    {
+      "id": "message_symb",
+      "en": "message (",
+      "ru": "сообщение ("
+    },
+    {
+      "id": "too_long_message",
+      "en": "too long message (",
+      "ru": "слищком длинное сообщение ("
+    },
+    {
+      "id": "another_message",
+      "en": "Another message",
+      "ru": "Написать еще"
+    },
+    {
+      "id": "submit",
+      "en": "Submit",
+      "ru": "Отправить"
+    },
+    {
+      "id": "message_symbols",
+      "en": "message (0/500)",
+      "ru": "сообщение (0/500)"
+    },
+    {
+      "id": "name",
+      "en": "name",
+      "ru": "Имя"
+    },
+    {
+      "id": "about_nagels",
+      "en": "About Nägels",
+      "ru": "Об игре Nägels"
+    },
+    {
+      "id": "go_to_lobby",
+      "en": "Go to games lobby",
+      "ru": "Перейти в лобби"
+    },
+    {
+      "id": "get_game_info_error",
+      "en": "Something went wrong! Cannot get game info!",
+      "ru": "Что-то сломалось! Не удалось вывести информацию об игре!"
+    },
+    {
+      "id": "feedback_lower",
+      "en": "Feedback",
+      "ru": "Обратная связь"
+    },
+    {
+      "id": "register_new_player",
+      "en": "Register new player",
+      "ru": "Зарегистрироваться"
+    },
+    {
       "id": "took",
       "en": "took",
       "ru": "взяток"
