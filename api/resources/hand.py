@@ -4,6 +4,7 @@ from flask import url_for, request, jsonify, Blueprint
 from flask_cors import cross_origin
 from app import app, db
 from app.models import User, Room, Game, Player, Hand, DealtCards, HandScore
+from app.text import get_phrase
 import random
 from math import floor
 from config import get_settings, get_environment
@@ -17,11 +18,12 @@ env = get_environment()
 @cross_origin()
 def deal_cards(game_id):
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     if token is None:
         return jsonify({
-            'errors':[
-                {'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(post_token_url=url_for('user.post_token'))}
+            'errors': [
+                {'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))}
             ]
         }), 401
     requesting_user = User.verify_api_auth_token(token)
@@ -32,7 +34,7 @@ def deal_cards(game_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Only host can deal cards!'
+                    'message': get_phrase('only_host_deals_cards_error', lang)
                 }
             ]
         }), 403
@@ -41,7 +43,7 @@ def deal_cards(game_id):
         return jsonify({
             'errors':[
                 {
-                    'message': 'Game {game_id} has open hand {hand_id}! You should finish it before dealing new hand!'.format(game_id=game_id, hand_id=game.last_open_hand().id)
+                    'message': get_phrase('game_open_hand_error', lang).format(game_id=game_id, hand_id=game.last_open_hand().id)
                 }
             ]
         }), 403
@@ -51,7 +53,7 @@ def deal_cards(game_id):
         return jsonify({
             'errors':[
                 {
-                    'message': 'All hands in game {game_id} are already dealt!'.format(game_id=game_id)
+                    'message': get_phrase('all_game_hands_dealt_error', lang).format(game_id=game_id)
                 }
             ]
         }), 403
@@ -173,11 +175,12 @@ def deal_cards(game_id):
 @cross_origin()
 def get_hand_cards(game_id, hand_id):
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     if token is None:
         return jsonify({
             'errors':[
-                {'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(post_token_url=url_for('user.post_token'))}
+                {'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))}
             ]
         }), 401
     requesting_user = User.verify_api_auth_token(token)
@@ -187,7 +190,7 @@ def get_hand_cards(game_id, hand_id):
         return jsonify({
             'errors':[
                 {
-                    'message': 'User {username} is not participating in game {game_id}!'.format(username=requesting_user.username, game_id=game_id)
+                    'message': get_phrase('user_not_participating_error', lang).format(username=requesting_user.username, game_id=game_id)
                 }
             ]
         }), 403
@@ -197,7 +200,7 @@ def get_hand_cards(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Hand {hand_id} is closed or does not exist!'.format(hand_id=hand_id)
+                    'message': get_phrase('hand_not_exist_error', lang).format(hand_id=hand_id)
                 }
             ]
         }), 403
@@ -221,6 +224,7 @@ def get_hand_cards(game_id, hand_id):
 @hand.route('{base_path}/game/<game_id>/hand/<hand_id>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def status(game_id, hand_id):
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     my_position = 0
     requesting_user = None
@@ -231,7 +235,7 @@ def status(game_id, hand_id):
     if not game:
         return jsonify({
             'errors':[
-                {'message': 'Game #{game_id} is not found!'.format(game_id=game_id)}
+                {'message': get_phrase('game_not_found_error', lang).format(game_id=game_id)}
             ]
         }), 404
 
@@ -239,13 +243,13 @@ def status(game_id, hand_id):
     if not hand:
         return jsonify({
             'errors':[
-                {'message': 'Hand #{hand_id} is not found!'.format(hand_id=hand_id)}
+                {'message': get_phrase('hand_not_found_error', lang).format(hand_id=hand_id)}
             ]
         }), 404
     if int(hand.game_id) != int(game_id):
         return jsonify({
-            'errors':[
-                {'message': 'Hand #{hand_id} is not part of game#{game_id}!'.format(hand_id=hand_id,game_id=game_id)}
+            'errors': [
+                {'message': get_phrase('hand_not_in_game_error', lang).format(hand_id=hand_id,game_id=game_id)}
             ]
         }), 404
 

@@ -7,6 +7,7 @@ from app.models import User, Game, Player, Hand, HandScore, Turn, DealtCards, Tu
 from datetime import datetime
 import numpy as np
 from config import get_settings, get_environment
+from app.text import get_phrase
 
 
 turn = Blueprint('turn', __name__)
@@ -17,6 +18,7 @@ env = get_environment()
 @cross_origin()
 def bet(game_id, hand_id):
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     requesting_user = User.verify_api_auth_token(token)
 
@@ -25,7 +27,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Please, write down bet size!'
+                    'message': get_settings('no_bet_size_error')
                 }
             ]
         }), 400
@@ -35,7 +37,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} is not participating in game {game_id}!'.format(username=requesting_user.username, game_id=game_id)
+                    'message': get_phrase('user_not_participating_error', lang).format(username=requesting_user.username, game_id=game_id)
                 }
             ]
         }), 403
@@ -47,7 +49,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Hand {hand_id} is closed or does not exist!'.format(hand_id=hand_id)
+                    'message': get_phrase('hand_not_exist_error', lang).format(hand_id=hand_id)
                 }
             ]
         }), 403
@@ -57,7 +59,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Maximum bet size is {max_bet_size}!'.format(max_bet_size=str(max_bet_size))
+                    'message': get_phrase('max_bet_size_error', lang).format(max_bet_size=str(max_bet_size))
                 }
             ]
         }), 403
@@ -65,7 +67,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Bet size cannot be negative!'
+                    'message': get_phrase('negative_bet_size_error', lang)
                 }
             ]
         }), 403
@@ -75,7 +77,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} already has made a bet in hand {hand_id}!'.format(username=requesting_user.username, hand_id=hand_id)
+                    'message': get_phrase('already_made_bet_error', lang).format(username=requesting_user.username, hand_id=hand_id)
                 }
             ]
         }), 403
@@ -86,7 +88,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} is not registered in hand {hand_id} of game {game_id}!'.format(username=requesting_user.username, hand_id=hand_id, game_id=game_id)
+                    'message': get_phrase('user_not_in_hand_error', lang).format(username=requesting_user.username, hand_id=hand_id, game_id=game_id)
                 }
             ]
         }), 400
@@ -95,7 +97,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': "It is {username}'s turn now!".format(username=next_acting_player.username)
+                    'message': get_phrase('whos_turn_message', lang).format(username=next_acting_player.username)
                 }
             ]
         }), 403
@@ -109,7 +111,7 @@ def bet(game_id, hand_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Someone should stay unhappy! You cannot bet {bet_size} since you are last betting player in hand.'.format(bet_size=bet_size)
+                    'message': get_phrase('someone_unhappy_error', lang).format(bet_size=bet_size)
                 }
             ]
         }), 400
@@ -139,12 +141,13 @@ def put_card(game_id, hand_id, card_id):
         print('hand_id:' + str(hand_id))
         print('card_id:' + str(card_id))
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     if token is None:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(post_token_url=url_for('user.post_token'))
+                    'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))
                 }
             ]
         }), 401
@@ -155,7 +158,7 @@ def put_card(game_id, hand_id, card_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} is not participating in game {game_id}!'.format(username=requesting_user.username, game_id=game_id)
+                    'message': get_phrase('user_not_participating_error', lang).format(username=requesting_user.username, game_id=game_id)
                 }
             ]
         }), 403
@@ -165,7 +168,7 @@ def put_card(game_id, hand_id, card_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Hand {hand_id} is closed or does not exist!'.format(hand_id=hand_id)
+                    'message': get_phrase('hand_not_exist_error', lang).format(hand_id=hand_id)
                 }
             ]
         }), 403
@@ -174,7 +177,7 @@ def put_card(game_id, hand_id, card_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Wait until all bets are made in hand {hand_id}'.format(hand_id=hand_id)
+                    'message': get_phrase('wait_all_bets_error', lang).format(hand_id=hand_id)
                 }
             ]
         }), 403
@@ -183,7 +186,7 @@ def put_card(game_id, hand_id, card_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'All turns are made in hand {hand_id} of game {game_id}!'.format(hand_id=hand_id, game_id=game_id)
+                    'message': get_phrase('all_turns_made_error', lang).format(hand_id=hand_id, game_id=game_id)
                 }
             ]
         }), 403
@@ -193,7 +196,7 @@ def put_card(game_id, hand_id, card_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Player {username} has already put card in current turn of hand {hand_id}!'.format(username=requesting_user.username, hand_id=hand_id)
+                    'message': get_phrase('already_put_card_error', lang).format(username=requesting_user.username, hand_id=hand_id)
                 }
             ]
         }), 403
@@ -203,7 +206,7 @@ def put_card(game_id, hand_id, card_id):
         return jsonify({
             'errors': [
                 {
-                    'message': "Technical error: can not define next acting player!"
+                    'message': get_phrase('cannot_define_next_player_error', lang)
                 }
             ]
         }), 403
@@ -212,7 +215,7 @@ def put_card(game_id, hand_id, card_id):
             return jsonify({
                 'errors': [
                     {
-                        'message': "It is {username}'s turn now!".format(username=curr_player.username)
+                        'message': get_phrase('whos_turn_message', lang).format(username=curr_player.username)
                     }
                 ]
             }), 403
@@ -224,7 +227,7 @@ def put_card(game_id, hand_id, card_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Player {username} does not have card {card_id} on his hand!'.format(username=requesting_user.username, card_id=card_id[:1], card_suit=card_id[1:])
+                    'message': get_phrase('no_put_card_error', lang).format(username=requesting_user.username, card_id=card_id[:1], card_suit=card_id[1:])
                 }
             ]
         }), 403
@@ -306,7 +309,7 @@ def put_card(game_id, hand_id, card_id):
                             if all_remaining_cards_are_lower_trumps:
                                 status_code = 200                       # leaking lower trump if player has no other option is allowed
                             else:
-                                error_msg = 'You cannot leak trumps!'   # leaking trumps is not allowed if you have another option
+                                error_msg = get_phrase('leak_trumps_restriction', lang)   # leaking trumps is not allowed if you have another option
             else:
                 suitable_cards = []
                 for card_on_hand in player_current_hand:
@@ -319,7 +322,7 @@ def put_card(game_id, hand_id, card_id):
                 if turn_suit == hand_trump and suitable_cards == ['j' + hand_trump]:
                     status_code = 200                               # putting card of non trump suit in trump suited turn is allowed if the only remaining trump on hand is J
                 elif player_has_turn_suit:
-                    error_msg = 'Allowed suites:'  # putting card of non trump and non turn suit is not allowed if player has turn suited cards on hand
+                    error_msg = get_phrase('allowed_suits_message', lang)  # putting card of non trump and non turn suit is not allowed if player has turn suited cards on hand
                     if turn_suit == hand_trump:
                         allowed_suites = [turn_suit]
                     else:

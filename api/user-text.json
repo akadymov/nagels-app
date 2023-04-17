@@ -1,0 +1,444 @@
+{
+  "phrases": [
+    {
+      "id": "auth_token_absent_error",
+      "en": "Authentication token is absent! You should request token by POST {post_token_url}",
+      "ru": "Не найден аутентификационный токен! Необходимо запросить токен через POST {post_token_url}"
+    },
+    {
+      "id": "auth_token_invalid_error",
+      "en": "Authentication token is invalid! You should request new one by POST {post_token_url}",
+      "ru": "Неверный аутентификационный токен! Необходимо запросить новый токен через POST {post_token_url}"
+    },
+    {
+      "id": "game_not_exist_error",
+      "en": "Game #{game_id} does not exist!",
+      "ru": "Игра #{game_id} не существует!"
+    },
+    {
+      "id": "game_open_hand_error",
+      "en": "Game #{game_id} has open hand #{hand_id}! You should finish it before dealing new hand!",
+      "ru": "Игра #{game_id} содержит незакрытуюу руку #{hand_id}! Необходимо завершить ее перед тем, как начинать новую раздачу!"
+    },
+    {
+      "id": "game_not_found_error",
+      "en": "Game #{game_id} is not found!",
+      "ru": "Игра #{game_id} не найдена!"
+    },
+    {
+      "id": "only_host_deals_cards_error",
+      "en": "Only host can deal cards!",
+      "ru": "Только хост может раздавать карты!"
+    },
+    {
+      "id": "no_hosted_rooms_error",
+      "en": "User {username} does not have open rooms! Create room by POST {create_room_url} before managing games.",
+      "ru": "У пользователя {username} нет открытых комнат! Нужно создать комнату через POST {create_room_url}, чтобы администрировать комнату."
+    },
+    {
+      "id": "incorrect_players_number_error",
+      "en": "Incorrect number of players to start ({players_count} currently connected to room \"{room_name}\")!",
+      "ru": "Недопустимо стартовать игру с ({players_count} игроками, подключенными к комнате \"{room_name}\")!"
+    },
+    {
+      "id": "game_already_started_error",
+      "en": "Game {game_id} is already started at {game_start} and is not finished yet! You cannot run more than one game in room at one moment!",
+      "ru": "Игра {game_id} уже начата {game_start} и еще не закончена! Нельзя начинать новые игры в комнате, пока не закончены уже начатые!"
+    },
+    {
+      "id": "active_games_in_room_error",
+      "en": "Room {room_name} has {active_games} active game(s)!",
+      "ru": "В комнате {room_name} найдено {active_games} активных игр!"
+    },
+    {
+      "id": "game_not_started_error",
+      "en": "Game #{game_id} is not started yet!",
+      "ru": "Игра #{game_id} еще не начата!"
+    },
+    {
+      "id": "only_host_shuffle_error",
+      "en": "Only host can shuffle positions!",
+      "ru": "Только хост может определять позиции игроков!"
+    },
+    {
+      "id": "positions_already_defined_error",
+      "en": "Positions of players are already defined in game #{game_id}!",
+      "ru": "Позиции игроков уже определены в игре #{game_id}!"
+    },
+    {
+      "id": "game_room_not_found_error",
+      "en": "Room #{room_id} not found in game #{game_id}",
+      "ru": "Комната #{room_id} не найдена для игры #{game_id}"
+    },
+    {
+      "id": "game_rules_not_found_error",
+      "en": "Game rules not found!",
+      "ru": "Правила игры не найдены!"
+    },
+    {
+      "id": "game_info_not_found_error",
+      "en": "Game info not found!",
+      "ru": "Информация об игре не найдена!"
+    },
+    {
+      "id": "empty_message_error",
+      "en": "Empty message!",
+      "ru": "Пустое сообщение!"
+    },
+    {
+      "id": "too_long_message_error",
+      "en": "Too long message!",
+      "ru": "Слишком длинное сообщение!"
+    },
+    {
+      "id": "feedback_sent_message",
+      "en": "Feedback message sent",
+      "ru": "Обратная связь отправлена"
+    },
+    {
+      "id": "all_game_hands_dealt_error",
+      "en": "All hands in game {game_id} are already dealt!",
+      "ru": "Все руки в игре {game_id} уже раздали!"
+    },
+    {
+      "id": "user_not_participating_error",
+      "en": "User {username} is not participating in game #{game_id}!",
+      "ru": "Пользователь {username} не участвует в игре #{game_id}!"
+    },
+    {
+      "id": "hand_not_exist_error",
+      "en": "Hand #{hand_id} is closed or does not exist!",
+      "ru": "Рука #{hand_id} закрыт или не существует!"
+    },
+    {
+      "id": "hand_not_found_error",
+      "en": "Hand #{hand_id} is not found!",
+      "ru": "Рука #{hand_id} не найдена!"
+    },
+    {
+      "id": "hand_not_in_game_error",
+      "en": "Hand #{hand_id} is not part of game #{game_id}!",
+      "ru": "Рука #{hand_id} не является частью игры #{game_id}!"
+    },
+    {
+      "id": "user_already_opened_room_error",
+      "en": "User {username} already has opened room \"{room_name}\"!",
+      "ru": "Пользователь {username} уже открыл комнату\"{room_name}\"!"
+    },
+    {
+      "id": "user_already_connected_error",
+      "en": "User {username} already is connected to other room!",
+      "ru": "Пользователь {username} уже подключен к другой комнате!"
+    },
+    {
+      "id": "room_id_not_found_error",
+      "en": "Room #{room_id} not found!",
+      "ru": "Комната #{room_id} не найдена!"
+    },
+    {
+      "id": "room_already_closed_error",
+      "en": "Room {room_name} is already closed!",
+      "ru": "Комната {room_name} уже закрыта!"
+    },
+    {
+      "id": "only_host_close_room_error",
+      "en": "Only host can close the room!",
+      "ru": "Только хост может закрыть комнаты!"
+    },
+    {
+      "id": "room_closed_error",
+      "en": "Room \"{room_name}\" is closed!",
+      "ru": "Комната \"{room_name}\" закрыта!"
+    },
+    {
+      "id": "already_connected_error",
+      "en": "User {username} is already connected to room \"{room_name}\"! You will be redirected.",
+      "ru": "Пользователь {username} уже подключен к комнате \"{room_name}\"! Вы будете переадресованы."
+    },
+    {
+      "id": "room_max_players_error",
+      "en": "Maximum number of players exceeded for room \"{room_name}\"!",
+      "ru": "Достигнуто максимальное количество игроков для комнаты \"{room_name}\"!"
+    },
+    {
+      "id": "only_host_disconnect_error",
+      "en": "Only host can disconnect other players!",
+      "ru": "Только хост может отключать других игроков!"
+    },
+    {
+      "id": "host_disconnect_error",
+      "en": "Host cannot disconnect the room! You can close room if you wish.",
+      "ru": "Хост не может отключиться от комнаты! Можно заркыть комнату при желании."
+    },
+    {
+      "id": "room_closed_error",
+      "en": "Room \"{room_name}\" is closed!",
+      "ru": "Комната \"{room_name}\" закрыта!"
+    },
+    {
+      "id": "host_always_ready_error",
+      "en": "Host is always ready!",
+      "ru": "Хост всегда готов начать игру!"
+    },
+    {
+      "id": "room_user_not_connected_error",
+      "en": "User {username} is not connected to room \"{room_name}\"!",
+      "ru": "Пользователь {username} не подключен к комнате \"{room_name}\"!"
+    },
+    {
+      "id": "no_bet_size_error",
+      "en": "Please, write down bet size!",
+      "ru": "Пожалуйста, введите размер ставки!"
+    },
+    {
+      "id": "max_bet_size_error",
+      "en": "Maximum bet size is {max_bet_size}!",
+      "ru": "Размер ставки не может быть более {max_bet_size}!"
+    },
+    {
+      "id": "negative_bet_size_error",
+      "en": "Bet size cannot be negative!",
+      "ru": "Размер ставки не может быть отрицательным"
+    },
+    {
+      "id": "already_made_bet_error",
+      "en": "Player {username} already has made a bet in hand #{hand_id}!",
+      "ru": "Игрок {username} уже сделал ставку в руке #{hand_id}!"
+    },
+    {
+      "id": "user_not_in_hand_error",
+      "en": "User {username} is not registered in hand #{hand_id} of game #{game_id}!",
+      "ru": "Пользователь {username} не зарегистрирован в руке #{hand_id} игры #{game_id}!"
+    },
+    {
+      "id": "whos_turn_message",
+      "en": "It is {username}'s turn now!",
+      "ru": "Ход игрока {username}!"
+    },
+    {
+      "id": "someone_unhappy_error",
+      "en": "Someone should stay unhappy! You cannot bet {bet_size} since you are last betting player in hand.",
+      "ru": "Кто-то должен быть несчастлив! Вы не можете сделать ставку в размере {bet_size}, т.к. вы последний игрок в текущей руке."
+    },
+    {
+      "id": "wait_all_bets_error",
+      "en": "Wait until all bets are made in hand #{hand_id}",
+      "ru": "Дождитесь, пока будут сделаны все ставки в руке #{hand_id}"
+    },
+    {
+      "id": "all_turns_made_error",
+      "en": "All turns are made in hand #{hand_id} of game #{game_id}!",
+      "ru": "Все ходы уже завершены в руке #{hand_id} игры #{game_id}!"
+    },
+    {
+      "id": "already_put_card_error",
+      "en": "Player {username} has already put card in current turn of hand #{hand_id}!'",
+      "ru": "Игрок {username} уже положил карту в текущем ходе руки #{hand_id}!'"
+    },
+    {
+      "id": "cannot_define_next_player_error",
+      "en": "Technical error: can not define next acting player!",
+      "ru": "Техническая ошибка: не удалось определить следующего игрока!"
+    },
+    {
+      "id": "no_put_card_error",
+      "en": "Player {username} does not have card {card_id} on his hand!",
+      "ru": "У игрока {username} нет карты \"{card_id}\" на руке!"
+    },
+    {
+      "id": "registration_restricted_error",
+      "en": "Registration is restricted! Please, use feedback form or contact site admins to apply for registration.",
+      "ru": "Регистрация ограничена! Пожалуйста, используйте форму обратной связи или свяжитесь напрямую с администраторами для регистрации."
+    },
+    {
+      "id": "required_error",
+      "en": "Required",
+      "ru": "Обязательно"
+    },
+    {
+      "id": "password_confirmation_error",
+      "en": "Password confirmation is invalid!",
+      "ru": "Пароли не совпадают!"
+    },
+    {
+      "id": "bad_username_error",
+      "en": "Bad username!",
+      "ru": "Недопустимое имя пользователя!"
+    },
+    {
+      "id": "bad_email_error",
+      "en": "Bad email!",
+      "ru": "Недопустимый email!"
+    },
+    {
+      "id": "username_not_available_error",
+      "en": "Username \"{username}\" is unavailable!",
+      "ru": "Имя пользователя \"{username}\" недоступно!"
+    },
+    {
+      "id": "email_not_available_error",
+      "en": "User with email {email} already exists!",
+      "ru": "Пользователь с email'ом {email} уже зарегистрирован!"
+    },
+    {
+      "id": "user_not_found_error",
+      "en": "User {username} not found!",
+      "ru": "Пользователь {username} не найден!"
+    },
+    {
+      "id": "invalid_username_password_error",
+      "en": "Invalid username or password!",
+      "ru": "Неверные имя пользователя или пароль"
+    },
+    {
+      "id": "invalid_username_token_error",
+      "en": "Invalid username or authorization token!",
+      "ru": "Неверное имя пользователя или токен аутентификации!"
+    },
+    {
+      "id": "only_own_profile_update_error",
+      "en": "You can update only your own profile ({username})!",
+      "ru": "Можно обновлять только свой профиль ({username})!"
+    },
+    {
+      "id": "about_me_max_symbols_error",
+      "en": "About me section must be {max_symbols} symbols long!",
+      "ru": "Раздел \"Обо мне\" может содержать не более {max_symbols} символов!"
+    },
+    {
+      "id": "ivalid_username_email_error",
+      "en": "Invalid username or email!",
+      "ru": "Неверное имя пользователя или email!"
+    },
+    {
+      "id": "invalid_room_id_error",
+      "en": "Ivalid room id!",
+      "ru": "Неверный идентификатор комнаты!"
+    },
+    {
+      "id": "invite_token_outdated_error",
+      "en": "Invite token is outdated! Please, ask host to send another link.",
+      "ru": "Пригасительный токен устарел! Пожалуйста, попросите хоста прислать новую ссылку."
+    },
+    {
+      "id": "invalid_reset_token_error",
+      "en": "Invalid reset password token!",
+      "ru": "Некорректный токен для восстановления пароля!"
+    },
+    {
+      "id": "new_password_missing_error",
+      "en": "New password is missing!",
+      "ru": "Отсутствует новый пароль!"
+    },
+    {
+      "id": "password_confirmation_missing_error",
+      "en": "Password confirmation is missing!",
+      "ru": "Отсутствует подтверждение пароля!"
+    },
+    {
+      "id": "password_confirmation_error",
+      "en": "Password confirmation does not match!",
+      "ru": "Пароли не совпадают!"
+    },
+    {
+      "id": "new_password_saved",
+      "en": "New password is saved!",
+      "ru": "Новый пароль сохранен!"
+    },
+    {
+      "id": "incorrect_current_password_error",
+      "en": "Incorrect current password!",
+      "ru": "Некорректный текущий пароль!"
+    },
+    {
+      "id": "own_profile_pic_update_error",
+      "en": "You can update only your own profile picture ({username})!",
+      "ru": "Вы можете обновлять только собственный аватар ({username})!"
+    },
+    {
+      "id": "no_request_file_error",
+      "en": "No file in request!",
+      "ru": "Файл отсутствует в запросе!"
+    },
+    {
+      "id": "no_upload_file_error",
+      "en": "No file selected for uploading!",
+      "ru": "Не выбран файл для загрузки!"
+    },
+    {
+      "id": "allowed_format_error",
+      "en": "Only {allowed_formats} files allowed!",
+      "ru": "Разрешены только файлы формата {allowed_formats}!"
+    },
+    {
+      "id": "no_file_size_error",
+      "en": "File size is not specified!",
+      "ru": "Не указан размер файла!"
+    },
+    {
+      "id": "file_size_error",
+      "en": "File size exceeds limit of {limit}",
+      "ru": "Размер файла превышает допустимые {limit}"
+    },
+    {
+      "id": "file_upload_error",
+      "en": "Couldn't upload file: ",
+      "ru": "Не удается загрузить файл: "
+    },
+    {
+      "id": "shuffling_positions_action_message",
+      "en": "Game #{game_id} started by {hostname}! Shuffling positions.",
+      "ru": "Игра #{game_id} начата пользователем {hostname}! Определяем позиции игроков."
+    },
+    {
+      "id": "congratulations",
+      "en": "Congratulations! ",
+      "ru": "Поздравляем! "
+    },
+    {
+      "id": "congratulations_end",
+      "en": " won the game. You can check players standings by clicking \"Scores\"",
+      "ru": " - победитель игры. Вы можете изучить счет игры, нажав на \"Счет\""
+    },
+    {
+      "id": "game_closed_action_message",
+      "en": "This game is closed!",
+      "ru": "Эта игра закрыта!"
+    },
+    {
+      "id": "dealing_cards_action_message",
+      "en": "Dealing cards...",
+      "ru": "Раздаем карты..."
+    },
+    {
+      "id": "user_bets_action_message",
+      "en": "{username} is making bet...",
+      "ru": "{username} делает ставку..."
+    },
+    {
+      "id": "user_turn_action_message",
+      "en": "{username}'s turn...",
+      "ru": "Ход игрока {username}"
+    },
+    {
+      "id": "hand_finished_action_message",
+      "en": "Hand is finished",
+      "ru": "Рука закрыта"
+    },
+    {
+      "id": "only_host_status_error",
+      "en": "Only host can change other players' status!",
+      "ru": "Только хост может изменить статус других игроков!"
+    },
+    {
+      "id": "leak_trumps_restriction",
+      "en": "You cannot leak trumps!",
+      "ru": "Нельзя сливать козырей!"
+    },
+    {
+      "id": "allowed_suits_message",
+      "en": "Allowed suites:",
+      "ru": "Допустимые масти:"
+    }
+  ]
+}

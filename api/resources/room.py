@@ -6,6 +6,7 @@ from app import db
 from app.models import User, Room, Stats
 from datetime import datetime
 from config import get_settings, get_environment
+from app.text import get_phrase
 
 
 room = Blueprint('room', __name__)
@@ -95,12 +96,13 @@ def get_list():
 @cross_origin()
 def create():
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     if token is None:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(post_token_url=url_for('user.post_token'))
+                    'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))
                 }
             ]
         }), 401
@@ -112,7 +114,7 @@ def create():
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} already has opened room "{room_name}"!'.format(
+                    'message': get_phrase('user_already_opened_room_error', lang).format(
                     username=requesting_user.username,
                     room_name=hosted_room.room_name)
                 }
@@ -124,7 +126,7 @@ def create():
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} already is connected to other room!'.format(username=requesting_user.username)
+                    'message': get_phrase('user_already_connected_error', lang).format(username=requesting_user.username)
                 }
             ]
         }), 403
@@ -151,6 +153,7 @@ def create():
 @cross_origin()
 def close(room_id):
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
 
     requesting_user = User.verify_api_auth_token(token)
@@ -160,7 +163,7 @@ def close(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room with id {room_id} is not found!'.format(room_id=room_id)
+                    'message': get_phrase('room_id_not_found_error', lang).format(room_id=room_id)
                 }
             ]
         }), 404
@@ -168,7 +171,7 @@ def close(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room {room_name} is already closed!'.format(room_name=target_room.room_name)
+                    'message': get_phrase('room_already_closed_error', lang).format(room_name=target_room.room_name)
                 }
             ]
         }), 400
@@ -176,7 +179,7 @@ def close(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Only host can close the room!'
+                    'message': get_phrase('only_host_close_room_error', lang)
                 }
             ]
         }), 403
@@ -204,6 +207,7 @@ def close(room_id):
 @cross_origin()
 def connect(room_id):
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
 
     requesting_user = User.verify_api_auth_token(token)
@@ -215,7 +219,7 @@ def connect(room_id):
             return jsonify({
                 'warning': [
                     {
-                        'message': 'User {username} is already connected to room "{room_name}"! You will be redirected.'.format(
+                        'message': get_phrase('already_connected_error', lang).format(
                             username=requesting_user.username, room_name=target_room.room_name)
                     }
                 ]
@@ -223,7 +227,7 @@ def connect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} already is connected to other room!'.format(username=requesting_user.username)
+                    'message': get_phrase('user_already_connected_error', lang).format(username=requesting_user.username)
                 }
             ]
         }), 403
@@ -232,7 +236,7 @@ def connect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room with id {room_id} is not found!'.format(room_id=room_id)
+                    'message': get_phrase('room_id_not_found_error', lang).format(room_id=room_id)
                 }
             ]
         }), 404
@@ -240,7 +244,7 @@ def connect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room "{room_name}" is closed!'.format(room_name=target_room.room_name)
+                    'message': get_phrase('room_closed_error', lang).format(room_name=target_room.room_name)
                 }
             ]
         }), 400
@@ -248,7 +252,7 @@ def connect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Maximum number of players exceeded for room "{room_name}"!'.format(room_name=target_room.room_name)
+                    'message': get_phrase('room_max_players_error', lang).format(room_name=target_room.room_name)
                 }
             ]
         }), 403
@@ -272,6 +276,7 @@ def connect(room_id):
 @cross_origin()
 def disconnect(room_id):
 
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     username = request.json.get('username')
 
@@ -284,7 +289,7 @@ def disconnect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room with id {room_id} is not found!'.format(room_id=room_id)
+                    'message': get_phrase('room_id_not_found_error', lang).format(room_id=room_id)
                 }
             ]
         }), 404
@@ -292,7 +297,7 @@ def disconnect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room "{room_name}" is closed!'.format(room_name=target_room.room_name)
+                    'message': get_phrase('room_closed_error', lang).format(room_name=target_room.room_name)
                 }
             ]
         }), 400
@@ -300,7 +305,7 @@ def disconnect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Only host can disconnect other players!'
+                    'message': get_phrase('only_host_disconnect_error', lang)
                 }
             ]
         })
@@ -308,7 +313,7 @@ def disconnect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} is not connected to room "{room_name}"!'.format(username=disconnecting_user.username, room_name=target_room.room_name)
+                    'message': get_phrase('room_user_not_connected_error', lang).format(username=disconnecting_user.username, room_name=target_room.room_name)
                 }
             ]
         }), 200
@@ -316,7 +321,7 @@ def disconnect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Host cannot disconnect the room! You can close room if you wish.'
+                    'message': get_phrase('host_disconnect_error', lang)
                 }
             ]
         }), 403
@@ -338,12 +343,13 @@ def disconnect(room_id):
 @room.route('{base_path}/room/<room_id>'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
 @cross_origin()
 def status(room_id):
+    lang = request.headers.get('Accept-Language')
     room = Room.query.filter_by(id=room_id).first()
     if not room:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room #{room_id} not found!'.format(room_id=room_id)
+                    'message': get_phrase('room_id_not_found_error', lang).format(room_id=room_id)
                 }
             ]
         }), 404
@@ -368,6 +374,7 @@ def status(room_id):
 @room.route('{base_path}/room/<room_id>/ready'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def ready(room_id):
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     username = request.json.get('username')
 
@@ -380,7 +387,7 @@ def ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room with id {room_id} is not found!'.format(room_id=room_id)
+                    'message': get_phrase('room_id_not_found_error', lang).format(room_id=room_id)
                 }
             ]
         }), 404
@@ -388,7 +395,7 @@ def ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room "{room_name}" is closed!'.format(room_name=target_room.room_name)
+                    'message': get_phrase('room_closed_error', lang).format(room_name=target_room.room_name)
                 }
             ]
         }), 400
@@ -396,7 +403,7 @@ def ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Host is always ready!'
+                    'message': get_phrase('host_always_ready_error', lang)
                 }
             ]
         }), 403
@@ -404,7 +411,7 @@ def ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    "message": "Only host can change other players' status!"
+                    "message": get_phrase('only_host_status_error', lang)
                 }
             ]
         }), 403
@@ -412,7 +419,7 @@ def ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} is not connected to room "{room_name}"!'.format(
+                    'message': get_phrase('room_user_not_connected_error', lang).format(
                         username=modified_user.username, room_name=target_room.room_name)
                 }
             ]
@@ -436,9 +443,11 @@ def ready(room_id):
             'games': games_json
     }), 200
 
+
 @room.route('{base_path}/room/<room_id>/notready'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def not_ready(room_id):
+    lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     username = request.json.get('username')
 
@@ -451,7 +460,7 @@ def not_ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room with id {room_id} is not found!'.format(room_id=room_id)
+                    'message': get_phrase('room_id_not_found_error', lang).format(room_id=room_id)
                 }
             ]
         }), 404
@@ -459,7 +468,7 @@ def not_ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room "{room_name}" is closed!'.format(room_name=target_room.room_name)
+                    'message': get_phrase('room_closed_error', lang).format(room_name=target_room.room_name)
                 }
             ]
         }), 400
@@ -467,7 +476,7 @@ def not_ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} is not connected to room "{room_name}"!'.format(
+                    'message': get_phrase('room_user_not_connected_error', lang).format(
                         username=modified_user.username, room_name=target_room.room_name)
                 }
             ]
@@ -476,7 +485,7 @@ def not_ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    "message": "Only host can change other players' status!"
+                    "message": get_phrase('only_host_status_error', lang)
                 }
             ]
         }), 403
@@ -484,7 +493,7 @@ def not_ready(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Host is always ready!'
+                    'message': get_phrase('host_always_ready_error', lang)
                 }
             ]
         }), 403

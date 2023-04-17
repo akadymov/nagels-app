@@ -7,6 +7,7 @@ from app.models import User, Room, Game, Player, Hand, HandScore, TurnCard, Stat
 from datetime import datetime
 import random
 from config import get_settings, get_environment
+from app.text import get_phrase
 
 
 game = Blueprint('game', __name__)
@@ -19,11 +20,12 @@ env = get_environment()
 def game_score(game_id):
 
     g = Game.query.filter_by(id=game_id).first()
+    lang = request.headers.get('Accept-Language')
     if not g:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Game #{game_id} does not exist!'.format(game_id=game_id)
+                    'message': get_phrase('game_not_exist_error', lang).format(game_id=game_id)
                 }
             ]
         }), 400
@@ -43,11 +45,12 @@ def start():
     autodeal=request.json.get('autodeal')
     one_card_hands = request.json.get('singleCardHands')
     rating_game = request.json.get('ratingGame')
+    lang = request.headers.get('Accept-Language')
     if token is None:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(post_token_url=url_for('user.post_token'))
+                    'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))
                 }
             ]
         }), 401
@@ -58,7 +61,7 @@ def start():
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} does not have open rooms! Create room by POST {create_room_url} before managing games.'.format(
+                    'message': get_phrase('no_hosted_rooms_error', lang).format(
                         username=requesting_user.username,
                         create_room_url=url_for('room.create')
                     )
@@ -70,7 +73,7 @@ def start():
         return jsonify({
             'errors': [
                 {
-                    'message': 'Incorrect number of players to start ({players_count} currently connected to room "{room_name}")!'.format(
+                    'message': get_phrase('incorrect_players_number_error', lang).format(
                         players_count=hosted_room.connected_users.count(),
                         room_name=hosted_room.room_name
                     )
@@ -82,7 +85,7 @@ def start():
             return jsonify({
                 'errors': [
                     {
-                        'message': 'Game {game_id} is already started at {game_start} and is not finished yet! You cannot run more than one game in room at one moment!'.format(
+                        'message': get_phrase('game_already_started_error', lang).format(
                             game_id=room_game.id,
                             game_start=room_game.started
                         )
@@ -124,11 +127,12 @@ def start():
 def finish():
 
     token = request.json.get('token')
+    lang = request.headers.get('Accept-Language')
     if token is None:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(post_token_url=url_for('user.post_token'))
+                    'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))
                 }
             ]
         }), 401
@@ -139,7 +143,7 @@ def finish():
         return jsonify({
             'errors': [
                 {
-                    'message': 'User {username} does not have open rooms! Create room by POST {create_room_url} before managing games.'.format(
+                    'message': get_phrase('no_hosted_rooms_error', lang).format(
                         username=requesting_user.username,
                         create_room_url=url_for('room.create')
                     )
@@ -154,7 +158,7 @@ def finish():
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room {room_name} has {active_games} active game(s)!'.format(room_name=hosted_room.room_name, active_games=len(active_games))
+                    'message': get_phrase('active_games_in_room_error', lang).format(room_name=hosted_room.room_name, active_games=len(active_games))
                 }
             ]
         }), 403
@@ -189,11 +193,12 @@ def finish():
 def positions(game_id):
 
     token = request.json.get('token')
+    lang = request.headers.get('Accept-Language')
     if token is None:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(post_token_url=url_for('user.post_token'))
+                    'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))
                 }
             ]
         }), 401
@@ -204,7 +209,7 @@ def positions(game_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Game #{game_id} is not started yet!'.format(game_id=game_id)
+                    'message': get_phrase('game_not_started_error', lang).format(game_id=game_id)
                 }
             ]
         }), 400
@@ -214,7 +219,7 @@ def positions(game_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Only host can shuffle positions!'
+                    'message': get_phrase('only_host_shuffle_error', lang)
                 }
             ]
         }), 403
@@ -225,7 +230,7 @@ def positions(game_id):
             return jsonify({
                 'errors': [
                     {
-                        'message': 'Positions of players are already defined in game #{game_id}!'.format(game_id=game_id)
+                        'message': get_phrase('positions_already_defined_error', lang).format(game_id=game_id)
                     }
                 ]
             }), 403
@@ -262,11 +267,12 @@ def positions(game_id):
 def status(game_id):
 
     game = Game.query.filter_by(id=game_id).first()
+    lang = request.headers.get('Accept-Language')
     if not game:
         return jsonify({
             'errors': [
                 {
-                    'message': 'Game #{game_id} is not found!'.format(game_id=game_id)
+                    'message': get_phrase('game_not_found_error', lang).format(game_id=game_id)
                 }
             ]
         }), 404
@@ -276,7 +282,7 @@ def status(game_id):
         return jsonify({
             'errors': [
                 {
-                    'message': 'Room #{room_id} not found in game #{game_id}'.format(room_id=game.room_id, game_id=game_id)
+                    'message': get_phrase('game_room_not_found_error', lang).format(room_id=game.room_id, game_id=game_id)
                 }
             ]
         }), 401
@@ -374,24 +380,24 @@ def status(game_id):
                     'relativePosition': game.get_player_relative_positions(requesting_user.id, player.user_id) if requesting_user_is_player else player.position
                 })
 
-    action_msg = 'Game #{game_id} started by {hostname}! Shuffling positions.'.format(game_id=game_id, hostname=room.host.username)
+    action_msg = get_phrase('shuffling_positions_action_message', lang).format(game_id=game_id, hostname=room.host.username)
     can_deal = False
     if game.winner_id:
-        action_msg = 'Congratulations! ' + str(User.query.filter_by(id=game.winner_id).first().username) + ' won the game. You can check players standings by clicking "SCORES"'
+        action_msg = get_phrase('congratulations', lang) + str(User.query.filter_by(id=game.winner_id).first().username) + get_phrase('congratulations_end', lang)
     elif game.finished:
-        action_msg = 'This game is closed!'
+        action_msg = get_phrase('game_closed_action_message', lang)
     elif positions_defined:
         if current_hand is None:                        # if hand is not started yet
             can_deal = True
-            action_msg = 'Dealing cards...'
+            action_msg = get_phrase('dealing_cards_action_message', lang)
         elif next_player == requesting_user:
             action_msg = "It's your turn now"
         elif not current_hand.all_bets_made():          # if hand is started, but there are still bets to make
-            action_msg = '{username} is making bet...'.format(username=current_hand.next_acting_player().username)
+            action_msg = get_phrase('user_bets_action_message', lang).format(username=current_hand.next_acting_player().username)
         elif not current_hand.all_turns_made():         # if hand is not finished
-            action_msg = "{username}'s turn...".format(username=current_hand.next_acting_player().username)
+            action_msg = get_phrase('user_turn_action_message', lang).format(username=current_hand.next_acting_player().username)
         else:                                           # if hand is just finished
-            action_msg = 'Hand is finished'
+            action_msg = get_phrase('hand_finished_action_message', lang)
 
     played_hands_count = Hand.query.filter_by(game_id=game_id, is_closed=1).count()
 

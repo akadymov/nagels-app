@@ -7,6 +7,7 @@ from flask import url_for, jsonify
 from time import time
 import jwt
 from sqlalchemy import text
+from app.text import get_phrase
 from config import get_settings, get_environment
 
 
@@ -162,7 +163,7 @@ class User(UserMixin, db.Model):
             return jsonify({
                 'errors': [
                     {
-                        'message': 'Authentication token is absent! You should request token by POST {post_token_url}'.format(
+                        'message': get_phrase('auth_token_absent_error').format(
                 post_token_url=url_for('user.post_token'))
                     }
                 ]
@@ -172,7 +173,7 @@ class User(UserMixin, db.Model):
             return jsonify({
                 'errors': [
                     {
-                        'message': 'Authentication token is invalid! You should request new one by POST {post_token_url}'.format(
+                        'message': get_phrase('auth_token_invalid_error').format(
                 post_token_url=url_for('user.post_token'))
                     }
                 ]
