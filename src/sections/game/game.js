@@ -431,6 +431,7 @@ export default class Game extends React.Component{
                         body.cardsOnTable,
                         body.tookPlayer,
                         body.nextActingPlayer,
+                        body.lastTurnCards,
                         body.isLastCardInHand,
                         body.gameIsFinished
                     )
@@ -705,10 +706,13 @@ export default class Game extends React.Component{
                                     onMouseDown: (e) => this.handleLastTurnClick(e),
                                     onMouseUp: (e) => this.handleLastTurnClick(e)
                                 })
+                                newGameDetails.lastTurnCards = data.lastTurnCards
                             }
                             if(data.isLastCardInHand){
                                 if(data.gameIsFinished){
-                                    window.location.reload();
+                                    setTimeout(function(){
+                                        window.location.reload();
+                                    }, 5000)
                                 } else {
                                     newGameDetails.actionMessage = getText('dealing_cards')
                                     this.setState({
