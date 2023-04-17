@@ -96,7 +96,9 @@ def create_user():
         'preferredLang': user.preferred_language,
         'registered': user.registered,
         'lastSeen': user.last_seen,
-        'aboutMe': user.about_me
+        'aboutMe': user.about_me,
+        'colorScheme': user.color_scheme,
+        'deckType': user.deck_type
     }), 200
 
 
@@ -149,6 +151,7 @@ def post_token():
             'token': token,
             'expiresIn': auth['TOKEN_LIFETIME'][env],
             'connectedRoomId': user.get_connected_room_id(),
+            'preferredLang': user.preferred_language,
             'colorScheme': user.color_scheme,
             'deckType': user.deck_type
         }), 201
@@ -263,11 +266,11 @@ def send_password_recovery():
             'errors': [
                 {
                     'field': 'username',
-                    'message': get_phrase('ivalid_username_email_error', lang)
+                    'message': get_phrase('invalid_username_email_error', lang)
                 },
                 {
                     'field': 'email',
-                    'message': get_phrase('ivalid_username_email_error', lang)
+                    'message': get_phrase('invalid_username_email_error', lang)
                 }
             ]
         }), 400

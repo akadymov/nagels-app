@@ -308,6 +308,14 @@
     font-size: 12px;
 }
 
+.profile-lang-select-container{
+    position: absolute;
+    top: 0;
+    left: 37vw;
+    color: var(--regularText);
+    font-size: 12px;
+}
+
 .profile-deck-type-checkbox-container{
     position: absolute;
     top: 80px;

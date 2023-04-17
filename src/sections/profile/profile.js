@@ -118,7 +118,8 @@ export default class Profile extends React.Component{
             this.Cookies.get('idToken'), this.state.userData.email, 
             this.state.userData.aboutMe || '', 
             this.state.userData.colorScheme || 'light',
-            this.state.userData.deckType || 'classic'
+            this.state.userData.deckType || 'classic',
+            this.state.userData.preferredLang || 'en'
         )
         .then((body)=>{
             if(body.errors) {
@@ -142,6 +143,7 @@ export default class Profile extends React.Component{
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
                 this.Cookies.set('colorScheme', body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 this.Cookies.set('deckType', body.deckType, { path: '/' , deckType: expiresIn})
+                this.Cookies.set('preferredLang', body.preferredLang, { path: '/' , preferredLang: expiresIn})
                 if(body.colorScheme === 'dark'){
                     darkMode = true
                 }
@@ -213,6 +215,15 @@ export default class Profile extends React.Component{
     handleColorSchemeChange = (e) => {
         var userData = this.state.userData
         userData.colorScheme = e.target.value
+        this.setState({
+            userData: userData,
+            canUpdate: true
+        })
+    }
+
+    handleLangChange = (e) => {
+        var userData = this.state.userData
+        userData.preferredLang = e.target.value
         this.setState({
             userData: userData,
             canUpdate: true
@@ -557,6 +568,25 @@ export default class Profile extends React.Component{
                                     <MenuItem value='piggy' sx={{fontSize: 14}}>piggy</MenuItem>
                                 </Select>
                                 <InputLabel id="color-scheme-label" sx={{fontSize: '0.75rem', textAlign: 'left', marginLeft: '14px', marginTop: '4px'}}>color scheme</InputLabel>
+                            </div>
+                        :
+                            ''
+                        }
+                        {!this.props.isMobile && this.Cookies.get('username') === this.state.userData.username ?
+                            <div className='profile-lang-select-container'>
+                                <Select
+                                    labelId="lang-select-label"
+                                    id="lang-select"
+                                    value={this.state.userData.preferredLang || 'light'}
+                                    label="language"
+                                    size='small'
+                                    sx={{fontSize: 14, width: '100px', textAlign: 'left'}}
+                                    onChange={this.handleLangChange}
+                                >
+                                    <MenuItem value='en' sx={{fontSize: 14}}>en</MenuItem>
+                                    <MenuItem value='ru' sx={{fontSize: 14}}>ru</MenuItem>
+                                </Select>
+                                <InputLabel id="lang-label" sx={{fontSize: '0.75rem', textAlign: 'left', marginLeft: '14px', marginTop: '4px'}}>language</InputLabel>
                             </div>
                         :
                             ''

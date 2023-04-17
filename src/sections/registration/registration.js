@@ -133,6 +133,7 @@ export default class Registration extends React.Component{
                 this.Cookies.set('username',body.username, { path: '/' , expires: expiresIn})
                 this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 this.Cookies.set('deckType',body.deckType, { path: '/' , deckType: expiresIn})
+                this.Cookies.set('preferredLang', body.preferredLang, { path: '/' , preferredLang: expiresIn})
                 window.location.assign('/lobby/');
             }
         });

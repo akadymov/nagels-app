@@ -1,4 +1,7 @@
 import configFile from '../config.json'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export default class NagelsApi {
 
@@ -20,19 +23,20 @@ export default class NagelsApi {
         return response.json()  
     }
 
-    apiCall = async(url, method='GET', data = '') => {
+    apiCall = async(url, method='GET', data = '', preferredLang = cookies.get('preferredLang') || 'en') => {
 
         if (!['GET','DELETE','POST','PUT'].includes(method)) {
             throw new Error(`Bad request method (${method})`);
         }
         
         const resourceLocation = `${this._apiHost}${this._apiPort}${this._apiContext}${url}`
-
+        
         var req = {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Accept-Language': preferredLang
             }
         }
         if(data !== ''){
@@ -128,7 +132,7 @@ export default class NagelsApi {
 
         console.log(data)
 
-        const res = await this.apiCall('/user/edit/' + username, 'PUT', data);
+        const res = await this.apiCall('/user/edit/' + username, 'PUT', data, preferredLang);
         return res
     };
 
