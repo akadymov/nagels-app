@@ -9,6 +9,7 @@ import Modal from '@mui/material/Modal';
 import NagelsTableContainer from '../../components/nagels-table-container';
 import FormButton from '../form-button';
 import Cookies from 'universal-cookie';
+import phrases from '../../user-text.json'
 
 
 export default class GameScores extends React.Component{

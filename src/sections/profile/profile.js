@@ -10,7 +10,8 @@ import NagelsModal from '../../components/nagels-modal';
 //Local components
 import FormButton from '../../components/form-button';
 import defaultTheme from '../../themes/default';
-import NagelsAvatar from '../../components/nagels-avatar'
+import NagelsAvatar from '../../components/nagels-avatar';
+import { getText } from '../../components/user-text';
 
 //MUI components
 import TextField from '@mui/material/TextField';
@@ -166,7 +167,7 @@ export default class Profile extends React.Component{
     updatePassword = () => {
         if(this.state.newPassword !== this.state.repeatPassword){
             var newErrors = {
-                repeatPassword: 'password confirmation does not match'
+                repeatPassword: getText('password_confirmation_error')
             }
             this.setState({ errors: newErrors })
         } else {
@@ -260,7 +261,7 @@ export default class Profile extends React.Component{
         var newUserData = this.state.userData
         newUserData.aboutMe = e.target.value
         var newErrors = this.state.errors
-        newErrors.aboutMe = e.target.value.length > 500 ? 'about me (' + this.state.aboutMeSymbols + '/500)' : null
+        newErrors.aboutMe = e.target.value.length > 500 ? getText('about_me_symbols_tracker') + this.state.aboutMeSymbols + '/500)' : null
         this.setState({ 
             userData: newUserData, 
             canUpdate: newErrors.aboutMe == null, 
@@ -327,7 +328,7 @@ export default class Profile extends React.Component{
                         id: "file_type_error",
                         type: "text",
                         style: 'error',
-                        text: "Only PNG file types supported"
+                        text: getText('only_png_supported')
                     }
                 ]
             } else {
@@ -340,10 +341,10 @@ export default class Profile extends React.Component{
                             onChange: this.handleFileChange,
                         },
                         {
-                            id: "file_type_error",
+                            id: "file_size_error",
                             type: "text",
                             style: 'error',
-                            text: "Max file size is 200 KB"
+                            text: getText('max_avatar_size')
                         }
                     ]
                 } else {
@@ -358,7 +359,7 @@ export default class Profile extends React.Component{
                             id: "upload_avatar",
                             type: "button",
                             variant: "contained",
-                            text: "Upload",
+                            text: getText('upload'),
                             size: "small",
                             width: '140px',
                             onSubmit: this.uploadFile
@@ -416,7 +417,7 @@ export default class Profile extends React.Component{
                                     key='avatar_update_button'
                                     onClick={() => {this.setState({modalOpen: true})}}
                                     variant='outlined'
-                                    text='Upload new'
+                                    text= {getText('upload_new')}
                                     width='140px'
                                     size={this.props.isMobile ? 'small' : 'medium'}
                                     color='contrastControlElements'
@@ -449,7 +450,7 @@ export default class Profile extends React.Component{
                                     disabled
                                     variant='filled'
                                     size='small'
-                                    helperText='registered'
+                                    helperText={getText('registered')}
                                     value={this.state.userData.registered}
                                     sx={{width: this.props.isMobile ? (this.props.isPortrait ? '90vw' : '55vw') : '24vw'}}
                                 ></TextField>
@@ -461,7 +462,7 @@ export default class Profile extends React.Component{
                             <TextField
                                 id='about'
                                 disabled={this.state.userData.username !== this.Cookies.get('username')}
-                                helperText={this.state.errors.aboutMe || 'about me (' + this.state.aboutMeSymbols + '/500)'}
+                                helperText={this.state.errors.aboutMe || getText('about_me_symbols_tracker') + this.state.aboutMeSymbols + '/500)'}
                                 error={this.state.errors.aboutMe}
                                 value={this.state.userData.aboutMe}
                                 sx={{width: this.props.isMobile ? (this.props.isPortrait ? '90vw' : '55vw') : '49vw'}}
@@ -478,7 +479,7 @@ export default class Profile extends React.Component{
                                     disabled={!this.state.canUpdate}
                                     onSubmit={this.updateProfile}
                                     variant='contained'
-                                    text='Update profile'
+                                    text={getText('update_profile')}
                                     width='180px'
                                 ></FormButton>
                             </div>
@@ -489,7 +490,7 @@ export default class Profile extends React.Component{
                             <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <TextField
                                     id='current_password'
-                                    helperText={this.state.errors.currentPassword || 'current password'}
+                                    helperText={this.state.errors.currentPassword || getText('current_password')}
                                     error={this.state.errors.currentPassword}
                                     value={this.state.currentPassword}
                                     type='password'
@@ -506,7 +507,7 @@ export default class Profile extends React.Component{
                             <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <TextField
                                     id='new_password'
-                                    helperText={this.state.errors.newPassword || 'new password'}
+                                    helperText={this.state.errors.newPassword || getText('new_password')}
                                     error={this.state.errors.newPassword}
                                     value={this.state.newPassword}
                                     type='password'
@@ -523,7 +524,7 @@ export default class Profile extends React.Component{
                             <div className={`profile-text-field-control-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <TextField
                                     id='confirm_password'
-                                    helperText={this.state.errors.repeatPassword || 'repeat password'}
+                                    helperText={this.state.errors.repeatPassword || getText('repeat_password')}
                                     error={this.state.errors.repeatPassword}
                                     value={this.state.repeatPassword}
                                     type='password'
@@ -544,10 +545,10 @@ export default class Profile extends React.Component{
                                     disabled={!this.state.canUpdatePassword}
                                     onSubmit={this.updatePassword}
                                     variant='contained'
-                                    text='Update password'
+                                    text={getText('update_password')} 
                                     width='180px'
                                 ></FormButton>
-                                <div className="password-update-confirmation-message" style={{ display: this.state.passwordUpdated ? 'block' : 'none' }}>Password is saved</div>
+                                <div className="password-update-confirmation-message" style={{ display: this.state.passwordUpdated ? 'block' : 'none' }}>{getText('password_saved')}</div>
                             </div>
                         :
                             ''
@@ -558,16 +559,16 @@ export default class Profile extends React.Component{
                                     labelId="color-scheme-select-label"
                                     id="color-scheme-select"
                                     value={this.state.userData.colorScheme || 'light'}
-                                    label="color scheme"
+                                    label={getText('color_scheme')}
                                     size='small'
                                     sx={{fontSize: 14, width: '100px', textAlign: 'left'}}
                                     onChange={this.handleColorSchemeChange}
                                 >
-                                    <MenuItem value='light' sx={{fontSize: 14}}>light</MenuItem>
-                                    <MenuItem value='dark' sx={{fontSize: 14}}>dark</MenuItem>
-                                    <MenuItem value='piggy' sx={{fontSize: 14}}>piggy</MenuItem>
+                                    <MenuItem value='light' sx={{fontSize: 14}}>{getText('light')}</MenuItem>
+                                    <MenuItem value='dark' sx={{fontSize: 14}}>{getText('dark')}</MenuItem>
+                                    <MenuItem value='piggy' sx={{fontSize: 14}}>{getText('piggy')}</MenuItem>
                                 </Select>
-                                <InputLabel id="color-scheme-label" sx={{fontSize: '0.75rem', textAlign: 'left', marginLeft: '14px', marginTop: '4px'}}>color scheme</InputLabel>
+                                <InputLabel id="color-scheme-label" sx={{fontSize: '0.75rem', textAlign: 'left', marginLeft: '14px', marginTop: '4px'}}>{getText('color_scheme')}</InputLabel>
                             </div>
                         :
                             ''
@@ -577,16 +578,16 @@ export default class Profile extends React.Component{
                                 <Select
                                     labelId="lang-select-label"
                                     id="lang-select"
-                                    value={this.state.userData.preferredLang || 'light'}
-                                    label="language"
+                                    value={this.state.userData.preferredLang || 'en'}
+                                    label={getText('language')}
                                     size='small'
                                     sx={{fontSize: 14, width: '100px', textAlign: 'left'}}
                                     onChange={this.handleLangChange}
                                 >
-                                    <MenuItem value='en' sx={{fontSize: 14}}>en</MenuItem>
-                                    <MenuItem value='ru' sx={{fontSize: 14}}>ru</MenuItem>
+                                    <MenuItem value='en' sx={{fontSize: 14}}>{getText('english')}</MenuItem>
+                                    <MenuItem value='ru' sx={{fontSize: 14}}>{getText('russian')}</MenuItem>
                                 </Select>
-                                <InputLabel id="lang-label" sx={{fontSize: '0.75rem', textAlign: 'left', marginLeft: '14px', marginTop: '4px'}}>language</InputLabel>
+                                <InputLabel id="lang-label" sx={{fontSize: '0.75rem', textAlign: 'left', marginLeft: '14px', marginTop: '4px'}}>{getText('language')}</InputLabel>
                             </div>
                         :
                             ''
@@ -600,13 +601,13 @@ export default class Profile extends React.Component{
                                     size='small'
                                     sx={{padding:'5px'}}
                                 ></Checkbox>
-                                4 color deck
+                                {getText('4_color_deck')}
                             </div>
                         :
                             ''
                         }
                         <div className={`profile-backtogame-button-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                            <Tooltip title="Back to game" onClick={this.backToGame}>
+                            <Tooltip title={getText('back_to_game')} onClick={this.backToGame}>
                             <IconButton>
                                 <KeyboardBackspaceIcon/>
                             </IconButton>
@@ -619,29 +620,29 @@ export default class Profile extends React.Component{
                         <div className={`user-stats line1  ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                             <div className={`user-stat-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <div className={`user-stat-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{this.state.userData.stats.gamesPlayed}</div>
-                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>Games</div>
+                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('games')}</div>
                             </div>
                             <div className={`user-stat-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <div className={`user-stat-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{100*this.state.userData.stats.winRatio}</div>
-                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>Won %</div>
+                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('won_%')}</div>
                             </div>
                             <div className={`user-stat-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <div className={`user-stat-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{this.state.userData.stats.avgScore}</div>
-                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>Avg Score</div>
+                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('avg_score')}</div>
                             </div>
                         </div>
                         <div className={`user-stats line2 ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                         <div className={`user-stat-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <div className={`user-stat-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{this.state.userData.stats.avgBonuses}</div>
-                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>Avg Bonuses</div>
+                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('avg_bonuses')}</div>
                             </div>
                             <div className={`user-stat-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <div className={`user-stat-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{this.state.userData.stats.avgBets}</div>
-                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>Bets Per Game</div>
+                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('bets_per_game')}</div>
                             </div>
                             <div className={`user-stat-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <div className={`user-stat-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{this.state.userData.stats.totalScore}</div>
-                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>Total Score</div>
+                                <div className={`user-stat-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('total_score')}</div>
                             </div>
                         </div>
                         {this.state.userData.connectedRoomId ? 
@@ -651,7 +652,7 @@ export default class Profile extends React.Component{
                                     key='go_to_room'
                                     onSubmit={()=>window.location.assign('/room/' + this.state.userData.connectedRoomId)}
                                     variant='outlined'
-                                    text={'Connected to room#' + this.state.userData.connectedRoomId}
+                                    text={getText('connected_ro_room') + this.state.userData.connectedRoomId}
                                     size='small'
                                     width='190px'
                                 ></FormButton>
@@ -665,7 +666,7 @@ export default class Profile extends React.Component{
                 }
                 <NagelsModal
                     open={this.state.modalOpen}
-                    text="Upload new profile picture"
+                    text={getText('upload_new_avatar')}
                     isMobile={this.props.isMobile}
                     isDesktop={this.props.isDesktop}
                     isPortrait={this.props.isPortrait}

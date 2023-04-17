@@ -1,6 +1,231 @@
 {
   "phrases": [
     {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "",
+      "en": "",
+      "ru": ""
+    },
+    {
+      "id": "color_scheme",
+      "en": "color scheme",
+      "ru": "тема"
+    },
+    {
+      "id": "update_password",
+      "en": "Update password",
+      "ru": "Обновить пароль"
+    },
+    {
+      "id": "repeat_password",
+      "en": "repeat password",
+      "ru": "подтверждение пароля"
+    },
+    {
+      "id": "new_password",
+      "en": "new password",
+      "ru": "новый пароль"
+    },
+    {
+      "id": "current_password",
+      "en": "current password",
+      "ru": "текущий пароль"
+    },
+    {
+      "id": "update_profile",
+      "en": "Update profile",
+      "ru": "Обновить профиль"
+    },
+    {
+      "id": "registered",
+      "en": "registered",
+      "ru": "зарегистрирован"
+    },
+    {
+      "id": "upload_new",
+      "en": "Upload new",
+      "ru": "Загрузить"
+    },
+    {
+      "id": "upload",
+      "en": "Upload",
+      "ru": "Загрузить"
+    },
+    {
+      "id": "max_avatar_size",
+      "en": "Max file size is 200 KB",
+      "ru": "Макс размер файла - 200 KB"
+    },
+    {
+      "id": "upload_new_avatar",
+      "en": "Upload new profile picture",
+      "ru": "Загрузить новый аватар"
+    },
+    {
+      "id": "connected_ro_room",
+      "en": "Connected to room #",
+      "ru": "Подключен к комнате #"
+    },
+    {
+      "id": "total_score",
+      "en": "Total Score",
+      "ru": "Общий счет"
+    },
+    {
+      "id": "bets_per_game",
+      "en": "Bets Per Game",
+      "ru": "Ставок за игру"
+    },
+    {
+      "id": "avg_bonuses",
+      "en": "Avg Bonuses",
+      "ru": "Ср бонусов"
+    },
+    {
+      "id": "avg_score",
+      "en": "Avg Score",
+      "ru": "Ср счет"
+    },
+    {
+      "id": "won_%",
+      "en": "Won %",
+      "ru": "Побед %"
+    },
+    {
+      "id": "games",
+      "en": "Games",
+      "ru": "Игры"
+    },
+    {
+      "id": "back_to_game",
+      "en": "Back to game",
+      "ru": "Назад к игре"
+    },
+    {
+      "id": "4_color_deck",
+      "en": "4 color deck",
+      "ru": "4 цветная колода"
+    },
+    {
+      "id": "language",
+      "en": "language",
+      "ru": "язык"
+    },
+    {
+      "id": "english",
+      "en": "english",
+      "ru": "английский"
+    },
+    {
+      "id": "russian",
+      "en": "russian",
+      "ru": "русский"
+    },
+    {
+      "id": "light",
+      "en": "light",
+      "ru": "светлая"
+    },
+    {
+      "id": "dark",
+      "en": "dark",
+      "ru": "темная"
+    },
+    {
+      "id": "piggy",
+      "en": "piggy",
+      "ru": "свинячая"
+    },
+    {
+      "id": "password_saved",
+      "en": "Password is saved",
+      "ru": "Пароль сохранен"
+    },
+    {
+      "id": "only_png_supported",
+      "en": "Only PNG file types supported",
+      "ru": "Поддерживаются только PNG файлы"
+    },
+    {
+      "id": "about_me_symbols_tracker",
+      "en": "about me (",
+      "ru": "обо мне ("
+    },
+    {
       "id": "auth_token_absent_error",
       "en": "Authentication token is absent! You should request token by POST {post_token_url}",
       "ru": "Не найден аутентификационный токен! Необходимо запросить токен через POST {post_token_url}"
@@ -257,7 +482,7 @@
     },
     {
       "id": "password_confirmation_error",
-      "en": "Password confirmation is invalid!",
+      "en": "Password confirmation doesn't match!",
       "ru": "Пароли не совпадают!"
     },
     {
@@ -306,13 +531,13 @@
       "ru": "Раздел \"Обо мне\" может содержать не более {max_symbols} символов!"
     },
     {
-      "id": "ivalid_username_email_error",
+      "id": "invalid_username_email_error",
       "en": "Invalid username or email!",
       "ru": "Неверное имя пользователя или email!"
     },
     {
       "id": "invalid_room_id_error",
-      "en": "Ivalid room id!",
+      "en": "Invalid room id!",
       "ru": "Неверный идентификатор комнаты!"
     },
     {
@@ -334,11 +559,6 @@
       "id": "password_confirmation_missing_error",
       "en": "Password confirmation is missing!",
       "ru": "Отсутствует подтверждение пароля!"
-    },
-    {
-      "id": "password_confirmation_error",
-      "en": "Password confirmation does not match!",
-      "ru": "Пароли не совпадают!"
     },
     {
       "id": "new_password_saved",

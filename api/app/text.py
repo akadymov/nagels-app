@@ -1,7 +1,10 @@
 import json
 from app import get_settings
+import os
 
-with open('./user-text.json') as f:
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+with open(os.path.join(dir_path, '../../src/user-text.json')) as f:
     data = json.load(f)
 
 env = get_settings('ENVIRONMENT')
