@@ -13,6 +13,7 @@ export default class Registration extends React.Component{
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleRepeatPasswordChange = this.handleRepeatPasswordChange.bind(this);
+        this.handleLangChange = this.handleLangChange.bind(this);
         this.handleErrorResponse = this.handleErrorResponse.bind(this);
         this.clearErrorMessage = this.clearErrorMessage.bind(this);
         this.state = {
@@ -86,9 +87,24 @@ export default class Registration extends React.Component{
                     onSubmit: () => window.location.assign('/signin')
                 }
             ],
-            languages: [
-                {type:"radio", id:"preferred-lang-en", name:"preferred-lang", lang:"en", errorMessage:""},
-                {type:"radio", id:"preferred-lang-ru", name:"preferred-lang", lang:"ru", errorMessage:""}
+            selectList: [
+                {
+                    id: "preferred_lang",
+                    label: getText('language'),
+                    defaultValue: 'en',
+                    width: "300px",
+                    onChange: this.handleLangChange,
+                    values: [
+                        {
+                            value: 'en',
+                            label: getText('english')
+                        },
+                        {
+                            value: 'ru',
+                            label: getText('russian')
+                        }
+                    ]
+                }
             ]
       };
     }
@@ -198,6 +214,7 @@ export default class Registration extends React.Component{
                 onKeyPress={this.handleKeyPress}
                 textFieldsList={this.state.textFieldsList}
                 submitButtonList={this.state.submitButtonList}
+                selectList={this.state.selectList}
                 onSubmit={this.SendLoginRequest}
             >
             </FormContainer>

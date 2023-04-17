@@ -392,7 +392,7 @@ export default class Room extends React.Component{
                         {
                             id: "invitation_succeed_message",
                             type: "text",
-                            text: "Invitation link created and sent to specified email. You can share it with invited players"
+                            text: getText('invitation_created')
                         },
                         {
                             id: "invitation_link",

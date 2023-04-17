@@ -581,7 +581,7 @@ export default class Profile extends React.Component{
                                     value={this.state.userData.preferredLang || 'en'}
                                     label={getText('language')}
                                     size='small'
-                                    sx={{fontSize: 14, width: '100px', textAlign: 'left'}}
+                                    sx={{fontSize: 14, width: '130px', textAlign: 'left'}}
                                     onChange={this.handleLangChange}
                                 >
                                     <MenuItem value='en' sx={{fontSize: 14}}>{getText('english')}</MenuItem>

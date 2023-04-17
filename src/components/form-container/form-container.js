@@ -4,6 +4,12 @@ import './form-container.css';
 import FormButton from '../form-button';
 import TextField from '@mui/material/TextField';
 import parse from 'html-react-parser';
+import { getText } from '../user-text';
+
+//MUI components
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 
 export default class FormContainer extends React.Component{
@@ -46,6 +52,30 @@ export default class FormContainer extends React.Component{
                                         display: !field.hidden ? 'inline-flex' : 'none'
                                     }}
                                 ></TextField>
+                            </div>
+                        )
+                    })
+                :
+                    ''
+                }
+                { this.props.selectList ? 
+                    this.props.selectList.map(select => {
+                        return(
+                            <div className="form-element-container" key={`container-${select.id}`}>
+                                <Select
+                                    labelId={select.id}
+                                    id={select.id}
+                                    value={select.defaultValue}
+                                    label={select.value}
+                                    sx={{width: select.width, textAlign: 'left'}}
+                                    onChange={select.onChange}
+                                >
+                                    {select.values.map(selectValue => {
+                                        return(
+                                            <MenuItem value={selectValue.value}>{selectValue.label}</MenuItem>
+                                        )
+                                    })}
+                                </Select>
                             </div>
                         )
                     })

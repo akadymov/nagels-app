@@ -1,39 +1,9 @@
 {
   "phrases": [
     {
-      "id": "",
-      "en": "",
-      "ru": ""
-    },
-    {
-      "id": "",
-      "en": "",
-      "ru": ""
-    },
-    {
-      "id": "",
-      "en": "",
-      "ru": ""
-    },
-    {
-      "id": "",
-      "en": "",
-      "ru": ""
-    },
-    {
-      "id": "",
-      "en": "",
-      "ru": ""
-    },
-    {
-      "id": "",
-      "en": "",
-      "ru": ""
-    },
-    {
-      "id": "",
-      "en": "",
-      "ru": ""
+      "id": "invitation_created",
+      "en": "Invitation link created and sent to specified email. You can share it with invited players",
+      "ru": "Пригласительная ссылка создана и отправлена на указанный email. Вы можете поделиться ею с приглашенными игроками"
     },
     {
       "id": "log_in",
@@ -632,13 +602,13 @@
     },
     {
       "id": "english",
-      "en": "english",
-      "ru": "английский"
+      "en": "English",
+      "ru": "Английский"
     },
     {
       "id": "russian",
-      "en": "russian",
-      "ru": "русский"
+      "en": "Russian",
+      "ru": "Русский"
     },
     {
       "id": "light",
