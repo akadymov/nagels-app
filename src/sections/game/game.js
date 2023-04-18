@@ -423,6 +423,8 @@ export default class Game extends React.Component{
                     this.handleInGameError(body)
                 } else {
                     console.log('Emitting event "put_card"')
+                    console.log(this.state.gameDetails.lastTurnCards)
+                    console.log(body.cardsOnTable)
                     gameSocket.emit(
                         'put_card', 
                         this.props.match.params.gameId,
@@ -431,7 +433,7 @@ export default class Game extends React.Component{
                         body.cardsOnTable,
                         body.tookPlayer,
                         body.nextActingPlayer,
-                        body.lastTurnCards,
+                        body.cardsOnTable || this.state.gameDetails.lastTurnCards,
                         body.isLastCardInHand,
                         body.gameIsFinished
                     )
@@ -623,7 +625,7 @@ export default class Game extends React.Component{
                                             },
                                             {
                                                 id: "bet_players",
-                                                header: getText('mdae_bets'),
+                                                header: getText('made_bets'),
                                                 type: "players-bet-info",
                                                 players: betPlayers
                                             },
@@ -684,6 +686,7 @@ export default class Game extends React.Component{
                             newGameDetails.cardsOnTable = data.cardsOnTable
                             newGameDetails.nextActingPlayer = data.nextActingPlayer
                             var putPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.actor)
+                            var newHeaderControls = this.state.headerControls
                             newGameDetails.players[putPlayerIndex].cardsOnHand --
                             if(data.tookPlayer){
                                 var tookPlayerIndex = newGameDetails.players.findIndex(el => el.username === data.tookPlayer)
@@ -693,8 +696,8 @@ export default class Game extends React.Component{
                                 if(data.tookPlayer === newGameDetails.myInHandInfo.username) {
                                     newGameDetails.myInHandInfo.tookTurns ++
                                 }
-                                var newHeaderControls = this.state.headerControls  
-                                newHeaderControls.push({
+                                var lastTurnControlIndex = newHeaderControls.findIndex(control=>control.id==='last_turn')
+                                var newLastTurnControl = {
                                     id: 'last_turn',
                                     type: 'button',
                                     text: getText('last_turn'),
@@ -705,7 +708,12 @@ export default class Game extends React.Component{
                                     onSubmit: this.showLastTurnMobile,
                                     onMouseDown: (e) => this.handleLastTurnClick(e),
                                     onMouseUp: (e) => this.handleLastTurnClick(e)
-                                })
+                                }
+                                if(lastTurnControlIndex){
+                                    newHeaderControls[lastTurnControlIndex] = newLastTurnControl
+                                } else {
+                                    newHeaderControls.push({newLastTurnControl})
+                                }
                                 newGameDetails.lastTurnCards = data.lastTurnCards
                             }
                             if(data.isLastCardInHand){

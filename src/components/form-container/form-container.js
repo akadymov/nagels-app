@@ -4,13 +4,11 @@ import './form-container.css';
 import FormButton from '../form-button';
 import TextField from '@mui/material/TextField';
 import parse from 'html-react-parser';
-import { getText } from '../user-text';
 
 //MUI components
 import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-
+    
 
 export default class FormContainer extends React.Component{
 
