@@ -10,6 +10,7 @@ import NagelsTableContainer from '../../components/nagels-table-container';
 import FormButton from '../form-button';
 import Cookies from 'universal-cookie';
 import { getText } from '../user-text';
+import defaultTheme from '../../themes/default';
 
 
 export default class GameScores extends React.Component{
@@ -39,6 +40,7 @@ export default class GameScores extends React.Component{
                             <FormButton
                                 key='close_game_scores'
                                 variant='outlined'
+                                width='140px'
                                 text={getText('back_to_game')}
                                 onSubmit={this.props.closeModal}
                                 size='small'

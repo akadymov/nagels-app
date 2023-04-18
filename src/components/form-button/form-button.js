@@ -5,10 +5,17 @@ import './form-button.css';
 //MUI components
 import Button from '@mui/material/Button';
 
+//Local components
+import Cookies from 'universal-cookie';
+
 
 export default class FormButton extends React.Component{
 
+    Cookies = new Cookies();
+
     render() {
+
+
         return(
             <div className="button-container">
                 <Button

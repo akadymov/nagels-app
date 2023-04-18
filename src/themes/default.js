@@ -33,14 +33,20 @@ const defaultTheme = createTheme({
       main: '#b10000',
     },
     secondary: {
-      main: '#13428f',
-      piggy: '#ffbce6'
+      main: '#13428f'
+    },
+    secondaryPiggy: {
+      main: '#ffbce6'
     },
     primary: {
       light: '#5dc2fc',
       main: '#13428f', 
       dark: '#5dc2fc',
       piggy: '#fc5dbf'
+    },
+    primaryPiggy: {
+      main: '#fc5dbf',
+      active: '#5dc2fc'
     },
     blackSuit: {
       main: '#000000',
@@ -77,6 +83,48 @@ const defaultTheme = createTheme({
   components: {
     MuiPaper: {
       styleOverrides: { root: { backgroundColor: cookies.get('colorScheme')==='dark' ? '#131313' : (cookies.get('colorScheme')==='piggy' ? '#ffe6f0' : 'white') } },
+    },
+    MuiButton: {
+      styleOverrides: { 
+        contained: {
+          backgroundColor: cookies.get('colorScheme')==='piggy' ? '#fc5dbf' : '#13428f',
+          "&:hover": {
+            backgroundColor: cookies.get('colorScheme')==='piggy' ? '#620140' : '#5dc2fc'
+          }
+        },
+        outlined: {
+          borderColor: cookies.get('colorScheme')==='piggy' ? '#fc5dbf' : '#13428f',
+          color: cookies.get('colorScheme')==='piggy' ? '#fc5dbf' : '#13428f',
+          "&:hover": {
+            borderColor: cookies.get('colorScheme')==='piggy' ? '#fc5dbf' : '#13428f'
+          }
+        },
+        text: {
+          border: '1px solid #b10000',
+          color: '#b10000',
+          "&:hover": {
+            backgroundColor: '#b100008e'
+          },
+          "&:disabled": {
+            border: 'none',
+            backgroundColor: '#0000001f'
+          }
+        }
+    }
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        bar: {
+          backgroundColor: cookies.get('colorScheme')==='piggy' ? '#fc5dbf' : '#13428f'
+        }
+      }
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+            color: cookies.get('colorScheme')==='piggy' ? '#fc5dbf' : '#13428f'
+        }
+      }
     }
   }
 });
