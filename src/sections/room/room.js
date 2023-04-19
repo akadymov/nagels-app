@@ -32,27 +32,7 @@ export default class Room extends React.Component{
             modalOpen: false,
             modalHeader: getText('confirm_action'),
             modalCanClose: true,
-            modalControls: [
-                {
-                    id: "confirm_close_room",
-                    type: "button",
-                    variant: "text",
-                    text: getText('close_room'),
-                    width: '140px',
-                    color: 'error',
-                    disabled: false,
-                    onSubmit: this.confirmCloseRoom
-                },
-                {
-                    id: "cancel_close_room",
-                    type: "button",
-                    variant: "contained",
-                    text: getText('cancel'),
-                    width: '140px',
-                    disabled: false,
-                    onSubmit: this.closeModal
-                }
-            ],
+            modalControls: [],
             roomDetails: {
                 connectedUserList: [],
                 host: '',
@@ -570,7 +550,28 @@ export default class Room extends React.Component{
 
     closeRoom = () => {
         this.setState({
-            modalOpen: true
+            modalOpen: true,
+            modalControls: [
+                {
+                    id: "confirm_close_room",
+                    type: "button",
+                    variant: "text",
+                    text: getText('close_room'),
+                    width: '140px',
+                    color: 'error',
+                    disabled: false,
+                    onSubmit: this.confirmCloseRoom
+                },
+                {
+                    id: "cancel_close_room",
+                    type: "button",
+                    variant: "contained",
+                    text: getText('cancel'),
+                    width: '140px',
+                    disabled: false,
+                    onSubmit: this.closeModal
+                }
+            ]
         })
     }
 

@@ -223,7 +223,7 @@
     {
       "id": "hand_id",
       "en": "Hand #",
-      "ru": "Раздача #"
+      "ru": "#"
     },
     {
       "id": "is_making_bet",
