@@ -24,6 +24,7 @@ export default class ForgotPassword extends React.Component{
             username: null,
             email: null,
             recoverySent: false,
+            formMessage: null,
             errors: {},
             textFieldsList: [
                 {
@@ -108,7 +109,8 @@ export default class ForgotPassword extends React.Component{
                     submitButtonList: newSubmitButtonList,
                     username: null,
                     email: null,
-                    recoverySent: true
+                    recoverySent: true,
+                    formMessage: getText('password_recover_sent')
                 })
             }
         })
@@ -163,14 +165,9 @@ export default class ForgotPassword extends React.Component{
                     textFieldsList={this.state.textFieldsList}
                     submitButtonList={this.state.submitButtonList}
                     onSubmit={this.SendLoginRequest}
+                    formMessage={this.state.formMessage}
                 >
                 </FormContainer>
-                <div 
-                    className={`recovery-sent-confirmation-message ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
-                    style={{ display: this.state.recoverySent ? 'block' : 'none' }}
-                >
-                    {getText('password_recover_sent')}
-                </div>
             </div>
         )
     }

@@ -40,6 +40,7 @@ export default class FormContainer extends React.Component{
                                     error={field.errorMessage !== ''}
                                     helperText={field.errorMessage}
                                     type={field.type}
+                                    disabled={field.disabled}
                                     required={field.required}
                                     defaultValue={field.text}
                                     autoComplete={field.autoComplete}
@@ -53,6 +54,13 @@ export default class FormContainer extends React.Component{
                             </div>
                         )
                     })
+                :
+                    ''
+                }
+                { this.props.formMessage ? 
+                    <div className="form-message-container" key='container-form-message'>
+                        {this.props.formMessage}
+                    </div>
                 :
                     ''
                 }

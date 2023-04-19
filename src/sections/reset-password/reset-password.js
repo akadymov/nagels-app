@@ -24,6 +24,7 @@ export default class ResetPassword extends React.Component{
             newPassword: null,
             repeatPassword: null,
             passwordUpdated: false,
+            formMessage: null,
             errors: {},
             textFieldsList: [
                 {
@@ -111,6 +112,7 @@ export default class ResetPassword extends React.Component{
                     submitButtonList: newSubmitButtonList
                 })
             } else {
+                var password = this.state.newPassword
                 newSubmitButtonList = this.state.submitButtonList
                 newSubmitButtonList[0].disabled = true
                 newSubmitButtonList[1].hidden = false
@@ -118,21 +120,22 @@ export default class ResetPassword extends React.Component{
                     submitButtonList: newSubmitButtonList,
                     newPassword: null,
                     repeatPassword: null,
-                    passwordUpdated: true
+                    passwordUpdated: true,
+                    formMessage: getText('password_updated')
                 })
-                setTimeout(this.SendLoginRequest(), 3000)
+                setTimeout(this.SendLoginRequest(body.username, password), 3000)
             }
         })
     }
 
-    SendLoginRequest = () => {
+    SendLoginRequest = (username, password) => {
         this.NagelsApi.login(
-            this.state.username, 
-            this.state.password
+            username, 
+            password
         )
         .then((body) => {
             if(body.errors) {
-                window.location.assign('/signin/' + this.state.username);
+                window.location.assign('/signin/' + username);
             } else {
                 var currentDate = new Date(); 
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
@@ -203,14 +206,9 @@ export default class ResetPassword extends React.Component{
                     textFieldsList={this.state.textFieldsList}
                     submitButtonList={this.state.submitButtonList}
                     onSubmit={this.SendLoginRequest}
+                    formMessage={this.state.formMessage}
                 >
                 </FormContainer>
-                <div 
-                    className={`password-updated-confirmation-message ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
-                    style={{ display: this.state.passwordUpdated ? 'block' : 'none' }}
-                >
-                    {getText('password_updated')}
-                </div>
             </div>
         )
     }

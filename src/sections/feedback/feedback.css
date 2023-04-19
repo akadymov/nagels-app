@@ -1,6 +1,9 @@
 .feedback-sent-confirmation-message{
     position: absolute;
-    top: 150px;
+    top:auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 30%;
     left: 50%;
     transform: translate(-50%, 0);
     width: 200px;

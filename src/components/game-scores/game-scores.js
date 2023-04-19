@@ -10,7 +10,6 @@ import NagelsTableContainer from '../../components/nagels-table-container';
 import FormButton from '../form-button';
 import Cookies from 'universal-cookie';
 import { getText } from '../user-text';
-import defaultTheme from '../../themes/default';
 
 
 export default class GameScores extends React.Component{

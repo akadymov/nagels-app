@@ -456,10 +456,12 @@ def reset_password():
 
     saved_token = Token.query.filter_by(token=token).first()
     requesting_user.set_password(new_password)
-    saved_token.status='used'
+    saved_token.status = 'used'
     db.session.commit()
 
-    return jsonify('New password is saved!'), 200
+    return jsonify({
+        'username': requesting_user.username
+    }), 200
 
 
 @user.route('/user/reset_password/<token>', methods=['GET'])
