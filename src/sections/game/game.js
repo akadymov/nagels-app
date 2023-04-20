@@ -130,7 +130,7 @@ export default class Game extends React.Component{
                         }
                     ]
                     if (getGameResponse.host === this.Cookies.get('username')){
-                        newHeaderControls.push({
+                        newHeaderControls.unshift({
                             id: 'shuffle',
                             type: 'button',
                             text: getGameResponse.status === 'finished' ? getText('start_new_game') : getText('shuffle'),

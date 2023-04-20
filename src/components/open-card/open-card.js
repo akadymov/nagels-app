@@ -53,6 +53,7 @@ export default class OpenCard extends React.Component{
                 //widthNum = 49
                 height = '70px'
                 heightNum = 70
+                interval = 15
                 break
             case 'medium':
                 width = '60px'
