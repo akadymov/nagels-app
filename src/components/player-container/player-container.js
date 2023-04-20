@@ -27,6 +27,7 @@ export default class PlayerContainer extends React.Component{
                             selectedCard={this.props.selectedCard}
                             index={this.props.dealtCards.findIndex( el => el === card )}
                             onClick={this.props.onSelectCard}
+                            size={this.props.isMobile ? 'small' : 'large'}
                         ></OpenCard>
                     )})}
                     {

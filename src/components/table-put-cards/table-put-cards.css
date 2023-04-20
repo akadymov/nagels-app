@@ -21,7 +21,7 @@
 }
 
 .table-put-cards-container.mobile.landscape{
-    top: 40%
+    top: 46%
 }
 
 .table-put-cards-container.mobile{
@@ -41,6 +41,10 @@
 
 .table-put-card.player0.mobile.landscape{
     bottom: 0%;
+}
+
+.table-put-card.player0.mobile.portrait{
+    bottom: -40%;
 }
 
 
@@ -135,23 +139,27 @@
 
 
 .table-put-card.player1.outof6{
+    right: -5%;
+    top: 45%;
+}
+
+.table-put-card.player2.outof6{
     right: 5%;
     top: 20%;
 }
 
-.table-put-card.player2.outof6{
+.table-put-card.player3.outof6{
     left: 50%;
     transform: translate(-50%, 0);
-    top: 0%;
-}
-
-.table-put-card.player3.outof6{
-    left: 10%;
-    top: 20%;
+    top: 5%;
 }
 
 .table-put-card.player4.outof6{
-    bottom: -10%;
-    left: 50%;
-    transform: translate(-50%, 0);
+    left: 5%;
+    top: 20%;
+}
+
+.table-put-card.player5.outof6{
+    left: -5%;
+    top: 45%;
 }

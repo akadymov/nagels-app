@@ -20,6 +20,7 @@ export default class OpponentContainer extends React.Component{
                     isDesktop={this.props.isDesktop}
                     isPortrait={this.props.isPortrait}
                     cards={this.props.cards}
+                    myPosition={this.props.myPosition}
                 ></OpponentCards>
                 <PlayerInfo
                     isMobile={this.props.isMobile}

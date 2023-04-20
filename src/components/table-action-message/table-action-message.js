@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './table-action-message.css';
+import Cookies from 'universal-cookie';
 
 //MUI components
 import LinearProgress from '@mui/material/LinearProgress';
@@ -8,6 +9,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { getText } from '../user-text';
 
 export default class TableActionMessage extends React.Component{
+
+    Cookies = new Cookies();
     
     render() {
         

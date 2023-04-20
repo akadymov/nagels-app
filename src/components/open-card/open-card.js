@@ -23,7 +23,7 @@ export default class OpenCard extends React.Component{
         var heightNum = 100
         var interval = 22
         
-        if(this.props.isMobile){
+        /*if(this.props.isMobile){
             if(this.props.onTable){
                 width = '49px'
                 //widthNum = 49
@@ -45,10 +45,33 @@ export default class OpenCard extends React.Component{
                 heightNum = 86
                 interval = 18
             }
+        }*/
+
+        switch(this.props.size){
+            case 'small':
+                width = '49px'
+                //widthNum = 49
+                height = '70px'
+                heightNum = 70
+                break
+            case 'medium':
+                width = '60px'
+                //widthNum = 60
+                height = '86px'
+                heightNum = 86
+                interval = 18
+                break
+            case 'large':
+                width = '70px'
+                //var widthNum = 70
+                height = '100px'
+                heightNum = 100
+                interval = 22
+                break
         }
 
         if(!this.props.onTable) {
-             leftShift = this.props.index * interval
+            leftShift = this.props.index * interval
             if(this.props.selectedCard === this.props.cardId.substring(5)){
                  topShift = -this.props.index * heightNum - 38
             } else {

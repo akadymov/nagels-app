@@ -179,7 +179,8 @@ export default class Game extends React.Component{
                         //var sumOfMadeBets = 0
                         getGameResponse.players.map(player => {
                             if(player.username !== this.Cookies.get('username')){
-                                if(player.betSize >= 0){
+                                if(player.betSize !== null){
+                                    console.log(player)
                                     betPlayers.push(player)
                                     //sumOfMadeBets =+ player.betSize
                                 } else {
@@ -200,12 +201,6 @@ export default class Game extends React.Component{
                                 players: betPlayers
                             },
                             {
-                                id: "players_to_bet",
-                                header: getText('players_to_bet'),
-                                type: "players-bet-info",
-                                players: playersToBet
-                            },
-                            {
                                 id: "bet_size_input",
                                 type: "input",
                                 textFormat: "number",
@@ -217,6 +212,12 @@ export default class Game extends React.Component{
                                 onChange: this.handleBetChange,
                                 width: '150px',
                                 defaultValue:0
+                            },
+                            {
+                                id: "players_to_bet",
+                                header: getText('players_to_bet'),
+                                type: "players-bet-info",
+                                players: playersToBet
                             },
                             {
                                 id: "bet_size_confirm_button",
@@ -609,7 +610,7 @@ export default class Game extends React.Component{
                                         //var sumOfMadeBets = 0
                                         newGameDetails.players.map(player => {
                                             if(player.username !== this.Cookies.get('username')){
-                                                if(player.betSize){
+                                                if(player.betSize !== null){
                                                     betPlayers.push(player)
                                                     //sumOfMadeBets =+ player.betSize
                                                 } else {
@@ -630,12 +631,6 @@ export default class Game extends React.Component{
                                                 players: betPlayers
                                             },
                                             {
-                                                id: "players_to_bet",
-                                                header: getText('players_to_bet'),
-                                                type: "players-bet-info",
-                                                players: playersToBet
-                                            },
-                                            {
                                                 id: "bet_size_input",
                                                 type: "input",
                                                 textFormat: "number",
@@ -647,6 +642,12 @@ export default class Game extends React.Component{
                                                 onChange: this.handleBetChange,
                                                 width: '150px',
                                                 defaultValue:0
+                                            },
+                                            {
+                                                id: "players_to_bet",
+                                                header: getText('players_to_bet'),
+                                                type: "players-bet-info",
+                                                players: playersToBet
                                             },
                                             {
                                                 id: "bet_size_confirm_button",
@@ -808,6 +809,7 @@ export default class Game extends React.Component{
                                 isPortrait={this.props.isPortrait}
                                 cardsOnTable={this.state.gameDetails.cardsOnTable}
                                 playersCount={this.state.gameDetails.players.length}
+                                myPosition={this.state.gameDetails.myInHandInfo.position ? this.state.gameDetails.myInHandInfo.position : 0}
                             ></TablePutCards>
                         :
                             ''
@@ -821,6 +823,7 @@ export default class Game extends React.Component{
                                 cardsOnTable={this.state.gameDetails.lastTurnCards.length > 0 ? this.state.gameDetails.lastTurnCards : this.state.gameDetails.cardsOnTable}
                                 playersCount={this.state.gameDetails.players.length}
                                 isLastTurn={this.state.showLastTurn}
+                                myPosition={this.state.gameDetails.myInHandInfo.position ? this.state.gameDetails.myInHandInfo.position : 0}
                             ></TablePutCards>
                         :
                             ''

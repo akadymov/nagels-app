@@ -84,6 +84,7 @@ export default class NagelsModal extends React.Component{
                                                             isPortrait={this.props.isPortrait}
                                                             index={control.cards.findIndex( el => el === card )}
                                                             modal={true}
+                                                            size={this.props.isMobile ? 'small' : 'medium'}
                                                         ></OpenCard>)
                                                     })}
                                                 </div>
