@@ -1,6 +1,31 @@
 {
   "phrases": [
     {
+      "id": "created",
+      "en": "Created",
+      "ru": "Создана"
+    },
+    {
+      "id": "status",
+      "en": "Status",
+      "ru": "Статус"
+    },
+    {
+      "id": "players",
+      "en": "Players",
+      "ru": "Игроки"
+    },
+    {
+      "id": "host",
+      "en": "Host",
+      "ru": "Хост"
+    },
+    {
+      "id": "room",
+      "en": "Room",
+      "ru": "Комната"
+    },
+    {
       "id": "invitation_created",
       "en": "Invitation link created and sent to specified email. You can share it with invited players",
       "ru": "Пригласительная ссылка создана и отправлена на указанный email. Вы можете поделиться ею с приглашенными игроками"

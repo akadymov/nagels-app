@@ -70,6 +70,7 @@ export default class NavMenu extends React.Component{
         this.Cookies.remove('username');
         this.Cookies.remove('colorScheme');
         this.Cookies.remove('deckType');
+        this.Cookies.remove('preferredLang');
         window.location.assign('/signin')
     }
 

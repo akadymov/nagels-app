@@ -19,7 +19,7 @@ export default class Lobby extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            roomsHeaders: this.props.isMobile && this.props.isPortrait ? ['Room', 'Host', 'Players', ''] : ['Room', 'Host', 'Players', 'Created', 'Status', ''],
+            roomsHeaders: this.props.isMobile && this.props.isPortrait ? [getText('room'), getText('host'), getText('players'), ''] : [getText('room'), getText('host'), getText('players'), getText('created'), getText('status'), ''],
             rooms: [],
             selectedRoomId: -1,
             headerControls: [
