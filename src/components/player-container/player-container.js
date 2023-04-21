@@ -12,7 +12,7 @@ export default class PlayerContainer extends React.Component{
 
     render() {
 
-        const cardsDivWidth = 22*(this.props.dealtCards.length - 1) + 70
+        const cardsDivWidth = (this.props.isMobile ? 15 : 22) *(this.props.dealtCards.length - 1) + (this.props.isMobile ? 49 : 70)
 
         return (
             <div className={`player-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>

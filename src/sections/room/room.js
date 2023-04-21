@@ -24,7 +24,7 @@ export default class Room extends React.Component{
         this.handleInvitationMessageChange = this.handleInvitationMessageChange.bind(this);
         this.handleReadySwitchChange = this.handleReadySwitchChange.bind(this);
         this.state = {
-            playerHeaders: this.props.isMobile && this.props.isPortrait ? [getText('player'), getText('ready'),''] : [getText('player') ,getText('ready'),'',getText('won')],
+            playerHeaders: this.props.isMobile && this.props.isPortrait ? [getText('player'), getText('ready'),''] : [getText('player') /*,getText('ready')*/,'',getText('won')],
             players: [],
             autodeal: true,
             singleCardHands: true,
@@ -104,18 +104,18 @@ export default class Room extends React.Component{
                     username: player.username,
                     host: player.username === this.state.roomDetails.host
                 },
-                {
+                /*{
                     type:'switch',
                     checked: player.ready,
                     defaultChecked: player.defaultChecked || player.ready,
                     disabled: player.username === this.state.roomDetails.host || (this.Cookies.get('username') !== this.state.roomDetails.host && player.username !== this.Cookies.get('username')),
                     username: player.username,
                     onChange: this.handleReadySwitchChange.bind(this, index) // FIXME: handle changes state but doesnot change UI appearance
-                },
+                },*/
                 {
                     type: 'button',
                     variant: 'text',
-                    text:  player.username === this.Cookies.get('username') ? getText('Leave') : getText('kick'),
+                    text:  player.username === this.Cookies.get('username') ? getText('leave') : getText('kick'),
                     onSubmit: this.disconnectRoom.bind(this, index),
                     width: '130px',
                     color: 'error',
