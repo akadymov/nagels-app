@@ -303,7 +303,7 @@
     {
       "id": "finish_game",
       "en": "Finish game",
-      "ru": "Завершить игру"
+      "ru": "Завершить"
     },
     {
       "id": "make_a_bet",
@@ -352,8 +352,8 @@
     },
     {
       "id": "start_new_game",
-      "en": "Start new game",
-      "ru": "Начать новую игру"
+      "en": "Start game",
+      "ru": "Начать игру"
     },
     {
       "id": "exit",
