@@ -16,6 +16,7 @@ import Cookies from 'universal-cookie';
 import NagelsAvatar from '../nagels-avatar';
 import defaultTheme from '../../themes/default';
 import { getText } from '../user-text';
+import NagelsModal from '../nagels-modal';
 
 
 export default class NavMenu extends React.Component{
@@ -25,7 +26,10 @@ export default class NavMenu extends React.Component{
         this.state = {
             menuExpanded: false,
             hoveredItem: null,
-            loggedIn: false
+            loggedIn: false,
+            modalOpen: false,
+            modalControls: [],
+            modalText: ''
         }
     }
     Cookies = new Cookies();
@@ -66,12 +70,51 @@ export default class NavMenu extends React.Component{
     }
 
     signOut = () => {
+        var newModalControls = [
+            {
+                id: "confirm_sign_out",
+                type: "button",
+                variant: "text",
+                variant: "contained",
+                color: 'error',
+                text: getText('sign_out'),
+                width: '140px',
+                disabled: false,
+                onSubmit: this.confirmSignOut
+            },
+            {
+                id: "cancel_sign_in",
+                type: "button",
+                variant: "contained",
+                text: getText('cancel'),
+                width: '140px',
+                disabled: false,
+                onSubmit: this.closeModal
+            }
+        ]
+        this.setState({
+            modalControls: newModalControls,
+            modalOpen: true,
+            modalText: getText('are_you_sure'),
+            modalCanClose: true
+        })
+    }
+
+    confirmSignOut = () => {
         this.Cookies.remove('idToken', {path:'/'})
         this.Cookies.remove('username');
         this.Cookies.remove('colorScheme');
         this.Cookies.remove('deckType');
         this.Cookies.remove('preferredLang');
         window.location.assign('/signin')
+    }
+
+    closeModal = () => {
+        this.setState({
+            modalControls: [],
+            modalOpen: false,
+            modalText: ''
+        })
     }
 
     componentDidMount() {
@@ -220,6 +263,16 @@ export default class NavMenu extends React.Component{
                         ''
                     }
                 </div>
+                <NagelsModal
+                    open={this.state.modalOpen}
+                    text={this.state.modalText}
+                    isMobile={this.props.isMobile}
+                    isDesktop={this.props.isDesktop}
+                    isPortrait={this.props.isPortrait}
+                    controls={this.state.modalControls}
+                    closeModal={this.closeModal}
+                    modalCanClose={true}
+                ></NagelsModal>
             </div>
         )
     }
