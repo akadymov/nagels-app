@@ -125,7 +125,7 @@ export default class Room extends React.Component{
             if(!(this.props.isMobile && this.props.isPortrait)) {
                 dataArray.push({
                     type: 'text',
-                    value: 100 * player.winRatio + '%'
+                    value: Math.round(100 * player.winRatio) + '%'
                 })
             }
             newPlayers.push({

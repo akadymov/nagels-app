@@ -43,7 +43,7 @@ export default class LeaderBoard extends React.Component{
                             },
                             {
                                 type: 'text',
-                                value: 100 * rating.winRatio + '%'
+                                value: Math.round(100 * rating.winRatio) + '%'
                             },
                             {
                                 type: 'text',
