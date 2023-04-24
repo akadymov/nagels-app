@@ -891,7 +891,7 @@ export default class Game extends React.Component{
                     }
                     {this.state.gameDetails.currentHandId ?
                         <div className={`current-game-trump-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                            <div className={`hand-id-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('hand_id')}{this.state.gameDetails.currentHandSerialNo}/20</div>
+                            <div className={`hand-id-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('hand_id')}{this.state.gameDetails.currentHandSerialNo}/{this.state.gameDetails.players.length === 6 ? 16 : 20}</div>
                             <div className={`hand-id-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <p className={`${this.state.gameDetails.trump || 'x'} trump-container ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : ''}`}>{this.state.gameDetails.cardsPerPlayer}</p>
                             </div>
