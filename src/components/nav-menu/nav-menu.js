@@ -70,34 +70,38 @@ export default class NavMenu extends React.Component{
     }
 
     signOut = () => {
-        var newModalControls = [
-            {
-                id: "confirm_sign_out",
-                type: "button",
-                variant: "text",
-                variant: "contained",
-                color: 'error',
-                text: getText('sign_out'),
-                width: '140px',
-                disabled: false,
-                onSubmit: this.confirmSignOut
-            },
-            {
-                id: "cancel_sign_in",
-                type: "button",
-                variant: "contained",
-                text: getText('cancel'),
-                width: '140px',
-                disabled: false,
-                onSubmit: this.closeModal
-            }
-        ]
-        this.setState({
-            modalControls: newModalControls,
-            modalOpen: true,
-            modalText: getText('are_you_sure'),
-            modalCanClose: true
-        })
+        if(!this.state.loggedIn){
+            window.location.assign('/signin')
+        } else {
+            var newModalControls = [
+                {
+                    id: "confirm_sign_out",
+                    type: "button",
+                    variant: "text",
+                    variant: "contained",
+                    color: 'error',
+                    text: getText('sign_out'),
+                    width: '140px',
+                    disabled: false,
+                    onSubmit: this.confirmSignOut
+                },
+                {
+                    id: "cancel_sign_in",
+                    type: "button",
+                    variant: "contained",
+                    text: getText('cancel'),
+                    width: '140px',
+                    disabled: false,
+                    onSubmit: this.closeModal
+                }
+            ]
+            this.setState({
+                modalControls: newModalControls,
+                modalOpen: true,
+                modalText: getText('are_you_sure'),
+                modalCanClose: true
+            })
+        }
     }
 
     confirmSignOut = () => {
