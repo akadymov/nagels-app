@@ -16,6 +16,7 @@ import TableActionMessage from '../../components/table-action-message';
 import TablePutCards from '../../components/table-put-cards';
 import GameScores from '../../components/game-scores';
 import { getText } from '../../components/user-text';
+import e from 'cors';
 
 export default class Game extends React.Component{
 
@@ -93,8 +94,12 @@ export default class Game extends React.Component{
             if(getGameResponse.errors){
                 this.handleApiError(getGameResponse)
             } else {
-                if(getGameResponse.canDeal && getGameResponse.autodeal && getGameResponse.host === this.Cookies.get('username')){
-                    this.dealCards()
+                if(getGameResponse.autodeal && getGameResponse.host === this.Cookies.get('username')){
+                    if(getGameResponse.canDeal){
+                        this.dealCards()
+                    } else {
+                        this.definePositions()
+                    }     
                 } else {
                     newHeaderControls = [
                         {
