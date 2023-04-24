@@ -1,6 +1,11 @@
 {
   "phrases": [
     {
+      "id": "deal",
+      "en": "Deal",
+      "ru": "Раздать"
+    },
+    {
       "id": "are_you_sure",
       "en": "Are you sure?",
       "ru": "Вы уверены?"

@@ -440,6 +440,7 @@ def put_card(game_id, hand_id, card_id):
             'cardId': str(card.card_id) + card.card_suit,
             'playerId': card.player_id,
             'playerPosition': player_position,
+            'playerUsername': card_user.username,
             'playerRelativePosition': player_relative_position
         })
 

@@ -88,7 +88,7 @@
 
 
 .table-put-card.player1.outof4{
-    right: 5%;
+    right: 0%;
     top: 20%;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .table-put-card.player3.outof4{
-    left: 10%;
+    left: 0%;
     top: 20%;
 }
 
@@ -130,7 +130,7 @@
 }
 
 .table-put-card.player4.outof5{
-    bottom: 5%;
+    bottom: -5%;
     left: 25%;
     transform: translate(-50%, 0);
 }
@@ -162,4 +162,119 @@
 .table-put-card.player5.outof6{
     left: -5%;
     top: 45%;
+}
+
+.put-card-avatar{   
+    position: absolute;
+    opacity: 50%;
+    border: 0.5px solid var(--primary);
+    border-radius: 50%;
+}
+
+.put-card-avatar:hover{
+    opacity: unset
+}
+
+
+
+
+
+
+.put-card-avatar.player0{
+    left: 2px;
+    bottom: 2px;
+}
+
+
+
+
+
+.put-card-avatar.player1.outof2{
+    right: 2px;
+    top: 2px
+}
+
+
+
+
+
+.put-card-avatar.player1.outof3{
+    right: 2px;
+    top: 2px
+}
+
+.put-card-avatar.player2.outof3{
+    left: 2px;
+    bottom: 2px
+}
+
+
+
+
+
+.put-card-avatar.player1.outof4{
+    right: 2px;
+    top: 2px
+}
+
+.put-card-avatar.player2.outof4{
+    right: 2px;
+    top: 2px
+}
+
+.put-card-avatar.player3.outof4{
+    left: 2px;
+    bottom: 2px
+}
+
+
+
+.put-card-avatar.player1.outof5{
+    right: -10px;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.put-card-avatar.player2.outof5{
+    top: -10px;
+    right: -10px;
+}
+
+.put-card-avatar.player3.outof5{
+    left: -10px;
+    top: -10px;
+}
+
+.put-card-avatar.player4.outof5{
+    left: -10px;
+    bottom: -10px;
+}
+
+
+
+
+.put-card-avatar.player1.outof6{
+    right: -10px;
+    top: 40%;
+    transform: translate(0%, -50%);
+}
+
+.put-card-avatar.player2.outof6{
+    right: 2px;
+    top: 2px;
+}
+
+.put-card-avatar.player3.outof6{
+    right: 2px;
+    top: 2px;
+}
+
+.put-card-avatar.player4.outof6{
+    right: 2px;
+    top: 2px
+}
+
+.put-card-avatar.player5.outof6{
+    left: 2px;
+    bottom: 2px
 }

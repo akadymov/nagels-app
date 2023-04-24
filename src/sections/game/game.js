@@ -136,21 +136,35 @@ export default class Game extends React.Component{
                     }
                 ]
                 if (getGameResponse.host === this.Cookies.get('username')){
-                    newHeaderControls.unshift({
-                        id: 'shuffle',
-                        type: 'button',
-                        text: getGameResponse.status === 'finished' ? getText('start_new_game') : getText('shuffle'),
-                        variant: 'contained',
-                        disabled: getGameResponse.positionsDefined && getGameResponse.status !== 'finished',
-                        size: 'small',
-                        width: '130px',
-                        onSubmit: getGameResponse.status === 'finished' ? this.restartGame : this.definePositions
-                    })
+                    if(!getGameResponse.positionsDefined){
+                        newHeaderControls.unshift({
+                            id: 'shuffle',
+                            type: 'button',
+                            text: getText('shuffle'),
+                            variant: 'contained',
+                            disabled: getGameResponse.status === 'finished',
+                            size: 'small',
+                            width: '130px',
+                            onSubmit: this.definePositions
+                        })
+                    }
+                    if(getGameResponse.status === 'finished'){
+                        newHeaderControls.unshift({
+                            id: 'shuffle',
+                            type: 'button',
+                            text: getText('start_new_game'),
+                            variant: 'contained',
+                            disabled: getGameResponse.status !== 'finished',
+                            size: 'small',
+                            width: '130px',
+                            onSubmit: this.restartGame
+                        })
+                    }
                     if(getGameResponse.canDeal){
                         newHeaderControls.push({
                             id: 'deal',
                             type: 'button',
-                            text: 'Deal',
+                            text: getText('deal'),
                             variant: 'contained',
                             disabled: !getGameResponse.canDeal,
                             size: 'small',

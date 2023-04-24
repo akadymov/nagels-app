@@ -42,7 +42,7 @@ def game_score(game_id):
 @cross_origin()
 def start():
     token = request.json.get('token')
-    autodeal=request.json.get('autodeal')
+    autodeal = request.json.get('autodeal')
     one_card_hands = request.json.get('singleCardHands')
     rating_game = request.json.get('ratingGame')
     lang = request.headers.get('Accept-Language')
@@ -346,6 +346,7 @@ def status(game_id):
                 cards_on_table.append({
                     'cardId': str(card.card_id) + card.card_suit,
                     'playerId': card.player_id,
+                    'playerUsername': card_user.username,
                     'playerPosition': player_position,
                     'playerRelativePosition': player_relative_position
                 })

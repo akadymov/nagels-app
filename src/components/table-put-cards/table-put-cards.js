@@ -3,6 +3,7 @@ import React from 'react';
 import './table-put-cards.css';
 import OpenCard from '../open-card';
 import { getText } from '../user-text';
+import NagelsAvatar from '../nagels-avatar';
 
 export default class TablePutCards extends React.Component{
 
@@ -38,6 +39,17 @@ export default class TablePutCards extends React.Component{
                             onTable={true}
                             size={this.props.isMobile ? 'small' : 'medium'}
                         ></OpenCard>
+                        {card.playerUsername ? 
+                            <div className={`put-card-avatar player${this.getRelativePosition(card.playerPosition)} outof${this.props.playersCount} ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+                                <NagelsAvatar
+                                    width = {this.props.isMobile ? "20px" : "20px"}
+                                    height = {this.props.isMobile ? "20px" : "20px"}
+                                    username = {card.playerUsername}
+                                ></NagelsAvatar>
+                            </div>
+                        :
+                            ''
+                        }
                     </div>
                     )})}
             </div>
