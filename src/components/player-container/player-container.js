@@ -12,7 +12,7 @@ export default class PlayerContainer extends React.Component{
 
     render() {
 
-        const cardsDivWidth = (this.props.isMobile ? 15 : 22) *(this.props.dealtCards.length - 1) + (this.props.isMobile ? 49 : 70)
+        const cardsDivWidth = (this.props.isMobile ? 18 : 22) *(this.props.dealtCards.length - 1) + (this.props.isMobile ? 60 : 70)
 
         return (
             <div className={`player-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
@@ -27,7 +27,7 @@ export default class PlayerContainer extends React.Component{
                             selectedCard={this.props.selectedCard}
                             index={this.props.dealtCards.findIndex( el => el === card )}
                             onClick={this.props.onSelectCard}
-                            size={this.props.isMobile ? 'small' : 'large'}
+                            size={this.props.isMobile ? 'medium' : 'large'}
                         ></OpenCard>
                     )})}
                     {
