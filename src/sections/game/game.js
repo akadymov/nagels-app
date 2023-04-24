@@ -101,52 +101,53 @@ export default class Game extends React.Component{
                     if(!getGameResponse.positionsDefined){
                         this.definePositions()
                     }
-                } else {
-                    newHeaderControls = [
-                        {
-                            id: 'scores',
-                            type: 'button',
-                            text: getText('scores'),
-                            variant: 'outlined',
-                            disabled: false,
-                            size: 'small',
-                            width: '130px',
-                            onSubmit: this.showScores
-                        },
-                        {
-                            id: 'refresh',
-                            type: 'button',
-                            text: getText('refresh'),
-                            variant: 'outlined',
-                            disabled: false,
-                            size: 'small',
-                            width: '130px',
-                            onSubmit: this.newGameStatus
-                        },
-                        {
-                            id: 'exit',
-                            type: 'button',
-                            text: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? getText('finish') : getText('exit'),
-                            variant: 'text',
-                            disabled: false,
-                            size: 'small',
-                            width: '130px',
-                            color: 'error',
-                            onSubmit: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? this.finishGame : (getGameResponse.myInHandInfo.username && getGameResponse.status !== 'finished' ? this.exitGame : ()=> window.location.assign('/lobby'))
-                        }
-                    ]
-                    if (getGameResponse.host === this.Cookies.get('username')){
-                        newHeaderControls.unshift({
-                            id: 'shuffle',
-                            type: 'button',
-                            text: getGameResponse.status === 'finished' ? getText('start_new_game') : getText('shuffle'),
-                            variant: 'contained',
-                            disabled: getGameResponse.positionsDefined && getGameResponse.status !== 'finished',
-                            size: 'small',
-                            width: '130px',
-                            onSubmit: getGameResponse.status === 'finished' ? this.restartGame : this.definePositions
-                        })
-                        /*newHeaderControls.push({
+                }
+                newHeaderControls = [
+                    {
+                        id: 'scores',
+                        type: 'button',
+                        text: getText('scores'),
+                        variant: 'outlined',
+                        disabled: false,
+                        size: 'small',
+                        width: '130px',
+                        onSubmit: this.showScores
+                    },
+                    {
+                        id: 'refresh',
+                        type: 'button',
+                        text: getText('refresh'),
+                        variant: 'outlined',
+                        disabled: false,
+                        size: 'small',
+                        width: '130px',
+                        onSubmit: this.newGameStatus
+                    },
+                    {
+                        id: 'exit',
+                        type: 'button',
+                        text: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? getText('finish') : getText('exit'),
+                        variant: 'text',
+                        disabled: false,
+                        size: 'small',
+                        width: '130px',
+                        color: 'error',
+                        onSubmit: getGameResponse.host === this.Cookies.get('username') && getGameResponse.status !== 'finished' ? this.finishGame : (getGameResponse.myInHandInfo.username && getGameResponse.status !== 'finished' ? this.exitGame : ()=> window.location.assign('/lobby'))
+                    }
+                ]
+                if (getGameResponse.host === this.Cookies.get('username')){
+                    newHeaderControls.unshift({
+                        id: 'shuffle',
+                        type: 'button',
+                        text: getGameResponse.status === 'finished' ? getText('start_new_game') : getText('shuffle'),
+                        variant: 'contained',
+                        disabled: getGameResponse.positionsDefined && getGameResponse.status !== 'finished',
+                        size: 'small',
+                        width: '130px',
+                        onSubmit: getGameResponse.status === 'finished' ? this.restartGame : this.definePositions
+                    })
+                    if(getGameResponse.canDeal){
+                        newHeaderControls.push({
                             id: 'deal',
                             type: 'button',
                             text: 'Deal',
@@ -155,110 +156,110 @@ export default class Game extends React.Component{
                             size: 'small',
                             width: '130px',
                             onSubmit: this.dealCards
-                        })*/
-                        if(!getGameResponse.positionsDefined){
-                            getGameResponse.attentionToMessage = true
-                            getGameResponse.actionMessage = getText('press_shuffle')
-                        }
-                        if(getGameResponse.canDeal){
-                            getGameResponse.attentionToMessage = true
-                            getGameResponse.actionMessage = getText('press_deal')
-                        }
-                    }
-                    if(getGameResponse.lastTurnCards.length > 0) {
-                        newHeaderControls.push({
-                            id: 'last_turn',
-                            type: 'button',
-                            text: getText('last_turn'),
-                            variant: 'contained',
-                            disabled: getGameResponse.lastTurnCards === [],
-                            size: 'small',
-                            width: '130px',
-                            onSubmit: this.showLastTurnMobile,
-                            onMouseDown: (e) => this.handleLastTurnClick(e),
-                            onMouseUp: (e) => this.handleLastTurnClick(e)
                         })
                     }
-                    if(getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade){
-                        var betPlayers = []
-                        var playersToBet = []
-                        //var sumOfMadeBets = 0
-                        getGameResponse.players.map(player => {
-                            if(player.username !== this.Cookies.get('username')){
-                                if(player.betSize !== null){
-                                    console.log(player)
-                                    betPlayers.push(player)
-                                    //sumOfMadeBets =+ player.betSize
-                                } else {
-                                    playersToBet.push(player)
-                                }
-                            }
-                        })
-                        newModalControls = [
-                            {
-                                id: "hand_cards",
-                                type: "hand-cards",
-                                cards: getGameResponse.myInHandInfo.dealtCards
-                            },
-                            {
-                                id: "bet_players",
-                                header: getText('made_bets'),
-                                type: "players-bet-info",
-                                players: betPlayers
-                            },
-                            {
-                                id: "bet_size_input",
-                                type: "input",
-                                textFormat: "number",
-                                label: getText('bet_size'),
-                                required: true,
-                                variant: "outlined",
-                                value: this.state.myBetSizeValue,
-                                errorMessage: "",
-                                onChange: this.handleBetChange,
-                                width: '150px',
-                                defaultValue:0
-                            },
-                            {
-                                id: "players_to_bet",
-                                header: getText('players_to_bet'),
-                                type: "players-bet-info",
-                                players: playersToBet
-                            },
-                            {
-                                id: "bet_size_confirm_button",
-                                type: "button",
-                                variant: "contained",
-                                text: getText('confirm'),
-                                width: "195px",
-                                onSubmit: this.makeBet
-                            },
-                            {
-                                id: "scores_view_button",
-                                type: "button",
-                                variant: "outlined",
-                                text: getText('scores'),
-                                width: "195px",
-                                onSubmit: this.showScores
-                            }
-                        ]
-                    }
-                    if(getGameResponse.nextActingPlayer === this.Cookies.get('username')){
+                    if(!getGameResponse.positionsDefined){
                         getGameResponse.attentionToMessage = true
+                        getGameResponse.actionMessage = getText('press_shuffle')
                     }
-                    this.setState({
-                        gameDetails: getGameResponse,
-                        headerControls: newHeaderControls,
-                        modalControls: newModalControls,
-                        modalOpen: getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade,
-                        modalText: getText('make_a_bet'),
-                        modalCanClose: false,
-                        modalContentType: 'Bet'
-                    })
-                    /*if(getGameResponse.players.length === getGameResponse.cardsOnTable.length){
-                        setTimeout(this.utilizeCards(getGameResponse.currentHandId, getGameResponse.nextActingPlayer), 3000)
-                    }*/
+                    if(getGameResponse.canDeal){
+                        getGameResponse.attentionToMessage = true
+                        getGameResponse.actionMessage = getText('press_deal')
+                    }
                 }
+                if(getGameResponse.lastTurnCards.length > 0) {
+                    newHeaderControls.push({
+                        id: 'last_turn',
+                        type: 'button',
+                        text: getText('last_turn'),
+                        variant: 'contained',
+                        disabled: getGameResponse.lastTurnCards === [],
+                        size: 'small',
+                        width: '130px',
+                        onSubmit: this.showLastTurnMobile,
+                        onMouseDown: (e) => this.handleLastTurnClick(e),
+                        onMouseUp: (e) => this.handleLastTurnClick(e)
+                    })
+                }
+                if(getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade){
+                    var betPlayers = []
+                    var playersToBet = []
+                    //var sumOfMadeBets = 0
+                    getGameResponse.players.map(player => {
+                        if(player.username !== this.Cookies.get('username')){
+                            if(player.betSize !== null){
+                                console.log(player)
+                                betPlayers.push(player)
+                                //sumOfMadeBets =+ player.betSize
+                            } else {
+                                playersToBet.push(player)
+                            }
+                        }
+                    })
+                    newModalControls = [
+                        {
+                            id: "hand_cards",
+                            type: "hand-cards",
+                            cards: getGameResponse.myInHandInfo.dealtCards
+                        },
+                        {
+                            id: "bet_players",
+                            header: getText('made_bets'),
+                            type: "players-bet-info",
+                            players: betPlayers
+                        },
+                        {
+                            id: "bet_size_input",
+                            type: "input",
+                            textFormat: "number",
+                            label: getText('bet_size'),
+                            required: true,
+                            variant: "outlined",
+                            value: this.state.myBetSizeValue,
+                            errorMessage: "",
+                            onChange: this.handleBetChange,
+                            width: '150px',
+                            defaultValue:0
+                        },
+                        {
+                            id: "players_to_bet",
+                            header: getText('players_to_bet'),
+                            type: "players-bet-info",
+                            players: playersToBet
+                        },
+                        {
+                            id: "bet_size_confirm_button",
+                            type: "button",
+                            variant: "contained",
+                            text: getText('confirm'),
+                            width: "195px",
+                            onSubmit: this.makeBet
+                        },
+                        {
+                            id: "scores_view_button",
+                            type: "button",
+                            variant: "outlined",
+                            text: getText('scores'),
+                            width: "195px",
+                            onSubmit: this.showScores
+                        }
+                    ]
+                }
+                if(getGameResponse.nextActingPlayer === this.Cookies.get('username')){
+                    getGameResponse.attentionToMessage = true
+                }
+                this.setState({
+                    gameDetails: getGameResponse,
+                    headerControls: newHeaderControls,
+                    modalControls: newModalControls,
+                    modalOpen: getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade,
+                    modalText: getText('make_a_bet'),
+                    modalCanClose: false,
+                    modalContentType: 'Bet'
+                })
+                /*if(getGameResponse.players.length === getGameResponse.cardsOnTable.length){
+                    setTimeout(this.utilizeCards(getGameResponse.currentHandId, getGameResponse.nextActingPlayer), 3000)
+                }*/
             }
         })
     }
