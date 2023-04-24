@@ -97,9 +97,10 @@ export default class Game extends React.Component{
                 if(getGameResponse.autodeal && getGameResponse.host === this.Cookies.get('username')){
                     if(getGameResponse.canDeal){
                         this.dealCards()
-                    } else {
+                    }
+                    if(!getGameResponse.positionsDefined){
                         this.definePositions()
-                    }     
+                    }
                 } else {
                     newHeaderControls = [
                         {
