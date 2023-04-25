@@ -118,6 +118,14 @@
     top: 35%;
 }
 
+.table-put-card.player1.outof5.mobile{
+    right: -10%;
+}
+
+.table-put-card.player1.outof5.mobile.landscape{
+    top: 20%;
+}
+
 .table-put-card.player2.outof5{
     left: 60%;
     transform: translate(-50%, 0);
@@ -130,9 +138,13 @@
 }
 
 .table-put-card.player4.outof5{
-    bottom: -5%;
+    bottom: 5%;
     left: 25%;
     transform: translate(-50%, 0);
+}
+
+.table-put-card.player4.outof5.mobile.portrait{
+    bottom: -5%;
 }
 
 
@@ -230,24 +242,23 @@
 
 
 .put-card-avatar.player1.outof5{
-    right: -10px;
-    top: 50%;
-    transform: translate(0%, -50%);
+    right: 2px;
+    top: 2px;
 }
 
 .put-card-avatar.player2.outof5{
-    top: -10px;
-    right: -10px;
+    right: 2px;
+    top: 2px;
 }
 
 .put-card-avatar.player3.outof5{
-    left: -10px;
-    top: -10px;
+    right: 2px;
+    top: 2px;
 }
 
 .put-card-avatar.player4.outof5{
-    left: -10px;
-    bottom: -10px;
+    left: 2px;
+    bottom: 2px;
 }
 
 
