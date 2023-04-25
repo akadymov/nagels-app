@@ -16,7 +16,12 @@ import TableActionMessage from '../../components/table-action-message';
 import TablePutCards from '../../components/table-put-cards';
 import GameScores from '../../components/game-scores';
 import { getText } from '../../components/user-text';
-import e from 'cors';
+
+//MUI components
+import Checkbox from '@mui/material/Checkbox';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
 
 export default class Game extends React.Component{
 
@@ -25,6 +30,11 @@ export default class Game extends React.Component{
         this.handleBetChange = this.handleBetChange.bind(this);
         this.selectCard = this.selectCard.bind(this);
         this.state = {
+            userSettings: {
+                deckType: this.Cookies.get('deckType'),
+                colorScheme: this.Cookies.get('colorScheme'),
+                preferredLang: this.Cookies.get('preferredLang')
+            },
             gameDetails: {
                 gameId: null,
                 roomId: null,
@@ -575,6 +585,56 @@ export default class Game extends React.Component{
             }
         }
     };
+
+    handleDeckTypeChange = () => {
+        this.NagelsApi.getUser(this.Cookies.get('username'))
+        .then((body)=>{
+            if(!body.errors) {
+                var newUserData = body
+                var newUserSettings = this.state.userSettings
+                newUserSettings.deckType = newUserSettings.deckType === '4color' ? 'classic' : '4color'
+                this.NagelsApi.updateUser(
+                    this.Cookies.get('username'), 
+                    this.Cookies.get('idToken'), 
+                    newUserData.email, 
+                    newUserData.aboutMe, 
+                    newUserData.colorScheme,
+                    newUserSettings.deckType,
+                    newUserData.preferredLang
+                )
+                var currentDate = new Date(); 
+                var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
+                this.Cookies.set('deckType', newUserSettings.deckType, { path: '/' , deckType: expiresIn})
+                this.setState({userSettings: newUserSettings})
+            }
+        })
+    }
+
+    handleColorSchemeChange = (e) => {
+        this.NagelsApi.getUser(this.Cookies.get('username'))
+        .then((body)=>{
+            if(!body.errors) {
+                var newUserData = body
+                var newUserSettings = this.state.userSettings
+                newUserSettings.colorScheme = e.target.value
+                console.log(newUserSettings.colorScheme)
+                this.NagelsApi.updateUser(
+                    this.Cookies.get('username'), 
+                    this.Cookies.get('idToken'), 
+                    newUserData.email, 
+                    newUserData.aboutMe, 
+                    newUserSettings.colorScheme,
+                    newUserData.deckType,
+                    newUserData.preferredLang
+                )
+                var currentDate = new Date(); 
+                var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
+                this.Cookies.set('colorScheme', newUserSettings.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.setState({userSettings: newUserSettings})
+                window.location.reload()
+            }
+        })
+    }
     
     componentDidMount = () => {
         this.newGameStatus();
@@ -899,6 +959,41 @@ export default class Game extends React.Component{
                     : '' }
                 </div>
                 
+                {!this.props.isMobile ?
+                    <div className='game-deck-type-checkbox-container'>
+                        <Checkbox
+                            key='game-deck-type-checkbox'
+                            onChange={this.handleDeckTypeChange}
+                            defaultChecked={this.state.userSettings.deckType === "4color"}
+                            size='medium'
+                            sx={{padding:'5px'}}
+                        ></Checkbox>
+                        {getText('4_color_deck')}
+                    </div>
+                :
+                    ''
+                }
+                {!this.props.isMobile ?
+                    <div className='game-color-scheme-select-container'>
+                    <InputLabel id="color-scheme-label" sx={{fontSize: '0.75rem', textAlign: 'right', marginBottom: '4px'}}>{getText('color_scheme')}</InputLabel>
+                        <Select
+                            labelId="color-scheme-select-label"
+                            id="color-scheme-select"
+                            value={this.state.userSettings.colorScheme || 'light'}
+                            label={getText('color_scheme')}
+                            size='small'
+                            sx={{fontSize: 14, width: '100px', textAlign: 'left'}}
+                            onChange={this.handleColorSchemeChange}
+                        >
+                            <MenuItem value='light' sx={{fontSize: 14}}>{getText('light')}</MenuItem>
+                            <MenuItem value='dark' sx={{fontSize: 14}}>{getText('dark')}</MenuItem>
+                            <MenuItem value='piggy' sx={{fontSize: 14}}>{getText('piggy')}</MenuItem>
+                        </Select>
+                    </div>
+                :
+                    ''
+                }
+
                 <NagelsModal
                     open={this.state.modalOpen}
                     text={this.state.modalText}

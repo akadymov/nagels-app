@@ -188,3 +188,19 @@
 .h.trump-container.fourcolor:after{
     color: #BE1931;
 }
+
+.game-deck-type-checkbox-container{
+    position: absolute;
+    top: 74vh;
+    right: 1vw;
+    color: var(--regularText);
+    font-size: 12px;
+}
+
+.game-color-scheme-select-container{
+    position: absolute;
+    top: 65vh;
+    right: 1vw;
+    color: var(--regularText);
+    font-size: 12px;
+}
