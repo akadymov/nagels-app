@@ -42,8 +42,8 @@
         <li><b>Trump.</b> Trump is changed every hand in strict order: <p className='d suit-container' style="margin:2px" style="margin:2px">diamonds</p><p className='h suit-container' style="margin:2px">hearts</p><p className='c suit-container' style="margin:2px">clubs</p><p className='s suit-container' style="margin:2px">spades</p><p className='x suit-container' style="margin:2px">no trump</p></li>
         <li><b>Bets.</b> Every hand players make bet (zero or more) in counterclockwise order. Starting player is changed every hand counterclockwise. Sum of bet sizes should NOT equal number of dealt cards per player. That’s why there is restriction for last betting player only (someone should stay unhappy).</li>
         <li><b>Putting cards in turn.</b> After making all bets players start to put cards on table. No restriction in choosing card for first putting player, but every next player has to put card in suit of first card or trump suit. There are two exceptions: player can put any card if he/she doesn’t have suited card and can NOT put trump lower than already put trump when first card is NOT trump (you can not leak trumps). When every player puts one card (this is one turn of the hand) cards are took by player with highest suited card or trump. Keep in mind that Jack of trumps is highest card, and second is Nine! This rule applies only for trump suit.</li>
-        <li><b>Hand scores.</b> After all turns are made took number of turns are calculated. Every player gets points equally to number of took turns + 10 points IF number of took hands equals to made bet.</li>
-        <li><b>Game scores.</b> In the end of game (after all hands) player is defined based on cumulative number of scored points.</li>
+        <li><b>Hand scores.</b> After all turns are made took number of turns are calculated. Every player gets points equally to number of took turns + 10 bonus points IF number of took hands equals to made bet.</li>
+        <li><b>Game scores.</b> In the end of game (after all hands) winner is defined based on cumulative number of scored points. In case of equal number of points winner is defined based on cumulative number of got bonuses.</li>
     </ol>
     <a href="#contents">Back to contents</a>
     
@@ -65,7 +65,7 @@
     <p>Room players chat: under construction</p>
     <a href="#contents">Back to contents</a>
     <a id="game_start"><h3>Game start</h3></a>
-    <p>After at least one player joins lobby room its host can start the game. Ready switch is introduced just for players communication.</p>
+    <p>After at least one player joins lobby room its host can start the game.</p>
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/room_interface_host.jpg">
     <p>When starting the game host can configure following options</p>
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/game_configure_host.jpg">
@@ -75,8 +75,6 @@
         <li>Rating game - if option is checked game results will be written to players profiles and overall leaderboards (no data is written if all hands not played)</li>
     </ul>
     <p>Timebank option: under construction</p>
-    <p>On game start host should initiate automatic defining players' positions in the game. Game starting player has a dealer button on the left. Starting player is changed every hand counterclockwise.</p>
-    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/game_start_player.jpg">
     <a href="#contents">Back to contents</a>
     <a id="game_bet"><h3>Betting</h3></a>
     <p>Then first hand of the game starts with card dealing. First round of hand is making bets. Every player has to make a bet at his/her order taking into account dealt cards (including cards number), already made bets and current trump.</p>
@@ -91,7 +89,7 @@
     <p>Then every player puts card in his/her turn. Player who put highest card takes the turn and starts next one.</p>
     <p>Following action message displayed when it comes your turn to put card.</p>
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/action_message_your_turn.jpg">
-    <p>On your turn select any card from your hand and confirm choise by clicking/tapping it second time.</p>
+    <p>On your turn select any card from your hand and confirm choice by clicking/tapping it second time.</p>
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 500px" src="/info/images/select_card.jpg">
     <p>Following message displayed in case putting selected card in this turn is prohibited.</p>
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 500px" src="/info/images/action_message_incorrect_card.jpg">
@@ -127,7 +125,7 @@
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/profile_other_player.jpg">
     <a href="#contents">Back to contents</a>
     <a id="dark_mode"><h3>Dark mode</h3></a>
-    <p>You can also use dark mode of the application by setting corresponding checkbox in personal profile and updating. Here is how it looks:</p>
+    <p>You can also use dark or "piggy" mode of the application by setting corresponding checkbox in personal profile or in game. Here is how dark mode looks:</p>
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/dark_mode_profile_personal.jpg">
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/dark_mode_gameplay.jpg">
     <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/dark_mode_game_configure_host.jpg">

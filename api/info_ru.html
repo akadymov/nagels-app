@@ -1,0 +1,143 @@
+<div style="text-align:left; font-family:'Montserrat', sans-serif; font-weight: 100; line-height:1.8">
+    <a id="contents"><h2>Содержание</h2></a>
+    <ul>
+        <li><a href="#gameinfo">Об игре</a></li>
+        <li><a href="#gamerules">Правила</a></li>
+        <li style="padding-bottom: 0"><a href="#gameplay">Игровой процесс</a></li>
+            <li style="margin-left:2em"><a href="#room">Лобби и игровые комнаты</a></li>
+            <li style="margin-left:2em"><a href="#game_start">Начало игры</a></li>
+            <li style="margin-left:2em"><a href="#game_bet">Ставки</a></li>
+            <li style="margin-left:2em"><a href="#putting_cards">Выбор карт</a></li>
+            <li style="margin-left:2em"><a href="#scores">Подсчет результатов</a></li>
+            <li style="margin-left:2em"><a href="#game_finish">Завершение игры</a></li>
+            <li style="margin-left:2em"><a href="#stats">Таблица лидеров и рейтинг</a></li>
+        <li style="padding-bottom: 0"><a href="#playeraccount">Профиль игрока</a></li>
+            <li style="margin-left:2em"><a href="#social_login">Логин через соц.сети</a></li>
+            <li style="margin-left:2em"><a href="#profile_info">Информация об игроке</a></li>
+            <li style="margin-left:2em"><a href="#dark_mode">Темный режим</a></li>
+            <li style="margin-left:2em"><a href="#4color_deck">4-цветная колода</a></li>
+            <li style="margin-left:2em"><a href="#password_recovery">Восстановление пароля</a></li>
+            <li style="margin-left:2em"><a href="#feedback">Обратная связь</a></li>
+    </ul>
+        <a id="gameinfo"><h2>Об игре</h2></a>
+    <p>Nägels - карточная игра для 2-6 игроков.</p>
+
+    <p>Неизвестно наверняка как и когда появилась игра, но, похоже, ее происхождение связано со Швейцарией (всегда приветствуется дополнение истории игры, если вы ее знаете - в этом случае используйте раздел <a href="/feedback">"Обратная связь"</a>).</p>
+
+    <p>Будучи чем-то средним между <a href="https://en.wikipedia.org/wiki/Preferans">Преферансом</a> и <a href="https://en.wikipedia.org/wiki/Hearts_(card_game)">Червами</a> (которая устанавливалась по умолчанию на некоторые ранние системы Windows), Nägels способствует развитию стратегических навыков и логики. В то же время эта интересная игра гарантирует вам веселое времяпровождение с друзьями. Правила могут показаться сложными, но если вы запомните основные принципы и начнете играть, то станет очевидно, насколько она интересная и затягивающая.
+    <br><br>
+    Удачи!
+    <br><br>
+    Команда разработки Nägels Online</p>
+
+
+    <a id="gamerules"><h2>Правила</h2></a>
+
+    <p>Цель игры - получить максимум очков в течение всей игры, состоящей из 16-20 раздач.</p>
+
+    <p>Вот основные правила:</p>
+    <ol>
+        <li><b>Количество игроков.</b> Для начала игры нужно от 2 до 6 игроков. Оптимально - 4-5 игроков.</li>
+        <li><b>Количество карт в раздаче.</b> Каждую раздачу количество карт на руке одного игрока изменяется на 1 (исключение - раздача с 1 картой играется 2 раза подряд): сначала количество карт на руке уменьшается до 1, а затем - увеличивается до исходного количества.</li>
+        <li><b>Козырь.</b> Козырь сменяется каждую раздачу в одном и том же порядке: <p className='d suit-container' style="margin:2px" style="margin:2px">буби</p><p className='h suit-container' style="margin:2px">червы</p><p className='c suit-container' style="margin:2px">трефы</p><p className='s suit-container' style="margin:2px">пики</p><p className='x suit-container' style="margin:2px">без козыря</p></li>
+        <li><b>Ставки.</b> Каждую разадчу игроки совершают ставку (0 или выше) один за другим против часовой стрелки. Начинающий раунд ставок сменяется на одного против часовой стрелки каждую раздачу. Сумма всех ставок не может равняться сумме фактически доступных в раздаче взяток. Для этого введено ограничение на заявляемую ставку для последнего ставящего игрока ("кто-то должен быть несчастен").</li>
+        <li><b>Выбор карты в ходе.</b> После заявления ставок игроки начинают ходить своими картами. Для выбора первой карты в ходе нет никаких ограничений, однако все последующие игроки должны положить карту той же масти, что и первая, либо карту козырной масти. В этом правиле есть два исключения: игрок может положить любую карту, если у него/нее нет карты той масти, с которой начат ход, но при этом НЕ может положить карту козырной масти, которая младше уже положенной козырной масти, при том, что первая карта хода - НЕ козырь ("нельзя сливать козырей"). Когда каждый игрок положил свою карту в текущем ходе все карты (взятка) забираются игроком, который положил самую старшую карту начальной масти или наиболее старшего козыря. При этом старшая карта в козырной масти - это валет, а второй по счету идет девятка! Эта особенность применяется только к козырной масти.</li>
+        <li><b>Подсчет результатов.</b> После того, как завершены все ходы в раздаче, подсчитываются результаты. Каждый игрок получает по одному очку за каждую взятку + бонус в виде 10 очков ЕСЛИ количество взяток совпало с заявленной в начале раздачи ставкой.</li>
+        <li><b>Итоги игры.</b> В конце игры (после всех раздач) победитель определяется по суммарному кол-ву очков. При равентсве очков победителем считается игрок, взявший больше бонусов.</li>
+    </ol>
+    <a href="#contents">Назад к содержанию</a>
+    
+    
+    <a id="gameplay"><h2>Игровой процесс</h2></a>
+    <a id="room"><h3>Лобби и игровые комнаты</h3></a>
+    <p>Чтобы начать играть в Nägels игрок должен создать игровую комнату в <a href="/lobby">лобби</a></p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px;" src="/info/images/new_room_modal.jpg">
+    <p>или присоединиться к открытой игровой комнате.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/join_room.jpg">
+    <p>Владелец комнаты может пригласить новых или существующих игроков присоединиться к игре, нажав на кнопку "Пригласить":</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/invite_create_modal.jpg">
+    <p>После нажатия на "Создать ссылку-приглашение" отображается ссылка для подключения к игре. Если введен корректный email, сообщение с приглашением будет отправлено игроку на почту.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/invite_link_modal.jpg">
+    <p>Когда игрок открывает пригласительную ссылку, он/она видит окно создания профиля или входа в существующий профиль игрока:</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/invite_join_modal.jpg">
+    <p>Владелец комнаты может кикнуть любого игрока.</p>
+    <p>Кнопка "Пингануть владельца": в разработке</p>
+    <p>Чат игровой комнаты: в разработке</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="game_start"><h3>Начало игры</h3></a>
+    <p>После того, как хотя бы один игрок присоединяется к игровой комнате, владелец может начать игру. </p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/room_interface_host.jpg">
+    <p>Перед началом игры владелец комнаты может настроить следующии опции:</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/game_configure_host.jpg">
+    <ul>
+        <li>Авто раздача карт - если отмечено, карты раздаются автоматически перед началом каждой раздачи, в противном случае владельцу потребуется вручную инициировать рассадку игроков и раздачу карт.</li>
+        <li>Раздачи с одной картой - если отмечено, в середине играются две раздачи с одной картой на руке, в противном случае они заменяются раздачами с двумя картами у каждого игрока</li>
+        <li>Рейтинговая игра - если отмечено, результаты игры будут записаны в профили игроков и в общую таблицу лидеров (но только в том случае, если игра будет завершена)</li>
+    </ul>
+    <p>Время на ход: в разработке</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="game_bet"><h3>Ставки</h3></a>
+    <p>В начале любой раздачи игроки делают ставки. Каждый игрок должен сделать ставку в свою очередь с учетом карт на руке (как их достоинства, так и их количества), уже совершенных ставок и козыря игры.</p>
+    <p>Следующее окно появляется, когда игроку пришло время сделать ставку.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/bet_modal.jpg">
+    <p>Нельзя сделать ставку больше, чем общее количество взяток в текущей раздаче.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/bet_modal_max_size_restriction.jpg">
+    <p>Последний ставящий игрок не может сделать ставку, которая в сумме с предыдущими ставками дает общее количество взяток в текущей разадче.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/bet_modal_last_player_restriction.jpg">
+    <a href="#contents">Назад к содержанию</a>
+    <a id="putting_cards"><h3>Выбор карт</h3></a>
+    <p>После этого каждый игрок кладет карты в свою очередь. Игрок, положивший старшую карту в ходе, забирает взятку и начинает следующий ход.</p>
+    <p>Следующее сообщение отображается, когда игроку пришло время сделать свой ход.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/action_message_your_turn.jpg">
+    <p>Во время вашего хода нажмите на карту один раз, чтобы выбрать карту. Нажмите на выбранную карту еще раз, чтобы подтвердить выбор.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 500px" src="/info/images/select_card.jpg">
+    <p>Следующее сообщение отображается, если ход выбранной картой не возможен по правилам игры.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 500px" src="/info/images/action_message_incorrect_card.jpg">
+    <p>Кнопка "Прошлый ход" доступна после завершения первого хода в раздаче. Нажатие на нее отобразит карты последнего завершенного хода.</p>
+    <p>После завершения последнего хода раздачи, карты раздаются заново и начинается следующая раздача.</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="scores"><h3>Счет игры</h3></a>
+    <p>Текущий счет игры можно увидеть, нажав на кнопку "Счет".</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 600px" src="/info/images/in_game_scores.jpg">
+    <a href="#contents">Назад к содержанию</a>
+    <a id="game_finish"><h3>Завершение игры</h3></a>
+    <p>После завершения игры отображается логин победителя.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/action_message_winner.jpg">
+    <p>Владелец комнаты может завершить игру в любой момент, нажав на кнопку "Завершить".</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block; max-width: 350px" src="/info/images/finish_game_modal.jpg">
+    <p>Игрок может выйти из игры в любой момент, нажав на кнопку "Выйти".</p>
+    <p>Владелец игры может начать очередную игру, нажав на кнопку "Начать игру" после завершения предыдущей игры.</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="stats"><h3>Таблица лидеров и рейтинг</h3></a>
+    <p>Общая статистика игроков доступна в разделе <a href='/leaderboard'>Рейтинг</a>.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/leaderboard.jpg">
+    <p>Индивидуальная статистика игроков доступна в профилях игроков, которые можно открыть, нажав на логин в любом месте приложения.</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="playeraccount"><h2>Профиль игрока</h2></a>
+    <p>Для игры в Nägels Online игрок должен предварительно <a href='/register'>зарегистрироваться</a>.</p>
+    <a id="social_login"><h3>Вход через соц. сети</h3></a>
+    <p>В разработке</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="profile_info"><h3>Информация об игроке</h3></a>
+    <p>Можно просматривать и редактировать информацию об себе в разделе <a href='/profile'>Профиль</a>.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/profile_personal.jpg">
+    <p>Профили других игроков можно просмотреть, кликнув на логин игрока в игре, игровой комнате, лобби или рейтинговой таблице.</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/profile_other_player.jpg">
+    <a href="#contents">Назад к содержанию</a>
+    <a id="dark_mode"><h3>Темный режим</h3></a>
+    <p>Также можно установить темную или "свинячую" цветовую схему приложения в профиле или непосредственно из игры. Вот как выглядит темный режим:</p>
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/dark_mode_profile_personal.jpg">
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/dark_mode_gameplay.jpg">
+    <img style="width:70vw; margin-left: auto; margin-right: auto; display: block" src="/info/images/dark_mode_game_configure_host.jpg">
+    <a href="#contents">Назад к содержанию</a>
+    <a id="4color_deck"><h3>4 цветная колода</h3></a>
+    <p>Имеется возможность отображать карты разных мастей с использованием 4ех разных цветов. Цвет колоды может быть изменен в профиле или в игре.</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="password_recovery"><h3>Восстановление пароля</h3></a>
+    <p>Если вы забыли пароль от своего профиля, вы можете <a href="/forgot-password">отправить</a> ссылку для восстановления пароля на свой email.</p>
+    <a href="#contents">Назад к содержанию</a>
+    <a id="feedback"><h3>Обратная связь</h3></a>
+    <p>Приветствуется любая обратная связь. Если у вас есть идеи по улучшению приложения Nägels Online Application, вы можете использовать <a href='/feedback'>форму</a> обратной связи.</p>
+    <a href="#contents">Назад к содержанию</a>
+
+</div>

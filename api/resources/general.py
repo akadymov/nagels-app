@@ -33,7 +33,9 @@ def get_rules():
 @cross_origin()
 def get_info():
     lang = request.headers.get('Accept-Language')
-    with open("info.html", 'r') as f:
+    if not lang:
+        lang = get_settings('LANGS')['DEFAULT']
+    with open("info_" + lang + ".html", 'r') as f:
         content = f.read()
         f.close()
     if not content:
