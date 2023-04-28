@@ -3,7 +3,7 @@
 from flask import url_for, request, jsonify, Blueprint
 from flask_cors import cross_origin
 from app import db
-from app.models import User, Room, Game, Player, Hand, HandScore, TurnCard, Stats
+from app.models import User, Room, Game, Player, Hand, HandScore, TurnCard, Turn
 from datetime import datetime
 import random
 from config import get_settings, get_environment
@@ -352,6 +352,12 @@ def status(game_id):
                 })
 
         last_turn = current_hand.get_last_turn()
+        if not last_turn:
+            previous_hand = game.previous_hand()
+            if previous_hand:
+                prev_hand_turns = Turn.query.filter_by(hand_id=previous_hand.id).order_by(Turn.id.desc()).all()
+                if prev_hand_turns:
+                    last_turn = prev_hand_turns[0]
         if last_turn:
             for card in TurnCard.query.filter_by(turn_id=last_turn.id).all():
                 card_user = User.query.filter_by(id=card.player_id).first()

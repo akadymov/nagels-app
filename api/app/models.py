@@ -333,6 +333,14 @@ class Game(db.Model):
     def last_open_hand(self):
         return Hand.query.filter_by(game_id=self.id, is_closed=0).order_by(Hand.serial_no.desc()).first()
 
+    def previous_hand(self):
+        current_hand = Hand.query.filter_by(game_id=self.id, is_closed=0).order_by(Hand.serial_no.desc()).first()
+        if not current_hand:
+            return None
+        if current_hand.serial_no == 1:
+            return None
+        return Hand.query.filter_by(game_id=self.id, serial_no=current_hand.serial_no - 1).first()
+
     def all_hands_played(self):
         all_games_played = False
         players_count = self.players.count()
