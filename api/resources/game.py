@@ -350,31 +350,6 @@ def status(game_id):
                     'playerPosition': player_position,
                     'playerRelativePosition': player_relative_position
                 })
-
-        last_turn = current_hand.get_last_turn()
-        if not last_turn:
-            previous_hand = game.previous_hand()
-            if previous_hand:
-                prev_hand_turns = Turn.query.filter_by(hand_id=previous_hand.id).order_by(Turn.id.desc()).all()
-                if prev_hand_turns:
-                    last_turn = prev_hand_turns[0]
-        if last_turn:
-            for card in TurnCard.query.filter_by(turn_id=last_turn.id).all():
-                card_user = User.query.filter_by(id=card.player_id).first()
-                player_position = None
-                player_relative_position = None
-                if card_user:
-                    player_position = current_hand.get_position(card_user)
-                    player_relative_position = player_position
-                    if requesting_user_is_player:
-                        player_relative_position = game.get_player_relative_positions(requesting_user.id, card_user.id)
-                last_turn_cards.append({
-                    'cardId': str(card.card_id) + card.card_suit,
-                    'playerId': card.player_id,
-                    'playerPosition': player_position,
-                    'playerRelativePosition': player_relative_position
-                })
-
     else:
         for player in players:
             user = User.query.filter_by(id=player.user_id).first()
@@ -386,6 +361,34 @@ def status(game_id):
                     'position': player.position,
                     'relativePosition': game.get_player_relative_positions(requesting_user.id, player.user_id) if requesting_user_is_player else player.position
                 })
+
+    last_turn = []
+    if current_hand:
+        hand_context = current_hand
+        last_turn = current_hand.get_last_turn()
+    if not last_turn:
+        previous_hand = game.previous_hand()
+        if previous_hand:
+            prev_hand_turns = Turn.query.filter_by(hand_id=previous_hand.id).order_by(Turn.id.desc()).all()
+            if prev_hand_turns:
+                last_turn = prev_hand_turns[0]
+                hand_context = previous_hand
+    if last_turn and hand_context:
+        for card in TurnCard.query.filter_by(turn_id=last_turn.id).all():
+            card_user = User.query.filter_by(id=card.player_id).first()
+            player_position = None
+            player_relative_position = None
+            if card_user:
+                player_position = hand_context.get_position(card_user)
+                player_relative_position = player_position
+                if requesting_user_is_player:
+                    player_relative_position = game.get_player_relative_positions(requesting_user.id, card_user.id)
+            last_turn_cards.append({
+                'cardId': str(card.card_id) + card.card_suit,
+                'playerId': card.player_id,
+                'playerPosition': player_position,
+                'playerRelativePosition': player_relative_position
+            })
 
     action_msg = get_phrase('shuffling_positions_action_message', lang).format(game_id=game_id, hostname=room.host.username)
     can_deal = False
