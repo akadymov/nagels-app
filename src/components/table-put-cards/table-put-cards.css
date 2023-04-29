@@ -178,7 +178,7 @@
 
 .put-card-avatar{   
     position: absolute;
-    /*opacity: 50%;*/
+    opacity: 60%;
     border: 0.5px solid var(--primary);
     border-radius: 50%;
 }
