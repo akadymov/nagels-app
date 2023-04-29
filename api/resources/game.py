@@ -363,16 +363,17 @@ def status(game_id):
                 })
 
     last_turn = []
+    hand_context = None
     if current_hand:
         hand_context = current_hand
         last_turn = current_hand.get_last_turn()
     if not last_turn:
-        previous_hand = game.previous_hand()
-        if previous_hand:
-            prev_hand_turns = Turn.query.filter_by(hand_id=previous_hand.id).order_by(Turn.id.desc()).all()
-            if prev_hand_turns:
-                last_turn = prev_hand_turns[0]
-                hand_context = previous_hand
+        if game.finished:
+            hand_context = Hand.query.filter_by(game_id=game.id).order_by(Hand.serial_no.desc()).first()
+        else:
+            hand_context = game.previous_hand()
+        if hand_context:
+            last_turn = Turn.query.filter_by(hand_id=hand_context.id).order_by(Turn.id.desc()).first()
     if last_turn and hand_context:
         for card in TurnCard.query.filter_by(turn_id=last_turn.id).all():
             card_user = User.query.filter_by(id=card.player_id).first()
@@ -386,6 +387,7 @@ def status(game_id):
             last_turn_cards.append({
                 'cardId': str(card.card_id) + card.card_suit,
                 'playerId': card.player_id,
+                'playerUsername': card_user.username,
                 'playerPosition': player_position,
                 'playerRelativePosition': player_relative_position
             })
