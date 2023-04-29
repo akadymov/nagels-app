@@ -7,6 +7,7 @@ from config import get_settings, get_environment
 auth = get_settings('AUTH')
 env = get_environment()
 nagels_app = get_settings('NAGELS_APP')
+default_lang = get_settings('LANGS')['DEFAULT'][env]
 
 
 def send_async_email(app, msg):
@@ -36,20 +37,20 @@ def send_email(subject, sender, recipients, text_body, html_body):
     Thread(target=send_async_email, args=(app, msg)).start()
 
 
-def send_password_reset_email(user):
+def send_password_reset_email(user, lang=default_lang):
     token = user.get_reset_password_token()
     send_email(
         '[Nägels Online] Reset Your Password',
         sender=auth['ADMINS'][env].split(',')[0],
         recipients=[user.email],
         text_body=render_template(
-            'email/reset_password.txt',
+            'email/reset_password_' + lang + '.txt',
             nagels_url=nagels_app['SITE_URL'][env],
             user=user,
             token=token
         ),
         html_body=render_template(
-            'email/reset_password.html',
+            'email/reset_password_' + lang + '.html',
             nagels_url=nagels_app['SITE_URL'][env],
             user=user,
             token=token
@@ -57,20 +58,20 @@ def send_password_reset_email(user):
     )
 
 
-def send_invite_email(token, room_id, email, message):
+def send_invite_email(token, room_id, email, message, lang=default_lang):
     send_email(
         '[Nägels Online] Invitation to join game',
         sender=auth['ADMINS'][env].split(',')[0],
         recipients=[email],
         text_body=render_template(
-            'email/invite.txt',
+            'email/invite_' + lang + '.txt',
             nagels_url=nagels_app['SITE_URL'][env],
             room_id=room_id,
             message=message,
             token=token
         ),
         html_body=render_template(
-            'email/invite.html',
+            'email/invite_' + lang + '.html',
             nagels_url=nagels_app['SITE_URL'][env],
             room_id=room_id,
             message=message,
@@ -79,16 +80,17 @@ def send_invite_email(token, room_id, email, message):
     )
 
 
-def send_registration_notification(user):
+def send_registration_notification(user, lang=default_lang):
     send_email('[Nägels Online] Welcome letter',
                sender=auth['ADMINS'][env].split(',')[0],
                recipients=[user.email],
-               text_body=render_template('email/register.txt',
+               text_body=render_template('email/register_' + lang + '.txt',
                                          user=user),
-               html_body=render_template('email/register.html',
+               html_body=render_template('email/register_' + lang + '.html',
                                          user=user))
 
-def send_feedback(message, sender_email=None, sender_name=None):
+
+def send_feedback(message, sender_email=None, sender_name=None, lang=default_lang):
     if not sender_email:
         sender_email = auth['ADMINS'][env].split(',')[0]
     if not sender_name:
@@ -97,7 +99,7 @@ def send_feedback(message, sender_email=None, sender_name=None):
         '[Nägels Online] Feedback from user',
         sender=(sender_name, sender_email),
         recipients=auth['ADMINS'][env].split(','),
-        text_body=render_template('email/feedback.txt', message=message, sender_name=sender_name),
-        html_body=render_template('email/feedback.html', message=message, sender_name=sender_name)
+        text_body=render_template('email/feedback_' + lang + '.txt', message=message, sender_name=sender_name),
+        html_body=render_template('email/feedback_' + lang + '.html', message=message, sender_name=sender_name)
     )
 

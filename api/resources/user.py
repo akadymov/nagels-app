@@ -89,7 +89,7 @@ def create_user():
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
-    send_registration_notification(user)
+    send_registration_notification(user, lang)
     return jsonify({
         'username': user.username,
         'email': user.email,
@@ -275,7 +275,7 @@ def send_password_recovery():
             ]
         }), 400
 
-    send_password_reset_email(requesting_user)
+    send_password_reset_email(requesting_user, lang)
 
     return jsonify('Password recovery link is sent!'), 200
 
@@ -313,7 +313,7 @@ def invite_user():
     invite_token = User.get_invite_token(room_id)
 
     if email:
-        send_invite_email(invite_token, room_id, email, message)
+        send_invite_email(invite_token, room_id, email, message, lang)
 
     return jsonify({'inviteLink': '{site_url}/room/{room_id}/{token}'.format(
         site_url=get_settings('NAGELS_APP')['SITE_URL'][env],

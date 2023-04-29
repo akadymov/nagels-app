@@ -132,7 +132,7 @@ class User(UserMixin, db.Model):
             return
         return room_id
 
-    def get_reset_password_token(self, expires_in=600):
+    def get_reset_password_token(self, expires_in=3600):
         new_token = jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             auth['SECRET_KEY'][env],

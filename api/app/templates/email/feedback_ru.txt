@@ -1,0 +1,5 @@
+Новая обратная связь от пользователя Nägels Online  {{ sender_name }}:
+
+"{{ message }}"
+
+Команда Nägels Online

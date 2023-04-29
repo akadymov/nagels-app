@@ -74,7 +74,7 @@ def feedback():
             }]
         })
 
-    send_feedback(message=message, sender_name=sender_name, sender_email=sender_email)
+    send_feedback(message=message, sender_name=sender_name, sender_email=sender_email, lang=lang)
     return jsonify({'message': get_phrase('feedback_sent_message', lang)}), 200
 
 
