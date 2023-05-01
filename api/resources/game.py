@@ -324,6 +324,7 @@ def status(game_id):
             if user:
                 user_scores = HandScore.query.filter_by(player_id=user.id, hand_id=current_hand.id).first()
                 players_enriched.append({
+                    'playerId': user.id,
                     'username': user.username,
                     'position': current_hand.get_position(user),
                     'betSize': user_scores.bet_size if user_scores else None,
@@ -413,6 +414,74 @@ def status(game_id):
 
     played_hands_count = Hand.query.filter_by(game_id=game_id, is_closed=1).count()
 
+    played_hands = []
+    if game.finished:
+        played_hands_raw = Hand.query.filter_by(game_id=game.id).order_by(Hand.id.asc()).all()
+        players_replay = []
+        for player in players_enriched:
+            players_replay.append(player)
+        for h in played_hands_raw:
+            hand_turns = []
+            hand_scores_raw = HandScore.query.filter_by(hand_id=h.id).order_by(HandScore.id.asc()).all()
+            for hs in hand_scores_raw:
+                for player_replay in players_replay:
+                    if hs.player_id == player_replay['playerId']:
+                        player_replay['betSize'] = hs.bet_size
+                        player_replay['cardsOnHand'] = h.cards_per_player
+                        player_replay['tookTurns'] = 0
+            hand_turns_raw = Turn.query.filter_by(hand_id=h.id).order_by(Turn.id.asc()).all()
+            turn_no = 0
+            for t in hand_turns_raw:
+                turn_no = turn_no + 1
+                turn_cards = []
+                turn_cards_raw = TurnCard.query.filter_by(turn_id=t.id).order_by(TurnCard.id.asc()).all()
+                i = 0
+                put_cards_num = 0
+                players_turn_snapshot = []
+                for p in players_replay:
+                    if t.took_user_id == p['playerId']:
+                        p['tookTurns'] += 1
+                    players_turn_snapshot.append({
+                        'playerId': p['playerId'],
+                        'username': p['username'],
+                        'position': p['position'],
+                        'relativePosition': p['relativePosition'],
+                        'betSize': p['betSize'],
+                        'tookTurns': p['tookTurns'],
+                        'cardsOnHand': p['cardsOnHand'] - turn_no
+                    })
+                for c in turn_cards_raw:
+                    i = i + 1
+                    put_cards_num = put_cards_num + 1
+                    c_user = User.query.filter_by(id=c.player_id).first()
+                    is_turn_last_card = put_cards_num == len(players)
+                    is_hand_last_card = is_turn_last_card and h.cards_per_player == turn_no
+                    is_game_last_card = is_hand_last_card and h.serial_no == (20 if len(players) < 6 else 16)
+                    turn_cards.append({
+                        'cardId': str(c.card_id) + c.card_suit,
+                        'turnLastCard': is_turn_last_card,
+                        'handLastCard': is_hand_last_card,
+                        'gameLastCard': is_game_last_card,
+                        'playerId': c.player_id,
+                        'playerUsername': c_user.username,
+                        'playerPosition': i,
+                        'playerRelativePosition': i
+                    })
+                hand_turns.append({
+                    'turnId': t.id,
+                    'turnSerialNo': turn_no,
+                    'turnCards': turn_cards,
+                    'tookPlayerId': t.took_user_id,
+                    'players': players_turn_snapshot
+                })
+            played_hands.append({
+                'handId': h.id,
+                'handSerialNo': h.serial_no,
+                'cards': h.cards_per_player,
+                'trump': h.trump,
+                'turns': hand_turns
+            })
+
     response_json = {
         'gameId': game.id,
         'roomName': Room.query.filter_by(id=game.room_id).first().room_name,
@@ -429,6 +498,7 @@ def status(game_id):
         'started': game.started,
         'status': 'open' if game.finished is None else 'finished',
         'finished': game.finished,
+        'playedHands': played_hands,
         'players': players_enriched,
         'lastTurnCards': last_turn_cards,
         'nextActingPlayer': next_player.username if next_player else None,
