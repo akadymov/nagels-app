@@ -426,9 +426,9 @@ export default class Game extends React.Component{
     }
 
     viewNextHand = () => {
-        var previousHandIndex = this.state.replayedHand + 1
+        var nextHandIndex = this.state.replayedHand + 1
         this.setState({
-            replayedHand: previousHandIndex,
+            replayedHand: nextHandIndex,
             replayedTurn: 0
         }, () => {
             this.viewPlayedHands()
@@ -436,9 +436,9 @@ export default class Game extends React.Component{
     }
 
     viewPreviousHand = () => {
-        var previousHandId = this.state.replayedHand - 1
+        var previousHandIndex = this.state.replayedHand - 1
         this.setState({
-            replayedHand: previousHandId,
+            replayedHand: previousHandIndex,
             replayedTurn: 0
         }, () => {
             this.viewPlayedHands()
@@ -463,18 +463,18 @@ export default class Game extends React.Component{
     }
 
     viewPreviousTurn = () => {
-        var nextTurnIndex = 0
-        var nextHandId = 0
+        var previousTurnIndex = 0
+        var previousHandIndex = 0
         if(this.state.replayedTurn === 0){
-            nextHandId = this.state.replayedHand - 1
-            nextTurnIndex = this.state.gameDetails.playedHands[this.state.replayedHand].turns.length - 1
+            previousHandIndex = this.state.replayedHand - 1
+            previousTurnIndex = this.state.gameDetails.playedHands[previousHandIndex].turns.length - 1
         } else {
-            nextHandId = this.state.replayedHand
-            nextTurnIndex = this.state.replayedTurn - 1
+            previousHandIndex = this.state.replayedHand
+            previousTurnIndex = this.state.replayedTurn - 1
         }
         this.setState({
-            replayedHand: nextHandId,
-            replayedTurn: nextTurnIndex
+            replayedHand: previousHandIndex,
+            replayedTurn: previousTurnIndex
         }, () => {
             this.viewPlayedHands()
         });
@@ -606,6 +606,7 @@ export default class Game extends React.Component{
                         newGameDetails.cardsOnTable.push({
                             'cardId': cardId,
                             'playerId': this.Cookies.get('username'),
+                            'playerUsername': this.Cookies.get('username'),
                             'playerPosition': newGameDetails.myInHandInfo.position,
                             'playerRelativePosition': 0
                         })
