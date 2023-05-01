@@ -130,8 +130,6 @@ export default class NagelsApi {
             data.deckType = deckType
         }
 
-        console.log(data)
-
         const res = await this.apiCall('/user/edit/' + username, 'PUT', data, preferredLang);
         return res
     };

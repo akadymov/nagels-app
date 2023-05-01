@@ -129,7 +129,6 @@ export default class Feedback extends React.Component{
                     if (senderEmailIndex >= 0){
                         newTextFieldsList[senderEmailIndex].text = body.email
                     }
-                    console.log(newTextFieldsList)
                     this.setState({
                         senderName: username,
                         senderEmail: body.email,

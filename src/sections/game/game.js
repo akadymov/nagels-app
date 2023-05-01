@@ -35,6 +35,9 @@ export default class Game extends React.Component{
                 colorScheme: this.Cookies.get('colorScheme'),
                 preferredLang: this.Cookies.get('preferredLang')
             },
+            replayMode: false,
+            replayedHand: 0,
+            replayedTurn: 0,
             gameDetails: {
                 gameId: null,
                 roomId: null,
@@ -46,6 +49,7 @@ export default class Game extends React.Component{
                 allowedSuites: [],
                 attentionToMessage: false,
                 gameScores: [],
+                playedHands: [],
                 nextActingPlayer: null,
                 players: [],
                 cardsOnTable: [],
@@ -160,7 +164,7 @@ export default class Game extends React.Component{
                     }
                     if(getGameResponse.status === 'finished'){
                         newHeaderControls.unshift({
-                            id: 'shuffle',
+                            id: 'restart',
                             type: 'button',
                             text: getText('start_new_game'),
                             variant: 'contained',
@@ -168,6 +172,16 @@ export default class Game extends React.Component{
                             size: 'small',
                             width: '130px',
                             onSubmit: this.restartGame
+                        })
+                        newHeaderControls.push({
+                            id: 'replay_button',
+                            type: 'button',
+                            text: getText('replay_hands'),
+                            variant: 'contained',
+                            disabled: getGameResponse.status !== 'finished' && getGameResponse.playedHands,
+                            size: 'small',
+                            width: '130px',
+                            onSubmit: this.viewPlayedHands
                         })
                     }
                     if(getGameResponse.canDeal){
@@ -212,7 +226,6 @@ export default class Game extends React.Component{
                     getGameResponse.players.map(player => {
                         if(player.username !== this.Cookies.get('username')){
                             if(player.betSize !== null){
-                                console.log(player)
                                 betPlayers.push(player)
                                 //sumOfMadeBets =+ player.betSize
                             } else {
@@ -279,7 +292,8 @@ export default class Game extends React.Component{
                     modalOpen: getGameResponse.nextActingPlayer === this.Cookies.get('username') && !getGameResponse.betsAreMade,
                     modalText: getText('make_a_bet'),
                     modalCanClose: false,
-                    modalContentType: 'Bet'
+                    modalContentType: 'Bet',
+                    replayMode: false
                 })
                 /*if(getGameResponse.players.length === getGameResponse.cardsOnTable.length){
                     setTimeout(this.utilizeCards(getGameResponse.currentHandId, getGameResponse.nextActingPlayer), 3000)
@@ -344,6 +358,124 @@ export default class Game extends React.Component{
             modalCanClose: true,
             modalContentType: 'Finish'
         })
+    }
+
+    viewPlayedHands = () => {
+        var newGameDetails = this.state.gameDetails
+        var newHeaderControls = this.state.headerControls
+        newGameDetails.actionMessage = getText('this_is_replay')
+        newGameDetails.attentionToMessage = true
+        newHeaderControls = [
+            {
+                id: 'next_hand',
+                type: 'button',
+                text: getText('next_hand'),
+                variant: 'contained',
+                size: 'small',
+                disabled: this.state.replayedHand === newGameDetails.playedHands.length - 1,
+                width: '130px',
+                onSubmit: this.viewNextHand
+            },
+            {
+                id: 'next_turn',
+                type: 'button',
+                text: getText('next_turn'),
+                variant: 'contained',
+                size: 'small',
+                disabled: this.state.replayedHand === newGameDetails.playedHands.length - 1 && this.state.replayedTurn === newGameDetails.playedHands[this.state.replayedHand].turns.length - 1,
+                width: '130px',
+                onSubmit: this.viewNextTurn
+            },
+            {
+                id: 'previous_turn',
+                type: 'button',
+                text: getText('previous_turn'),
+                variant: 'contained',
+                size: 'small',
+                disabled: this.state.replayedTurn === 0 && this.state.replayedHand === 0,
+                width: '130px',
+                onSubmit: this.viewPreviousTurn
+            },
+            {
+                id: 'previous_hand',
+                type: 'button',
+                text: getText('previous_hand'),
+                variant: 'contained',
+                size: 'small',
+                disabled: this.state.replayedHand === 0,
+                width: '130px',
+                onSubmit: this.viewPreviousHand
+            },
+            {
+                id: 'back_to_game_button',
+                type: 'button',
+                text: getText('back_to_game'),
+                variant: 'contained',
+                size: 'small',
+                width: '130px',
+                onSubmit: this.newGameStatus
+            }
+        ]
+        this.setState({ 
+            replayMode: true,
+            gameDetails: newGameDetails,
+            headerControls: newHeaderControls
+        })
+    }
+
+    viewNextHand = () => {
+        var previousHandIndex = this.state.replayedHand + 1
+        this.setState({
+            replayedHand: previousHandIndex,
+            replayedTurn: 0
+        }, () => {
+            this.viewPlayedHands()
+        });
+    }
+
+    viewPreviousHand = () => {
+        var nextHandId = 0
+        this.setState({
+            replayedHand: nextHandId,
+            replayedTurn: 0
+        }, () => {
+            this.viewPlayedHands()
+        });
+    }
+
+    viewNextTurn = () => {
+        var previousHandIndex = 0
+        var previousTurnIndex = 0
+        if(this.state.replayedTurn === this.state.gameDetails.playedHands[this.state.replayedHand].turns.length - 1){
+            previousHandIndex = this.state.replayedHand + 1
+        } else {
+            previousHandIndex = this.state.replayedHand
+            previousTurnIndex = this.state.replayedTurn + 1
+        }
+        this.setState({
+            replayedHand: previousHandIndex,
+            replayedTurn: previousTurnIndex
+        }, () => {
+            this.viewPlayedHands()
+        });
+    }
+
+    viewPreviousTurn = () => {
+        var nextTurnIndex = 0
+        var nextHandId = 0
+        if(this.state.replayedTurn === 0){
+            nextHandId = this.state.replayedHand - 1
+            nextTurnIndex = this.state.gameDetails.playedHands[this.state.replayedHand].turns.length - 1
+        } else {
+            nextHandId = this.state.replayedHand
+            nextTurnIndex = this.state.replayedTurn - 1
+        }
+        this.setState({
+            replayedHand: nextHandId,
+            replayedTurn: nextTurnIndex
+        }, () => {
+            this.viewPlayedHands()
+        });
     }
 
     closeModal = () => {
@@ -455,8 +587,6 @@ export default class Game extends React.Component{
                     this.handleInGameError(body)
                 } else {
                     console.log('Emitting event "put_card"')
-                    console.log(this.state.gameDetails.lastTurnCards)
-                    console.log(body.cardsOnTable)
                     gameSocket.emit(
                         'put_card', 
                         this.props.match.params.gameId,
@@ -617,7 +747,6 @@ export default class Game extends React.Component{
                 var newUserData = body
                 var newUserSettings = this.state.userSettings
                 newUserSettings.colorScheme = e.target.value
-                console.log(newUserSettings.colorScheme)
                 this.NagelsApi.updateUser(
                     this.Cookies.get('username'), 
                     this.Cookies.get('idToken'), 
@@ -847,7 +976,7 @@ export default class Game extends React.Component{
         
         setTimeout(function(){
 
-            if(this.state.gameDetails.cardsOnTable.length === this.state.gameDetails.players.length && lastTurnCards === this.state.gameDetails.lastTurnCards){
+            if(this.state.gameDetails.cardsOnTable.length === this.state.gameDetails.players.length && lastTurnCards === this.state.gameDetails.lastTurnCards && !this.state.replayMode){
                 var newGameDetails = this.state.gameDetails
                 newGameDetails.cardsOnTable = []
                 this.setState({ gameDetails: newGameDetails })
@@ -856,6 +985,11 @@ export default class Game extends React.Component{
     }
 
     render() {
+
+        var players = this.state.gameDetails.players
+        if(this.state.replayMode){
+            players = this.state.gameDetails.playedHands[this.state.replayedHand].turns[this.state.replayedTurn].players
+        }
 
         return (
             <div className={`game-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
@@ -888,7 +1022,7 @@ export default class Game extends React.Component{
                                 isMobile={this.props.isMobile}
                                 isDesktop={this.props.isDesktop}
                                 isPortrait={this.props.isPortrait}
-                                cardsOnTable={this.state.gameDetails.cardsOnTable}
+                                cardsOnTable={this.state.replayMode ? this.state.gameDetails.playedHands[this.state.replayedHand].turns[this.state.replayedTurn].turnCards : this.state.gameDetails.cardsOnTable}
                                 playersCount={this.state.gameDetails.players.length}
                                 myPosition={this.state.gameDetails.myInHandInfo.position ? this.state.gameDetails.myInHandInfo.position : 0}
                             ></TablePutCards>
@@ -910,8 +1044,8 @@ export default class Game extends React.Component{
                             ''
                     }
                     {
-                    this.state.gameDetails.players.map(player => {  // TODO consider replacing with forEach
-                        if(player.username !== this.Cookies.get('username')) {
+                    players.map(player => {  // TODO consider replacing with forEach
+                        if(player.username !== this.Cookies.get('username') || this.state.replayMode) {
                             if(this.state.gameDetails.positionsDefined){
                                 return (
                                     <OpponentContainer
@@ -932,7 +1066,7 @@ export default class Game extends React.Component{
                             }
                         }
                     })}
-                    {this.state.gameDetails.positionsDefined && this.state.gameDetails.myInHandInfo.dealtCards ? 
+                    {this.state.gameDetails.positionsDefined && this.state.gameDetails.myInHandInfo.dealtCards && !this.state.replayMode ? 
                         <PlayerContainer
                             isMobile={this.props.isMobile}
                             isDesktop={this.props.isDesktop}
@@ -951,9 +1085,9 @@ export default class Game extends React.Component{
                     }
                     {this.state.gameDetails.currentHandId ?
                         <div className={`current-game-trump-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                            <div className={`hand-id-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('hand_id')}{this.state.gameDetails.currentHandSerialNo}/{this.state.gameDetails.players.length === 6 ? 16 : 20}</div>
+                            <div className={`hand-id-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('hand_id')}{this.state.replayMode ? this.state.gameDetails.playedHands[this.state.replayedHand].handSerialNo : this.state.gameDetails.currentHandSerialNo}/{this.state.gameDetails.players.length === 6 ? 16 : 20}</div>
                             <div className={`hand-id-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
-                                <p className={`${this.state.gameDetails.trump || 'x'} trump-container ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : ''}`}>{this.state.gameDetails.cardsPerPlayer}</p>
+                                <p className={`${(this.state.replayMode ? this.state.gameDetails.playedHands[this.state.replayedHand].trump : this.state.gameDetails.trump) || 'x'} trump-container ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : ''}`}>{this.state.replayMode ? this.state.gameDetails.playedHands[this.state.replayedHand].cards : this.state.gameDetails.cardsPerPlayer}</p>
                             </div>
                         </div>
                     : '' }

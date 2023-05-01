@@ -8,6 +8,29 @@
     height: 100px;
 }
 
+.opponent-container.player0{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 100px;
+}
+
+.opponent-container.player0.mobile.landscape{
+    bottom: -27%;
+}
+
+.opponent-container.player0.mobile.portrait{
+    bottom: -25%;
+}
+
+.opponent-container.player0.tablet{
+    bottom: -10%;
+}
+
+.opponent-container.player0.desktop{
+    bottom: -15%;
+}
+
 .opponent-container.player1.outof2{
     top:-8%;
     left: 50%;

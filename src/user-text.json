@@ -1109,6 +1109,36 @@
       "id": "allowed_suits_message",
       "en": "Allowed suites:",
       "ru": "Допустимые масти:"
+    },
+    {
+      "id": "replay_hands",
+      "en": "Replay hands",
+      "ru": "История раздач"
+    },
+    {
+      "id": "next_hand",
+      "en": "Next hand",
+      "ru": "След. раздача"
+    },
+    {
+      "id": "next_turn",
+      "en": "Next turn",
+      "ru": "След. ход"
+    },
+    {
+      "id": "previous_hand",
+      "en": "Previous hand",
+      "ru": "Пред. раздача"
+    },
+    {
+      "id": "previous_turn",
+      "en": "Previous turn",
+      "ru": "Пред. ход"
+    },
+    {
+      "id": "this_is_replay",
+      "en": "This is closed game's hands replay. Click \"Back to game\" to resume playing",
+      "ru": "Это повтор раздач завершенной игры. Нажмите на \"Назад к игре\", чтобы продолжить игру"
     }
   ]
 }
