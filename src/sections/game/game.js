@@ -173,16 +173,6 @@ export default class Game extends React.Component{
                             width: '130px',
                             onSubmit: this.restartGame
                         })
-                        newHeaderControls.push({
-                            id: 'replay_button',
-                            type: 'button',
-                            text: getText('replay_hands'),
-                            variant: 'contained',
-                            disabled: getGameResponse.status !== 'finished' && getGameResponse.playedHands,
-                            size: 'small',
-                            width: '130px',
-                            onSubmit: this.viewPlayedHands
-                        })
                     }
                     if(getGameResponse.canDeal){
                         newHeaderControls.push({
@@ -204,6 +194,18 @@ export default class Game extends React.Component{
                         getGameResponse.attentionToMessage = true
                         getGameResponse.actionMessage = getText('press_deal')
                     }
+                }
+                if(getGameResponse.status === 'finished'){
+                    newHeaderControls.push({
+                        id: 'replay_button',
+                        type: 'button',
+                        text: getText('replay_hands'),
+                        variant: 'contained',
+                        disabled: getGameResponse.status !== 'finished' || !getGameResponse.playedHands,
+                        size: 'small',
+                        width: '130px',
+                        onSubmit: this.viewPlayedHands
+                    })
                 }
                 if(getGameResponse.lastTurnCards.length > 0) {
                     newHeaderControls.push({
@@ -434,9 +436,9 @@ export default class Game extends React.Component{
     }
 
     viewPreviousHand = () => {
-        var nextHandId = 0
+        var previousHandId = this.state.replayedHand - 1
         this.setState({
-            replayedHand: nextHandId,
+            replayedHand: previousHandId,
             replayedTurn: 0
         }, () => {
             this.viewPlayedHands()
@@ -1017,7 +1019,7 @@ export default class Game extends React.Component{
                             ''
                     }
                     {
-                        this.state.gameDetails.cardsOnTable.length > 0 && !this.state.showLastTurn ?
+                        this.state.gameDetails.cardsOnTable.length > 0 || this.state.showLastTurn || this.state.replayMode ?
                             <TablePutCards
                                 isMobile={this.props.isMobile}
                                 isDesktop={this.props.isDesktop}

@@ -359,6 +359,7 @@ def status(game_id):
             if user:
                 players_enriched.append({
                     'username': user.username,
+                    'playerId': user.id,
                     'position': player.position,
                     'relativePosition': game.get_player_relative_positions(requesting_user.id, player.user_id) if requesting_user_is_player else player.position
                 })
