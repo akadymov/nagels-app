@@ -49,6 +49,20 @@ export default class OnboardingContainer extends React.Component{
                     <div className={`onboarding-text-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                         {this.props.text}
                     </div>
+                    <div 
+                        className={`onboarding-image-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
+                        style={{ display: this.props.img ? 'block' : 'none' }}
+                    >
+                        <img 
+                            style={{
+                                width: this.props.width,
+                                marginLeft: 'auto',
+                                marginRight: 'auto',
+                                display: 'block'
+                            }} 
+                            src={"/api/info/images/" + this.props.img}
+                        ></img>
+                    </div>
                     <div className={`onboarding-controls-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                         <FormButton
                             key="next_onboarding"

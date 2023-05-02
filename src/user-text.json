@@ -1188,7 +1188,7 @@
     {
       "id": "game_onboarding",
       "en": "This is your first game in Nägels Online! Here are some tips before you start playing.",
-      "ru": "Это ваша первая игра в Nägels Online!\nВот несколько подсказок и правил перед тем, как начать играть."
+      "ru": "Это ваша первая игра в Nägels Online!Вот несколько подсказок и правил перед тем, как начать играть."
     },
     {
       "id": "game_goal_onboarding",
@@ -1232,8 +1232,8 @@
     },
     {
       "id": "game_first_cards_put_onboarding",
-      "en": "After all bets are made every player puts card in his/her order. Starting player can put any card. ",
-      "ru": "После того, как все ставки сделаны, игроки кладут свои карты в свою очередь. Начинающий игрок может выбрать любую карту. "
+      "en": "After all bets are made every player puts card in his/her order. Starting player can put any card. Click/tap the card once to select card and once more - to confirm the choice.",
+      "ru": "После того, как все ставки сделаны, игроки кладут свои карты в свою очередь. Начинающий игрок может выбрать любую карту. Кликните по карте один раз для выбора и еще раз - для подтверждения выбора."
     },
     {
       "id": "game_turn_suit_onboarding",

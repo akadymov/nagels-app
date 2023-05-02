@@ -1000,6 +1000,7 @@ export default class Game extends React.Component{
         var onboardingTooltipWidth = 'unset'
         var isLastOnboardingStage = false
         var faded = false
+        var img = null
         switch(this.Cookies.get('onboardingGame')){
             case '0':
                 onboardingText = getText('game_onboarding')
@@ -1049,6 +1050,7 @@ export default class Game extends React.Component{
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
+                img = 'action_message_your_turn.jpg'
             break
             case '7':
                 onboardingText = getText('game_bet_size_onboarding')
@@ -1056,6 +1058,7 @@ export default class Game extends React.Component{
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
+                img = 'bet_modal.jpg'
             break
             case '8':
                 onboardingText = getText('game_someone_unhappy_rule_onboarding')
@@ -1063,6 +1066,7 @@ export default class Game extends React.Component{
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
+                img = 'bet_modal_last_player_restriction.jpg'
             break
             case '9':
                 onboardingText = getText('game_first_cards_put_onboarding')
@@ -1070,62 +1074,58 @@ export default class Game extends React.Component{
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
+                img = 'select_card.jpg'
             break
             case '10':
-                onboardingText = getText('game_first_cards_put_onboarding')
-                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
-                onboardingTooltipTop = '40vh'
-                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
-                faded = true
-            break
-            case '11':
                 onboardingText = getText('game_turn_suit_onboarding')
                 onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
             break
-            case '12':
+            case '11':
                 onboardingText = getText('game_incorrect_card_message_onboarding')
                 onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
+                img = 'action_message_incorrect_card.jpg'
             break
-            case '13':
+            case '12':
                 onboardingText = getText('game_no_suit_card_onboarding')
                 onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
             break
-            case '14':
+            case '13':
                 onboardingText = getText('game_take_turn_onboarding')
                 onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
             break
-            case '15':
+            case '14':
                 onboardingText = getText('game_cannot_leak_trump_exception')
                 onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
             break
-            case '16':
+            case '15':
                 onboardingText = getText('game_jack_exception')
                 onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
             break
-            case '17':
+            case '16':
                 onboardingText = getText('game_scores_onboarding')
                 onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
                 onboardingTooltipTop = '40vh'
                 onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
                 faded = true
+                img = 'in_game_scores.jpg'
             break
             case '17':
                 onboardingText = getText('game_last_turn_onboarding')
@@ -1329,6 +1329,7 @@ export default class Game extends React.Component{
                     isPortrait={this.props.isPortrait}
                     onboardingStage={this.Cookies.get('onboardingGame')}
                     faded={faded}
+                    img={img}
                     section='Game'
                     text={onboardingText}
                     left={onboardingTooltipLeft}
