@@ -5,6 +5,7 @@ import './onboarding-container.css';
 import FormButton from '../form-button';
 import { getText } from '../user-text';
 import Cookies from 'universal-cookie';
+import '../../config.json'
 
 export default class OnboardingContainer extends React.Component{
 
