@@ -108,6 +108,23 @@ export default class Login extends React.Component{
                 this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , colorScheme: expiresIn})
                 this.Cookies.set('deckType',body.deckType, { path: '/' , deckType: expiresIn})
                 this.Cookies.set('preferredLang', body.preferredLang, { path: '/' , preferredLang: expiresIn})
+                var expiresInEternal = new Date(currentDate.getTime + 999999999)
+                //this.Cookies.set('onboardingNavMenu', 0, { path: '/' , preferredLang: expiresInEternal})
+                if(!this.Cookies.get('onboardingLobby')){
+                    this.Cookies.set('onboardingLobby', 0, { path: '/' , preferredLang: expiresInEternal})
+                }
+                if(!this.Cookies.get('onboardingRoom')){
+                    this.Cookies.set('onboardingRoom', 0, { path: '/' , preferredLang: expiresInEternal})
+                }
+                if(!this.Cookies.get('onboardingGame')){
+                    this.Cookies.set('onboardingGame', 0, { path: '/' , preferredLang: expiresInEternal})
+                }
+                if(!this.Cookies.get('onboardingRating')){
+                    this.Cookies.set('onboardingRating', 0, { path: '/' , preferredLang: expiresInEternal})
+                }
+                if(!this.Cookies.get('onboardingProfile')){
+                    this.Cookies.set('onboardingProfile', 0, { path: '/' , preferredLang: expiresInEternal})
+                }
                 if(body.connectedRoomId) {
                     window.location.assign('/room/' + body.connectedRoomId)
                 } else {

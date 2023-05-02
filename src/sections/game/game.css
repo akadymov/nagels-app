@@ -77,12 +77,12 @@
 }
 
 .current-game-trump-container.mobile{
-    width: 40px;
+    width: 45px;
     height: 30px;
 }
 
 .current-game-trump-container.mobile.portrait{
-    right: -5%;
+    right: -10%;
     top: -5%;
 }
 
@@ -124,7 +124,7 @@
     position: absolute;
     bottom: 0%;
     width: 70px;
-    height: 25px;
+    height: 30px;
     line-height: 0px;
     font-size: 20px;
     text-align: center;
@@ -132,7 +132,7 @@
 
 .hand-id-value.mobile{
     width: 60px;
-    height: 20px;
+    height: 22px;
     line-height: 0px;
     font-size: 14px;
 }

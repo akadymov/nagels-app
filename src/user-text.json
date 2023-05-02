@@ -1139,6 +1139,151 @@
       "id": "this_is_replay",
       "en": "This is closed game's hands replay. Click \"Back to game\" to resume playing",
       "ru": "Это повтор раздач завершенной игры. Нажмите на \"Назад к игре\", чтобы продолжить игру"
+    },
+    {
+      "id": "next",
+      "en": "Next",
+      "ru": "Дальше"
+    },
+    {
+      "id": "skip",
+      "en": "Skip",
+      "ru": "Пропустить"
+    },
+    {
+      "id": "ok",
+      "en": "OK",
+      "ru": "Понятно"
+    },
+    {
+      "id": "lobby_onboarding",
+      "en": "Welcome to Nägels Online! Here are some game tips and rules before you start playing.",
+      "ru": "Добро пожаловать в Nägels Online! Ознакомьтесь с некоторыми правилами, перед тем, как начать играть."
+    },
+    {
+      "id": "lobby_table_onboarding",
+      "en": "All game rooms are placed in lobby. You can join existing rooms, if game is not started yet.",
+      "ru": "В лобби отображены все игровые комнаты. Вы можете подключиться к уже созданным комнатам, если там еще не стартовала игра."
+    },
+    {
+      "id": "lobby_controls_onboarding",
+      "en": "You also can create new game room. Press \"Create\" button in lobby control panel to do that.",
+      "ru": "Вы также можете создать собственную игровую комнату. Для этого используйте кнопку \"Создать\" в панели инструментов лобби."
+    },
+    {
+      "id": "room_onboarding",
+      "en": "Welcome to your first Nägels Online room! Here are some game tips and rules before you start playing.",
+      "ru": "Добро пожаловать в вашу первую игровую комнату Nägels Online!\nВот несколько подсказок, перед тем, как начать играть."
+    },
+    {
+      "id": "room_table_onboarding",
+      "en": "All connected players are displayed in list (you can check player detailed profile by clicking on his/her username). You can exit room at any moment before game is started. Room host can kick any player at any point.",
+      "ru": "Все подключенные к комнате игроки перечислены в списке (вы можете посмотреть детальный профиль игрока, кликнув на ее/его логин. Вы можете выйти из комнаты в любой момент до того, как началась игра. Владелец комнаты может кикнуть игрока в любой момент."
+    },
+    {
+      "id": "room_controls_onboarding",
+      "en": "Room host can close room and start game at any point using room control panel. In-room chat is under construction.",
+      "ru": "Владелец комнаты может начать игру или закрыть комнату в любой момент, используя панель инструментов комнаты. Чат внутри игровой комнаты в разработке."
+    },
+    {
+      "id": "game_onboarding",
+      "en": "This is your first game in Nägels Online! Here are some tips before you start playing.",
+      "ru": "Это ваша первая игра в Nägels Online!\nВот несколько подсказок и правил перед тем, как начать играть."
+    },
+    {
+      "id": "game_goal_onboarding",
+      "en": "Game goal is to score maximum points. One point is given for every took turn and ten more points are given in case number of took turns in particular hand equals to player's bet size. ",
+      "ru": "Цель игры - набрать наибольшее количество очков. Одно очко дается за каждую взятку, 10 очков - за то, что кол-во взяток в одной раздаче совпало со ставкой в начале раздачи."
+    },
+    {
+      "id": "game_hands_onboarding",
+      "en": "Game is divided to 16-20 hands. New number of cards is dealt each hand (starting from 8-10 cards, decreasing every hand down to 1 card and then increasing back to 8-10 cards. Trump is changed every hand in strict order.",
+      "ru": "Игра делится на 16-20 раздач. Каждую раздачу раздается новое количество карт каждому игроку (начиная с 8-10 карт, оно уменьшается на 1 каждую разадчу, вплоть до 1 карты, а затем увеличивается по одной до исходного количества). Козырная масть меняется каждую раздачу в строго определенном порядке."
+    },
+    {
+      "id": "game_current_hand_onboarding",
+      "en": "You can check current number of dealt cards per player, serial number of hand and current trump at any point of the game. Player who acts first is changed every hand counterclockwise.",
+      "ru": "Проверить кол-во сданных карт, козырь и порядковый номер текущей разадчи можно в любой момент. Игрок, действующий первым, меняется каждую раздачу против часовой стрелки."
+    },
+    {
+      "id": "game_opponents_onboarding",
+      "en": "Your opponents' usernames, avatars, their dealt cards, bet size and number of took turns within current hand is displayed on game table. Players order is set randomly in the beginning of the game.",
+      "ru": "Логины, аватары, количество сданных карт, размеры ставок и количество взяток каждого вашего оппонента отображается на игровом столе. Порядок игроков определяется случайным образом в начале игры."
+    },
+    {
+      "id": "game_players_onboarding",
+      "en": "Your dealt cards within current hand, current bet size and number of took turns can be found in bottom of the game table.",
+      "ru": "Сданные вам в текущей раздаче карты, текущая ставка и количество ваших взяток отображаются в нижней части игрового стола."
+    },
+    {
+      "id": "game_action_message_onboarding",
+      "en": "Nägels Online will tell you what is happening every turn by updating action message in middle of the game table. Action message will be highlighted when it's your turn to put card.",
+      "ru": "Nägels Online подсказывает вам, что происходит в любой момент игры, с помощью специального сообщения в центре игрового стола. Сообщение будет подсчечено, если пришла ваша очередь ходить."
+    },
+    {
+      "id": "game_bet_size_onboarding",
+      "en": "In the beginning of every hand after dealing cards players make their bets taking into account number of dealt cards, already made bets and current hand trump.",
+      "ru": "В начале каждой раздачи после сдачи карт игроки делают ставки с учетом количества сданных карт, уже сделанных ставок и текущего козыря."
+    },
+    {
+      "id": "game_someone_unhappy_rule_onboarding",
+      "en": "Every player can make a bet from zero to number of dealt cards, except last betting player who cannot make a bet which, summed with other bets, equals to actual number of dealt cards per player. This rule is called \"Someone has to stay unhappy\".",
+      "ru": "Каждый игрок может сделать ставку от нуля до кол-ва сданных карт, за исключением последнего. Последний игрок так же не может сделать такую ставку, которая в сумме с остальными даст количество сданных карт на одного игрока. Это правило называется \"Кто-то должен остаться несчастлив\"."
+    },
+    {
+      "id": "game_first_cards_put_onboarding",
+      "en": "After all bets are made every player puts card in his/her order. Starting player can put any card. ",
+      "ru": "После того, как все ставки сделаны, игроки кладут свои карты в свою очередь. Начинающий игрок может выбрать любую карту. "
+    },
+    {
+      "id": "game_turn_suit_onboarding",
+      "en": "Next players can put only card of same (as first turn card) suit or trump.",
+      "ru": "Все последующие игроки могут положить карту той же (что и у первой карты хода), либо козырной масти."
+    },
+    {
+      "id": "game_incorrect_card_message_onboarding",
+      "en": "Relevant action message is displayed if putting selected card is prohibited by the rules.",
+      "ru": "Соответствующее сообщение будет отображено, если положить выбранную карту в текущем ходе нельзя по правилам."
+    },
+    {
+      "id": "game_no_suit_card_onboarding",
+      "en": "If player has no card of turn suit he/she can put any card.",
+      "ru": "Если у игрока нет карты той же масти, что и первая карта хода, то он вправе положить любую карту."
+    },
+    {
+      "id": "game_take_turn_onboarding",
+      "en": "Turn is taken by the player who put highest card of turn suit or highest trump. Took player starts next turn within current hand. Non-trump suits have strict hierarchy, but trump-suit has Jack as highest card, Nine - as second, and every other cards - in usual strict order.",
+      "ru": "Взятку (карты за весь ход) забирает тот игрок, который положил старшую карту начальной масти хода, либо старшего козыря. Этот же игрок начинает следующий ход. Старшинство карт вне козырной масти определяется обычным образом. В козырной масти два исключения: старшей картой является валет, а второй картой - девятка (далее - как обычно)."
+    },
+    {
+      "id": "game_cannot_leak_trump_exception",
+      "en": "There is an exception while putting cards: player cannot put lower trump if turn is started with non-trump and higher trump is put by other player (\"You cannot leak trumps\") unless player has only trumps left on hand.",
+      "ru": "Исключение при выборе карты: игрок не может положить младшего козыря если ход начат НЕ с козыря и кто-то уже положил старшего козыря (\"Нельзя сливать козырей\"). Это исключение НЕ действительно, если у игрока на руке остались ТОЛЬКО козыри."
+    },
+    {
+      "id": "game_jack_exception",
+      "en": "When turn is started with trump-suit player who has only Jack-trump can skip putting it and put any other card. This applies only to highest trump card (Jack).",
+      "ru": "Если ход начат с козырной масти, игрок, у которого из козырей остался ТОЛЬКО валет, может положить абсолютно любую карту. Это правило применяется только к самому старшему козырю - валету."
+    },
+    {
+      "id": "game_scores_onboarding",
+      "en": "You can check current game players standings by clicking/tapping \"Scores\" button in game control panel.",
+      "ru": "Вы можете посмотреть текущий счет игры в любой момент, нажав на \"Счет\" в панели инструментов игры."
+    },
+    {
+      "id": "game_last_turn_onboarding",
+      "en": "You can view last turn cards at any point by clicking/tapping \"Last turn\" button in game control panel.",
+      "ru": "Вы можете посмотреть карты последнего завершенного хода в любой момент, нажав на \"Прошлый ход\" в панели инструментов игры."
+    },
+    {
+      "id": "game_history_onboarding",
+      "en": "You can check whole game history after game is finished by clicking/tapping \"Hand history\" button in game control panel.",
+      "ru": "Вы можете посмотреть историю всех раздач и ходов после того, как игра завершена, нажав на кнопку \"История раздач\"."
+    },
+    {
+      "id": "game_settings_onboarding",
+      "en": "You can also change color scheme, language and deck type of game using special controls (available only at desktop).",
+      "ru": "Можно изменить цветовую схему, язык и включить четырехцветную колоду прямо в настройках игры (доступны только на desktop)."
     }
   ]
 }

@@ -3,6 +3,10 @@ import FormButton from '../form-button';
 
 import './section-header.css';
 
+import defaultTheme from '../../themes/default';
+
+import Cookies from 'universal-cookie';
+
 export default class SectionHeader extends React.Component{
     constructor(props) {
         super(props);
@@ -10,10 +14,14 @@ export default class SectionHeader extends React.Component{
         }
     }
 
+    Cookies = new Cookies();
+
     render() {
 
         return(
-            <div className={`section-header-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+            <div 
+                className={`section-header-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
+            >
                 {this.props.title ?
                     <div className={`section-title-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                         {this.props.title}
@@ -28,7 +36,9 @@ export default class SectionHeader extends React.Component{
                 :
                     ''
                 }
-                <div className={`controls-container  ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+                <div 
+                    className={`controls-container  ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
+                >
                     {this.props.controls.map(control => {
                         return(
                             <FormButton

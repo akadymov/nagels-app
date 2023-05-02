@@ -12,6 +12,9 @@ import NagelsTableContainer from '../../components/nagels-table-container';
 import SectionHeader from '../../components/section-header';
 import NagelsModal from '../../components/nagels-modal';
 import { getText } from '../../components/user-text';
+import OnboardingContainer from '../../components/onboarding-container';
+import defaultTheme from '../../themes/default';
+import zIndex from '@mui/material/styles/zIndex';
 
 
 export default class Lobby extends React.Component{
@@ -325,14 +328,61 @@ export default class Lobby extends React.Component{
 
     render() {
 
+        var onboardingText = ''
+        var onboardingTooltipLeft = 'unset'
+        var onboardingTooltipRight = 'unset'
+        var onboardingTooltipTop = 'unset'
+        var onboardingTooltipBottom = 'unset'
+        var onboardingTooltipHeight = 'unset'
+        var onboardingTooltipWidth = 'unset'
+        var isLastOnboardingStage = false
+        var faded = false
+        switch(this.Cookies.get('onboardingLobby')){
+            case '0':
+                onboardingText = getText('lobby_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '20vw'
+                onboardingTooltipTop = '30vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '5vw' : '25vw') : '40vw'
+                faded = true
+            break
+            case '1':
+                onboardingText = getText('lobby_table_onboarding')
+                onboardingTooltipBottom = this.props.isMobile ? (this.props.isPortrait ? 'unset' : '2vh') : 'unset'
+                onboardingTooltipTop = this.props.isMobile ? (this.props.isPortrait ? '0.5vh' : 'unset') : '3vh'
+                onboardingTooltipLeft = this.props.isMobile ? '1vw' : '39vw'
+                onboardingTooltipHeight = this.props.isMobile ? (this.props.isPortrait ? '9vh' : '10vh') : 'unset'
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '98vw' : '90vw') : '30vw'
+                faded = true
+            break
+            case '2':
+                onboardingText = getText('lobby_controls_onboarding')
+                onboardingTooltipBottom = this.props.isMobile ? (this.props.isPortrait ? 'unset' : '2vh') : 'unset'
+                onboardingTooltipTop = this.props.isMobile ? (this.props.isPortrait ? '0.5vh' : 'unset') : '20vh'
+                onboardingTooltipLeft = this.props.isMobile ? '1vw' : 'unset'
+                onboardingTooltipRight = this.props.isMobile ? 'unset' : '5vw'
+                onboardingTooltipHeight = this.props.isMobile ? (this.props.isPortrait ? '9vh' : '10vh') : 'unset'
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '98vw' : '90vw') : '30vw'
+                isLastOnboardingStage = true
+            break
+        }
+
         return(
-            <div className={`lobby-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+            <div 
+                className={`lobby-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
+                style={{
+                    outline: this.Cookies.get('onboardingLobby') === '2' ? '2px solid ' + (this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.primary.piggy : defaultTheme.palette.primary.main) : 'unset',
+                    boxSizing: 'border-box',
+                    borderRadius: '2px',
+                    zIndex: this.Cookies.get('onboardingLobby') === '2' ? 102 : 'unset'
+                }}
+            >
                 <SectionHeader
                     isMobile={this.props.isMobile}
                     isDesktop={this.props.isDesktop}
                     isPortrait={this.props.isPortrait}
                     controls={this.state.headerControls}
-                    title= {!this.props.isMobile ? getText('games_lobby') : ''}
+                    title={!this.props.isMobile ? getText('games_lobby') : ''}
+                    onboarding={this.Cookies.get('onboardingLobby') === '2'}
                 ></SectionHeader>
                 <div className={`lobby-table-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                     <NagelsTableContainer 
@@ -341,6 +391,7 @@ export default class Lobby extends React.Component{
                         rows={this.state.rooms}
                         onClick={this.selectRoom}
                         selected={this.state.selectedRoomId}
+                        onboarding={this.Cookies.get('onboardingLobby') === '1'}
                     ></NagelsTableContainer>
                 </div>
                 <NagelsModal
@@ -354,6 +405,22 @@ export default class Lobby extends React.Component{
                     closeModal={this.closeModal}
                     modalCanClose={true}
                 ></NagelsModal>
+                <OnboardingContainer
+                    isMobile={this.props.isMobile}
+                    isDesktop={this.props.isDesktop}
+                    isPortrait={this.props.isPortrait}
+                    onboardingStage={this.Cookies.get('onboardingLobby')}
+                    section='Lobby'
+                    text={onboardingText}
+                    left={onboardingTooltipLeft}
+                    right={onboardingTooltipRight}
+                    top={onboardingTooltipTop}
+                    bottom={onboardingTooltipBottom}
+                    height={onboardingTooltipHeight}
+                    width={onboardingTooltipWidth}
+                    faded={faded}
+                    isLastOnboardingStage={isLastOnboardingStage}
+                ></OnboardingContainer>
             </div>
         )
     }

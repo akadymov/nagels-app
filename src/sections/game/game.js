@@ -16,6 +16,8 @@ import TableActionMessage from '../../components/table-action-message';
 import TablePutCards from '../../components/table-put-cards';
 import GameScores from '../../components/game-scores';
 import { getText } from '../../components/user-text';
+import OnboardingContainer from '../../components/onboarding-container';
+import defaultTheme from '../../themes/default';
 
 //MUI components
 import Checkbox from '@mui/material/Checkbox';
@@ -989,6 +991,166 @@ export default class Game extends React.Component{
 
     render() {
 
+        var onboardingText = ''
+        var onboardingTooltipLeft = 'unset'
+        var onboardingTooltipRight = 'unset'
+        var onboardingTooltipTop = 'unset'
+        var onboardingTooltipBottom = 'unset'
+        var onboardingTooltipHeight = 'unset'
+        var onboardingTooltipWidth = 'unset'
+        var isLastOnboardingStage = false
+        var faded = false
+        switch(this.Cookies.get('onboardingGame')){
+            case '0':
+                onboardingText = getText('game_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '1':
+                onboardingText = getText('game_goal_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '2':
+                onboardingText = getText('game_hands_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '3':
+                onboardingText = getText('game_current_hand_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '4':
+                onboardingText = getText('game_opponents_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '5':
+                onboardingText = getText('game_players_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '6':
+                onboardingText = getText('game_action_message_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '7':
+                onboardingText = getText('game_bet_size_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '8':
+                onboardingText = getText('game_someone_unhappy_rule_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '9':
+                onboardingText = getText('game_first_cards_put_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '10':
+                onboardingText = getText('game_first_cards_put_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '11':
+                onboardingText = getText('game_turn_suit_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '12':
+                onboardingText = getText('game_incorrect_card_message_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '13':
+                onboardingText = getText('game_no_suit_card_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '14':
+                onboardingText = getText('game_take_turn_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '15':
+                onboardingText = getText('game_cannot_leak_trump_exception')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '16':
+                onboardingText = getText('game_jack_exception')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '17':
+                onboardingText = getText('game_scores_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '17':
+                onboardingText = getText('game_last_turn_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '18':
+                onboardingText = getText('game_history_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+            break
+            case '19':
+                onboardingText = getText('game_settings_onboarding')
+                onboardingTooltipWidth = this.props.isMobile ? (this.props.isPortrait ? '90vw' : '50vw') : '30vw'
+                onboardingTooltipTop = '40vh'
+                onboardingTooltipLeft = this.props.isMobile ? (this.props.isPortrait ? '3vw' : '25vw') : '39vw'
+                faded = true
+                isLastOnboardingStage = true
+            break
+        }
+
         var players = this.state.gameDetails.players
         if(this.state.replayMode){
             players = this.state.gameDetails.playedHands[this.state.replayedHand].turns[this.state.replayedTurn].players
@@ -1061,6 +1223,7 @@ export default class Game extends React.Component{
                                         username={player.username}
                                         position={player.relativePosition}
                                         betSize={player.betSize}
+                                        onboarding={this.Cookies.get('onboardingGame') === '4'}
                                         tookTurns={player.tookTurns}
                                         active={this.state.gameDetails.nextActingPlayer === player.username}
                                         isStarter={this.state.gameDetails.handStarter === player.username}
@@ -1080,6 +1243,7 @@ export default class Game extends React.Component{
                             active={this.state.gameDetails.myInHandInfo.username === this.state.gameDetails.nextActingPlayer}
                             dealtCards={this.state.gameDetails.myInHandInfo.dealtCards}
                             selectedCard={this.state.selectedCard}
+                            onboarding={this.Cookies.get('onboardingGame') === '5'}
                             onSelectCard={this.onSelectCard}
                             isStarter={this.Cookies.get('username')===this.state.gameDetails.handStarter}
                         ></PlayerContainer>
@@ -1087,7 +1251,15 @@ export default class Game extends React.Component{
                         ''
                     }
                     {this.state.gameDetails.currentHandId ?
-                        <div className={`current-game-trump-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+                        <div 
+                            className={`current-game-trump-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
+                            style={{
+                                outline: this.Cookies.get('onboardingGame') === '3' ? '2px solid ' + (this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.primary.piggy : defaultTheme.palette.primary.main) : 'unset',
+                                boxSizing: 'border-box',
+                                borderRadius: '2px',
+                                zIndex: this.Cookies.get('onboardingGame') === '3' ? 102 : 'unset'
+                            }}
+                        >
                             <div className={`hand-id-label ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>{getText('hand_id')}{this.state.replayMode ? this.state.gameDetails.playedHands[this.state.replayedHand].handSerialNo : this.state.gameDetails.currentHandSerialNo}/{this.state.gameDetails.players.length === 6 ? 16 : 20}</div>
                             <div className={`hand-id-value ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
                                 <p className={`${(this.state.replayMode ? this.state.gameDetails.playedHands[this.state.replayedHand].trump : this.state.gameDetails.trump) || 'x'} trump-container ${this.Cookies.get('deckType') === '4color' ? 'fourcolor' : ''}`}>{this.state.replayMode ? this.state.gameDetails.playedHands[this.state.replayedHand].cards : this.state.gameDetails.cardsPerPlayer}</p>
@@ -1151,6 +1323,22 @@ export default class Game extends React.Component{
                     scores={this.state.gameDetails.gameScores.rows}
                     closeModal={this.closeScoresModal}
                 ></GameScores>
+                <OnboardingContainer
+                    isMobile={this.props.isMobile}
+                    isDesktop={this.props.isDesktop}
+                    isPortrait={this.props.isPortrait}
+                    onboardingStage={this.Cookies.get('onboardingGame')}
+                    faded={faded}
+                    section='Game'
+                    text={onboardingText}
+                    left={onboardingTooltipLeft}
+                    right={onboardingTooltipRight}
+                    top={onboardingTooltipTop}
+                    bottom={onboardingTooltipBottom}
+                    height={onboardingTooltipHeight}
+                    width={onboardingTooltipWidth}
+                    isLastOnboardingStage={isLastOnboardingStage}
+                ></OnboardingContainer>
             </div>
         )
     }

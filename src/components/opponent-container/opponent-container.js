@@ -6,9 +6,13 @@ import './opponent-container.css';
 import OpponentCards from '../opponent-cards';
 import PlayerInfo from '../player-info/player-info';
 import DealerButton from '../dealer-button';
+import Cookies from 'universal-cookie';
+import defaultTheme from '../../themes/default';
 
 
 export default class OpponentContainer extends React.Component{
+
+    Cookies = new Cookies();
 
     render() {
         return (

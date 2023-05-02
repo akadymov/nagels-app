@@ -6,16 +6,22 @@ import './player-container.css';
 import PlayerInfo from '../player-info/player-info';
 import OpenCard from '../open-card';
 import DealerButton from '../dealer-button';
+import Cookies from 'universal-cookie';
+import defaultTheme from '../../themes/default';
 
 
 export default class PlayerContainer extends React.Component{
+
+    Cookies = new Cookies();
 
     render() {
 
         const cardsDivWidth = (this.props.isMobile ? 18 : 22) *(this.props.dealtCards.length - 1) + (this.props.isMobile ? 60 : 70)
 
         return (
-            <div className={`player-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
+            <div 
+                className={`player-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
+            >
                 <div 
                     className={`player-cards-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}
                     style={{width:  cardsDivWidth}}

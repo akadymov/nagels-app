@@ -98,7 +98,11 @@ export default class NagelsTableContainer extends React.Component{
                 sx={{ 
                     height:this.props.height, 
                     overflow: 'scroll', 
-                    boxShadow: 'none'
+                    boxShadow: 'none',
+                    zIndex: this.props.onboarding ? 101 : 'unset',
+                    border: this.props.onboarding ? '2px solid ' + (this.Cookies.get('colorScheme') === 'piggy' ? defaultTheme.palette.primary.piggy : defaultTheme.palette.primary.main) : 'unset',
+                    boxSizing: 'border-box',
+                    borderRadius: '2px'
                 }}>
                 <Table stickyHeader aria-label="simple table">
                     <TableHead>
