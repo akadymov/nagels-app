@@ -55,9 +55,7 @@ export default class OnboardingContainer extends React.Component{
                     >
                         <img 
                             style={{
-                                width: this.props.width,
-                                marginLeft: 'auto',
-                                marginRight: 'auto',
+                                width: '150px',
                                 display: 'block'
                             }} 
                             src={"/info/images/" + this.props.img}
