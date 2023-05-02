@@ -60,7 +60,7 @@ export default class OnboardingContainer extends React.Component{
                                 marginRight: 'auto',
                                 display: 'block'
                             }} 
-                            src={"/api/info/images/" + this.props.img}
+                            src={"/info/images/" + this.props.img}
                         ></img>
                     </div>
                     <div className={`onboarding-controls-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
