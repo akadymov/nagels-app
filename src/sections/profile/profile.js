@@ -140,10 +140,9 @@ export default class Profile extends React.Component{
             } else {
                 var darkMode = false
                 var fourColorDeck = false
-                const cookieOptions = Cookies.get('idToken') && Cookies.get('idToken').options;
                 var expiresIn = 24 * 60 * 60 * 1000 // 24 hours
-                if (cookieOptions && cookieOptions.expires) {
-                    expiresIn = new Date(cookieOptions.expires);
+                if (Cookies.get('idToken') && Cookies.get('idToken').options.expires) {
+                    expiresIn = new Date(Cookies.get('idToken').options.expires);
                 }
                 this.Cookies.set('colorScheme', body.colorScheme, { path: '/' , expires: expiresIn})
                 this.Cookies.set('deckType', body.deckType, { path: '/' , expires: expiresIn})

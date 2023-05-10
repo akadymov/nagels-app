@@ -108,22 +108,22 @@ export default class Login extends React.Component{
                 this.Cookies.set('colorScheme',body.colorScheme, { path: '/' , expires: expiresIn})
                 this.Cookies.set('deckType',body.deckType, { path: '/' , expires: expiresIn})
                 this.Cookies.set('preferredLang', body.preferredLang, { path: '/' , expires: expiresIn})
-                var expiresInEternal = new Date(currentDate.getTime + 999999999)
-                //this.Cookies.set('onboardingNavMenu', 0, { path: '/' , expires: expiresInEternal})
+                //var expiresInEternal = new Date(currentDate.getTime + 999999999)
+                //this.Cookies.set('onboardingNavMenu', 0, { path: '/' , expires: expiresIn})
                 if(!this.Cookies.get('onboardingLobby')){
-                    this.Cookies.set('onboardingLobby', 0, { path: '/' , expires: expiresInEternal})
+                    this.Cookies.set('onboardingLobby', 0, { path: '/' , expires: expiresIn})
                 }
                 if(!this.Cookies.get('onboardingRoom')){
-                    this.Cookies.set('onboardingRoom', 0, { path: '/' , expires: expiresInEternal})
+                    this.Cookies.set('onboardingRoom', 0, { path: '/' , expires: expiresIn})
                 }
                 if(!this.Cookies.get('onboardingGame')){
-                    this.Cookies.set('onboardingGame', 0, { path: '/' , expires: expiresInEternal})
+                    this.Cookies.set('onboardingGame', 0, { path: '/' , expires: expiresIn})
                 }
                 if(!this.Cookies.get('onboardingRating')){
-                    this.Cookies.set('onboardingRating', 0, { path: '/' , expires: expiresInEternal})
+                    this.Cookies.set('onboardingRating', 0, { path: '/' , expires: expiresIn})
                 }
                 if(!this.Cookies.get('onboardingProfile')){
-                    this.Cookies.set('onboardingProfile', 0, { path: '/' , expires: expiresInEternal})
+                    this.Cookies.set('onboardingProfile', 0, { path: '/' , expires: expiresIn})
                 }
                 if(body.connectedRoomId) {
                     window.location.assign('/room/' + body.connectedRoomId)
