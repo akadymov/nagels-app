@@ -762,8 +762,11 @@ export default class Game extends React.Component{
                     newUserData.deckType,
                     newUserData.preferredLang
                 )
-                var currentDate = new Date(); 
-                var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
+                const cookieOptions = Cookies.get('idToken') && Cookies.get('idToken').options;
+                var expiresIn = 24 * 60 * 60 * 1000 // 24 hours
+                if (cookieOptions && cookieOptions.expires) {
+                    expiresIn = new Date(cookieOptions.expires);
+                }
                 this.Cookies.set('colorScheme', newUserSettings.colorScheme, { path: '/' , colorScheme: expiresIn})
                 this.setState({userSettings: newUserSettings})
                 window.location.reload()
