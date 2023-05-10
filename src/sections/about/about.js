@@ -61,7 +61,7 @@ export default class About extends React.Component{
         this.setState({
             preferredLang: e.target.value
         })
-        this.Cookies.set('preferredLang', e.target.value, { path: '/' , preferredLang: expiresIn})
+        this.Cookies.set('preferredLang', e.target.value, { path: '/' , expires: expiresIn})
         window.location.reload()
     }
     

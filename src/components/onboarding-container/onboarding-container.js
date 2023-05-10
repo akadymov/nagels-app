@@ -15,7 +15,7 @@ export default class OnboardingContainer extends React.Component{
         var currentDate = new Date(); 
         var currentOnboarding = parseInt(this.Cookies.get('onboarding' + this.props.section))
         var expiresInEternal = new Date(currentDate.getTime + 999999999)
-        this.Cookies.set('onboarding' + this.props.section, currentOnboarding + 1, { path: '/' , preferredLang: expiresInEternal})
+        this.Cookies.set('onboarding' + this.props.section, currentOnboarding + 1, { path: '/' , expires: expiresInEternal})
         window.location.reload()
     }
 
@@ -23,7 +23,7 @@ export default class OnboardingContainer extends React.Component{
         var currentDate = new Date(); 
         var currentOnboarding = parseInt(this.Cookies.get('onboarding' + this.props.section))
         var expiresInEternal = new Date(currentDate.getTime + 999999999)
-        this.Cookies.set('onboarding' + this.props.section, '-1', { path: '/' , preferredLang: expiresInEternal})
+        this.Cookies.set('onboarding' + this.props.section, '-1', { path: '/' , expires: expiresInEternal})
         window.location.reload()
     }
 

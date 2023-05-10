@@ -740,7 +740,7 @@ export default class Game extends React.Component{
                 )
                 var currentDate = new Date(); 
                 var expiresIn = new Date(currentDate.getTime() + body.expiresIn * 1000)
-                this.Cookies.set('deckType', newUserSettings.deckType, { path: '/' , deckType: expiresIn})
+                this.Cookies.set('deckType', newUserSettings.deckType, { path: '/' , expires: expiresIn})
                 this.setState({userSettings: newUserSettings})
             }
         })
@@ -767,7 +767,7 @@ export default class Game extends React.Component{
                 if (cookieOptions && cookieOptions.expires) {
                     expiresIn = new Date(cookieOptions.expires);
                 }
-                this.Cookies.set('colorScheme', newUserSettings.colorScheme, { path: '/' , colorScheme: expiresIn})
+                this.Cookies.set('colorScheme', newUserSettings.colorScheme, { path: '/' , expires: expiresIn})
                 this.setState({userSettings: newUserSettings})
                 window.location.reload()
             }

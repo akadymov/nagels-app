@@ -145,9 +145,9 @@ export default class Profile extends React.Component{
                 if (cookieOptions && cookieOptions.expires) {
                     expiresIn = new Date(cookieOptions.expires);
                 }
-                this.Cookies.set('colorScheme', body.colorScheme, { path: '/' , colorScheme: expiresIn})
-                this.Cookies.set('deckType', body.deckType, { path: '/' , deckType: expiresIn})
-                this.Cookies.set('preferredLang', body.preferredLang, { path: '/' , preferredLang: expiresIn})
+                this.Cookies.set('colorScheme', body.colorScheme, { path: '/' , expires: expiresIn})
+                this.Cookies.set('deckType', body.deckType, { path: '/' , expires: expiresIn})
+                this.Cookies.set('preferredLang', body.preferredLang, { path: '/' , expires: expiresIn})
                 if(body.colorScheme === 'dark'){
                     darkMode = true
                 }
