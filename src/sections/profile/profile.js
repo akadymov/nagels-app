@@ -141,7 +141,7 @@ export default class Profile extends React.Component{
                 var darkMode = false
                 var fourColorDeck = false
                 var expiresIn = 24 * 60 * 60 * 1000 // 24 hours
-                idTokenCookie = this.Cookies.get('idToken')
+                var idTokenCookie = this.Cookies.get('idToken')
                 if (idTokenCookie) {
                     expiresIn = new Date(idTokenCookie.options.expires);
                 }
