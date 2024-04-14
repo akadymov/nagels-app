@@ -249,17 +249,17 @@ def send_password_recovery():
         print(email)
         print(username)
     err = False
-    if not email:
-        err = True
-    if not username:
+    if not email and not username:
         err = True
     requesting_user = None
-    if username and email:
+    if username:
         requesting_user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
+    if email:
+        requesting_user = User.query.filter_by(email=email).first()
     if not requesting_user:
         err = True
-    elif requesting_user.email != email:
-        err = True
+    #elif requesting_user.email != email:
+    #    err = True
 
     if err:
         return jsonify({
