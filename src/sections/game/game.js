@@ -72,7 +72,8 @@ export default class Game extends React.Component{
             modalOpen: false,
             modalText: '',
             modalCanClose: false,
-            modalControls: []
+            modalControls: [],
+            isTabActive: true
         }
     };
 
@@ -305,6 +306,42 @@ export default class Game extends React.Component{
                 }*/
             }
         })
+    }
+
+    updateNotificationPermissions = () => {
+        Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              console.log("Notifications are enabled");
+            }
+          });
+    }
+
+    monitorTabAcviveness = () => {
+        const handleFocus = () => {
+            this.setState({ isTabActive: true})
+          };
+        
+        const handleBlur = () => {
+            this.setState({ isTabActive: false})
+        };
+    
+        window.addEventListener("focus", handleFocus);
+        window.addEventListener("blur", handleBlur);
+    
+        return () => {
+            window.removeEventListener("focus", handleFocus);
+            window.removeEventListener("blur", handleBlur);
+        };
+    }
+
+    notifyUser = (notificationHeader, notificationMessage) => {
+        alert(this.state.isTabActive)
+        if (Notification.permission === "granted" && !this.state.isTabActive) {
+            new Notification(notificationHeader, {
+              body: notificationMessage,
+              // icon: notificationIconLink,
+            });
+          }
     }
 
     restartGame = () => {
@@ -777,6 +814,8 @@ export default class Game extends React.Component{
     componentDidMount = () => {
         this.newGameStatus();
 
+        this.updateNotificationPermissions();
+
         roomSocket.on("start_game", (data) => {
             if(data.roomId === this.state.gameDetails.roomId){
                 window.location.assign('/game/' + data.gameId)
@@ -815,6 +854,7 @@ export default class Game extends React.Component{
                                     if(data.nextActingPlayer === this.Cookies.get('username')){
                                         newGameDetails.actionMessage = getText('its_your_turn')
                                         newGameDetails.attentionToMessage = true
+                                        this.notifyUser('Nagels Online', getText('its_your_turn'))
                                     } else{
                                         newGameDetails.actionMessage = data.nextActingPlayer + getText('-s_turn')
                                     }
@@ -822,6 +862,7 @@ export default class Game extends React.Component{
                                     if(data.nextActingPlayer === this.Cookies.get('username')){
                                         newGameDetails.actionMessage = getText('its_your_turn')
                                         newGameDetails.attentionToMessage = true
+                                        this.notifyUser('Nagels Online', getText('its_your_turn'))
                                         newModalOpen = true
                                         newScoresModalOpen = false
                                         var betPlayers = []
@@ -956,6 +997,7 @@ export default class Game extends React.Component{
                                 if(data.nextActingPlayer === this.Cookies.get('username')) {
                                     newGameDetails.actionMessage = getText('its_your_turn')
                                     newGameDetails.attentionToMessage = true
+                                    this.notifyUser('Nagels Online', getText('its_your_turn'))
                                 } else {
                                     newGameDetails.actionMessage = data.nextActingPlayer + getText('-s_turn')
                                 }
@@ -1163,6 +1205,7 @@ export default class Game extends React.Component{
         if(this.state.replayMode){
             players = this.state.gameDetails.playedHands[this.state.replayedHand].turns[this.state.replayedTurn].players
         }
+
 
         return (
             <div className={`game-container ${ this.props.isMobile ? "mobile" : (this.props.isDesktop ? "desktop" : "tablet")} ${ this.props.isPortrait ? "portrait" : "landscape"}`}>
