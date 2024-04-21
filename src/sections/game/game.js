@@ -335,7 +335,6 @@ export default class Game extends React.Component{
     }
 
     notifyUser = (notificationHeader, notificationMessage) => {
-        alert(this.state.isTabActive)
         if (Notification.permission === "granted" && !this.state.isTabActive) {
             new Notification(notificationHeader, {
               body: notificationMessage,
