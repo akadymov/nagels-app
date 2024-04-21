@@ -22,6 +22,7 @@ export default class Lobby extends React.Component{
 
     constructor(props) {
         super(props);
+        this.handleNewRoomNameChange = this.handleNewRoomNameChange.bind(this);
         this.state = {
             roomsHeaders: this.props.isMobile && this.props.isPortrait ? [getText('room'), getText('host'), getText('players'), ''] : [getText('room'), getText('host'), getText('players'), getText('created'), getText('status'), ''],
             rooms: [],
@@ -52,7 +53,7 @@ export default class Lobby extends React.Component{
                     id: "new_room_name_input",
                     type: "input",
                     variant: "outlined",
-                    value: "",
+                    value: this.Cookies.get('username') & "'s room",
                     required: true,
                     errorMessage: "",
                     label: getText('room_name'),
@@ -67,7 +68,7 @@ export default class Lobby extends React.Component{
                     onSubmit: this.createNewRoom
                 }
             ],
-            newRoomName: '',
+            newRoomName: this.Cookies.get('username') & "'s room",
             newRoomError:'',
             confirmActionMsg:'',
             confirmAction:''
@@ -218,7 +219,7 @@ export default class Lobby extends React.Component{
 
     createRoomPopup = () => {
         this.setState({ 
-            newRoomName: '',
+            newRoomName: this.Cookies.get('username') & "'s room",
             modalOpen: true
         })
     }
@@ -259,7 +260,7 @@ export default class Lobby extends React.Component{
     closeModal = () => {
         this.setState({ 
             modalOpen: false,
-            newRoomName: ''
+            newRoomName: this.Cookies.get('username') & "'s room"
         }, () => {
             this.updateControls();
         })
