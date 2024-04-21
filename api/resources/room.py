@@ -92,6 +92,61 @@ def get_list():
     }), 200
 
 
+@room.route('{base_path}/room/close_inactive'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
+@cross_origin()
+def close_inactive():
+    # Define the server timezone (assumed to be known in advance)
+    server_timezone = pytz.timezone('UTC')  # Your database / server timezone TODO
+    '''Tried to use code server_timezone = datetime.now(pytz.utc).astimezone().tzinfo, but for some reason database 
+    uses different timezone'''
+
+    # Get the current time and date in the server timezone
+    Current_time = datetime.now(server_timezone)
+
+    # Get the INACTIVE_ROOM_LIFETIME value from settings
+    inactive_rooms_lifetime = get_settings('NAGELS_APP')['INACTIVE_ROOM_LIFETIME'][env]
+
+    # Calculate cutoff_time
+    cutoff_time = Current_time - timedelta(seconds=inactive_rooms_lifetime)
+
+    inactive_rooms = Room.query.filter(Room.created < cutoff_time).filter(Room.closed == None).all()
+
+    closed_rooms_array = []
+
+    for room in inactive_rooms:
+        for game in room.games:
+
+            # do not close the room, if game is not finished yet
+            if game.finished is None:
+                inactive_rooms.remove(room)
+
+            # do not close the room, if game was finished recently
+            else:
+                finished_time = game.finished.replace(tzinfo=server_timezone)
+                if finished_time > cutoff_time:
+                    inactive_rooms.remove(room)
+
+    for target_room in inactive_rooms:
+
+        for game in target_room.games:
+            game.finished = datetime.utcnow()
+
+        for user in target_room.connected_users:
+            target_room.disconnect(user)
+
+        target_room.closed = datetime.utcnow()
+        # TODO add socketio triggers for in-lobby, in-room and in-game updates
+        closed_rooms_array.append(
+            {'id': target_room.id, 'name': target_room.room_name, 'host': target_room.host.username}
+        )
+    db.session.commit()
+
+    return jsonify({
+        'cutoffTime': cutoff_time,
+        'closedRooms': closed_rooms_array
+    }), 201
+
+
 @room.route('{base_path}/room'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def create():
@@ -443,59 +498,6 @@ def ready(room_id):
         'connect': url_for('room.connect', room_id=target_room.id),
         'games': games_json
     }), 200
-
-
-@room.route('{base_path}/room/close_inactive'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
-@cross_origin()
-def close_inactive():
-    # Define the server timezone (assumed to be known in advance)
-    server_timezone = pytz.timezone('UTC')  # Your database / server timezone TODO
-    '''Tried to use code server_timezone = datetime.now(pytz.utc).astimezone().tzinfo, but for some reason database uses different timezone'''
-
-    # Get the current time and date in the server timezone
-    Current_time = datetime.now(server_timezone)
-
-    # Get the INACTIVE_ROOM_LIFETIME value from settings
-    inactive_rooms_lifetime = get_settings('NAGELS_APP')['INACTIVE_ROOM_LIFETIME'][env]
-
-    # Calculate cutoff_time
-    cutoff_time = Current_time - timedelta(seconds=inactive_rooms_lifetime)
-
-    inactive_rooms = Room.query.filter(Room.created < cutoff_time).filter(Room.closed == None).all()
-
-    closed_rooms_array = []
-
-    for room in inactive_rooms:
-        for game in room.games:
-
-            # do not close the room, if game is not finished yet
-            if game.finished is None:
-                inactive_rooms.remove(room)
-
-            # do not close the room, if game was finished recently
-            else:
-                finished_time = game.finished.replace(tzinfo=server_timezone)
-                if finished_time > cutoff_time:
-                    inactive_rooms.remove(room)
-
-    for target_room in inactive_rooms:
-
-        for game in target_room.games:
-            game.finished = datetime.utcnow()
-
-        for user in target_room.connected_users:
-            target_room.disconnect(user)
-
-        target_room.closed = datetime.utcnow()
-        # TODO add socketio triggers for in-lobby, in-room and in-game updates
-        closed_rooms_array.append(
-            {'id': target_room.id, 'name': target_room.room_name, 'host': target_room.host.username}
-        )
-    db.session.commit()
-
-    return jsonify({
-        'closedRooms': closed_rooms_array
-    }), 201
 
 
 @room.route('{base_path}/room/<room_id>/notready'.format(base_path=get_settings('API_BASE_PATH')[env]),
