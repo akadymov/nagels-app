@@ -6,10 +6,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import url_for, jsonify
 from time import time
 import jwt
-from sqlalchemy import text
+from sqlalchemy import text, func
 from app.text import get_phrase
 from config import get_settings, get_environment
-
 
 auth = get_settings('AUTH')
 env = get_environment()
@@ -25,7 +24,6 @@ connections = db.Table(
     room_id = db.Column(db.integer, nullable=False),
     user_id = db.Column(db.integer, nullable=False),
     ready = db.Column(db.integer, nullable=False, default=0)'''
-
 
 players = db.Table(
     'players',
@@ -164,7 +162,7 @@ class User(UserMixin, db.Model):
                 'errors': [
                     {
                         'message': get_phrase('auth_token_absent_error').format(
-                post_token_url=url_for('user.post_token'))
+                            post_token_url=url_for('user.post_token'))
                     }
                 ]
             }), 401
@@ -174,7 +172,7 @@ class User(UserMixin, db.Model):
                 'errors': [
                     {
                         'message': get_phrase('auth_token_invalid_error').format(
-                post_token_url=url_for('user.post_token'))
+                            post_token_url=url_for('user.post_token'))
                     }
                 ]
             }), 401
@@ -248,6 +246,10 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+def Current_time():
+    return func.current_timestamp()
+
+
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room_name = db.Column(db.String(64), index=True)
@@ -258,7 +260,7 @@ class Room(db.Model):
     connected_users_bad = db.relationship(
         'User',
         secondary=connections,
-        backref=db.backref('connected_rooms', lazy='dynamic',overlaps="connected_rooms_bad,connected_users"),
+        backref=db.backref('connected_rooms', lazy='dynamic', overlaps="connected_rooms_bad,connected_users"),
         overlaps="connected_rooms_bad,connected_users"
     )
 
@@ -290,7 +292,7 @@ class Room(db.Model):
     def if_user_is_ready(self, user):
         sql = text("SELECT ready FROM connections WHERE room_id= " + str(self.id) + " AND user_id=" + str(user.id))
         result = db.session.execute(sql).first()
-        if result[0]==1:
+        if result[0] == 1:
             return True
         return False
 
@@ -480,7 +482,8 @@ class Game(db.Model):
         winner_bonuses = 0
         winner_id = None
         for player_id in players_scores.keys():
-            if players_scores[player_id] > winner_score or (players_scores[player_id] == winner_score and players_bonuses[player_id] > winner_bonuses):
+            if players_scores[player_id] > winner_score or (
+                    players_scores[player_id] == winner_score and players_bonuses[player_id] > winner_bonuses):
                 winner_score = players_scores[player_id]
                 winner_bonuses = players_bonuses[player_id]
                 winner_id = player_id
@@ -498,7 +501,8 @@ class Player(db.Model):
     position = db.Column(db.Integer, nullable=True, default=None, index=True)
 
     def __repr__(self):
-        return '<Player {} on position {} in game {}>'.format(User.query.filter_by(id=self.user_id).first().username, self.position, self.game_id)
+        return '<Player {} on position {} in game {}>'.format(User.query.filter_by(id=self.user_id).first().username,
+                                                              self.position, self.game_id)
 
 
 class Hand(db.Model):
@@ -511,7 +515,10 @@ class Hand(db.Model):
     is_closed = db.Column(db.Integer, nullable=False, default=0)
 
     def __repr__(self):
-        return '<Hand {} (hand #{} in game {}): {}{}, starter {}>'.format(self.id, self.serial_no, self.game_id, self.trump if self.trump is not None else '-', self.cards_per_player, self.get_starter().username)
+        return '<Hand {} (hand #{} in game {}): {}{}, starter {}>'.format(self.id, self.serial_no, self.game_id,
+                                                                          self.trump if self.trump is not None else '-',
+                                                                          self.cards_per_player,
+                                                                          self.get_starter().username)
 
     def get_starter(self):
         return User.query.filter_by(id=self.starting_player).first()
@@ -553,7 +560,8 @@ class Hand(db.Model):
             if shifted_position == position:
                 user = User.query.filter_by(id=player.user_id).first()
                 if app.debug:
-                    print('User ' + str(user.username) + ' on initial position #' + str(player.position) + ' is who we are seeking for!')
+                    print('User ' + str(user.username) + ' on initial position #' + str(
+                        player.position) + ' is who we are seeking for!')
                 if user:
                     return user
         return None
@@ -576,7 +584,7 @@ class Hand(db.Model):
                     if card.card_suit == trump:
                         card_index = 14
                     else:
-                        card_index=11
+                        card_index = 11
                 elif card.card_id == 'q':
                     if card.card_suit == trump:
                         card_index = 10
@@ -768,14 +776,16 @@ class Hand(db.Model):
                 position_shift = turn_put_cards + played_hands
             else:
                 if app.debug:
-                    print('This is NOT first turn in game: position shift is defined with put cards, starter position is last turn taker position')
+                    print(
+                        'This is NOT first turn in game: position shift is defined with put cards, starter position is last turn taker position')
                 last_turn = self.get_last_turn()
                 if not last_turn:
                     if app.debug:
                         print('Something went wrong: last turn not found but should be...')
                     return None
                 last_turn_taker = User.query.filter_by(id=last_turn.took_user_id).first()
-                source_position_player = Player.query.filter_by(game_id=self.game_id, user_id=last_turn_taker.id).first()
+                source_position_player = Player.query.filter_by(game_id=self.game_id,
+                                                                user_id=last_turn_taker.id).first()
                 if not source_position_player:
                     if app.debug:
                         print('Something went wrong: last turn taker position not found but should be...')
@@ -783,16 +793,18 @@ class Hand(db.Model):
                 source_position = source_position_player.position
                 position_shift = turn_put_cards
 
-        #next acting player position calculation
+        # next acting player position calculation
         shifted_position = (source_position + position_shift) % game_players_cnt
         if shifted_position == 0:
             shifted_position = game_players_cnt
         if app.debug:
             print('position_shift: ' + str(position_shift))
             print('source_position: ' + str(source_position))
-            print(' player "' + str(User.query.filter_by(id=Player.query.filter_by(position=source_position, game_id=self.game_id).first().user_id).first().username) + '")')
+            print(' player "' + str(User.query.filter_by(id=Player.query.filter_by(position=source_position,
+                                                                                   game_id=self.game_id).first().user_id).first().username) + '")')
             print('shifted_position: ' + str(shifted_position))
-            print(' (player "' + str(User.query.filter_by(id=Player.query.filter_by(position=shifted_position, game_id=self.game_id).first().user_id).first().username) + '")')
+            print(' (player "' + str(User.query.filter_by(id=Player.query.filter_by(position=shifted_position,
+                                                                                    game_id=self.game_id).first().user_id).first().username) + '")')
         next_player = Player.query.filter_by(game_id=self.game_id, position=shifted_position).first()
         if not next_player:
             # Error: player at calculated position not found
@@ -801,14 +813,13 @@ class Hand(db.Model):
             return None
         return User.query.filter_by(id=next_player.user_id).first()
 
-
     def next_card_putting_user(self):
         curr_turn = self.get_current_turn()
         last_turn = self.get_last_turn()
         if app.debug:
             print('Current turn is ' + str(curr_turn))
             print('Last turn is ' + str(last_turn))
-        if last_turn and curr_turn:         # This is ongoing and not last turn
+        if last_turn and curr_turn:  # This is ongoing and not last turn
             if app.debug:
                 print('This is ongoing and not last turn')
             turn_players_sorted = self.get_players_relative_positions()
@@ -818,11 +829,13 @@ class Hand(db.Model):
                     card_string = 'no card'
                     if player_card:
                         card_string = 'card "' + str(player_card.card_id) + str(player_card.card_suit) + '"'
-                    print('Player "' + str(User.query.filter_by(id=turn_player['player_id']).first().username) + '" on position #' + str(turn_player['turn_position'] + 1) + ' has ' + card_string)
+                    print('Player "' + str(
+                        User.query.filter_by(id=turn_player['player_id']).first().username) + '" on position #' + str(
+                        turn_player['turn_position'] + 1) + ' has ' + card_string)
                 if not player_card:
                     return User.query.filter_by(id=turn_player['player_id']).first()
             return User.query.filter_by(id=last_turn.took_user_id).first()
-        elif curr_turn:                     # if this is first turn in hand
+        elif curr_turn:  # if this is first turn in hand
             if app.debug:
                 print('This is first ongoing turn in hand')
             turn_players_sorted = self.get_players_relative_positions()
@@ -834,19 +847,21 @@ class Hand(db.Model):
                     card_string = 'no card'
                     if player_card:
                         card_string = 'card "' + str(player_card.card_id) + str(player_card.card_suit) + '"'
-                    print('Player "' + str(User.query.filter_by(id=turn_player['player_id']).first().username) + '" on position #' + str(turn_player['turn_position'] + 1) + ' has ' + card_string)
+                    print('Player "' + str(
+                        User.query.filter_by(id=turn_player['player_id']).first().username) + '" on position #' + str(
+                        turn_player['turn_position'] + 1) + ' has ' + card_string)
                 if app.debug:
                     print(str(player_card))
                 if not player_card:
                     return User.query.filter_by(id=turn_player['player_id']).first()
-        elif last_turn:                     # if this is last turn in hand
+        elif last_turn:  # if this is last turn in hand
             if app.debug:
-                print('Now starting new turn in hand (last turn #' + str(last_turn.id) + ' was taken by player with #' + str(last_turn.took_user_id) + ')')
+                print('Now starting new turn in hand (last turn #' + str(
+                    last_turn.id) + ' was taken by player with #' + str(last_turn.took_user_id) + ')')
             return User.query.filter_by(id=last_turn.took_user_id).first()
         if app.debug:
             print('This is first turn of hand')
-        return self.get_starter()           # if this is first turn of whole game
-
+        return self.get_starter()  # if this is first turn of whole game
 
     def get_players_relative_positions(self, user_id=None):
         game_players = Player.query.filter_by(game_id=self.game_id).all()
@@ -872,7 +887,7 @@ class Hand(db.Model):
             print("Players' sorted positions in turn #" + str(self.id) + ":")
         if len(turn_players) == 0:
             return []
-        result = sorted(turn_players, key = lambda tp: tp['turn_position'])
+        result = sorted(turn_players, key=lambda tp: tp['turn_position'])
         if app.debug:
             print(result)
         if user_id:
@@ -890,7 +905,8 @@ class DealtCards(db.Model):
     card_suit = db.Column(db.String(1), nullable=False)
 
     def __repr__(self):
-        return '<Card {} dealt to player {} in hand {}>'.format(self.card_id, User.query.filter_by(id=self.player_id).first().username, self.hand_id)
+        return '<Card {} dealt to player {} in hand {}>'.format(self.card_id, User.query.filter_by(
+            id=self.player_id).first().username, self.hand_id)
 
 
 class HandScore(db.Model):
@@ -902,7 +918,8 @@ class HandScore(db.Model):
     bonus = db.Column(db.Integer, default=None)
 
     def __repr__(self):
-        return "<Player {}'s score in hand {}>".format(User.query.filter_by(id=self.player_id).first().username, self.hand_id)
+        return "<Player {}'s score in hand {}>".format(User.query.filter_by(id=self.player_id).first().username,
+                                                       self.hand_id)
 
     def took_turns(self):
         return Turn.query.filter_by(hand_id=self.hand_id, took_user_id=self.player_id).count()
@@ -958,15 +975,19 @@ class Turn(db.Model):
                 card_suit = str(card.card_suit).casefold()
                 card_score = str(card.card_id).casefold()
                 if card_suit == trump:
-                    if highest_card['suit'] != trump or trump_hierarchy.index(str(highest_card['id'])) < trump_hierarchy.index(str(card_score)):
+                    if highest_card['suit'] != trump or trump_hierarchy.index(
+                            str(highest_card['id'])) < trump_hierarchy.index(str(card_score)):
                         if app.debug:
-                            print(str(card) + ' is trump and is higher than ' + str(highest_card['id']) + str(highest_card['suit']))
+                            print(str(card) + ' is trump and is higher than ' + str(highest_card['id']) + str(
+                                highest_card['suit']))
                         highest_card['id'] = card_score
                         highest_card['suit'] = card_suit
-                elif turn_suit == card_suit and cards_hierarchy.index(str(highest_card['id'])) < cards_hierarchy.index(card_score) and highest_card['suit'] != trump:
+                elif turn_suit == card_suit and cards_hierarchy.index(str(highest_card['id'])) < cards_hierarchy.index(
+                        card_score) and highest_card['suit'] != trump:
                     # if card is in the same suit with turn and is higher than the highest card within analyzed it becomes highest in turn within analyzed
                     if app.debug:
-                        print(str(card) + ' is same suit as turn starting card and is higher than ' + str(highest_card['id']) + str(highest_card['suit']))
+                        print(str(card) + ' is same suit as turn starting card and is higher than ' + str(
+                            highest_card['id']) + str(highest_card['suit']))
                     highest_card['id'] = card_score
                     highest_card['suit'] = card_suit
             if app.debug:
@@ -986,7 +1007,9 @@ class TurnCard(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
 
     def __repr__(self):
-        return "<Card {}{} in hand {} put by player {}>".format(self.card_id, self.card_suit, self.hand_id, User.query.filter_by(id=self.player_id).first().username)
+        return "<Card {}{} in hand {} put by player {}>".format(self.card_id, self.card_suit, self.hand_id,
+                                                                User.query.filter_by(
+                                                                    id=self.player_id).first().username)
 
 
 class Token(db.Model):

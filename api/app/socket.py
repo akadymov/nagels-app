@@ -183,7 +183,7 @@ def not_ready(actor, username, room_id):
 @socketio.on('close_room', namespace='/room')
 def close_room(actor, room_id):
     if app.debug:
-        print('Host has closed Room #' + str(room_id))
+        print('Room #' + str(room_id) + ' has been closed.')
     emit(
         "exit_room",
         {

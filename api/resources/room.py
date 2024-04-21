@@ -3,11 +3,11 @@
 from flask import url_for, request, jsonify, Blueprint
 from flask_cors import cross_origin
 from app import db
-from app.models import User, Room, Stats
-from datetime import datetime
+from app.models import User, Room, Stats, Current_time
+from datetime import datetime, timedelta
 from config import get_settings, get_environment
 from app.text import get_phrase
-
+import pytz
 
 room = Blueprint('room', __name__)
 env = get_environment()
@@ -95,14 +95,14 @@ def get_list():
 @room.route('{base_path}/room'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def create():
-
     lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     if token is None:
         return jsonify({
             'errors': [
                 {
-                    'message': get_phrase('auth_token_absent_error', lang).format(post_token_url=url_for('user.post_token'))
+                    'message': get_phrase('auth_token_absent_error', lang).format(
+                        post_token_url=url_for('user.post_token'))
                 }
             ]
         }), 401
@@ -115,8 +115,8 @@ def create():
             'errors': [
                 {
                     'message': get_phrase('user_already_opened_room_error', lang).format(
-                    username=requesting_user.username,
-                    room_name=hosted_room.room_name)
+                        username=requesting_user.username,
+                        room_name=hosted_room.room_name)
                 }
             ]
         }), 403
@@ -126,7 +126,8 @@ def create():
         return jsonify({
             'errors': [
                 {
-                    'message': get_phrase('user_already_connected_error', lang).format(username=requesting_user.username)
+                    'message': get_phrase('user_already_connected_error', lang).format(
+                        username=requesting_user.username)
                 }
             ]
         }), 403
@@ -152,7 +153,6 @@ def create():
 @room.route('{base_path}/room/<room_id>/close'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def close(room_id):
-
     lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
 
@@ -206,7 +206,6 @@ def close(room_id):
 @room.route('{base_path}/room/<room_id>/connect'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
 @cross_origin()
 def connect(room_id):
-
     lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
 
@@ -227,7 +226,8 @@ def connect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': get_phrase('user_already_connected_error', lang).format(username=requesting_user.username)
+                    'message': get_phrase('user_already_connected_error', lang).format(
+                        username=requesting_user.username)
                 }
             ]
         }), 403
@@ -272,10 +272,10 @@ def connect(room_id):
     }), 201
 
 
-@room.route('{base_path}/room/<room_id>/disconnect'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
+@room.route('{base_path}/room/<room_id>/disconnect'.format(base_path=get_settings('API_BASE_PATH')[env]),
+            methods=['POST'])
 @cross_origin()
 def disconnect(room_id):
-
     lang = request.headers.get('Accept-Language')
     token = request.json.get('token')
     username = request.json.get('username')
@@ -313,7 +313,8 @@ def disconnect(room_id):
         return jsonify({
             'errors': [
                 {
-                    'message': get_phrase('room_user_not_connected_error', lang).format(username=disconnecting_user.username, room_name=target_room.room_name)
+                    'message': get_phrase('room_user_not_connected_error', lang).format(
+                        username=disconnecting_user.username, room_name=target_room.room_name)
                 }
             ]
         }), 200
@@ -359,15 +360,15 @@ def status(room_id):
     games_json = generate_games_json(room)
 
     return jsonify({
-            'roomId': room.id,
-            'roomName': room.room_name,
-            'host': room.host.username,
-            'status': room.current_status(),
-            'created': room.created,
-            'closed': room.closed,
-            'connectedUserList': users_json,
-            'connect': url_for('room.connect', room_id=room.id),
-            'games': games_json
+        'roomId': room.id,
+        'roomName': room.room_name,
+        'host': room.host.username,
+        'status': room.current_status(),
+        'created': room.created,
+        'closed': room.closed,
+        'connectedUserList': users_json,
+        'connect': url_for('room.connect', room_id=room.id),
+        'games': games_json
     }), 200
 
 
@@ -428,23 +429,77 @@ def ready(room_id):
     target_room.ready(modified_user)
 
     connected_users = target_room.connected_users
-    users_json = generate_users_json(target_room,connected_users)
+    users_json = generate_users_json(target_room, connected_users)
     games_json = generate_games_json(target_room)
 
     return jsonify({
-            'roomId': target_room.id,
-            'roomName': target_room.room_name,
-            'host': target_room.host.username,
-            'status': target_room.current_status(),
-            'created': target_room.created,
-            'closed': target_room.closed,
-            'connectedUserList': users_json,
-            'connect': url_for('room.connect', room_id=target_room.id),
-            'games': games_json
+        'roomId': target_room.id,
+        'roomName': target_room.room_name,
+        'host': target_room.host.username,
+        'status': target_room.current_status(),
+        'created': target_room.created,
+        'closed': target_room.closed,
+        'connectedUserList': users_json,
+        'connect': url_for('room.connect', room_id=target_room.id),
+        'games': games_json
     }), 200
 
 
-@room.route('{base_path}/room/<room_id>/notready'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['POST'])
+@room.route('{base_path}/room/close_inactive'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
+@cross_origin()
+def close_inactive():
+    # Define the server timezone (assumed to be known in advance)
+    server_timezone = pytz.timezone('UTC')  # Your database / server timezone TODO
+    '''Tried to use code server_timezone = datetime.now(pytz.utc).astimezone().tzinfo, but for some reason database uses different timezone'''
+
+    # Get the current time and date in the server timezone
+    Current_time = datetime.now(server_timezone)
+
+    # Get the INACTIVE_ROOM_LIFETIME value from settings
+    inactive_rooms_lifetime = get_settings('NAGELS_APP')['INACTIVE_ROOM_LIFETIME'][env]
+
+    # Calculate cutoff_time
+    cutoff_time = Current_time - timedelta(seconds=inactive_rooms_lifetime)
+
+    inactive_rooms = Room.query.filter(Room.created < cutoff_time).filter(Room.closed == None).all()
+
+    closed_rooms_array = []
+
+    for room in inactive_rooms:
+        for game in room.games:
+
+            # do not close the room, if game is not finished yet
+            if game.finished is None:
+                inactive_rooms.remove(room)
+
+            # do not close the room, if game was finished recently
+            else:
+                finished_time = game.finished.replace(tzinfo=server_timezone)
+                if finished_time > cutoff_time:
+                    inactive_rooms.remove(room)
+
+    for target_room in inactive_rooms:
+
+        for game in target_room.games:
+            game.finished = datetime.utcnow()
+
+        for user in target_room.connected_users:
+            target_room.disconnect(user)
+
+        target_room.closed = datetime.utcnow()
+        # TODO add socketio triggers for in-lobby, in-room and in-game updates
+        closed_rooms_array.append(
+            {'id': target_room.id, 'name': target_room.room_name, 'host': target_room.host.username}
+        )
+    db.session.commit()
+
+    return jsonify({
+        'closedRooms': closed_rooms_array
+    }), 201
+
+
+@room.route('{base_path}/room/<room_id>/notready'.format(base_path=get_settings('API_BASE_PATH')[env]),
+            methods=['POST'])
 @cross_origin()
 def not_ready(room_id):
     lang = request.headers.get('Accept-Language')
@@ -501,18 +556,17 @@ def not_ready(room_id):
     target_room.not_ready(modified_user)
 
     connected_users = target_room.connected_users
-    users_json = generate_users_json(target_room,connected_users)
+    users_json = generate_users_json(target_room, connected_users)
     games_json = generate_games_json(target_room)
 
     return jsonify({
-            'roomId': target_room.id,
-            'roomName': target_room.room_name,
-            'host': target_room.host.username,
-            'status': target_room.current_status(),
-            'created': target_room.created,
-            'closed': target_room.closed,
-            'connectedUserList': users_json,
-            'connect': url_for('room.connect', room_id=target_room.id),
-            'games': games_json
+        'roomId': target_room.id,
+        'roomName': target_room.room_name,
+        'host': target_room.host.username,
+        'status': target_room.current_status(),
+        'created': target_room.created,
+        'closed': target_room.closed,
+        'connectedUserList': users_json,
+        'connect': url_for('room.connect', room_id=target_room.id),
+        'games': games_json
     }), 200
-
