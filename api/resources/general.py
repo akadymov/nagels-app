@@ -99,4 +99,11 @@ def ratings():
                     'avgBonuses': round(rating.bonuses / rating.games_played, 2),
                     'avgBets': round(rating.sum_of_bets / rating.games_played, 2)
                 })
+
+        ratings_final = sorted(
+            ratings_final,
+            key=lambda x: (x['winRatio'], x['avgBonuses']),
+            reverse=True
+        )
+
     return ratings_final
