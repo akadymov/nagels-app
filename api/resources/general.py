@@ -32,10 +32,11 @@ def get_rules():
 @general.route('{base_path}/info'.format(base_path=get_settings('API_BASE_PATH')[env]), methods=['GET'])
 @cross_origin()
 def get_info():
-    lang = request.headers.get('Accept-Language')
+    default_lang = get_settings('LANGS')['DEFAULT'][env]
+    lang = request.headers.get('Accept-Language')[:2] if request.headers.get('Accept-Language') else default_lang
     if not lang:
-        lang = get_settings('LANGS')['DEFAULT']
-    with open("info_" + lang + ".html", 'r') as f:
+        lang = get_settings('LANGS')['DEFAULT'][env]
+    with open("info_" + str(lang) + ".html", 'r') as f:
         content = f.read()
         f.close()
     if not content:

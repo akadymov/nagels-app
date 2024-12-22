@@ -30,7 +30,8 @@ def send_email(subject, sender, recipients, text_body, html_body):
     if env != 'PROD':
         recipients = auth['ADMINS'][env].split(',')
     if app.debug:
-        print('Sending message with subject "' + str(subject) + '" from sender ' + str(sender) + ' to emails ' + str(recipients) + ')...')
+        print('Sending message with subject "' + str(subject) + '" from sender ' + str(sender) + ' to emails ' + str(
+            recipients) + ')...')
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
@@ -84,9 +85,9 @@ def send_registration_notification(user, lang=default_lang):
     send_email('[Nägels Online] Welcome letter',
                sender=auth['ADMINS'][env].split(',')[0],
                recipients=[user.email],
-               text_body=render_template('email/register_' + lang + '.txt',
+               text_body=render_template('email/register_en.txt',
                                          user=user),
-               html_body=render_template('email/register_' + lang + '.html',
+               html_body=render_template('email/register_en.html',
                                          user=user))
 
 
@@ -102,4 +103,3 @@ def send_feedback(message, sender_email=None, sender_name=None, lang=default_lan
         text_body=render_template('email/feedback_' + lang + '.txt', message=message, sender_name=sender_name),
         html_body=render_template('email/feedback_' + lang + '.html', message=message, sender_name=sender_name)
     )
-

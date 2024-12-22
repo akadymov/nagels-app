@@ -5,8 +5,8 @@ from tests.base_case import BaseCase
 import json
 from config import get_settings, get_environment
 
-langs = get_environment('LANG')
 env = get_environment()
+langs = get_settings('LANGS')
 
 
 class UserMethodsCase(BaseCase):
